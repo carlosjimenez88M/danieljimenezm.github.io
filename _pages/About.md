@@ -21,7 +21,7 @@ Soy un apasionado por la ciencia de datos, la estadística aplicada y las cienc
 
 Mis principales areas de trabajo son:
 
-* Visuaización de Datos;
+* Visualización de Datos;
 * Análisis de Anomalías ;
 * Detección de Fraudes;
 * Diseño de experimentos;
