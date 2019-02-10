@@ -1,0 +1,42 @@
+---
+layout: post
+title: "Distribución Beta"
+author: "Carlos Jiménez"
+date: "9/2/2019"
+output: html_document
+---
+
+
+```{r, echo=FALSE, cache=FALSE, warning=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE)
+library(tidyverse)
+library(ggplot2)
+library(PerformanceAnalytics)
+theme_set(theme_light())
+```
+
+
+```{r, echo=FALSE, cache=FALSE}
+p = seq(0,1, length=200)
+plot(p, dbeta(p, 200, 200), ylab="densidad", type ="l", col=4)
+lines(p, dbeta(p, 50, 50), type ="l", col=3)
+lines(p, dbeta(p, 20, 20), col=2) 
+lines(p, dbeta(p, 10, 10), col=1) 
+legend(0.7,8, c("Beta(200,200)","Beta(50,50)","Beta(20,20)", "Beta(10,10)"),lty=c(1,1,1,1),col=c(4,3,2,1))
+title("Distribución Beta")
+```
+
+
+La distribución beta indudablemente es una de las más interesantes a nivel de uso y filosofía, dado el uso que la misma tiene y las posibilidades que ella alcanza. La razón para sacar este post es el hecho que esta distribución en el mundo real y el acádemico no es explicada en términos intuitivos y por lo tanto el esfuerzo es darle sonoridad a la misma en el mundo de la ciencia de datos.
+
+## Aproximaciones sobre la distribución beta
+
+Se parte de una antesala:
+
+
+> "La distribución beta difiere de las distribuciones continuas [...] dado que solo se puede usar para describir variables aleatorias que tomen valores entre 0 y 1" Gutierrez (2010)[^1]
+
+
+
+
+[^1]: En la página [data literacy](https://drive.google.com/file/d/0ByzoHkgSB8F3UGhmSktWaG5FWlU/view) podra encontrar el libro de Gutiérrez que cuenta de manera detallada los conceptos sobres las distribuciones.
