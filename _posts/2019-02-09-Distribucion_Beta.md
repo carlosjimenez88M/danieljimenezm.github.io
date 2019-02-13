@@ -10,7 +10,7 @@ mathjax: "true"
 
 
 
-![center](/figs/2019-02-09-Distribucion_Beta/unnamed-chunk-2-1.png)
+![center](/figs/2019-02-09-Distribucion_Beta/2019-02-09-Distribucion_Beta/unnamed-chunk-2-1.png)
 
 
 Durante muchos años, tanto en el ambito acádemico como en el mundo de la estadística aplicada la *distribución beta* ha sido tratada con especial rezago en su definición y aplicación, dicho lo anterior esta entrada intenta dar una visión sobre la filosofía de la distribución y en especial darle una aplicación empirica para ver su potencial en el mundo real.
