@@ -1,8 +1,8 @@
 ---
 title: "Distribución Beta"
 date: 2019-02-13
-
-
+description: "Introducción en el sentido de la abstracción de la distribución beta"
+output: html_document
 mathjax: "true"
 ---
 
