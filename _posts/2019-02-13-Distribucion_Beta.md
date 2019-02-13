@@ -1,13 +1,9 @@
 ---
-layout: post
 title: "Distribución Beta"
-author: "Carlos Jiménez"
-description: "Uso y explicación de la beta"
-date: "9/2/2019"
-output: html_document
-category: r
-comments: true
-mathjax:"true"
+date: 2019-02-13
+
+
+mathjax: "true"
 ---
 
 
