@@ -68,9 +68,7 @@ Antes de entrar en el terreno de las aplicaciones desarrollare la matemáticas q
 
 Una variable aleatoria $\mathrm{X}$ tiene distribución beta si su función de densidad está dada de la siguiente manera:
 
-$$
-\mbox{ Función Beta}=B(a,b)=\frac{\Gamma(a) \Gamma(b)}{\Gamma(a+b)}=\int_{0}^{1} u^{a-1}(1-u)^{b-1 }du
-$$
+$$\mbox{ Función Beta}=B(a,b)=\frac{\Gamma(a) \Gamma(b)}{\Gamma(a+b)}=\int_{0}^{1} u^{a-1}(1-u)^{b-1 }du$$
 
 $$
 f_{X}(x)=\frac{1}{B(a,b)}x^{a-1}(1-x)^{b-1}I_{(0,1)}(x) \mbox{ Dado los parámetros }a>0 \mbox{ y } b>0
