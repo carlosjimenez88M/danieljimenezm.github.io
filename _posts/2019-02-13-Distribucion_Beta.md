@@ -7,7 +7,7 @@ date: "9/2/2019"
 output: html_document
 category: r
 comments: true
-mathjax:"true"
+mathjax: "true"
 ---
 
 
