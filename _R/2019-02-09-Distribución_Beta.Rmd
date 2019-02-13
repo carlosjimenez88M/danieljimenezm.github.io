@@ -1,13 +1,12 @@
 ---
-layout: post
 title: "Distribución Beta"
-author: "Carlos Jiménez"
-date: "9/2/2019"
+date: 2019-02-13
+description: "Introducción en el sentido de la abstracción de la distribución beta"
 output: html_document
+mathjax: "true"
 ---
 
-
-```{r, echo=FALSE, cache=FALSE, warning=FALSE, message=FALSE}
+```{r}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE)
 library(tidyverse)
 library(ggplot2)
@@ -16,7 +15,7 @@ theme_set(theme_light())
 ```
 
 
-```{r, echo=FALSE, cache=FALSE}
+```{r}
 p = seq(0,1, length=200)
 plot(p, dbeta(p, 200, 200), ylab="densidad", type ="l", col=4)
 lines(p, dbeta(p, 50, 50), type ="l", col=3)
