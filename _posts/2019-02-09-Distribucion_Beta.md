@@ -224,7 +224,7 @@ Notese que los resultados de la previa no abrian existido bateadores con la form
 
 Lo anterior muestra que se esta actualizando la previa 
 
-![center](/figs/2019-02-09-Distribucion_Beta/unnamed-chunk-10-1.png)
+![center](/figs/2019-02-09-Distribucion_Beta/2019-02-09-Distribucion_Beta/unnamed-chunk-10-1.png)
 
 La anterior gráfica de los valores verdaderos de bateo promedio, selecciona especificamente a los jugadores que han tenido records de $60/300$, $80/300$ y $100/300$.
 
