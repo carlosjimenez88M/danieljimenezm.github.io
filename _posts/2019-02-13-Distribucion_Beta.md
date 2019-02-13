@@ -6,14 +6,6 @@ output: html_document
 mathjax: "true"
 ---
 
-```{r, echo=FALSE, cache=FALSE, warning=FALSE, message=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE)
-library(tidyverse)
-library(ggplot2)
-library(PerformanceAnalytics)
-theme_set(theme_light())
-```
-
 
 
 ```{r, echo=FALSE, cache=FALSE}
