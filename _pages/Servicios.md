@@ -2,8 +2,6 @@
 layout: archive
 title: "Servicios"
 permanlink: /Servicios/
-header:
-	image:"/images/Servicio2.png"
 ---
 {% include base_path %}
 {% include group-by-array collection=site.posts field="tags" %}
