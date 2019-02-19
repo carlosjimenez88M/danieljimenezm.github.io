@@ -1,7 +1,7 @@
 ---
 layout: archive
 permalink: /Data-Science/
-title: "Cursos"
+title: "Servicios"
 output: ioslides_presentation
 ---
 {% include base_path %}
