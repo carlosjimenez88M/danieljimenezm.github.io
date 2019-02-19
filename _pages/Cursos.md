@@ -30,7 +30,7 @@ output: ioslides_presentation
 
 
 
-<img src="images/Work.png" alt="hi" class="inline"/>
+<img src="https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/images/Work.png" alt="hi" class="inline"/>
 
 ##  Data Science tools
 
