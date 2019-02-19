@@ -1,11 +1,16 @@
 # main links
 main:
+  - title: "Servicios"
+    url: /Servicios/
+  - title: "Media"
+    url: /Media/
+  - title: "Cursos"
+    url: /Data-Science/
   - title: "Sobre mi"
     url: /about/
-  - title: "Portafolio"
-    url: /Data-Science/
-    
-  
+
+
+
   # - title: "Sample Posts"
   #   url: /year-archive/
   # - title: "Sample Collections"

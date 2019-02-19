@@ -1,7 +1,7 @@
 ---
 layout: archive
 permalink: /Data-Science/
-title: "Ciencia de Datos "
+title: "Cursos"
 output: ioslides_presentation
 ---
 {% include base_path %}
@@ -17,7 +17,7 @@ output: ioslides_presentation
 
 
 
-## About me 
+## About me
 
 
 * Data Scientist ;
@@ -33,7 +33,7 @@ output: ioslides_presentation
 <img src="
 https://carlosjimenez88m.github.io/danieljimenezm.github.io/images/Work.png" alt="hi" class="inline"/>
 
-##  Data Science tools 
+##  Data Science tools
 
 
 <img src="
