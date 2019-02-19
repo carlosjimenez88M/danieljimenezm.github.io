@@ -1,7 +1,7 @@
 ---
 layout: archive
 title: "Servicios"
-permanlink:/Servicios/
+permanlink: /Servicios/
 header:
 	image:"/images/Servicio2.png"
 ---
