@@ -2,12 +2,12 @@
 main:
   - title: "Servicios"
     url: /Data-Science/
-  - title: "Cursos"
-    url: /Cursos/
   - title: "Media"
     url: /Media/
   - title: "Sobre mi"
     url: /about/
+  - title: "Cursos"
+    url: /Cursos/
 
 
 
