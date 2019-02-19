@@ -36,9 +36,9 @@ output: ioslides_presentation
 
 
 <img src="
-https://carlosjimenez88m.github.io/danieljimenezm.github.io/images/tools.png" alt="hi" class="inline"/>
+https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/images/tools.png" alt="hi" class="inline"/>
 ##  [Some] Projects
 
 
 <img src="
-https://carlosjimenez88m.github.io/danieljimenezm.github.io/images/projects.png" alt="hi" class="inline"/>
+https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/images/projects.png" alt="hi" class="inline"/>
