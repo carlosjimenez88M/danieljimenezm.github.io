@@ -2,7 +2,7 @@
 layout: archive
 permalink: /Data-Science/
 title: "Servicios"
-output: ioslides_presentation
+
 ---
 {% include base_path %}
 {% include group-by-array collection=site.posts field="tags" %}
