@@ -6,7 +6,7 @@ main:
     url: /Media/
   - title: "Sobre mi"
     url: /about/
-  - title: "Cursos"
+  - title: "Presentaciones"
     url: /Cursos/
 
 
