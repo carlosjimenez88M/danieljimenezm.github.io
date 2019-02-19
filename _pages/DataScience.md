@@ -22,7 +22,7 @@ Los productos y servicios que desarrollo se despliegan en tres áreas principale
 
 
 
-### Estadística Aplicada
+### Estadística Aplicada 
 
 La estadística aplicada es la verdadera revolución del siglo XXI, aplicada en temas tan diversos como Marketing ó diseño de políticas públicas, este instrumento de entendimiento es tan poderoso como eficaz en todo lo que tiene que ver con tomas de decisiones y anteponerse a posibles escenarios del mundo real.
 
