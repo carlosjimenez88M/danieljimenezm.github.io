@@ -17,29 +17,85 @@ output: ioslides_presentation
 
 
 
-## About me
-
-
-* Data Scientist ;
-* Passionate about Anomalies Detection, Data Visualization Reinforcement Learning, Experimental Science and Empirical Bayes Application.
-* I working with : Data Science , Modeling Statistics , Neural Networks, Supervised Learning and Unsupervised Learning.
-* Hobbies : Political History, Climbing and Cook
-
-## Who I´ve worked with
+Los productos y servicios que desarrollo se despliegan en tres áreas principales y dos consecuentes.
 
 
 
 
-<img src="
-https://carlosjimenez88m.github.io/danieljimenezm.github.io/images/Work.png" alt="hi" class="inline"/>
+### Estadística Aplicada
 
-##  Data Science tools
+La estadística aplicada es la verdadera revolución del siglo XXI, aplicada en temas tan diversos como Marketing ó diseño de políticas públicas, este instrumento de entendimiento es tan poderoso como eficaz en todo lo que tiene que ver con tomas de decisiones y anteponerse a posibles escenarios del mundo real.
+
+En este campo mis áreas de actuación son:
+
+* Análisis Exploratorio de Datos
+* Muestro
+* Diseño y Análisis de encuestas
+* Análisis de anomalías
+* Modelos Econométricos
+* Marketing Analytics
+* Análisis de recursos humanos
+* Diseño de experimentos
+* Modelamiento estadístico
+* Test A/B
+* Forecasting
+* Análisis Bayesiano de datos
+
+<img src="/images/Anomalias.png" alt="hi" class="inline"/>
+
+### Ciencia de datos
+
+El poder del las ciencias de la computación aplicado a patrones matemáticos y estadísticos es la razón de ser de la *ciencia de datos* y el *Machine Learning*.
+
+En este campo mis áreas de trabajo son
+
+* Clasificación
+* Segmentación
+* Text Mining
+* Detección de fraudes y anomalías
+* Análisis no supervisado
+* Análisis Supervisado
+* Visualización de datos
+* Dashboard
+* Big Data Science
+* Churn models
+* Ciclo de vida de clientes
+* Up sell & Cross sell
+* Modelos predictivos
+* Aprendizaje de máquina por refuerzo
+
+<img src="/images/Servicio1.png" alt="hi" class="inline"/>
+
+### Capacitación y educación personalizada
+
+Desde el inicio de mi actividad profesional, siempre he trabajado como acádemico, en áreas tan diferentes como la historia del poder  hasta programación, tanto que este oficio de educador lo convertí en un arte y mi razón de ser, a través de metódos cognitivos y computacionales (para el desarrollo del pensamiento lógico).
+
+Mis cursos y capacitaciones permanentes son:
+
+* Desarrollo de indicadores de gestión
+* Big Data y Data Science
+* Matemáticas Aplicadas
+* Habilidades coorporativas
+* Innovación
+* Excel para negocios
+* Internet de las cosas
+* Análitica
+* Metodología de la investigación.
+
+<img src="/images/Clases.JPG" alt="hi" class="inline"/>
 
 
-<img src="
-https://carlosjimenez88m.github.io/danieljimenezm.github.io/images/tools.png" alt="hi" class="inline"/>
-##  [Some] Projects
+### Categorías consecuentes
+
+El tema de *reportería personalizada, masiva y empresarial* han sido resultantes de mis gustos al trabajar todos estos años entre los sectores públicos y privados, al igual que el desarrollo de *dashboard* a la medida o necesidad del cliente, estos trabajados con herramientas open-source (Shiny, Markdown, LaTeX, Beamer).
 
 
-<img src="
-https://carlosjimenez88m.github.io/danieljimenezm.github.io/images/projects.png" alt="hi" class="inline"/>
+### Algunos de los lugares donde he trabajado
+
+
+<img src="/images/Work.png" alt="hi" class="inline"/>
+
+
+### Algunos de mis proyectos
+
+<img src="/images/projects.png" alt="hi" class="inline"/>
