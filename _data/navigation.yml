@@ -1,10 +1,9 @@
 # main links
 main:
-
-  - title: "Media"
-    url: /Media/
   - title: "Servicios"
     url: /Data-Science/
+  - title: "Media"
+    url: /Media/
   - title: "Sobre mi"
     url: /about/
 
