@@ -1,8 +1,8 @@
 ---
 layout: archive
 permalink: /Cursos/
-title: "Cursos"
-output: ioslides_presentation
+title: "Presentaciones"
+
 ---
 {% include base_path %}
 {% include group-by-array collection=site.posts field="tags" %}
@@ -15,30 +15,8 @@ output: ioslides_presentation
   {% endfor %}
 {% endfor %}
 
+En esta sección reposa algunas de las presentaciones de clases como eventos en los que he participado.
 
-
-## About me
-
-
-* Data Scientist ;
-* Passionate about Anomalies Detection, Data Visualization Reinforcement Learning, Experimental Science and Empirical Bayes Application.
-* I working with : Data Science , Modeling Statistics , Neural Networks, Supervised Learning and Unsupervised Learning.
-* Hobbies : Political History, Climbing and Cook
-
-## Who I´ve worked with
-
-
-
-
-<img src="https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/images/Work.png" alt="hi" class="inline"/>
-
-##  Data Science tools
-
-
-<img src="
-https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/images/tools.png" alt="hi" class="inline"/>
-##  [Some] Projects
-
-
-<img src="
-https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/images/projects.png" alt="hi" class="inline"/>
+## Ciencia de datos
+### 2019
+[Diseño y creación de clusters](https://www.slideshare.net/DanielJimnez56/cluster-132474391)
