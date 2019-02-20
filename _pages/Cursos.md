@@ -27,5 +27,5 @@ Por otra parte también están los apuntes de clases, material de libre uso para
 
 ## Apuntes de clases
 ### Ciencia de Datos 
-* [Modelos jerárquicos bayesianos](https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/Notas/Bayesiana.pdf)
+[Modelos jerárquicos bayesianos](https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/Notas/Bayesiana.pdf)
 
