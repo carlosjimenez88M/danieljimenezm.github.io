@@ -2,8 +2,6 @@
 layout: archive
 title: "Sobre mi"
 permalink: /about/
-header:
-  image: "/images/Perfil.jpg"
 ---
 
 
