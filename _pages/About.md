@@ -3,7 +3,7 @@ layout: archive
 title: "Sobre mi"
 permalink: /about/
 header:
-  image: "/images/imagen2.png"
+  image: "/images/Perfil.jpg"
 ---
 
 
