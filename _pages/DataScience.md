@@ -26,7 +26,7 @@ Los productos y servicios que desarrollo se despliegan en tres áreas principale
 
 ### Estadística Aplicada 
 
-La estadística aplicada es la verdadera revolución del siglo XXI, aplicada en temas tan diversos como Marketing ó diseño de políticas públicas, este instrumento de entendimiento es tan poderoso como eficaz en todo lo que tiene que ver con tomas de decisiones y anteponerse a posibles escenarios del mundo real.
+La estadística aplicada es la verdadera revolución del siglo XXI, aplicada a temas tan diversos como Marketing o diseño de políticas públicas, este instrumento de entendimiento es tan poderoso como eficaz en todo lo que tiene que ver con tomas de decisiones y anteponerse a posibles escenarios del mundo real.
 
 En este campo mis áreas de actuación son:
 
@@ -47,7 +47,7 @@ En este campo mis áreas de actuación son:
 
 ### Ciencia de datos
 
-El poder del las ciencias de la computación aplicado a patrones matemáticos y estadísticos es la razón de ser de la *ciencia de datos* y el *Machine Learning*.
+El poder de la ciencia de la computación aplicado a patrones matemáticos y estadísticos es la razón de ser de la *ciencia de datos* y el *Machine Learning*.
 
 En este campo mis áreas de trabajo son
 
@@ -77,11 +77,11 @@ Mis cursos y capacitaciones permanentes son:
 * Desarrollo de indicadores de gestión
 * Big Data y Data Science
 * Matemáticas Aplicadas
-* Habilidades coorporativas
+* Habilidades corporativas
 * Innovación
 * Excel para negocios
 * Internet de las cosas
-* Análitica
+* Analítica
 * Metodología de la investigación.
 
 <img src="/images/Clases.JPG" alt="hi" class="inline"/>
