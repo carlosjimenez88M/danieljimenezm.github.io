@@ -20,7 +20,7 @@ Trabajo con R del cual soy fanático, aunque manejo Python, Octave y SQL. Las pr
 * [Tenserflow](https://tensorflow.rstudio.com/) Para Machine Learning
 * [SQLDF](https://www.rdocumentation.org/packages/sqldf/versions/0.4-11) Para Bases de Datos
 * [Stackr](https://github.com/dgrtwo/stackr) Para API`s
-* [Devtools](http://devtools.r-lib.org/) Para Ingenieria 
+* [Devtools](http://devtools.r-lib.org/) Para Ingenieria de software
 
 
 En mis tiempos libres me dedico a la cocina, el ciclismo de montaña y a la lectura, tengo una gran debilidad por los libros y la novela psicológica.
