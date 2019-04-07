@@ -36,8 +36,8 @@ Los científicos de datos, matemáticos y estadísticos que más admiro son:
 * [Andrés Gutiérrez](http://hagutierrezro.blogspot.com/) Modelamiento estadístico y muestreo.
 * [Carlos Díez](https://docentes.konradlorenz.edu.co/2017/01/carlos-alberto-d%C3%ADez-fonnegra.html) Modelamiento Matemático.
 
-![proceso](http://res.cloudinary.com/dyd911kmh/image/upload/f_auto,q_auto:best/v1523346698/tidyverse2_yjcwfy.png)[^1]
-[^1]: Imagen tomada de <https://www.r-bloggers.com/what-is-the-tidyverse/>
+![proceso](http://res.cloudinary.com/dyd911kmh/image/upload/f_auto,q_auto:best/v1523346698/tidyverse2_yjcwfy.png)
+
 
 
 
