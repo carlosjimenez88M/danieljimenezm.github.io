@@ -23,7 +23,7 @@ Trabajo con R del cual soy fanático, aunque manejo Python, Octave y SQL. Las pr
 * [Devtools](http://devtools.r-lib.org/) Para Ingenieria de software
 
 
-En mis tiempos libres me dedico a la cocina, el ciclismo de montaña y a la lectura, tengo una gran debilidad por los libros y la novela psicológica.
+
 
 
 Los científicos de datos, matemáticos y estadísticos que más admiro son:
@@ -42,7 +42,7 @@ Los científicos de datos, matemáticos y estadísticos que más admiro son:
 
 
 
-
+En mis tiempos libres me dedico a la cocina, el ciclismo de montaña y a la lectura, tengo una gran debilidad por los libros y la novela psicológica.
 
 
 
