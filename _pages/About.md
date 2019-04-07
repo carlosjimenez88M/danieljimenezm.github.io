@@ -6,8 +6,8 @@ permalink: /about/
 
 ![](https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/images/Perfil2.jpg)
 
-\justifying
 
+\justifying
 Me llamo Daniel Jiménez , en la actualidad soy Chief Data Scientist en [Resolve Studio](http://resolvestudio.co/) una agencia de publicidad y marketing (Digital y Tradicional) que implementa soluciones en base a Machine Learning y Data Science para los diferentes servicios que la organización ofece , a la par soy profesor de Analytics y Ciencia de Datos en la [Uniempresarial](https://www.uniempresarial.edu.co/) y  co-funder de [Nostradamus Data](https://www.linkedin.com/company/35639847/admin/) empresa dedicada a la ciencia de datos más la infraestructura tecnológica para soluciones inteligentes en Colombia, Perú y Chile.
 
 
