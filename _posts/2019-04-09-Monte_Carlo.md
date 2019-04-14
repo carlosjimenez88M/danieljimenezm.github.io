@@ -10,7 +10,7 @@ mathjax: "true"
 > "It has long been an axiom of mine that the little things are infinitely
 the most important." Arthur Conan Doyle
 
-![center](/figs/2019-04-09-Monte_Carlo/unnamed-chunk-135-1.png)
+![center](/figs/2019-04-09-Monte_Carlo/unnamed-chunk-1-1.png)
 
 
 
@@ -18,19 +18,19 @@ the most important." Arthur Conan Doyle
 
 El nombre del método no proviene de un autor como estamos acostumbrados en el mundo de la estadística, sino de un casino en Mónaco, y puntualmente le dieron este titulo debido a que los juegos de azar que son *generadores de número aleatorios*, como los resultados de las cartas, la ruletas y demás.
 
-De la mano con lo anterior y conforme al desarrollo de la computación, durante la Segunda Guerra Mundial (1944), se estudiaba problemas probabilisticos sobre la difusión de neutrones en hidrodinámicas donde la difusión posee un comportamiento plenamente aleatorio, por lo anterior sumado al  trabajo de [Neumann](https://es.wikipedia.org/wiki/John_von_Neumann) y [Metropolis](https://es.wikipedia.org/wiki/Nicholas_Metropolis) se logro estimar valores propios en la ecuación de Schrödinge a través de este método de simulación, esta simulación basada en Monte Carlo, dando como resultado que dadas $N$ muestras en un espacio de $M$ dimesiones se puede dar un resultado (o vectores resultantes) a pesar que el problema sea deterministico o estocástico.
+De la mano con lo anterior y conforme al desarrollo de la computación, durante la Segunda Guerra Mundial (1944), se estudiaba problemas probabilisticos sobre la difusión de neutrones en hidrodinámicas donde la difusión posee un comportamiento plenamente aleatorio, por lo anterior sumado al  trabajo de [Neumann](https://es.wikipedia.org/wiki/John_von_Neumann) y [Metropolis](https://es.wikipedia.org/wiki/Nicholas_Metropolis) se logro estimar valores propios en la ecuación de Schrödinge a través de este método de simulación, esta simulación basada en Monte Carlo, dando como resultado que dadas $N$ muestras en un espacio de $M$ dimensiones se puede dar un resultado (o vectores resultantes) a pesar que el problema sea deterministico o estocástico.
 
-Lo anterior hace refiega en un concepto claro sobre los limites en la inferencia estadística, los límites sobre los problemas númericos, los cuales se presentan en dos casos:
+Lo anterior hace refriega en un concepto claro sobre los limites en la inferencia estadística, los límites sobre los problemas numéricos, los cuales se presentan en dos casos:
 
 * Problemas de optimización ;
 * Problemas de integración.
 
 Dichos problemas se presentan dado que no es posible calcular analíticamente los estimadores propios a un número de paradigmas. 
 
-Dicho lo anterior, los mejores resultados para estos problemas vienen dados de generar simulaciones sustitutivas (de distribuciones o vectores), para calcular cantidades de interés, dado que se puede producir infinitos números de aleatorios acordes a una distribución que viene dada de un fenómeno frecuentista o asintóticos, lo cual resulta más facil que la inferencia númerica, puesto que se puede obtener y controlar el tamaño de las muestras. Y usando los resultados probabilisticos a la ley de los grandes números o teoría del limite central, se puede evidenciar como convergen los métodos de simulación y así poder dar conclusiones sobre las observaciones.
+Dicho lo anterior, los mejores resultados para estos problemas vienen dados de generar simulaciones sustitutivas (de distribuciones o vectores), para calcular cantidades de interés, dado que se puede producir infinitos números de aleatorios acordes a una distribución que viene dada de un fenómeno frecuentista o asintóticos, lo cual resulta más fácil que la inferencia numérica, puesto que se puede obtener y controlar el tamaño de las muestras. Y usando los resultados probabilisticos a la ley de los grandes números o teoría del limite central, se puede evidenciar como convergen los métodos de simulación y así poder dar conclusiones sobre las observaciones.
 
 
-Considere lo siguiente: Dada una variable aleatoria $X$, con función de densidad $f(x)$, se evalua la expresión 
+Considere lo siguiente: Dada una variable aleatoria $X$, con función de densidad $f(x)$, se evalúa la expresión 
 
 $$
 \int_{x} h(x) f(x) dx
@@ -48,7 +48,7 @@ $$
 $$
 
 
-Lo anterior se puede demostrar al calcular $\Gamma (\lambda)$ de la siguiente expresión, gracias a la ley de los grandes números que expresa que a una sucesión infinita de variables aleatorias independientes e identicamente distribuidas que cumplen que $E(|x|< \infty)$ tiene un valor esperado en $\mu$ por lo cual el promedio de las variables aleatorias converge a $\mu$
+Lo anterior se puede demostrar al calcular $\Gamma (\lambda)$ de la siguiente expresión, gracias a la ley de los grandes números que expresa que a una sucesión infinita de variables aleatorias independientes e idénticamente distribuidas que cumplen que $E(|x|< \infty)$ tiene un valor esperado en $\mu$ por lo cual el promedio de las variables aleatorias converge a $\mu$
 
 $$
 P(\lim_{n \rightarrow \infty} \hat{X}_n =\mu)=1
@@ -63,13 +63,13 @@ $$
 
 El resultado es el siguiente
 
-![center](/figs/2019-04-09-Monte_Carlo/unnamed-chunk-137-1.png)
+![center](/figs/2019-04-09-Monte_Carlo/unnamed-chunk-3-1.png)
 
 Se puede evidenciar que no hay discrepancia en los valores pequeños de $\lambda$.
 
-Más lo anrterior tiene un problema y es que la integración falla a la hora de detectar el área de importancia de la función. Por lo tanto los métodos de simulación se enfocan en esta región explotando la información de la función de densiada asociada a la integral.
+Más lo anterior tiene un problema y es que la integración falla a la hora de detectar el área de importancia de la función. Por lo tanto los métodos de simulación se enfocan en esta región explotando la información de la función de densidad asociada a la integral.
 
-*Observación:* La función de integración puede aceptar ínfinitos límites, pero sus salidas no son confiables.
+*Observación:* La función de integración puede aceptar infinitos límites, pero sus salidas no son confiables.
 
 
 Consideremos el siguiente caso: Tengo una muestra de 15 elementos proveniente de una distribución Cauchy (la de la resonancia forzada) con parámetro de localización $\theta =500$. La psuedo-muestra margial del plano es 
@@ -97,14 +97,14 @@ integrate(lik,200,500) #función programada
 {% endhighlight %}
 
 
-Para evitar dicho problema del error , se recurre a Monte Carlo, donde el problema generico es sobre la evaluación de 
+Para evitar dicho problema del error , se recurre a Monte Carlo, donde el problema genérico es sobre la evaluación de 
 
 $$
 \mathbf{E}_{f}[h(X)] \int_{x} h(x) f(x)
 $$
 
 
-Donde x denota los valores de la variable aleatoria de X que son usuales o soportables (support) para la función de densidad $f(x)$, por lo tanto el principio teórico  de Monte Carlo está dado a la aproximación de la anterior función generando muestras dada la función de densidad y aproximaciones empiricas antes mencionada
+Donde x denota los valores de la variable aleatoria de X que son usuales o soportables (support) para la función de densidad $f(x)$, por lo tanto el principio teórico  de Monte Carlo está dado a la aproximación de la anterior función generando muestras dada la función de densidad y aproximaciones empíricas antes mencionada
 
 $$
 \hat{h}_n = \frac{1}{n} \sum_{n}^{i=1} h(x_i)
@@ -125,9 +125,9 @@ $$
 v_n=\frac{1}{n^2} \sum_{i=1}^{n}[h(x_i)-\hat{h}_n]^2
 $$
 
-Se contruye el intervalo de confianza.
+Se construye el intervalo de confianza.
 
-Esto gracias al teorema del limite central para números grandes, donde sea $X_1,X_2,...,X_n$  un conjunto de valores independientes e identicamente distribuidos con promedio $\mu$ y varianza $0<\theta^2<\infty$, se obtiene   que
+Esto gracias al teorema del limite central para números grandes, donde sea $X_1,X_2,...,X_n$  un conjunto de valores independientes e idénticamente distribuidos con promedio $\mu$ y varianza $0<\theta^2<\infty$, se obtiene   que
 
 $$
 \hat{X_n}=\frac{1}{n}(X_1+....+X_n-1,+X_n)
@@ -147,7 +147,7 @@ $$
 $$
 
 
-Dicho lo anterior se calcula $h(x)=[\cos(40x)+\sin(30x)]^2$, en donde se generaran muestras independientes e identicamente distribuidas al rededor $\int h(x)dx$ con $\h(U_i)/n$ donde $U_i$ son variables aleatorias
+Dicho lo anterior se calcula $h(x)=[\cos(40x)+\sin(30x)]^2$, en donde se generaran muestras independientes e idénticamente distribuidas al rededor $\int h(x)dx$ con $\h(U_i)/n$ donde $U_i$ son variables aleatorias
 
 
 
@@ -155,10 +155,10 @@ Dicho lo anterior se calcula $h(x)=[\cos(40x)+\sin(30x)]^2$, en donde se generar
 ## 0.8176594 with absolute error < 5.4e-05
 {% endhighlight %}
 
-![center](/figs/2019-04-09-Monte_Carlo/unnamed-chunk-140-1.png)
-![center](/figs/2019-04-09-Monte_Carlo/unnamed-chunk-141-1.png)
+![center](/figs/2019-04-09-Monte_Carlo/unnamed-chunk-6-1.png)
+![center](/figs/2019-04-09-Monte_Carlo/unnamed-chunk-7-1.png)
 
-Otra fomra de verlo es la siguiente
+Otra forma de verlo es la siguiente
 
 Suponga que hay que integrar la función 
 
@@ -198,7 +198,7 @@ integrate(h1,a,b)
 {% endhighlight %}
 
 Al gráficar se obtiene que 
-![center](/figs/2019-04-09-Monte_Carlo/unnamed-chunk-144-1.png)
+![center](/figs/2019-04-09-Monte_Carlo/unnamed-chunk-10-1.png)
 
 Ahora se evidencia la eficiencia de Monte Carlo a medida que aumenta el tamaño de la población $n$ junto a los intervalos de confianza
 
@@ -213,7 +213,7 @@ lines(h_bar+1.96*se, col="green")
 lines(h_bar-1.96*se, col="red")
 {% endhighlight %}
 
-![center](/figs/2019-04-09-Monte_Carlo/unnamed-chunk-145-1.png)
+![center](/figs/2019-04-09-Monte_Carlo/unnamed-chunk-11-1.png)
 
 Observese que las integrales pueden usarse desde que $n>500$
 
