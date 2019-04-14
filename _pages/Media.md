@@ -26,7 +26,7 @@ Intentaré actualizar está sección una vez al mes, con el fin de mostrar lo qu
 
 * [Cuando ya no esté: Yuval Noah Harari (Parte 1/2) | #0](https://www.youtube.com/watch?v=hxuKo_VdM9o), video del autor de Animales a Dioses, en el cual habla del porque los humanos como especie lograron el nivel de desarrollo que otras especies no compartieron, está es la primer parte del video. 
 
-* [Cuando ya no esté: Yuval Noah Harari (Parte 2/2) ](https://www.youtube.com/watch?v=ECwY77VI3QM).
+* [Cuando ya no esté: Yuval Noah Harari (Parte 2/2)](https://www.youtube.com/watch?v=ECwY77VI3QM).
 
 * [Cómo se fotografió un agujero negro por primera vez](https://www.youtube.com/watch?v=LQi2qgzLD10), [Freddy Vega](https://twitter.com/freddier?lang=es) Co Funder de [Platzi](https://platzi.com/) (La mejor academía en educación on-line en America Latina), explica como con Machine Learning y Big Data se logró tomar la primer fotografía de un **Agujero Negro**.
 
