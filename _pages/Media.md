@@ -30,7 +30,8 @@ Intentaré actualizar está sección una vez al mes, con el fin de mostrar lo qu
 
 * [Cómo se fotografió un agujero negro por primera vez](https://www.youtube.com/watch?v=LQi2qgzLD10), [Freddy Vega](https://twitter.com/freddier?lang=es) Co Funder de [Platzi](https://platzi.com/) (La mejor academía en educación on-line en America Latina), explica como con Machine Learning y Big Data se logró tomar la primer fotografía de un **Agujero Negro**.
 
-![Homero](http://bp2.blogger.com/_9zh5Kv2YFek/SCef4Lnx1FI/AAAAAAAAASQ/TVp6tNE3V8w/s1600-h/homero.jpg)
+![Homero](https://vignette.wikia.nocookie.net/simpsons/images/6/61/3dHomer.jpg/revision/latest/scale-to-width-down/350?cb=20180416002715)
+
 
 * [MATRICES: de los gráficos de Fortnite a la física cuántica](https://www.youtube.com/watch?v=9FKFgNQktkU), Explicación de las matrices en al vida cotidiana .
 
@@ -38,7 +39,7 @@ Intentaré actualizar está sección una vez al mes, con el fin de mostrar lo qu
 
 ## Libros 
 
-*[Introducción al aprendizaje estadístico](http://www-bcf.usc.edu/~gareth/ISL/ISLR%20Seventh%20Printing.pdf), de Gareth James, Daniela Witten y otros, Es un libro que nos lleva por un contexto de como abstraer la estadística teoríca en el mundo computacional para así desarrollar aplicaciones geniales.
+* [Introducción al aprendizaje estadístico](http://www-bcf.usc.edu/~gareth/ISL/ISLR%20Seventh%20Printing.pdf), de Gareth James, Daniela Witten y otros, Es un libro que nos lleva por un contexto de como abstraer la estadística teoríca en el mundo computacional para así desarrollar aplicaciones geniales.
 
 * [Introducción a Monte Carlo](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.703.5878&rep=rep1&type=pdf),de Christian P. Robert ,Este libro me parece que es uno de los que mejor explica ¿Qué es ? y ¿ Cómo usar? estos metódos de simulación.
 
