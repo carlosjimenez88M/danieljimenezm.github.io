@@ -38,6 +38,20 @@ Los científicos de datos, matemáticos y estadísticos que más admiro son:
 ![proceso](http://res.cloudinary.com/dyd911kmh/image/upload/f_auto,q_auto:best/v1523346698/tidyverse2_yjcwfy.png)
 
 
+Mi formación académica es :
+
+Pregrados: 
+* Economista - Universidad Santo Tomas
+* Matemático(Actualmente) - Universidad Konrad Lorenz
+
+Posgrados:
+* Master en Estadística Aplicada (Actualmente) - Universidad Santo Tomas
+* Especialista en Ciencia de Datos - Johns Hopkins University
+* Especialista en Matemáticas - Imperial College London
+
+Certificaciones:
+* Ciencia de Datos
+* Machine Learning
 
 
 
