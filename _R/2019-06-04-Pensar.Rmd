@@ -1,7 +1,10 @@
 ---
+layout: post
 title: "Pensar en Ciencia de Datos "
-date: "6/4/2019"
 mathjax: "true"
+category: r
+tags: [blog]
+comments: true
 output: html_document
 ---
 
@@ -82,7 +85,7 @@ Base%>%
 Parece que los datos tienen un comportamiento bimodal, para ello se somete a un test de normalidad, por lo cuál me adelantaré hacer un poco de inferencia estadística. Supongamos que los datos provienen de una distribución normal
 
 $$
-f(x)=\frac{1}{\sqrt2\pi\sigma}exp\{{-\frac{1}{2\sigma^2}(x-\mu)^2}\}\mathbf{I}_{R}(x)
+f(x)=\frac{1}{\sqrt2\pi\sigma}exp\{\frac{1}{2\sigma^2}(x-\mu)^2}\}\mathbf{I}_{R}(x)
 $$
 
 Donde sus propiedades son :
