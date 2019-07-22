@@ -36,7 +36,6 @@ En este campo mis áreas de actuación son:
 * Análisis de anomalías
 * Modelos Econométricos
 * Marketing Analytics
-* Análisis de recursos humanos
 * Diseño de experimentos
 * Modelamiento estadístico
 * Test A/B
@@ -62,7 +61,7 @@ En este campo mis áreas de trabajo son
 * Big Data Science
 * Churn models
 * Ciclo de vida de clientes
-* Up sell & Cross sell
+* Web Scraping
 * Modelos predictivos
 * Aprendizaje de máquina por refuerzo
 
