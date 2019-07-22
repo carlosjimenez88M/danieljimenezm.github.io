@@ -74,7 +74,7 @@ analytics:
 
 
 # Site Author
-owner:
+author:
   name             : "Carlos Daniel Jiménez"
   avatar           :  "/images/perfilpic.jpg"    
   bio              : "Senior Data Scientist at Merlin & Leader Machine Learning and Analytics at Nostradamus Data"
