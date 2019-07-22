@@ -76,7 +76,7 @@ analytics:
 # Site Author
 author:
   name             : "Daniel Jiménez"
-  avatar           :  "/images/Perfil.jpg"    
+  avatar           :  https://avatars0.githubusercontent.com/u/25884888?s=40&v=4    
   bio              : "Senior Data Scientist at Merlin & Leader Machine Learning and Analytics at Nostradamus Data"
   location         : "Bogotá, Colombia"
   email            :  "cjimenez187@aol.com"
