@@ -76,9 +76,9 @@ analytics:
 # Site Author
 author:
   name             : "Carlos Daniel Jiménez"
-  avatar           :  "/images/Perfil2.jpg"    
+  avatar           :  "/images/perfilpic.jpg"    
   bio              : "Data Scientist & Quantitative Analyst"
-  location         : "Medellín-Bogotá, Colombia"
+  location         : "Bogotá, Colombia"
   email            :  "cjimenez187@aol.com"
   uri              :
   home             : # null (default), "absolute or relative url to link to author home"
