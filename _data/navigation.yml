@@ -1,11 +1,11 @@
 # main links
 main:
+  - title: "Sobre mi"
+    url: /about/
   - title: "Servicios"
     url: /Data-Science/
   - title: "De interés"
     url: /Media/
-  - title: "Sobre mi"
-    url: /about/
   - title: "Presentaciones"
     url: /Cursos/
 
