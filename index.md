@@ -1,0 +1,8 @@
+---
+layout: home
+excerpt: "Applied Statistics, Machine Learning and R Projects"
+tags: [blog]
+---
+
+This is the homepage and blog of Daniel Jiménez, Senior Data Scientist at [Merlin(https://merlinjobs.com/es/) And Leader Machine Learning and Analytics at [Nostradamus Data](www.nostradamusdata.com). For more about me, <a href="/about" style="text-decoration: underline">see here</a>.
+tags: [blog]
