@@ -25,4 +25,4 @@ El objetivo de este proyecto es aportar a la comunidad en español de [R4DS](htt
 
 |Título| Tema |  Base de Datos | Código|
 | :----| :----| :--------------| :----- | 
-|Machine Learning Models with Tidyverse| Machine Learning| Base de datos| Código|
+|Machine Learning Models with Tidyverse| Machine Learning| (Base de datos)[https://cran.r-project.org/web/packages/gapminder/README.html]| [Código](https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/Rprojects/Tidy%20for%20Machine%20Learning.R)|
