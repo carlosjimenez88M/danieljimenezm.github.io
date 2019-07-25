@@ -1,9 +1,9 @@
 # =======================================
-# =   Machine Learning with tidyverse   =
-# =           Daniel Jiménez            =
-# =         Equipo de Producto          =
-# =          Resolve Studio             =
-# =           2019-07-24                =
+# =   Machine Learning with tidyverse    =
+# =            Daniel Jiménez            =
+# =         Senior Data Scientist        =
+# =               Merlin                 =
+# =           2019-07-245                =
 # =======================================
 
 
