@@ -8,7 +8,8 @@ main:
     url: /Media/
   - title: "Presentaciones"
     url: /Cursos/
-
+  - title: "R Projects"
+    url: /Cursos/
 
 
   # - title: "Sample Posts"
