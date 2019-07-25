@@ -19,6 +19,11 @@ En esta sección reposa algunas de las presentaciones de las clases y capacitaci
 
 Por otra parte también están los apuntes de clases, material de libre uso para quien lo desee. 
 
+## Análisis de Datos 
+### 2019
+
+
+
 ## Ciencia de datos
 ### 2019
 [Diseño y creación de clusters](https://www.slideshare.net/DanielJimnez56/cluster-132474391)
