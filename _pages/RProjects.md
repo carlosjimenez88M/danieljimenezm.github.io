@@ -25,3 +25,4 @@ El objetivo de este proyecto es aportar a la comunidad en español de [R4DS](htt
 
 |Título| Tema |  Base de Datos | Código|
 | :----| :----| :--------------| :----- | 
+|Machine Learning Models with Tidyverse| Machine Learning| Base de datos| Código|
