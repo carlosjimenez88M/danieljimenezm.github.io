@@ -15,7 +15,7 @@ title: "R Projects"
   {% endfor %}
 {% endfor %}
 
-En esta sección encontrará el código desarrollado para distintos temas, también presentaré un análisis corto sobre las principales conclusiones del trabajo desarrollado.
+En esta sección encontrará el código para distintos temas, también presentaré un análisis corto sobre las principales conclusiones del trabajo desarrollado.
 El objetivo de este proyecto es aportar a la comunidad en español de [R4DS](https://github.com/rfordatascience)
 
 
