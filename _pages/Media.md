@@ -24,6 +24,8 @@ Intentaré actualizar está sección una vez al mes, con el fin de mostrar lo qu
 
 ## Videos 
 
+* [Así se programó el Apolo 11 en 1969 / El código que nos llevó a la Luna](https://www.youtube.com/watch?v=tP0XQYC4rjI), un video supremamente interesante sobre los desarrollos de código para llegar a la luna a través de una verdadera interacción humana 
+
 * [Cuando ya no esté: Yuval Noah Harari (Parte 1/2)](https://www.youtube.com/watch?v=hxuKo_VdM9o), video del autor de Animales a Dioses, en el cual habla del porque los humanos como especie lograron el nivel de desarrollo que otras especies no compartieron, está es la primer parte del video. 
 
 * [Cuando ya no esté: Yuval Noah Harari (Parte 2/2)](https://www.youtube.com/watch?v=ECwY77VI3QM).
