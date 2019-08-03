@@ -26,3 +26,4 @@ El objetivo de este proyecto es aportar a la comunidad en español de [R4DS](htt
 |Título| Tema |  Base de Datos | Código|
 | :----| :----| :--------------| :----- | 
 |Machine Learning Models with Tidyverse| Machine Learning| [Base de datos](https://cran.r-project.org/web/packages/gapminder/README.html)| [Código](https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/Rprojects/Tidy%20for%20Machine%20Learning.R)|
+|Practice PCA for NN| Machine Learning|[Pokemon](https://www.kaggle.com/abcsds/pokemon/downloads/pokemon.zip/2)|[PCA](https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/Rprojects/PCA%20Reduction%20for%20Machine%20Learning.R)|
