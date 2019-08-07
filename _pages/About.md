@@ -42,7 +42,7 @@ Mi formación académica es :
 
 Pregrados: 
 * Economista - Universidad Santo Tomás
-* Matemático(Actualmente) - Universidad Konrad Lorenz
+* Matemático(c)- Universidad Konrad Lorenz
 
 Posgrados:
 * Master en Estadística Aplicada - Universidad Santo Tomás
