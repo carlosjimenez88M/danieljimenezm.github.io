@@ -15,15 +15,6 @@ library(corrr) # Correlaciones
 library(corrplot) # Gráficos de correlación 
 library(statisticalModeling) # MOdelos estadísticos
 library(broom)
-#library(caTools)
-#library(ROCR)
-#library(caret)
-#library(fitdistrplus)
-#library(normtest) ###REALIZA 5 PRUEBAS DE NORMALIDAD###
-#library(nortest) ###REALIZA 10 PRUEBAS DE NORMALIDAD###
-#library(moments)
-#library(fda) 
-
 # Cargar Base de datos
 
 Pokemon<-read.csv("Documents/R/Bases de Datos/Pokemon.csv")%>%
