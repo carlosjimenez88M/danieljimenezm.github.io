@@ -7,7 +7,7 @@ output: html_document
 
 ## La noticia sobre Python Vs R sobre el Data Science
 
-Sobre el articulo [Is Python Strangling R to Death?](https://www.datanami.com/2019/08/15/is-python-strangling-r-to-death/) quiero analizar dos cosas:
+Sobre el artículo [Is Python Strangling R to Death?](https://www.datanami.com/2019/08/15/is-python-strangling-r-to-death/) quiero analizar dos cosas:
 
 * La realidad sobre Python a nivel de integración y uso y ;
 * La estructura comparativa 
