@@ -1,7 +1,5 @@
 ---
 title: "Python vs R"
-author: "Daniel Jiménez"
-date: "8/18/2019"
 output: html_document
 ---
 
