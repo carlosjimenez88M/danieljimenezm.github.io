@@ -9,10 +9,10 @@ output: html_document
 
 Sobre el articulo [Is Python Strangling R to Death?](https://www.datanami.com/2019/08/15/is-python-strangling-r-to-death/) quiero analizar dos cosas:
 
-i) La realidad sobre Python a nivel de integración y uso y ;
-ii) La estructura comparativa 
+* La realidad sobre Python a nivel de integración y uso y ;
+* La estructura comparativa 
 
-De antemano quiero resaltar una verdad sobre el articulo
+De antemano quiero resaltar una verdad sobre el artículo
 
 > As programming languages go, there’s no denying that Python is hot 
 
