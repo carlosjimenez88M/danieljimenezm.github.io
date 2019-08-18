@@ -26,7 +26,7 @@ Ahora sobre lo anterior hay que tener presente un aspecto fundamental, independi
 Ahora la parte importante [Hadley Wickham](https://twitter.com/hadleywickham), detalla lo siguiente:
 
 
-![](../../Captura de Pantalla 2019-08-18 a la(s) 1.06.15 p. m..png)
+![](https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/images/hi.png)
 
 
 En el articulo que Wickham comenta, en efecto detalla que la comparación se basa en el número de busquedas de **Programación estadística en R** versus **Programación en Python** lo cual es un obvio problema de medición a nivel de comparación!!
