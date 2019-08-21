@@ -6,7 +6,8 @@ permalink: /about/
 
 <img src="/images/Perfil2.jpg" alt="hi" class="inline"/>
 
-Me llamo Daniel Jiménez , en la actualidad soy **Senior Data Scientist** en [Merlin](https://merlinjobs.com/es/) una de las Startup más innovadoras y prometedoras en USA sobre temas de empleabilidad  y a la par trabajo como **Leader Machine Learning and Analytics** de [Nostradamus Data](http://www.nostradamusdata.com/) una  empresa dedicada a la ciencia de datos **+** la infraestructura tecnológica, para soluciones inteligentes en Colombia, Perú y Chile.
+Me llamo Daniel Jiménez , en la actualidad soy **Senior Data Scientist** en [Merlin](https://merlinjobs.com/es/) una de las Startup más innovadoras y prometedoras en USA en temas de empleabilidad, a la par trabajo como **Leader Machine Learning and Analytics** en [Nostradamus Data](http://www.nostradamusdata.com/) una  empresa dedicada a la ciencia de datos **+** la infraestructura tecnológica, para soluciones inteligentes en Colombia, Perú y Chile.
+
 
 
 
@@ -55,7 +56,7 @@ Certificaciones:
 
 
 
-En mis tiempos libres me dedico a la cocina, el ciclismo de montaña y a la lectura, tengo una gran debilidad por los libros y la novela psicológica.
+En mis tiempos libres me dedico a la cocina, el ciclismo de montaña y a la lectura, tengo una gran debilidad por los libros y en especial la novela psicológica.
 
 
 
