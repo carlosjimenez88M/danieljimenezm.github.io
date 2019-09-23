@@ -10,7 +10,7 @@ permalink: /about/
 
 Hi! I am Daniel, Senior Data Scientist with over 8 years of experience applying and development of models to real world issues such Marketing Analytics, churn modeling, cluster desing , anomalies detection , data analytics,machine learning and AI.Currently I am workin as Senior Machine Learning Developer at [Merlin Jobs](www.merlinjobs.com).
 
-I am passionate about Machine Learning, applied statistics and Maths , experimental sciences, algebra lineal, and Bayesian Data Science. I working with R , Python and Octave.
+I am passionate about Machine Learning, applied statistics and Maths , experimental sciences,computational science, algebra lineal, and Bayesian Data Science. I working with R , Python and Octave.
 
 
 Some of my favorites tools for workflow on Data Science  
@@ -19,9 +19,9 @@ Some of my favorites tools for workflow on Data Science
 * [Tenserflow](https://tensorflow.rstudio.com/) Machine Learning
 * [Keras](https://keras.rstudio.com/) for neural networks and Deep learning
 * [Sklearn](https://scikit-learn.org/stable/) for Machine Learning
-* [SQLDF](https://www.rdocumentation.org/packages/sqldf/versions/0.4-11) 
-* [Stackr](https://github.com/dgrtwo/stackr) 
-* [Devtools](http://devtools.r-lib.org/) 
+* [SQLDF](https://www.rdocumentation.org/packages/sqldf/versions/0.4-11)  For BBDD
+* [Stackr](https://github.com/dgrtwo/stackr) R package for connecting to the Stack Exchange API 
+* [Devtools](http://devtools.r-lib.org/) for general package development.
 
 
 
