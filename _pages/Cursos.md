@@ -1,7 +1,7 @@
 ---
 layout: archive
-permalink: /Cursos/
-title: "Presentaciones"
+permalink: /Courses/
+title: "Presentations"
 
 ---
 {% include base_path %}
