@@ -1,7 +1,7 @@
 ---
 layout: archive
 permalink: /Media/
-title: "Media"
+title: "Curiosities"
 output: ioslides_presentation
 ---
 {% include base_path %}
