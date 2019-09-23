@@ -6,57 +6,49 @@ permalink: /about/
 
 <img src="/images/Perfil2.jpg" alt="hi" class="inline"/>
 
-Me llamo Daniel Jiménez , en la actualidad soy **Senior Data Scientist** en [Merlin](https://merlinjobs.com/es/) una de las Startup más innovadoras y prometedoras en USA en temas de empleabilidad, a la par trabajo como **Leader Machine Learning and Analytics** en [Nostradamus Data](http://www.nostradamusdata.com/) una  empresa dedicada a la ciencia de datos **+** la infraestructura tecnológica, para soluciones inteligentes en Colombia, Perú y Chile.
+
+
+Hi! I am Daniel, Senior Data Scientist with over 8 years of experience applying and development of models to real world issues such Marketing Analytics, churn modeling, cluster desing , anomalies detection , data analytics,machine learning and AI.Currently I am workin as Senior Machine Learning Developer at [Merlin Jobs](www.merlinjobs.com).
+
+I am passionate about Machine Learning, applied statistics and Maths , experimental sciences, algebra lineal, and Bayesian Data Science. I working with R , Python and Octave.
+
+
+Some of my favorites tools for workflow on Data Science  
+
+* [Tidyverse](https://www.tidyverse.org/) Manipulate Datsa
+* [Tenserflow](https://tensorflow.rstudio.com/) Machine Learning
+* [Keras](https://keras.rstudio.com/) for neural networks and Deep learning
+* [Sklearn](https://scikit-learn.org/stable/) for Machine Learning
+* [SQLDF](https://www.rdocumentation.org/packages/sqldf/versions/0.4-11) 
+* [Stackr](https://github.com/dgrtwo/stackr) 
+* [Devtools](http://devtools.r-lib.org/) 
 
 
 
 
-Cuento con más de ocho años de experiencia laboral, tanto en sector público como privado en el desarrollo y aplicación de modelos predictivos,  análisis de anomalías, churn , marketing, y diseño de experimentos.  Soy un Data Scientist del tipo Bayesiano con un gran interés por el modelamiento estadístico y matemático, las ciencias experimentales (en especial todas aquellas que tengan que ver con temas de cerebro, mente y cognición), microeconomía aplicada, visualización de datos, empirismo bayesiano, machine learning por reforzamiento, análisis no supervisado y algebra lineal.
+My favorites Data Scientist are:
 
 
-Trabajo con R, del cual soy fanático, aunque manejo Python, Octave y SQL. Las principales librerias con que trabajo son: 
-
-* [Tidyverse](https://www.tidyverse.org/) para Ciencia de Datos y Machine Learning 
-* [Tenserflow](https://tensorflow.rstudio.com/) Para Machine Learning
-* [SQLDF](https://www.rdocumentation.org/packages/sqldf/versions/0.4-11) Para Bases de Datos
-* [Stackr](https://github.com/dgrtwo/stackr) Para API`s
-* [Devtools](http://devtools.r-lib.org/) Para Ingenieria de software
-
-
-
-
-
-Los científicos de datos, matemáticos y estadísticos que más admiro son:
-
-* [David Robinson](http://varianceexplained.org/) en todo lo que tiene que ver con  análisis de datos, modelos predictivos y probabilidades.
-* [Hadley Wickham](http://hadley.nz/) en Ciencia de datos y programación estadística.
-* [Nate Silver](https://fivethirtyeight.com/contributors/nate-silver/) en predicciones y análisis de datos
-* [Rasmus Bååth](http://www.sumsar.net/about.html) Ciencia de Datos  Bayesiana
-* [Alejandro Correa](https://albahnsen.com/about/) Desarrollo de modelos predictivos y análisis de fraudes
-* [Andrés Gutiérrez](http://hagutierrezro.blogspot.com/) Modelamiento estadístico y muestreo.
-* [Carlos Díez](https://docentes.konradlorenz.edu.co/2017/01/carlos-alberto-d%C3%ADez-fonnegra.html) Modelamiento Matemático.
+* [David Robinson](http://varianceexplained.org/) 
+* [Hadley Wickham](http://hadley.nz/) 
+* [Nate Silver](https://fivethirtyeight.com/contributors/nate-silver/)
+* [Rasmus Bååth](http://www.sumsar.net/about.html) 
+* [Alejandro Correa](https://albahnsen.com/about/) 
+* [Andrés Gutiérrez](http://hagutierrezro.blogspot.com/) 
+* [Carlos Díez](https://docentes.konradlorenz.edu.co/2017/01/carlos-alberto-d%C3%ADez-fonnegra.html) 
 
 ![proceso](http://res.cloudinary.com/dyd911kmh/image/upload/f_auto,q_auto:best/v1523346698/tidyverse2_yjcwfy.png)
 
 
-Mi formación académica es :
-
-Pregrados: 
-* Economista - Universidad Santo Tomás
-* Matemático(c)- Universidad Konrad Lorenz
-
-Posgrados:
-* Master en Estadística Aplicada - Universidad Santo Tomás
-* Especialista en Ciencia de Datos - Johns Hopkins University
-* Especialista en Matemáticas - Imperial College London
-
-Certificaciones:
-* Ciencia de Datos
-* Machine Learning
+Education :
 
 
+* B.A in Economics -Saint Tomás University 
+* B.A Matematics(c)-Konrad Lorenz University 
+* Master in Statistics- Saint Tomás University 
+* Posgraduate in Data Science (currently) - Johns Hopkins University
+* Posgraduate in Maths (currently) - Imperial College London
 
-En mis tiempos libres me dedico a la cocina, el ciclismo de montaña y a la lectura, tengo una gran debilidad por los libros y en especial la novela psicológica.
 
 
 
