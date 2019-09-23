@@ -1,6 +1,6 @@
 ---
 layout: archive
-title: "Sobre mi"
+title: "About"
 permalink: /about/
 ---
 
