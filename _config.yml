@@ -1,6 +1,6 @@
 # Site Settings
 locale                   : "en-US"
-title                    : "Un Data Scientist Dice: <br/> Un blog sobre ciencia de datos y estadística aplicada "
+title                    : "Un Data Scientist Dice: <br/> Blog on Machine Learning , Applied Statistics and AI"
 title_separator          : "-"
 subtitle                 : "Applied Statistics , Machine Learning and R projects"
 name                     : "Daniel Jiménez"
@@ -77,7 +77,7 @@ analytics:
 author:
   name             : "Daniel Jiménez"
   avatar           :  https://avatars1.githubusercontent.com/u/25884888?s=460&v=4    
-  bio              : "Senior Data Scientist at Merlin & Leader Machine Learning and Analytics at Nostradamus Data"
+  bio              : "Senior Data Scientist at Merlin"
   location         : "USA"
   email            :  "cjimenez187@aol.com"
   uri              :
