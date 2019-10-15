@@ -1,5 +1,5 @@
 ---
-title: "Representacion de un modelo"
+title: "Representación de un modelo"
 author: "Daniel Jiménez"
 date: "10/14/2019"
 mathjax: "true"
