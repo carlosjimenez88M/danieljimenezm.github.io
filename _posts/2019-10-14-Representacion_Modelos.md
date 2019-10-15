@@ -1,7 +1,6 @@
 ---
 title: "Representación de un modelo"
 mathjax: "true"
-category: r
 output: html_document
 ---
 
