@@ -1,0 +1,521 @@
+---
+title: "Representacion de un modelo"
+author: "Daniel Jiménez"
+date: "10/14/2019"
+mathjax: "true"
+category: r
+tags: [blog]
+comments: true
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+>If you want to be a good data scientist, you should spend ~49% of your time developing your statistical intuition (i.e. how to ask good questions of the data), and ~49% of your time on domain knowledge (improving overall understanding of your field). Only ~2% on methods per se. Nate Silver 2019
+
+## Determinantes para la selección de un modelo
+
+
+El diseño de modelos estadísticos parte de la comprensión de que variables tienen efectos sobre las otras, para asi poder determinar que tanto puede ayudar a ajustar y determinar (*causa - efecto*) sobre el objetivo de estudio.
+
+Dicho lo anterior hay tres vertientes a determinar, para que el objetivo del diseño de los modelos pueda resolverse
+
+
+* EDA
+    + Entender los datos
+    + Asociar los datos
+    + Visualizar los datos
+    
+* Selección de variables 
+* Validación de los supuestos.
+
+Para realizar este trabajo se usaran dos librerias de R, [Broom](https://cran.r-project.org/web/packages/broom/vignettes/broom.html) la cual se encarga de *resumir la información estadística de los objetos de trabajo*, mientras que [tidyverse](https://www.tidyverse.org/) sirve como paquete compilador de acciones de manipulación de datos orientado a la ingenieria de datos y la aplicación del desarrollo de modelos para ciencia de datos.
+
+Omitere algunos conceptos de carácter técnico, más la documentación necesaria para ello estará atada a hipervinculos sobre las ideas que aquí presento.
+
+## Etapa I : Los Datos
+
+
+Lo primero para el diseño de los modelos estadísticos es la obtención de los datos , de este paso no mencionare nada, dado que todo depende de la fuente de obtención, un consejo practico, cuando se tienen *Q* alta de datos, lo mejor es trabajar con una de las platarmas de gestión de datos como Bigquery, dado que en el fondo incluye un map reduce, lo cual permite hacer la transformación de datos de la mejor manera posible. Cuando menciono tranformación de datos hago referencia a las operaciones u operaciones matemáticas para darle sentido a los datos.
+
+Paso dos, viene dado por las visualización de datos. En está parte en lo personal, la considero la más importante al tratar de descubir la distribución de los datos o hacer el proceso de inferencia estadística, paso seguido se trabaja con la **organización de datos**: en esta parte se ejecutan con base al descubrimiento de los patrones en los datos para así poder desarrollar insights de negocio o del problema en especifico.
+
+
+Suponga el siguiente ejemplo: Se desea desarrollar un modelo que permita predecir los valores el alto del sépalo de una planta (se trabajará con la base de datos de *iris*), por lo tanto se intenta describir el comportamiento promedio de las mismas
+
+
+```{r, echo=FALSE, cache=FALSE, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(broom)
+library(corrr)
+library(GGally)
+library(mosaic)
+library(psych)
+theme_set(theme_replace())
+```
+
+
+```{r, echo=FALSE, cache=FALSE}
+mosaic::mean(iris$Sepal.Length~iris$Species)
+```
+
+Notese que tienen comportamientos similares promedios el largo de sépalo entre las especies, si se evalua por la varianza (variabilidad entre los datos), se puede observar lo siguiente
+
+
+```{r, echo=FALSE, cache=FALSE}
+mosaic::var(iris$Sepal.Length~iris$Species)
+```
+
+Puede observarse que la especie que menor variación promedio tiene es la setosa y la de mayor volatilidad es la virginica, observese esto descrito en percentiles
+
+
+```{r, echo=FALSE, cache=FALSE}
+iris%>%
+  filter(Species=='setosa')->Setosa
+
+quantile(Setosa$Sepal.Length)%>%
+  knitr::kable(format = 'markdown',caption = 'Setosa Behiavor', col.names = 'Sepal Length')
+
+
+```
+
+Mientras que versicolor tiene el siguiente comportamiento
+
+```{r, echo=FALSE, cache=FALSE}
+iris%>%
+  filter(Species=='versicolor')->versicolor
+
+quantile(versicolor$Sepal.Length)%>%
+  knitr::kable(format = 'markdown',caption = 'Versicolor Behiavor', col.names = 'Sepal Length')
+```
+
+
+
+Ahora se evalua la correspondencia entre las variables a través de un gráfico
+
+
+```{r, echo=FALSE, cache=FALSE, message=FALSE, warning=FALSE}
+iris%>%
+  ggpairs()
+```
+
+Notese las correlaciones más fuentes entre las variables, este es un buen indicio para el desarrollo de un modelo. Pero par aclarar mejor está idea se usara el paquete [corrr](https://github.com/tidymodels/corrr), para detallar de mejor manera este fit
+
+
+```{r, echo=FALSE, cache=FALSE, message=FALSE}
+
+iris%>%
+  dplyr::select(-Species)%>%
+  correlate(method = 'pearson')%>%
+  network_plot()
+
+```
+
+Las lineas azules indican que son correlaciones directas y fuertes, mientras que las líneas rojas indican una relación inversamente proporcional, a la hora de ver lo anterior de forma matricial el resultado es el siguiente
+
+
+```{r, echo=FALSE, cache=FALSE}
+iris%>%
+  dplyr::select(-Species)%>%
+  correlate()%>%
+  rearrange()%>%
+  shave()%>%
+  fashion()
+```
+
+
+## Encontrando la distribución de los datos
+
+
+Conocer la distribución de los datos permitirá el desarrollo del proceso de inferencia estadística, con lo cual los supuestos sobre los grupos de los datos pueden aliniarce a las ideas del objeto de estudio. Lo más importante de esto es que si se conoce las distribuciones de probabilidad, por ende se puede conocer las propiedades de los datos.
+
+Usualmente para este tipo de trabajo se suele usar los histogramas. Se presentaran cuatro histogramas, pero me enfocaré solo un uno para presentar el desarrollo del concepto de la distribución de probabilidad.
+
+
+```{r, echo=FALSE, cache=FALSE, message=FALSE, warning=FALSE}
+library(gridExtra)
+a<-iris%>%
+  ggplot(aes(x=Sepal.Length))+
+  geom_histogram()+
+  labs(title = 'Sepal Length')
+
+
+b<-iris%>%
+  ggplot(aes(x=Sepal.Width))+
+  geom_histogram()+
+  labs(title = 'Sepal Width')
+
+c<-iris%>%
+  ggplot(aes(x=Petal.Length))+
+  geom_histogram()+
+  labs(title = 'Petal Length')
+
+d<-iris%>%
+  ggplot(aes(x=Petal.Length))+
+  geom_histogram()+
+  labs(title = 'Petal Length')
+
+
+grid.arrange(a,b,c,d,ncol=2)
+```
+
+Para saber a que tipo de distribución corresponde cada una de las variables se suele verificar a través de su forma a que familia corresponde y por ende sus propiedades
+
+![](https://relopezbriega.github.io/images/distribution.png)
+
+En el caso de *Sepal.Width*, se puede decir lo siguiente:
+
+* El comportamiento de la variable tiene la siguiente estructura
+
+```{r, echo=FALSE, cache=FALSE}
+psych::describe(iris$Sepal.Width)
+```
+
+* El histograma indica la siguiente forma
+
+```{r, echo=FALSE, cache=FALSE}
+iris%>%
+  ggplot(aes(Sepal.Width))+
+  geom_histogram(binwidth = 0.5)+
+  labs(title = 'Distribución de la variable Sepal Width')
+```
+
+```{r, echo=FALSE, cache=FALSE}
+
+iris%>%
+  ggplot(aes(Sepal.Width))+
+  geom_histogram(binwidth = 0.5, aes(y=..density..))+
+  labs(title = 'Distribución de densidad  de la variable Sepal Width')
+
+```
+
+Dado los valores descriptivos y la forma de la distribución de probabilidad, se puede suponer que está variable se comporta como una [normal](https://statisticsbyjim.com/basics/normal-distribution/#targetText=The%20normal%20distribution%20is%20a%20probability%20distribution.,will%20fall%20within%20that%20interval.) y [Lognormal](https://es.wikipedia.org/wiki/Distribuci%C3%B3n_log-normal)
+
+
+
+Al desarrollar una prueba para determinar que estos supuestos tienen cierta validez se desarrollan los siguentes operaciones
+
+* Suponer una distribución
+
+
+```{r, echo=FALSE, cache=FALSE}
+library(fitdistrplus)
+descdist(iris$Sepal.Width, discrete = FALSE)
+```
+
+La prueba parece indicar que la distribución teórica de la variable tiene posibilidad de ser : i) Normal, ii) Weibull o iii) Lognormal. Para poder hacer más solido este supuesto se trabajará con boots
+
+
+```{r, echo=FALSE, cache=FALSE}
+descdist(iris$Sepal.Width, discrete = FALSE,boot = 100)
+```
+
+Todo parece indicar que es una *log - normal*, más de desarrollaran unas pruebas para ello.
+
+
+```{r, echo=FALSE, cache=FALSE}
+w_fit<-fitdist(iris$Sepal.Length,'weibull')
+n_fit<-fitdist(iris$Sepal.Length,'norm')
+ln_fit<-fitdist(iris$Sepal.Length,'lnorm')
+```
+
+Con la Weibull se encuentra lo siguiente
+
+
+```{r, echo=FALSE, cache=FALSE}
+plot(w_fit)
+```
+
+La distribución teórica parece tener buen ajuste. Mientras la normal tiene el siguiente comportamiento
+
+```{r, echo=FALSE, cache=FALSE}
+plot(n_fit)
+```
+
+El ajuste parece adecuado, por último la log-normal tiene la siguiente estructura
+
+```{r, echo=FALSE, cache=FALSE}
+plot(ln_fit)
+```
+
+
+Dado que los tres ajusge parecen oportunos, se trabajará con el AIC para determinar con que distribución quedarse.
+
+```{r, echo=FALSE, cache=FALSE}
+AICS<-list(
+  Normal_Aic=n_fit$aic,
+  Weibull_Aic=w_fit$aic,
+  LogNormal_Aic=ln_fit$aic
+)
+
+AICS
+
+
+
+```
+
+Se selecciona el que tenga menor valor en el criterio de Akaike. Por lo tanto la distribución más adecuada es la logNormal.
+
+## Diseño del modelo
+
+Después de determinar la distribución de las variables de los datos, se procede a desarrollar modelos a través de la inferencia que se pudo adquirir en el paso anterior.
+
+
+Suponga que se desea predecir el valor del largo del sépalo, por lo tanto se genera un modelo sencillo, el cual es el cuarto paso para poder trabajar con la representación de los modelos.
+
+
+```{r,echo=FALSE, cache=FALSE}
+iris_model<-lm(Sepal.Length ~ Sepal.Width +Petal.Length+Petal.Width, data = iris)
+tidy(iris_model)
+```
+
+El comportamiento objetivo del modelo con todas las variables es el siguiente
+
+```{r, echo=FALSE, cache=FALSE}
+glance(iris_model)
+```
+
+Con un ajuste del .85, se puede considerar un buen modelo, pero sería más apremiante compararlo con menor número de variables 
+
+
+```{r}
+fits<-list(
+  fit1 <-lm(Sepal.Length ~ Sepal.Width, data = iris),
+  fit2 <-lm(Sepal.Length ~ Sepal.Width +Petal.Length, data = iris),
+  fit3 <-lm(Sepal.Length ~ Sepal.Width +Petal.Length + Petal.Width , data = iris)
+)
+
+
+gof<-map_df(fits,glance,.id ='model')%>%
+  arrange(AIC)
+
+gof
+```
+
+Notesé que el modelo tres que tiene mayor número de variables explicativas es que el mejor ajuste da a un modelo
+
+Ahora se estudia el comportamiento del residuo de las variables y el resultado es el siguiente
+```{r, echo=FALSE,cache=FALSE}
+iris2<-iris
+colnames(iris2)=c('Sepal_Length','Sepal_Width','Petal_Length','Petal_Width','Species')
+fit3 <-lm(Sepal_Length ~ Sepal_Width +Petal_Length + Petal_Width , data = iris2)
+
+au<-broom::augment(fit3)
+
+au%>%
+  gather(x,val,-contains("."))%>%
+  ggplot(aes(val,.resid))+
+  geom_point()+
+  facet_wrap(~x,scales = 'free')+
+  labs(x='Predictior Value', y='Residual')
+```
+
+Al evaluar por inferencia estádistica los valores , se encuentran desde una perspectiva lo siguiente
+```{r, echo=FALSE, cache=FALSE, message=FALSE}
+library(moderndive)
+library(skimr)
+
+iris%>%
+  dplyr::select(-Species)%>%
+  skim()
+
+```
+
+Por lo cual la tabla de regresión del modelo multiple es
+
+```{r, echo=FALSE, cache=FALSE}
+get_regression_table(fit3)
+
+```
+
+Por lo cual el modelo será
+
+$$
+y=1.856+0.651_{Sepal_Width}+0.709_{Petal_Length}-0.556_{Petal_Width}
+$$
+
+
+
+
+Y su comportamiento será (a manera desagregada)
+
+```{r, echo=FALSE, cache=FALSE}
+
+
+gg_parallel_slopes(y = "Sepal.Length", num_x = "Petal.Width", cat_x = "Species",data = iris)
+  
+```
+
+Y en general
+
+
+```{r, echo=FALSE, cache=FALSE}
+iris%>%
+  ggplot(aes(Petal.Width,Sepal.Length))+
+  geom_point()+
+  geom_smooth(method = 'lm',se=TRUE)
+```
+
+
+Por lo cual los valores observados y los ajustados se repreentaran en la siguiente tabla
+
+```{r, echo=FALSE, cache=FALSE}
+regression_points <- get_regression_points(fit3)
+regression_points
+```
+
+
+
+## Generalidades sobre el modelo
+
+La suma de los residuos al cuadrado sirve para saber que tan desviada está un modelo sobre su promedio
+
+```{r, echo=FALSE, cache=FALSE}
+get_regression_points(fit3) %>% 
+  mutate(sq_residuals = residual^2) %>% 
+  summarize(sum_sq_residuals = sum(sq_residuals))
+```
+
+
+El anterior valor permite expresar la variación total de $Y$ en este caso *Sepal.Length*, por lo cual la variación atribuida al error es de 14.44.
+
+
+## Computando el R ajustado
+
+Recuerde que 
+
+$$
+R^2=1-\frac{Var(Residuals)}{Var(y)}
+$$
+
+El R^2 sirve para medir el ajuste del modelo, al calcularlo se encuentran los siguientes resultados
+
+```{r, echo=FALSE, cache=FALSE}
+get_regression_points(fit3) %>%
+  summarize(r_squared = 1 - var(residual) / var(Sepal_Length))
+```
+
+
+```{r, echo=FALSE, cache=FALSE}
+augment(fit3)%>%
+  ggplot(aes(.fitted,.resid))+
+  geom_point()+
+labs(title = 'Alto ajuste')
+```
+
+
+Ahora  se calculará el error cuadrático medio sirve para calcular el error predictivo.
+
+
+```{r, echo=FALSE, cache=FALSE}
+get_regression_points(fit3) %>%
+  mutate(sq_residuals = residual^2) %>%
+summarize(mse = mean(sq_residuals)) %>% 
+  mutate(rmse = sqrt(mse))
+```
+
+Por último ya se sabe de cuanto es el error promedio que pueden tener las predicciones con un ajuste del 0.86
+
+
+
+## Boostraping
+
+Para la técnica de [boostrap](https://machinelearningmastery.com/a-gentle-introduction-to-the-bootstrap-method/#targetText=The%20bootstrap%20method%20is%20a,the%20mean%20or%20standard%20deviation.&targetText=That%20when%20using%20the%20bootstrap,and%20the%20number%20of%20repeats.) se suele usar interacciones que ajusten los valores gracias a los valores obtenidos en las bodades de ajustes
+```{r, echo=FALSE, cache=FALSE}
+gof<-map_df(fits,glance,.id ='model')%>%
+  arrange(AIC)
+
+
+gof%>%
+  knitr::kable(format = 'markdown')
+```
+
+
+
+
+
+
+
+Inspeccionado los valores residuales de las variables, se obtiene el nivel de dispersión de los datos y con está técnica se puede seleccionar la variable de predicción si también se desea conservar el nivel confiabilidad y certidumbre sobre los datos.
+
+
+
+```{r, echo=FALSE, cache=FALSE}
+iris2<-iris
+colnames(iris2)=c('Sepal_Length','Sepal_Width','Petal_Length','Petal_Width','Species')
+fit3 <-lm(Sepal_Length ~ Sepal_Width +Petal_Length + Petal_Width , data = iris2)
+
+au<-broom::augment(fit3)
+
+au%>%
+  gather(x,val,-contains("."))%>%
+  ggplot(aes(val,.resid))+
+  geom_point()+
+  facet_wrap(~x,scales = 'free')+
+  labs(x='Predictior Value', y='Residual')
+
+```
+
+
+
+Conjugando la relación de los datos más parejo , se encuentra lo siguiente
+
+
+```{r, echo=FALSE, cache=FALSE}
+
+iris2%>%
+  ggplot(aes(Petal_Width,Sepal_Length))+
+  geom_point()
+```
+
+Al considerar el modelo con la siguiente estructura
+
+
+$$
+\mbox{Sepal_Length}=\frac{k}{\mbox{Petal_width}}+b+e \sim LN(mean,sd)
+$$
+Donde K y b vienen por bootstrap, y por lo cual los calculos dan el siguiente resultado (sample head)
+
+```{r, echo=FALSE,cache=FALSE}
+boots<-bootstraps(iris2, times = 100)  
+boots
+```
+
+```{r, echo=FALSE,cache=FALSE}
+attach(iris2)
+fit_nls_bootstrap<- function(split){
+  nls(
+    Petal_Width ~ k / Sepal_Length + b,
+    analysis(split),
+    start = list(k=1,b=0)
+  )
+}  
+
+
+boots_fits<-boots%>%
+  mutate(fit=map(splits,fit_nls_bootstrap),
+         coef_info=map(fit,tidy))
+
+boot_coef<-boots_fits%>%
+  unnest(coef_info)
+
+boot_coef%>%
+  head()
+```
+
+
+Y la distribución de probabilidad de k y b dá el siguiente resultado
+
+```{r, echo=FALSE, cache=FALSE}
+boot_coef%>%
+  ggplot(aes(estimate))+
+  geom_histogram()+
+  facet_wrap(~ term, scales = 'free')+
+  labs(x='Value',
+       y='Count',
+       title = 'Sampling distribution of K and B')
+```
+
