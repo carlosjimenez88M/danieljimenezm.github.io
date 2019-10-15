@@ -1,11 +1,7 @@
 ---
 title: "Representación de un modelo"
-author: "Daniel Jiménez"
-date: "10/14/2019"
 mathjax: "true"
 category: r
-tags: [blog]
-comments: true
 output: html_document
 ---
 
