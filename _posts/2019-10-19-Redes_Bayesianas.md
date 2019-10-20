@@ -1,6 +1,7 @@
 ---
 title: "Redes Bayesianas"
 output: html_document
+mathjax: "true"
 ---
 
 
