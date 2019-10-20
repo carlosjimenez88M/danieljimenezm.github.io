@@ -38,11 +38,11 @@ $$
 
 Donde:
 
-i) $P(A)$ = Probabilidad a priori
+i) P(A) = Probabilidad a priori
 
-ii) $P(B|A)$ = Probabilidad de B dada la hipótesis de A
+ii) P(B|A) = Probabilidad de B dada la hipótesis de A
 
-iii) $P(A|B)$ = Probabilidad posterior
+iii) P(A|B) = Probabilidad posterior
 
 
 
