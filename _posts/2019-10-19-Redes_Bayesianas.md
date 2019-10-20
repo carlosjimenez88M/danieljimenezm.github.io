@@ -118,7 +118,7 @@ Primeras conclusiones :
 
 * Se fuma más cuando hay evidencia de estrés fisico.
 
-Quedo con una duda, y es si realmente hay una diferencia o no cuando los individuos tienen antecedentes familiares, por lo cual desarrolllo una prueba de inferencia y los resultados son los siguientes (código abierto)
+Quedo con una duda, y es si realmente hay una diferencia o no cuando los individuos tienen antecedentes familiares, por lo cual desarrolllo una prueba de inferencia y los resultados son los siguientes 
 
 ![center](/figs/2019-10-19-Redes_Bayesianas/unnamed-chunk-6-1.png)
 
