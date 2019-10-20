@@ -264,9 +264,7 @@ El proceso de simulación se desarrolla a través de muestreo de cada uno de los
 
 
 
-{% highlight text %}
-## Error in file(con, "rb"): cannot open the connection
-{% endhighlight %}
+
 
 A través de la simulación bayesiana dada las de pendencias y probabilidad de las ocurrencias se obtiene el siguiente resultado
 
