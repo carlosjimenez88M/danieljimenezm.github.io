@@ -164,7 +164,7 @@ Primeras conclusiones :
 
 * Se fuma más cuando hay evidencia de estrés fisico.
 
-Quedo con una duda, y es si realmente hay una diferencia o no cuando los individuos tienen antecedentes familiares, por lo cual desarrolllo una prueba de inferencia y los resultados son los siguientes (código abierto)
+Quedo con una duda, y es si realmente hay una diferencia o no cuando los individuos tienen antecedentes familiares, por lo cual desarrolllo una prueba de inferencia y los resultados son los siguientes 
 
 ```{r, echo=FALSE, cache=FALSE}
 # H0: No hay diferencia entre los fumadores y los no fumadores dado los antecendentes familiares
