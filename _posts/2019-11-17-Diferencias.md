@@ -1,7 +1,5 @@
 ---
 title: "Un problema de definición"
-author: "Daniel Jiménez"
-date: "11/17/2019"
 output: html_document
 ---
 
