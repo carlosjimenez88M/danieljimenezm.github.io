@@ -8,25 +8,31 @@ permalink: /about/
 
 
 
-Hi! I am Daniel, Senior Data Scientist with over 8 years of experience applying and development of models to real world issues such Marketing Analytics, churn modeling, cluster desing , anomalies detection , data analytics,machine learning and AI.Currently I am workin as Senior Machine Learning Developer at [Merlin Jobs](www.merlinjobs.com).
+Hola!!, Soy Daniel Jiménez , Ingeniero de Machine Learning  y Científico 👨‍🔬  de Datos (Senior Data Scientist), cuento con más de ocho años de experiencia desarrollando modelos aplicados al mundo real en temas como forecast , UX, marketing Analytics, public policy, Optimización dinámica y más. Soy un data scientist del tipo [bayesiano](https://towardsdatascience.com/bayesian-statistics-for-data-science-45397ec79c94) y desarrollador matemático de diferentes implicaciones sociales (en mis ratos libres).
 
-I am passionate about Machine Learning, applied statistics and Maths , experimental sciences,computational science, algebra lineal, and Bayesian Data Science. I working with R , Python and Octave.
+Mis áreas de interés son :
+
+| Área       | Tema de interés        |
+| ------------- |:-------------:| 
+| Machine Learning | [Machine Learning Reinforcement](https://en.wikipedia.org/wiki/Reinforcement_learning)| 
+| Machine Learning | [Clusters Design ](https://www.geeksforgeeks.org/clustering-in-machine-learning/) | 
+| Machine Learning | [Text Mining](https://www.tidytextmining.com/)|
+| Machine Learning | [Deep Learning](https://www.indracompany.com/es/blogneo/deep-learning-sirve)|
+|Data Science |[Anomaly Detection](https://towardsdatascience.com/anomaly-detection-for-dummies-15f148e559c1)|
+|Data Science|[Web_scraping](https://es.wikipedia.org/wiki/Web_scraping)|
+|Data Science|A/B Testing|
+|Data Science|Data Visualization|
+|Data Science|[EDA](https://en.wikipedia.org/wiki/Exploratory_data_analysis)|
+|Statistics|[Experimental Design](https://www.statisticshowto.datasciencecentral.com/experimental-design/)|
+|Statistics|[Bayesian Data Analysis](http://www.stat.columbia.edu/~gelman/book/)|
+|Statistics| [Forecasting](https://en.wikipedia.org/wiki/Forecasting)|
 
 
-Some of my favorites tools for workflow on Data Science  
-
-* [Tidyverse](https://www.tidyverse.org/) Manipulate Datsa
-* [Tenserflow](https://tensorflow.rstudio.com/) Machine Learning
-* [Keras](https://keras.rstudio.com/) for neural networks and Deep learning
-* [Sklearn](https://scikit-learn.org/stable/) for Machine Learning
-* [SQLDF](https://www.rdocumentation.org/packages/sqldf/versions/0.4-11)  For BBDD
-* [Stackr](https://github.com/dgrtwo/stackr) R package for connecting to the Stack Exchange API 
-* [Devtools](http://devtools.r-lib.org/) for general package development.
+Trabajo principalmente con **R** porque me parece un software increible y la filosofía del **#Tidyverse** me parece lo mejor que le ha pasado a la profesión y a la ciencia , más aun así también uso Python y Octave.
 
 
 
-
-My favorites Data Scientist are:
+Mis científicos de cabecera son:
 
 
 * [David Robinson](http://varianceexplained.org/) 
@@ -40,14 +46,7 @@ My favorites Data Scientist are:
 ![proceso](http://res.cloudinary.com/dyd911kmh/image/upload/f_auto,q_auto:best/v1523346698/tidyverse2_yjcwfy.png)
 
 
-Education :
 
-
-* B.A in Economics -Saint Tomás University 
-* B.A Matematics(c)-Konrad Lorenz University 
-* Master in Statistics- Saint Tomás University 
-* Posgraduate in Data Science (currently) - Johns Hopkins University
-* Posgraduate in Maths (currently) - Imperial College London
 
 
 
