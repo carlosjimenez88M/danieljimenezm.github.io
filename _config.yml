@@ -77,11 +77,11 @@ analytics:
 author:
   name             : "Daniel Jiménez"
   avatar           :  https://cdn.imgbin.com/24/3/14/imgbin-rick-sanchez-pocket-mortys-morty-smith-rick-and-morty-season-3-meeseeks-and-destroy-others-ByZ1x7hMUSmMfFPwr3NY1xXA4.jpg   
-  bio              : "Senior Data Scientist at Merlin"
-  location         : "USA"
+  bio              : "Senior Data Scientist and Machine Learning Engineering, My interests include Experimental Science, Bayesian Data Analysis , Deep Learning and Computational Science."
+  location         : "Colombia"
   email            :  "cjimenez187@aol.com"
   uri              :
-  home             : # null (default), "absolute or relative url to link to author home"
+  home             : www.danieljimenezm.com
   bitbucket        :
   codepen          :
   dribbble         :
