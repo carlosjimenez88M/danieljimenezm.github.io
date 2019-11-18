@@ -7,7 +7,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Esta entrada tiende a ser un poco diferente a las que he desarrollado durante este año que me estrene como bloggero. Lo primero que quiero resaltar es un problema sobre las actividades que desarrollan cuatro perfiles que en ciertas partes tienden a confundir, paso seguido quiero llegar a profundizar una idea de como la especialización en  dichas áreas a creado nuevos perfiles.
+Esta entrada tiende a ser un poco diferente a las que he desarrollado durante este año en el que me estrene como bloggero. Lo primero que quiero resaltar es un problema sobre las actividades que desarrollan cuatro perfiles que con cierta frecuencia  tienden a confundir, paso seguido quiero llegar a profundizar una idea de como la especialización en  dichas áreas a creado nuevos perfiles.
 
 ## Ingeniería de Datos
 
@@ -34,12 +34,11 @@ La AI es la de mayor vigencia tiene en el tiempo, puesto que se habla de ella de
 
 Una definición formal es la de : Agente **autónomo** que ejecutan acciones. 
 
-Un ejemplo de lo anterior sería los autos autónomos, los cuales reconocen patrones de personas para poder gestionar la manera de como conducir por la ciudad sin causar accidentes.
-
+Un ejemplo de lo anterior sería los autos autónomos, los cuales reconocen patronespara conducirse así mismos sin generar accidentes.
 
 ## Un proceso de evolución
 
-Un aspecto importante de nombrar es que **El cientifíco de datos** en el mercado es aquel que domina las cuatro áreas que se mencionaron anteriormente. Pero en la realidad si hay una diferencia  y una salvedad.
+Un aspecto importante de nombrar es que **El científico de datos** en el mercado es aquel que domina las cuatro áreas que se mencionaron anteriormente. Pero en la realidad si hay una diferencia  y una salvedad.
 
-EL encargado de desarrollar modelos de machine learning se le denomina ingeniero de ML, dado que la automatización de procesos y la creación de los modelos se basa en un aspecto de ingeniería. Mientras el que desarrolla reglas de negocios, clasifica y genera modelos que logren predecir los sucesos y desarrolla análisis estadístico es el científico de datos, muy diferente al B.I que últimamente está siendo llamado data scientist , pues este se basa en el EDA y gestión de visualización de los datos para hacerlos entendibles por los stakeholders de un negocio especifico.
+EL encargado de desarrollar modelos de machine learning se le denomina ingeniero de ML, dado que la automatización de procesos y la creación de los modelos se basa en un aspecto de ingeniería. Mientras el que desarrolla reglas de negocios, clasifica y genera modelos que logren predecir los sucesos y desarrolla análisis estadístico es el **científico de datos**, muy diferente al B.I que últimamente está siendo llamado data scientist , pues este se basa en el EDA y gestión de visualización de los datos para hacerlos entendibles por los stakeholders de un negocio especifico.
 
