@@ -15,22 +15,24 @@ title: "Presentations"
   {% endfor %}
 {% endfor %}
 
-En esta sección reposa algunas de las presentaciones de las clases y capacitaciones que he dictado , a la par de los eventos en los que he participado.
-
-Por otra parte también están los apuntes de clases, material de libre uso para quien lo desee. 
-
-## Análisis de Datos 
-### 2019
+![](https://gaussianos.com/images/Futurama_no-convergente.JPG)
+En la presente sección encontrará las presentaciones y el material de clase por institución Universitaria y tema dado. Los códigos para las clases son de uso público y si desean comentarlos o hacer versiones sobre los mismos agradezco que los compartan puesto que ello ayuda a la divulgación sobre estos temas y mejoras en la practica.
 
 
 
-## Ciencia de datos
-### 2019
-[Diseño y creación de clusters](https://www.slideshare.net/DanielJimnez56/cluster-132474391)
+## Universidad Nacional 
+
+| Curso | Descripción|
+|:------|:-----|
+|(Big Data)[https://github.com/carlosjimenez88M/Curso-de-Big-Data-e-Ingenieria-de-datos/blob/master/README.md]|Curso Introductorio|
 
 
 
-## Apuntes de clases
-### Ciencia de Datos 
-[Modelos jerárquicos bayesianos](https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/Notas/Bayesiana.pdf)
+## Unipanamericana
+
+
+
+## Educación Futuro
+
+
 
