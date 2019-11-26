@@ -24,7 +24,7 @@ En la presente sección encontrará las presentaciones y el material de clase po
 
 | Curso | Descripción|
 |:------|:-----|
-|(Big Data)[https://github.com/carlosjimenez88M/Curso-de-Big-Data-e-Ingenieria-de-datos/blob/master/README.md]|Curso Introductorio|
+|[Big Data](https://github.com/carlosjimenez88M/Curso-de-Big-Data-e-Ingenieria-de-datos/blob/master/README.md) |Curso Introductorio|
 
 
 
