@@ -4,7 +4,7 @@ main:
     url: /about/
   #- title: "Servicios"
     #url: /Data-Science/
-  - title: "Curiosities"
+  - title: "Conversaciones con el hombre malvavisco"
     url: /Media/
   - title: "Presentations"
     url: /Courses/

@@ -7,32 +7,13 @@ permalink: /about/
 <img src="/images/Perfil2.jpg" alt="hi" class="inline"/>
 
 
-
-Hola!!, Soy Daniel Jiménez , Ingeniero de Machine Learning  y Científico 👨‍🔬  de Datos (Senior Data Scientist), cuento con más de ocho años de experiencia desarrollando modelos aplicados al mundo real en temas como forecast , UX, marketing Analytics, public policy, Optimización dinámica y más. Soy un data scientist del tipo [bayesiano](https://towardsdatascience.com/bayesian-statistics-for-data-science-45397ec79c94) y desarrollador matemático de diferentes implicaciones sociales (en mis ratos libres).
-
-Mis áreas de interés son :
-
-| Área       | Tema de interés        |
-| ------------- |:-------------:| 
-| Machine Learning | [Machine Learning Reinforcement](https://en.wikipedia.org/wiki/Reinforcement_learning)| 
-| Machine Learning | [Clusters Design ](https://www.geeksforgeeks.org/clustering-in-machine-learning/) | 
-| Machine Learning | [Text Mining](https://www.tidytextmining.com/)|
-| Machine Learning | [Deep Learning](https://www.indracompany.com/es/blogneo/deep-learning-sirve)|
-|Data Science |[Anomaly Detection](https://towardsdatascience.com/anomaly-detection-for-dummies-15f148e559c1)|
-|Data Science|[Web_scraping](https://es.wikipedia.org/wiki/Web_scraping)|
-|Data Science|A/B Testing|
-|Data Science|Data Visualization|
-|Data Science|[EDA](https://en.wikipedia.org/wiki/Exploratory_data_analysis)|
-|Statistics|[Experimental Design](https://www.statisticshowto.datasciencecentral.com/experimental-design/)|
-|Statistics|[Bayesian Data Analysis](http://www.stat.columbia.edu/~gelman/book/)|
-|Statistics| [Forecasting](https://en.wikipedia.org/wiki/Forecasting)|
+Hola! mi nombre es **Daniel Jiménez**, actualmente trabajo como Senior Data Scientist en [Chiper](https://chiper.co/) en donde soy el encargado  de analítica avanzada y del desarrollo  de modelos de Machine Learning en temas de Marketing, UX y logística. Cuento con más de ocho años de experiencia profesional aplicando ciencia de datos a problemas del *real world* tanto en el sector público como en el privado. A la par soy profesor de Ciencia de datos y Big Data en la [Universidad Nacional de Colombia](https://unal.edu.co/) e investigador sobre Ciencias experimentales.
 
 
-Trabajo principalmente con **R** porque me parece un software increible y la filosofía del **#Tidyverse** me parece lo mejor que le ha pasado a la profesión y a la ciencia , más aun así también uso Python y Octave.
+Mis principales intereses se centran en : Empirical Bayes for data analysis, PCA, machine learning reinforcement , estadística aplicada y detección de anomalías. A parte de ello me apasiona mucho la programación, el modelamiento matemático (y todos los problemas que se pueden resolver con algebra), las ciencias de la computación (no puedo evitar trabajar desde la terminal) y la seguridad informatica. 
 
 
-
-Mis científicos de cabecera son:
+Los científicos que más sigo son:
 
 
 * [David Robinson](http://varianceexplained.org/) 
@@ -42,6 +23,13 @@ Mis científicos de cabecera son:
 * [Alejandro Correa](https://albahnsen.com/about/) 
 * [Andrés Gutiérrez](http://hagutierrezro.blogspot.com/) 
 * [Carlos Díez](https://docentes.konradlorenz.edu.co/2017/01/carlos-alberto-d%C3%ADez-fonnegra.html) 
+
+
+Actualmente vivo entre Bogotá y Medellín , pero constantemente ando de viaje. Uso Mac por preferencia y  linux cuando debo trabajar con cosas serias, tengo una debilidad por los libros y el café impresionante, no uso redes sociales, ando en bici todo el rato que puedo, practico powerlifting y en mis ratos realmente libres y de ocio cocino. 
+
+
+Creé este Blog porque creo en el desarrollo de comunidad científica y en la divulgación del conocimiento, y en el fondo para aportar algo a está ciencia que un día me atrapo y no me va a soltar.
+
 
 ![proceso](http://res.cloudinary.com/dyd911kmh/image/upload/f_auto,q_auto:best/v1523346698/tidyverse2_yjcwfy.png)
 
