@@ -218,6 +218,8 @@ Para finalizar quiero resaltar la importancia del `tidytext` para el diseño de 
 
 
 
+
+
 [^1]:https://github.com/tidyverse/glue
 [^2]:https://cran.r-project.org/web/packages/tidytext/vignettes/tidytext.html
 
