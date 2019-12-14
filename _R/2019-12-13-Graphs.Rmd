@@ -85,7 +85,7 @@ franchises <- media_franchises %>%
 franchises%>%
   head(10)%>%
   arrange(desc(total_revenue))%>%
-  knitr::kable(format = 'pandoc', caption = 'Data Agrupada')
+  knitr::kable(format = 'html', caption = 'Data Agrupada')
 ```
 
 
@@ -98,7 +98,7 @@ franchises_q<-franchises%>%
   ungroup()
 
 franchises_q%>%
-  knitr::kable(format = 'pandoc', caption = 'Análisis de frecuencia por el formato')
+  knitr::kable(format = 'html', caption = 'Análisis de frecuencia por el formato')
 
 
 
