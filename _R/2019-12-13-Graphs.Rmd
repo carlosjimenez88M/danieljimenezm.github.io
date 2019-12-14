@@ -2,7 +2,7 @@
 title: "Gramática de los gráficos"
 subtitle: "Ordenar los facetting"
 author: "Daniel Jiménez"
-date: "12/13/2019"
+mathjax: "true"
 output: html_document
 ---
 
