@@ -7,7 +7,7 @@ permalink: /about/
 <img src="/images/Perfil2.jpg" alt="hi" class="inline"/>
 
 
-Hola! mi nombre es **Daniel Jiménez**, actualmente trabajo como Senior Data Scientist en [Chiper](https://chiper.co/) en donde soy el encargado  de analítica avanzada y del desarrollo  de modelos de Machine Learning en temas de Marketing, UX y logística. Cuento con más de ocho años de experiencia profesional aplicando ciencia de datos a problemas del *real world* tanto en el sector público como en el privado. A la par soy profesor de Ciencia de datos y Big Data en la [Universidad Nacional de Colombia](https://unal.edu.co/) e investigador sobre Ciencias experimentales.
+Hola! mi nombre es **Daniel Jiménez**, actualmente trabajo soy lead Data Scientist en [Chiper](https://chiper.co/) en donde estoy encargado  de analítica avanzada y del desarrollo  de modelos de Machine Learning en temas de Marketing, UX y logística. Cuento con más de ocho años de experiencia profesional aplicando ciencia de datos a problemas del *real world* tanto en el sector público como en el privado. A la par soy profesor de Ciencia de datos y Big Data en la [Universidad Nacional de Colombia](https://unal.edu.co/) e investigador sobre Ciencias experimentales.
 
 
 Mis principales intereses se centran en : Empirical Bayes for data analysis, PCA, machine learning reinforcement , estadística aplicada y detección de anomalías. A parte de ello me apasiona mucho la programación, el modelamiento matemático (y todos los problemas que se pueden resolver con algebra), las ciencias de la computación (no puedo evitar trabajar desde la terminal) y la seguridad informatica. 
@@ -36,8 +36,9 @@ Creé este Blog porque creo en el desarrollo de comunidad científica y en la di
 
 
 
+Creo que no soy geek, pero tengo todos estos stikers 
 
-
+<img src="/images/presentations.jpeg" alt="hi" class="inline"/>
 
 
 
