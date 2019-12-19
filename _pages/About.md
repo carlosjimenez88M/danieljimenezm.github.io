@@ -38,7 +38,7 @@ Creé este Blog porque creo en el desarrollo de comunidad científica y en la di
 
 Creo que no soy geek, pero tengo todos estos stikers 
 
-<img src="/images/presentations.jpeg" alt="hi" class="inline"/>
+![](https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/images/presentation.jpeg?raw=true)
 
 
 
