@@ -1,3 +1,8 @@
+---
+title: "Próximos proyectos"
+mathjax: "true"
+---
+
 ## Agenda 2020
 
 Durante este año, el aprendizaje ha sido impresionante y por lo tanto he definido la agenda del próximo año tanto como cientifíco de datos
