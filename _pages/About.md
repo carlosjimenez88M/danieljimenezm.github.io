@@ -40,9 +40,7 @@ Creo que no soy geek, pero tengo todos estos stikers
 
 ![](https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/images/presentation.jpeg?raw=true)
 
-Si desea ver mi CV
 
-* [Inglés](https://github.com/carlosjimenez88M/Resume/blob/master/CvEng2019.pdf)
 
 
 
