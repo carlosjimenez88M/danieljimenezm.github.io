@@ -43,7 +43,7 @@ Creo que no soy geek, pero tengo todos estos stikers
 Si desea ver mi CV
 
 * [Inglés](https://github.com/carlosjimenez88M/Resume/blob/master/CvEng2019.pdf)
-* [Español](https://github.com/carlosjimenez88M/Resume/blob/master/Spa_Resume.pdf)
+
 
 
 
