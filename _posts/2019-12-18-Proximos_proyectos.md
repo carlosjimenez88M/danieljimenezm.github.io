@@ -18,7 +18,7 @@ status](https://travis-ci.org/tidyverse/tidyverse.svg?branch=master)](https://tr
 coverage](https://codecov.io/gh/tidyverse/tidyverse/branch/master/graph/badge.svg)](https://codecov.io/gh/tidyverse/tidyverse?branch=master)
 <!-- badges: end -->
 
-La estadística aplicada es mi gran pasión y por ello enfocare mis esfuerzos en tres temas puntuales
+La estadística aplicada es mi gran pasión y por ello enfocare mis esfuerzos en cuatro temas puntuales
 
 ![](https://ih1.redbubble.net/image.543366382.2273/mp,840x830,matte,f8f8f8,t-pad,750x1000,f8f8f8.jpg)
 
