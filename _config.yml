@@ -1,6 +1,6 @@
 # Site Settings
 locale                   : "en-US"
-title                    : "Un Data Scientist Dice: <br/> Blog sobre Machine Learning, Estadística Aplicada y AI"
+title                    : "Un Data Scientist Dice: <br/> Blog on Machine Learning and Applied Statistics"
 title_separator          : "-"
 subtitle                 : "Applied Statistics , Machine Learning and R projects"
 name                     : "Daniel Jiménez"
@@ -77,7 +77,7 @@ analytics:
 author:
   name             : "Daniel Jiménez"
   avatar           :  https://cdn.imgbin.com/24/3/14/imgbin-rick-sanchez-pocket-mortys-morty-smith-rick-and-morty-season-3-meeseeks-and-destroy-others-ByZ1x7hMUSmMfFPwr3NY1xXA4.jpg   
-  bio              : "Senior Data Scientist and Machine Learning Engineering. Mis intereses son: Estadística aplicada, Deep Learning, Ciencias Experimentales y Ciencias de la computación"
+  bio              : "Senior Data Scientist and Machine Learning Engineering at Chiper."
   location         : "Colombia"
   email            :  "cjimenez187@aol.com"
   uri              :
