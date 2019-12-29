@@ -7,14 +7,17 @@ permalink: /about/
 <img src="/images/Perfil2.jpg" alt="hi" class="inline"/>
 
 
-Hola! mi nombre es **Daniel Jiménez**, actualmente trabajo soy lead Data Scientist en [Chiper](https://chiper.co/) en donde estoy encargado  de analítica avanzada y del desarrollo  de modelos de Machine Learning en temas de Marketing, UX y logística. Cuento con más de ocho años de experiencia profesional aplicando ciencia de datos a problemas del *real world* tanto en el sector público como en el privado. A la par soy profesor de Ciencia de datos y Big Data en la [Universidad Nacional de Colombia](https://unal.edu.co/) e investigador sobre Ciencias experimentales.
+Hi! I'm Daniel Jimenez, currently Lead Data Scientist at chiper [Chiper](https://chiper.co/) where I develop advanced analytical models for Marketing research, optimization in Demand Forecasting and decision making, also I develop Machine learning models for different uses. I'm passionae about Bayesian Data Analysis (and Machine Learning application), applied Statistics and reinforcement learning. 
 
 
-Mis principales intereses se centran en : Empirical Bayes for data analysis, PCA, machine learning reinforcement , estadística aplicada y detección de anomalías. A parte de ello me apasiona mucho la programación, el modelamiento matemático (y todos los problemas que se pueden resolver con algebra), las ciencias de la computación (no puedo evitar trabajar desde la terminal) y la seguridad informatica. 
+I more that a 8 years of experience applying data science - machine learning models (Machine Learning Engineer) and data analysis to political institutions , startup and consultants. My principal areas of interesting are: Maths for Machine Learning , Deep Learning, Artificial Intelligence, Web Scraping, Computational Science , and Statistical Modelling.
 
 
-Los científicos que más sigo son:
+Currently I 'm teacher at [Universidad Nacional de Colombia](http://fce.unal.edu.co/economia) where taught the following subjects : Big Data and Data Science. In other institutions I have also taught : Econometric , Political History, Functional Programming, Machine Learning and mathematical modelling.
 
+I works in R and Python, sometimes in Octave.
+
+My Favorites Data Scientist are:
 
 * [David Robinson](http://varianceexplained.org/) 
 * [Hadley Wickham](http://hadley.nz/) 
@@ -25,10 +28,7 @@ Los científicos que más sigo son:
 * [Carlos Díez](https://docentes.konradlorenz.edu.co/2017/01/carlos-alberto-d%C3%ADez-fonnegra.html) 
 
 
-Actualmente vivo entre Bogotá y Medellín , pero constantemente ando de viaje. Uso Mac por preferencia y  linux cuando debo trabajar con cosas serias, tengo una debilidad por los libros y el café impresionante, no uso redes sociales, ando en bici todo el rato que puedo, practico powerlifting y en mis ratos realmente libres y de ocio cocino. 
 
-
-Creé este Blog porque creo en el desarrollo de comunidad científica y en la divulgación del conocimiento, y en el fondo para aportar algo a está ciencia que un día me atrapo y no me va a soltar.
 
 
 ![proceso](http://res.cloudinary.com/dyd911kmh/image/upload/f_auto,q_auto:best/v1523346698/tidyverse2_yjcwfy.png)
@@ -36,11 +36,12 @@ Creé este Blog porque creo en el desarrollo de comunidad científica y en la di
 
 
 
-Creo que no soy geek, pero tengo todos estos stikers 
 
 ![](https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/images/presentation.jpeg?raw=true)
 
 
+
+In my free time I love Cooking, play Bass and guitar and I'm  addicted to mountain biking. 
 
 
 
