@@ -1,11 +1,11 @@
 ---
 title: "infer 02 - Numerical inference Boostrap"
-author: "Daniel Jiménez"
-date: "12/19/2019"
+mathjax: "true"
 output:
-  pdf_document: default
   html_document: default
 ---
+
+
 
 
 
