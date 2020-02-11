@@ -1,8 +1,7 @@
 ---
-title: "Untitled"
-author: "Daniel Jiménez"
-date: "2/10/2020"
+title: "Un caso aplicado a los metódos de ensamble"
 output: html_document
+mathjax: "true"
 ---
 
 ```{r setup, include=FALSE}
