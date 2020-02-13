@@ -36,4 +36,4 @@ El objetivo de este proyecto es aportar a la comunidad en español de [R4DS](htt
 
 
 
-https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/Rprojects/tidyverse_20200213.R
+
