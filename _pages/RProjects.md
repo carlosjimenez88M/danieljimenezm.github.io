@@ -32,3 +32,8 @@ El objetivo de este proyecto es aportar a la comunidad en español de [R4DS](htt
 |Text relations themes in Bob Ross|text mining|[bob_ross](https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-08-06/bob-ross.csv)|[code](https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/Rprojects/Bob%20Ross%20.R)|
 |Statistical Modeling |Statistics|Data|[Código](https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/Rprojects/Modeling%20statistical%20.R)|
 |Intro to deep learning| Deep Learning| [Data](https://raw.githubusercontent.com/juanklopper/MachineLearningDataSets/master/CTG.csv)|[code](https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/Rprojects/Deep-learning.R)|
+|Tidymodels| Machine Learning- stats| [Data](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-02-04/readme.md)|[code](https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/Rprojects/tidyverse_20200213.R)|
+
+
+
+https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/Rprojects/tidyverse_20200213.R
