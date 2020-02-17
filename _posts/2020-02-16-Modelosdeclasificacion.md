@@ -312,7 +312,7 @@ visualize(NUll_distribution)+
 {% endhighlight %}
 
 ![center](/figs/2020-02-16-Modelosdeclasificacion/unnamed-chunk-31-1.png)
-La evidencia arroja que existen diferencias importantes en la presencia de los niños dado el estilo del hotel.
+La evidencia arroja que no existen diferencias importantes en la presencia de los niños dado el estilo del hotel.
 
 
 
