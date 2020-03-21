@@ -21,7 +21,7 @@ El objetivo de este proyecto es aportar a la comunidad en español de [R4DS](htt
 
 ![](https://github.com/rfordatascience/tidytuesday/blob/master/static/tt_logo.png?raw=true)
 
-# 2019 
+# 2020
 
 |Título| Tema |  Base de Datos | Código|
 | :----| :----| :--------------| :----- | 
