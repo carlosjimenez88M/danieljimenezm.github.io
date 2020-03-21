@@ -34,6 +34,9 @@ El objetivo de este proyecto es aportar a la comunidad en español de [R4DS](htt
 |Intro to deep learning| Deep Learning| [Data](https://raw.githubusercontent.com/juanklopper/MachineLearningDataSets/master/CTG.csv)|[code](https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/Rprojects/Deep-learning.R)|
 |Tidymodels| Machine Learning- stats| [Data](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-02-04/readme.md)|[code](https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/Rprojects/tidyverse_20200213.R)|
 |Machine Learning Models| Machine Learning| [Data](https://github.com/rfordatascience/tidytuesday)|[code](https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/Rprojects/20200215-SVMTIDY.Rmd)|
+|NPL Maluma| NPL| [Data](https://www.letras.com/maluma/4-babys/)|[code](https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/Rprojects/NPL_maluma.R)|
+
+
 
 
 
