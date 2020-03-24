@@ -1,0 +1,183 @@
+---
+title: "El monarca equivocado"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## El monarca equivocado
+
+Durante los últimos dos siglos, la repercusión del fundamento del estado bajo la doctrina de Santo Tomás, imprenta del estatuo social, versus la dicótoma del estado Maquiavelico ha dejado en la región el surgimiento de los dictadores extraviados y el monopolio del discurso. 
+
+
+Dicho sustento va en la evolución de la idea de la mano de Dios de Tomás hasta la de [Smith](https://es.wikipedia.org/wiki/La_riqueza_de_las_naciones) con su **de la mano invisible**, entendida como el surgimiento de las clases dominantes sobre el derecho divino de los recursos públicos.
+
+Esta introducción basada en la filosofía del origen institucional de Colombia intenta responder el origen de la diferencia de lo que debería ser el Estado como ente social, practica que [Vitoria](https://es.wikipedia.org/wiki/Francisco_de_Vitoria) ataco primero como el **derechos de los hombres** piedra angular del derecho humano, a la practica Colombiana de los caudillos - feudalistas.
+
+El origen de está institucionalidad parte en 1612 , cuando la iglesia genero los libros prohibidos, generando un retraso en el pensamiento racional Español ( y por consecuente de los colonizados), dando origen años más tarde a los Dictadores que Maquiavelo plasmo en el **príncipe**. Pero ¿ Cómo marco está prohibición el desencadenante que ahora vivimos en la región ? la respuesta es complicada a nivel de historia comparada, pero fácil de entender a través de la herencia : El poder en manos de una sola persona.
+
+
+
+Durante la época de colonización, los españoles venían con la idea de fomentar una nueva religión basada en el miedo , y en el  **Leviatan** de Hobbes , impusieron una doctrina la cual definió Morse como : "La naturaleza predominante del Estado sobre el individuo"
+
+
+Dicha naturaleza fomento la guerra entre todos durante el siglo XV y el XVI, pero se viralizó con la independencia de los estados en una versión más intima : Entre los mismos ciudadanos , en el caso de Colombia sobra decir que desde los partidos políticos como fue la guerra de los mil días , hasta la guerra contra las disidencias (ELN, FARC).
+
+
+EL origen de dichas peleas corresponde a la ruptura de un pacto entre -El estado y el pueblo-, puesto que en palabras del mismo Francisco Suárez se rompe el derecho (por que si) a la dominación legitima.
+
+En este punto quiero desarrollar la idea del monarca, en su versión histórica , EL padre Suárez afirmaba al hombre en la política llegaba bajo tres pilares 
+
+* La moral;
+* La metafísica y 
+* La religión
+
+Si vemos está triada , corresponde a la suma de las razones por las cuales en el último siglo han sido seleccionados los últimos presidentes de Colombia y como tal tienen un perfil entre todos mesiánicos, unos por la paz y otros por la seguridad. Lo único que los diferencia entre si, es que uno casi logra su objetivo y los otros se extraviaron en la definición de su objetivo.
+
+
+
+Esta triada vista desde el punto de vista teológico correspondiente a la estructura del Estado - Nación de Colombia que viraliza en el hecho de la  aceptación (casi sin reproches) de la transición del poder a un monarca el cual se vuelve el centro de la vida social de un país.
+
+Por  lo anterior , en ¿qué se equivoca el monarca?, en la percepción de su realidad versus la realidad, la apuesta política en contra la realidad de los individuos. Prácticamente su concepción entre lo que está bien hecho y lo que se debió hacer en términos institucionales, lo cual me recuerda al libro de Benito Cereno, en donde el capitán de un Barco termina siendo esclavo de sus allegados y logra engañar a los otros capitanes que tarde descubren quien era el verdadero líder. Recordando la frase de aquel NN : "El crimen perfecto es aquel que se resuelve con un falso culpable" (Tomado de la película el Crimen Perfecto)
+
+
+Dicho lo anterior y en mi labor científica debo declarar la razón de esta reflexión : ¿ En qué se equivoca el monarca? A lo Benito Cereno (quien en realidad existió), en la intensión de sus acciones.
+
+
+Usando una herramienta de las ciencias de la computación , NLP, extraigo los últimos sentimientos en las redes sociales (que debería llamarse micrófono social) sobre las decisiones tomadas por el monarca.
+
+
+```{r, echo=FALSE, cache=FALSE, warning=FALSE, message=FALSE}
+#library(tidyverse)
+#library(tidytext);
+#library(stringr);
+#library(wordcloud)
+#library(broom);
+#library(dplyr);
+#library(scales);
+#library(tidyr)
+#library(tm);
+#library(SnowballC);
+#library(glue);
+#library(syuzhet);
+#library(gridExtra);
+#library(DT);
+#library(igraph);
+#library(ggraph);
+#library(rtweet);
+#library(twitteR)
+#library(ROAuth)
+# Conexión a Twitter -------------------------
+
+##  Creación de la app
+#api_key <-'cKnxoRUJ4YeS1FduEhIFaKvzD'
+#api_token <-'M31pqx77aHaxGD1RK8YxJygbYmqW7sZyCCPWRJthgVs6MxsUX6'
+#access_token <-'303456920-eMhzBlIOQLLri2GOhWvcOuGoYau14BYSDv0pNHFy'
+#access_token_secret <- 'JDTEnyenNtZeuxCeZHNeuo12pBsbIfss0oGipfsccSQKR'
+#twitter_app <- 'ChiperNLP'
+
+## Acceso a Twitter
+#create_token(
+#  app             = twitter_app,
+#  consumer_key    = api_key,
+#  consumer_secret = api_token,
+#  access_token    = access_token,
+#  access_secret   = access_token_secret)
+
+## Obtener geo localización
+
+#Duque_tweets <- search_tweets("Duque", n = 10000, include_rts = FALSE, lang="es")
+
+
+```
+
+
+
+```{r, echo=FALSE, cache=FALSE, warning=FALSE, message=FALSE}
+#Duque_txt <- Duque_tweets$text
+#Duque_txt <- gsub("(RT|via)((?:\\b\\W*@\\w+)+)", "", Duque_txt)
+#Duque_txt <- gsub("@\\w+", "", Duque_txt)
+#Duque_txt <-  gsub("\\bhttp[a-zA-Z0-9]*\\b", "", Duque_txt)
+#Duque_txt <- gsub("[^a-zA-Z ]", "", Duque_txt)
+#Duque_txt <- gsub("[[:punct:]]", "", Duque_txt)
+#Duque_txt <- gsub("amp ", "", Duque_txt)
+#Duque_txt <-  gsub("\\btco[a-zA-Z0-9]*\\b", "", Duque_txt)
+#Duque_txt <- Duque_txt[!is.na(Duque_txt)]
+#Duque_txt <- iconv(Duque_txt, 'UTF-8', 'ASCII')
+#Duque_txt <- gsub("[ \t]{2,}", "", Duque_txt)
+#Duque_txt <- gsub("^\\s+|\\s+$", "", Duque_txt)
+#Duque_txt <- tolower(Duque_txt)
+```
+
+```{r, echo=FALSE, cache=FALSE, warning=FALSE}
+#Duque_corpus <- Corpus(VectorSource(Duque_txt))
+#Duque_corpus_clean <- tm_map(Duque_corpus, tolower)
+#Duque_corpus_clean <- tm_map(Duque_corpus_clean, removePunctuation)
+#Duque_corpus_clean <- tm_map(Duque_corpus_clean, stripWhitespace)
+#Duque_corpus_clean <- tm_map(Duque_corpus_clean, removeWords, stopwords(kind = "es"))
+#Duque_tdm           <- TermDocumentMatrix(Duque_corpus_clean, control = list(stopwords = TRUE))
+#Duque_tdm            <- as.matrix(Duque_tdm)
+#Duque_tdm  <- DocumentTermMatrix(Duque_corpus_clean, control = list(minWordLength = 1, stopwords = TRUE))
+#Duque_corpus_clean <- tm_map(Duque_corpus_clean, stemDocument)
+#Duque_corpus_clean <- tm_map(Duque_corpus_clean, stemCompletion, dictionary = Duque_corpus_clean)
+#wordcloud(Duque_corpus_clean, min.freq = 10, random.order = FALSE)
+```
+
+![](../images/wordcloud.png)
+
+La anterior nube de palabras , son aquellas que más se mencionan en twitter, pero lo importante es declarar el sentimiento del pueblo con respecto a las actuaciones del presidente
+
+
+```{r, echo=FALSE, cache=FALSE, message=FALSE, warning=FALSE}
+#library(sentiment)
+#Duque_class_emo <- classify_emotion(Duque_txt, algorithm="bayes", prior=1.0)
+```
+
+
+```{r, echo=FALSE, cache=FALSE,warning=FALSE}
+#emotion <- Duque_class_emo[, 7]
+#emotion[is.na(emotion)] <- "unknown"
+#Duque_class_pol <- classify_polarity(Duque_txt, algorithm="bayes")
+#polarity <- Duque_class_pol[, 4]
+#Duque_sentiment_df = data.frame(text=Duque_txt, emotion=emotion,
+#polarity=polarity, stringsAsFactors=FALSE)
+#emotion_Duque = levels(factor(Duque_sentiment_df$emotion))
+#emotion_length = length(emotion_Duque)
+#emotion_Duque.docs = rep('', emotion_length)
+#for (i in 1: emotion_length) 
+#{
+#tmp = Duque_txt[emotion == emotion_Duque[i]]
+#}
+#emotion_Duque.docs[i] = paste(tmp, collapse=' ')
+ 
+# Eliminamos las Stopwords
+#emotion_Duque.docs = removeWords(emotion_Duque.docs, stopwords('es'))
+
+# Creamos el corpus
+#corpus = Corpus(VectorSource(emotion_Duque.docs#))
+#tdm = TermDocumentMatrix(corpus)
+#tdm = as.matrix(tdm)
+#colnames(tdm) = emotion_Duque
+ 
+# Dibujamos una Comparison Wordcloud
+#comparison.cloud(tdm, colors = brewer.pal(emotion_length, 'Dark2'),
+#scale = c(1,.2), max.words = 600,random.order = FALSE, title.size = 1.5)
+```
+![](../images/sentiment.png)
+
+
+
+El gráfico es claro sobre la tendencia de las actuaciones en cuatro principales términos : Disgusto, miedo, peligro y sorpresa.
+
+Las reflexiones sobre estos resultados las dispongo para el fuero interno de cada uno, más me hago una última pregunta sobre estos hechos: Al mejor estilo de la narración de Benito Cereno, ¿ No seremos nosotros como los capitanes Americanos de los barcos ? ¿ No estaremos confundiendo al capitán con el tripulante ? o dicho de otra forma : ¿Quién es verdadero tripulante y quién el Capitán?
+
+
+
+
+
+
+
