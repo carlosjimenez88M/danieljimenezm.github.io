@@ -4,8 +4,6 @@ main:
     url: /about/
   #- title: "Servicios"
     #url: /Data-Science/
-  - title: "Conversaciones con el hombre malvavisco"
-    url: /Media/
   - title: "Presentations"
     url: /Courses/
   - title: "R Projects"
