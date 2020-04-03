@@ -1,7 +1,7 @@
 ---
 layout: archive
 permalink: /Courses/
-title: "Presentations"
+title: "Cursos y presentaciones"
 
 ---
 
