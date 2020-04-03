@@ -1,10 +1,10 @@
 # main links
 main:
-  - title: "About"
+  - title: "Sobre mi"
     url: /about/
   #- title: "Servicios"
     #url: /Data-Science/
-  - title: "Presentations"
+  - title: "Clases y Presentaciones"
     url: /Courses/
   - title: "R Projects"
     url: /RProjects/
