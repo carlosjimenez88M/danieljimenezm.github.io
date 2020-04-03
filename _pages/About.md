@@ -6,18 +6,9 @@ permalink: /about/
 
 <img src="/images/Perfil2.jpg" alt="hi" class="inline"/>
 
+Hola! Soy [Daniel Jiménez](https://www.linkedin.com/in/djimenezm/), actualmente trabajo como principal data scientist en [Chiper](https://chiper.co/) donde me encargo del desarrollo de analítica avanzada, forecast  & Industrial Machine Learning modelling, para diferentes usos tecnológicos, logísticos, Marketing y BI. A la par soy profesor en la [Universidad Nacional de Colombia](http://fce.unal.edu.co/economia)  donde enseño ciencia de datos y machine learning aplicado. Cuento con más de nueve años de experiencia laboral  entre sector público,startups, y académico entre Colombia, México, España, Estados Unidos y Chile. Soy un apasionado por Bayesian Data Analysis(y sus aplicaciones en Machine Learning),la estadística computacional aplicada y reinforcement learning.
 
-Hi! I'm Daniel Jimenez, currently Lead Data Scientist at chiper [Chiper](https://chiper.co/) where I develop advanced analytical models for Marketing research, optimization in Demand Forecasting and decision making, also I develop Machine learning models for different uses. I'm passionae about Bayesian Data Analysis (and Machine Learning application), applied Statistics and reinforcement learning. 
-
-
-I more that a 8 years of experience applying data science - machine learning models (Machine Learning Engineer) and data analysis to political institutions , startup and consultants. My principal areas of interesting are: Maths for Machine Learning , Deep Learning, Artificial Intelligence, Web Scraping, Computational Science , and Statistical Modelling.
-
-
-Currently I 'm teacher at [Universidad Nacional de Colombia](http://fce.unal.edu.co/economia) where taught the following subjects : Big Data and Data Science. In other institutions I have also taught : Econometric , Political History, Functional Programming, Machine Learning and mathematical modelling.
-
-I works in R and Python, sometimes in Octave.
-
-My Favorites Data Scientist are:
+Mis Data Scientist favoritos son:
 
 * [David Robinson](http://varianceexplained.org/) 
 * [Hadley Wickham](http://hadley.nz/) 
@@ -28,21 +19,6 @@ My Favorites Data Scientist are:
 * [Carlos Díez](https://docentes.konradlorenz.edu.co/2017/01/carlos-alberto-d%C3%ADez-fonnegra.html) 
 
 
+A parte de mi trabajo como Data Scientist, soy investigador de historia de las ideas (política y económica) latinoamericana con el objetivo de entender el origen de las instituciones  y su relación con la religión en la creación del mesianismo político.
 
-
-
-![proceso](http://res.cloudinary.com/dyd911kmh/image/upload/f_auto,q_auto:best/v1523346698/tidyverse2_yjcwfy.png)
-
-
-
-
-
-![](https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/images/presentation.jpeg?raw=true)
-
-
-
-In my free time I love Cooking, play Bass and guitar and I'm  addicted to mountain biking. 
-
-
-
-
+En mi tiempo libre me dedico a la música, la cocina y al ciclismo de montaña. 
