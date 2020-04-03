@@ -16,9 +16,13 @@ En la presente sección encontrará las presentaciones y el material de clase po
 | Curso | Descripción|
 |:------|:-----|
 |[Big Data](https://github.com/carlosjimenez88M/Curso-de-Big-Data-e-Ingenieria-de-datos/blob/master/README.md) |Curso Introductorio|
+|[Ciencia de Datos]()| Fundamentos y diseño de modelos|
+|[Machine Learning Aplicado]()|Diseño y selección de modelos|
 
 
 
+
+## Presentaciones
 
 
 
