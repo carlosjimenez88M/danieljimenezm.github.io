@@ -1,6 +1,6 @@
 # Site Settings
 locale                   : "en-US"
-title                    : "Un Data Scientist Dice: <br/> Blog on Machine Learning and Applied Statistics"
+title                    : "Un Data Scientist Dice: Blog sobre estadística aplicada y Machine Learning"
 title_separator          : "-"
 subtitle                 : "Applied Statistics , Machine Learning and R projects"
 name                     : "Daniel Jiménez"
