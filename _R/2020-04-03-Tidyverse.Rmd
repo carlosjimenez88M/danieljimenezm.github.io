@@ -1,0 +1,159 @@
+---
+title: "Uso de Tidyverse en la creación de modelos"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE, cache=FALSE, warning=FALSE, message=FALSE}
+library(tidyverse);
+library(tidymodels)
+theme_set(theme_light())
+```
+
+
+## Tidyverse para el diseño y despliegue de modelos.
+
+[Tidyverse](https://www.tidyverse.org/) es un compendio de paquetes de R, que le permitirá desarrollar modelos y análisis de datos de manera optima. 
+
+```{r, echo=TRUE, eval=FALSE}
+install.packages("tidyverse")
+```
+
+
+
+Pero ¿Cómo se trabaja bajo este esquema?, lo primero a tener presente es como manipular los datos y paso seguido el diseño de las secuencias con los pipe, para poder así crear los modelos. A continuación trabajaré un ejemplo básico, que aclara el uso de está potente herramienta.
+
+
+Suponga el ejemplo clásico de `iris`, en donde quiere proyectar el tamaño del Sepalo de las especies, lo primero a trabajar es la agrupación de los datos.
+
+```{r}
+# Partición de los datos
+iris_split <- iris %>%
+  initial_split(strata = Species)
+
+iris_train <- training(iris_split)
+iris_test <- testing(iris_split)
+
+```
+
+
+```{r}
+iris%>%
+  ggplot(aes(Sepal.Length,Petal.Length, color=Species))+
+  geom_point()+
+  geom_smooth(method = 'lm')
+```
+
+
+```{r, eval=FALSE}
+iris%>%
+  group_by(Species)
+```
+
+
+
+Paso seguido se crea el modelo con una carácteristica puntual, se hará por especies, lo cual quiere decir que el modelo se creará por listas
+
+```{r}
+iris%>%
+  group_by(Species)%>%
+  summarize(lm_model = list(lm(Sepal.Length~Sepal.Width+Petal.Length+Petal.Width)))
+```
+
+Una vez creado el objeto `lm_model` se procede a crear un nuevo objeto que contenga los estadísticos necesarios.
+
+```{r}
+iris%>%
+  group_by(Species)%>%
+  summarize(lm_model = list(lm(Sepal.Length~Sepal.Width+Petal.Length+Petal.Width)))%>%
+  mutate(stats_model=map(lm_model,tidy,conf.int=TRUE))
+```
+
+
+Para visualizar los estadísticos se usa la función `unnest`
+
+```{r}
+iris%>%
+  group_by(Species)%>%
+  summarize(lm_model = list(lm(Sepal.Length~Sepal.Width+Petal.Length+Petal.Width)))%>%
+  mutate(stats_model=map(lm_model,tidy,conf.int=TRUE))%>%
+  unnest(stats_model)
+```
+
+Una forma de ver este resultado es a través de un gráfico
+
+```{r}
+iris%>%
+  group_by(Species)%>%
+  summarize(lm_model = list(lm(Sepal.Length~Sepal.Width+Petal.Length+Petal.Width)))%>%
+  mutate(stats_model=map(lm_model,tidy,conf.int=TRUE))%>%
+  unnest(stats_model)%>%
+  filter(term!='(Intercept)')%>%
+  ggplot(aes(estimate,Species))+
+  geom_point()+
+  geom_errorbarh(aes(xmin=conf.low,xmax=conf.high,height = .3))+
+  facet_wrap(~term, scales = 'free')
+```
+
+Un aspecto importante a evaluar es el comportamiento de los p-valores para csaber si el parámetro es optimo para trabajar
+
+
+```{r}
+iris%>%
+  group_by(Species)%>%
+  summarize(lm_model = list(lm(Sepal.Length~Sepal.Width+Petal.Length+Petal.Width)))%>%
+  mutate(stats_model=map(lm_model,tidy,conf.int=TRUE))%>%
+  unnest(stats_model)%>%
+  ggplot(aes(p.value))+
+  geom_histogram(bins = 3)+
+  facet_wrap(~Species)
+```
+
+Con todos se puede trabajar. Ahora la predicción, para ello usare las particiones de las bases 
+
+
+```{r}
+iris_train%>%
+  group_by(Species)%>%
+  summarize(lm_model = list(lm(Sepal.Length~Sepal.Width+Petal.Length+Petal.Width)))%>%
+  mutate(stats_model=map(lm_model,tidy,conf.int=TRUE))%>%
+  mutate(prediction=map(lm_model,predict,iris_test))%>%
+  unnest(prediction)
+```
+
+
+
+
+## Otra alternativa
+
+
+Un desarrollo que se llama `tidymodels` puede ejecutar este proceso de una manera increiblemente rápida y computacionalmente no es costoso, aunque como tal aun está en desarrollo.
+
+
+```{r}
+
+lm_spec <- linear_reg() %>%
+  set_engine(engine = "lm")
+
+lm_fit <- lm_spec %>%
+  fit(Sepal.Length ~ .,
+    data = iris_train
+  )
+
+
+```
+
+Se evalua el modelo
+
+
+```{r}
+lm_fit%>%
+  predict(new_data=iris_train)%>%
+  mutate(truth=iris_train$Sepal.Length,
+         accuracy=.pred/truth)
+```
+
+Esto es todo por esta entrada, espero les guste.
