@@ -4,7 +4,7 @@ main:
     url: /about/
   #- title: "Servicios"
     #url: /Data-Science/
-  - title: "Clases y Presentaciones"
+  - title: "Clases"
     url: /Courses/
   - title: "R Projects"
     url: /RProjects/
