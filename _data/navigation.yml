@@ -8,6 +8,8 @@ main:
     url: /Courses/
   - title: "R Projects"
     url: /RProjects/
+  - title: "Publicaciones"
+    url: /Media/
 
 
   # - title: "Sample Posts"
