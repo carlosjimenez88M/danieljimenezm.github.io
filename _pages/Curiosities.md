@@ -11,7 +11,7 @@ output: ioslides_presentation
 
 ## 2020
 
-[Inferencia Estadística un enfoque moderno](https://carlosjimenez88m.github.io/Inference_book/), Edición Libre, Bogotá - Colombia 2020.[github](https://github.com/carlosjimenez88M/Inference_book).
+[Inferencia Estadística un enfoque moderno](https://carlosjimenez88m.github.io/Inference_book/), Edición Libre, Bogotá - Colombia 2020.[Repositorio](https://github.com/carlosjimenez88M/Inference_book).
 
 
 
