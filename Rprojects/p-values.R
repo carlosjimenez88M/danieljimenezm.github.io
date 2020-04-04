@@ -70,4 +70,5 @@ ggplot(hypergeom_test, aes(hypergeom_p_value)) +
 
 ## Parece ser uniforme, todas las hipótesis son nulas 
 ## No se puede aceptar todos los valores p menores a .5
+## Este desarrollo continuara
 
