@@ -1,0 +1,420 @@
+Ten fun functions with Tidyverse
+========================================================
+author: Daniel Jiménez M.
+date: 
+autosize: true
+
+Some considerations 
+========================================================
+This presentation is based on [David Robinson](https://resources.rstudio.com/rstudio-conf-2018/teach-the-tidyverse-to-beginners-david-robinson) conference -**Teach the Tidyverse to beginners**- and some practices of my experience.
+
+What is Tidyverse?
+========================================================
+
+```{r, echo=FALSE}
+   knitr::include_graphics('http://gauss.inf.um.es:8080/tabular-tidyverse/www/images/hex-tidyverse.png')
+```
+
+Tidyverse
+========================================================
+
+```{r, eval=FALSE}
+install.packages("tidyverse")
+```
+
+
+Tidyverse
+========================================================
+
+>The tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures.
+
+(https://www.tidyverse.org/)
+
+
+Tidyverse
+========================================================
+Tidyverse contains this packages
+
+* ggplot
+* dplyr
+* tydir
+* reader
+* tibble
+* purr
+* more ...
+
+Tidyverse Philosophy
+========================================================
+
+```{r, echo=FALSE}
+   knitr::include_graphics('https://d33wubrfki0l68.cloudfront.net/571b056757d68e6df81a3e3853f54d3c76ad6efc/32d37/diagrams/data-science.png')
+```
+
+
+Tidyverse Tools
+========================================================
+* Import Data
+* Etl
+* tidy data
+* Create function and program
+* Transform data
+* Visualize Data
+* Modelling 
+* Communicate your outputs
+
+Tidyverse First Function: Describe your data (structure)
+========================================================
+
+```{r}
+library(tidyverse)
+data(mtcars)
+mtcars%>%
+  glimpse()
+```
+
+Tidyverse Second Function: create graphs for your data
+========================================================
+
+
+```{r}
+mtcars%>%
+  ggplot(aes(mpg,hp))+
+  geom_point()+
+  geom_smooth(method='auto')
+```
+
+
+Tidyverse Third Function: Summary your data
+========================================================
+
+
+```{r}
+iris%>%
+  group_by(Species)%>%
+  summarize(mean_petal_length=mean(Petal.Length))%>%
+  arrange(desc(mean_petal_length))
+```
+
+Tidyverse Fourth Function: Create Models
+========================================================
+
+
+```{r}
+iris%>%
+  group_by(Species)%>%
+  summarize(loess_model=list(loess(Petal.Length~Sepal.Length+Sepal.Width+Petal.Width)))
+```
+
+Tidyverse Fourth Function: Create Models
+========================================================
+
+```{r}
+library(broom)
+iris%>%
+  group_by(Species)%>%
+  summarize(Lineal_model=list(lm(Petal.Length~Sepal.Length+Sepal.Width+Petal.Width)))%>%
+  mutate(tidies=map(Lineal_model,tidy,conf.int = TRUE))
+```
+
+Tidyverse Fourth Function: Create Models
+========================================================
+
+```{r}
+iris%>%
+  group_by(Species)%>%
+  summarize(Lineal_model=list(lm(Petal.Length~Sepal.Length+Sepal.Width+Petal.Width)))%>%
+  mutate(tidies=map(Lineal_model,tidy,conf.int = TRUE))%>%
+  unnest(tidies)
+```
+
+
+Tidyverse Fourth Function: Create Models
+========================================================
+
+```{r}
+iris%>%
+  group_by(Species)%>%
+  summarize(Lineal_model=list(lm(Petal.Length~Sepal.Length+Sepal.Width+Petal.Width)))%>%
+  mutate(tidies=map(Lineal_model,tidy,conf.int = TRUE))%>%
+  mutate(predictions=map(Lineal_model,predict))
+```
+
+
+
+Tidyverse Fourth Function: Create Models
+========================================================
+```{r}
+iris%>%
+  group_by(Species)%>%
+  summarize(Lineal_model=list(lm(Petal.Length~Sepal.Length+Sepal.Width+Petal.Width)))%>%
+  mutate(tidies=map(Lineal_model,tidy,conf.int = TRUE))%>%
+  mutate(predictions=map(Lineal_model,predict))%>%
+  unnest(predictions)
+```
+
+
+Tidyverse Fifth Function: Reorder and rename
+========================================================
+
+
+```{r}
+pokemon<-read.csv('https://gist.githubusercontent.com/armgilles/194bcff35001e7eb53a2a8b441e8b2c6/raw/92200bc0a673d5ce2110aaad4544ed6c4010f687/pokemon.csv')
+
+pokemon%>%
+  head()
+```
+
+
+Tidyverse Fifth Function: Reorder and rename
+========================================================
+
+```{r}
+pokemon%>%
+  mutate(Name=fct_reorder(Name, Total))%>%
+  distinct(Name,.keep_all=TRUE)%>%
+  head(10)%>%
+  ggplot(aes(Name,Total,fill=Name))+
+  geom_col(show.legend=FALSE)+
+  coord_flip()
+```
+
+
+
+Tidyverse Sixth Function: Coefficients of mutiple models
+========================================================
+
+
+```{r}
+pokemon%>%
+  ggplot(aes(Total,Attack))+
+  geom_point()
+```
+
+
+Tidyverse Sixth Function: Coefficients of mutiple models
+========================================================
+
+```{r}
+pokemon%>%
+  filter(!is.na(Type.1))%>%
+  group_by(Type.1)%>%
+  summarize(lm_model=list(lm(Total~Attack)))%>%
+  mutate(coef=map(lm_model,tidy,conf.int=TRUE))%>%
+  unnest(coef)
+```
+
+Tidyverse Sixth Function: Coefficients of mutiple models
+========================================================
+
+```{r}
+pokemon%>%
+  filter(!is.na(Type.1))%>%
+  group_by(Type.1)%>%
+  summarize(lm_model=list(lm(Total~Attack)))%>%
+  mutate(coef=map(lm_model,tidy,conf.int=TRUE))%>%
+  unnest(coef)
+```
+
+
+Tidyverse Sixth Function: Coefficients of mutiple models
+========================================================
+
+```{r}
+pokemon_stats<-pokemon%>%
+  filter(!is.na(Type.1))%>%
+  group_by(Type.1)%>%
+  summarize(lm_model=list(lm(Total~Attack)))%>%
+  mutate(coef=map(lm_model,glance,conf.int=TRUE))%>%
+  unnest(coef)
+
+pokemon_stats%>%
+  top_n(n=5, wt=r.squared)
+```
+
+Tidyverse Sixth Function: Coefficients of mutiple models
+========================================================
+
+
+```{r}
+pokemon_stats%>%
+  top_n(n=5, wt=-r.squared)
+```
+Tidyverse Sixth Function: Coefficients of mutiple models
+========================================================
+
+```{r}
+pokemon_aug<-pokemon%>%
+  filter(!is.na(Type.1))%>%
+  group_by(Type.1)%>%
+  summarize(lm_model=list(lm(Total~Attack)))%>%
+  mutate(coef=map(lm_model,augment))%>%
+  unnest(coef)
+```
+
+
+
+Tidyverse Sixth Function: Coefficients of mutiple models
+========================================================
+
+```{r}
+pokemon_aug%>%
+  filter(Type.1=='Flying')%>%
+  ggplot(aes(Attack,Total))+
+  geom_point()+
+  geom_line(aes(y=.fitted),color='blue')
+```
+
+
+
+
+Tidyverse seventh Function: Evaluate yours models
+========================================================
+
+```{r}
+library(tidymodels)
+iris_split <- initial_split(iris, prop = 0.75,strata=Species)
+training_data <- training(iris_split)
+testing_data <- testing(iris_split)
+```
+
+
+Tidyverse seventh Function: Evaluate yours models
+========================================================
+
+```{r}
+library(rsample)
+cv_split= vfold_cv(training_data, v=2)
+cv_split
+```
+
+Tidyverse seventh Function: Evaluate yours models
+========================================================
+
+```{r}
+cv_split%>%
+  mutate(train=map(splits,~training(.x)),
+         validate=map(splits,~testing(.x)))
+```
+
+
+
+Tidyverse seventh Function: Evaluate yours models
+========================================================
+
+```{r}
+cv_split%>%
+  mutate(train=map(splits,~training(.x)),
+         validate=map(splits,~testing(.x)))->cv
+```
+
+```{r}
+cv_lm<-cv%>%
+  mutate(models=map(train,~lm(Sepal.Length~Petal.Length,data=.x)))
+```
+
+
+
+
+Tidyverse seventh Function: Evaluate yours models
+========================================================
+
+```{r}
+cv_prp_lm<-cv_lm%>%
+  mutate(validate_actual=map(validate,~.x$Sepal.Length))%>%
+  mutate(validate_prediction=map2(models,validate,~predict(.x,.y)))
+```
+
+
+Tidyverse seventh Function: Evaluate yours models
+========================================================
+
+```{r}
+library(Metrics)
+cv_evaluation<-cv_prp_lm%>%
+  mutate(validate_rmse=map2_dbl(validate_actual,validate_prediction,~rmse(actual=.x,predicted=.y)))
+```
+
+
+Tidyverse seventh Function: Evaluate yours models
+========================================================
+
+```{r}
+cv_evaluation
+```
+
+
+Tidyverse Eighth Function: Build yours models
+========================================================
+```{r}
+library(ranger)
+cv_rf_model<-cv%>%
+  mutate(model=map(train,~ranger(Sepal.Length~.,data=.x,seed=12345)))
+```
+
+```{r}
+cv_rf<-cv_rf_model%>%
+  mutate(validate_prediction=map2(model,validate,~predict(.x,.y)$predictions))
+```
+
+```{r}
+cv_rf
+```
+
+
+Tidyverse Ninth Function: Select best model
+========================================================
+
+
+```{r}
+cv_tune<-cv%>%
+  crossing(mtry=1:4)
+```
+
+```{r}
+cv_tune_rf<-cv_tune%>%
+  mutate(model=map2(train,mtry,~ranger(Sepal.Length~., data=.x, mtry=.y)))
+```
+
+
+
+Tidyverse Ninth Function: Select best model
+========================================================
+
+```{r}
+cv_tune_rf
+```
+
+
+
+Tidyverse Ninth Function: Select best model
+========================================================
+
+
+```{r}
+best_model<-ranger(Sepal.Length~Petal.Length., data=training_data,
+                   mtry=3, num.trees=36,seed=12345)
+
+test_actual<-testing_data$Sepal.Length
+test_predict<-predict(best_model,data = testing_data)$predictions
+
+print(mae(test_actual,test_predict))
+print(rmse(test_actual,test_predict))  
+
+```
+
+
+
+Tidyverse Tenth Function: add_count
+========================================================
+
+```{r}
+pokemon%>%
+  select(Name,Total)%>%
+  add_count()
+```
+
+Thks 4 All
+========================================================
+
+* Blog : www.danieljimenezm.com
+* Git  : carlosjimenez88M
