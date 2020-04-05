@@ -22,6 +22,7 @@ En la presente sección encontrará las presentaciones y el material de clase po
 
 ## Presentaciones
 |Presentación|
+|:-----------|
 |[Ten fun functions with tidyverse](https://rpubs.com/MindfreakDataScience/594905)|
 
 
