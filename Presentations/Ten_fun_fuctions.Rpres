@@ -391,15 +391,14 @@ Tidyverse Ninth Function: Select best model
 
 
 ```{r}
-best_model<-ranger(Sepal.Length~Petal.Length., data=training_data,
+best_model<-ranger(Sepal.Length~., data=training_data,
                    mtry=3, num.trees=36,seed=12345)
 
 test_actual<-testing_data$Sepal.Length
-test_predict<-predict(best_model,data = testing_data)$predictions
+test_predict<-predict(best_model,testing_data)$predictions
 
-print(mae(test_actual,test_predict))
-print(rmse(test_actual,test_predict))  
-
+mae(test_actual,test_predict)
+rmse(test_actual,test_predict)  
 ```
 
 
