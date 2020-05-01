@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Un Data Scientist Dice</title>
+    <link>https://danieljimenezm.com/post/</link>
+    <description>Recent content in Posts on Un Data Scientist Dice</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>Copyright © 2020, Daniel Jiménez; all rights reserved.</copyright>
+    <lastBuildDate>Wed, 13 Feb 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://danieljimenezm.com/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Distribución Beta</title>
+      <link>https://danieljimenezm.com/post/2019-02-09-distribucion_beta/</link>
+      <pubDate>Wed, 13 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://danieljimenezm.com/post/2019-02-09-distribucion_beta/</guid>
+      <description>Durante muchos años, tanto en el ambito acádemico como en el mundo de la estadística aplicada la distribución beta ha sido tratada con especial rezago en su definición y aplicación, dicho lo anterior esta entrada intenta dar una visión sobre la filosofía de la distribución y en especial darle una aplicación empirica para ver su potencial en el mundo real.
+Parto de una afirmación, los mayores usos de esta distribución se dan en el plano del mundo bayesiano, sobre todo para el desarrollo de ciencias experimentales y la teoría de la decisión.</description>
+    </item>
+    
+  </channel>
+</rss>
