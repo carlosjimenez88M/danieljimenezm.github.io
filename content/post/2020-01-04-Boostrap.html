@@ -41,27 +41,27 @@ sepal_med_ci%&gt;%
 <tbody>
 <tr class="odd">
 <td align="right">1</td>
-<td align="right">6.00</td>
+<td align="right">5.9</td>
 </tr>
 <tr class="even">
 <td align="right">2</td>
-<td align="right">5.65</td>
+<td align="right">6.0</td>
 </tr>
 <tr class="odd">
 <td align="right">3</td>
-<td align="right">5.80</td>
+<td align="right">5.8</td>
 </tr>
 <tr class="even">
 <td align="right">4</td>
-<td align="right">5.80</td>
+<td align="right">5.7</td>
 </tr>
 <tr class="odd">
 <td align="right">5</td>
-<td align="right">6.00</td>
+<td align="right">5.8</td>
 </tr>
 <tr class="even">
 <td align="right">6</td>
-<td align="right">5.80</td>
+<td align="right">5.8</td>
 </tr>
 </tbody>
 </table>
@@ -139,27 +139,27 @@ sepal_med_ht%&gt;%
 <tbody>
 <tr class="odd">
 <td align="right">1</td>
-<td align="right">5.8</td>
+<td align="right">5.80</td>
 </tr>
 <tr class="even">
 <td align="right">2</td>
-<td align="right">5.8</td>
+<td align="right">5.70</td>
 </tr>
 <tr class="odd">
 <td align="right">3</td>
-<td align="right">6.0</td>
+<td align="right">5.80</td>
 </tr>
 <tr class="even">
 <td align="right">4</td>
-<td align="right">6.0</td>
+<td align="right">5.80</td>
 </tr>
 <tr class="odd">
 <td align="right">5</td>
-<td align="right">5.8</td>
+<td align="right">5.75</td>
 </tr>
 <tr class="even">
 <td align="right">6</td>
-<td align="right">5.5</td>
+<td align="right">5.80</td>
 </tr>
 </tbody>
 </table>
@@ -179,7 +179,7 @@ print(sepal_med_obs)</code></pre>
 <pre><code>## # A tibble: 1 x 1
 ##   p_val
 ##   &lt;dbl&gt;
-## 1  0.63</code></pre>
+## 1 0.607</code></pre>
 <p>Now one question : We would like to evaluate whether this data provides evidence that the median Sepal of Iris Sepal Length is greater than 5.8 cm. <strong>What is the conclusion of the hypothesis test at the 5% significance level?</strong></p>
 <p>We dont have evidence that median Sepal Length in Iris is grater that 5.8. We fail to reject H0 since the p-value is above the significance level</p>
 </div>
@@ -201,16 +201,16 @@ weight_mean_ht</code></pre>
 <pre><code>## # A tibble: 1,500 x 2
 ##    replicate  stat
 ##  *     &lt;int&gt; &lt;dbl&gt;
-##  1         1  7.00
+##  1         1  7.07
 ##  2         2  7.03
-##  3         3  7.02
-##  4         4  6.96
-##  5         5  6.97
-##  6         6  7.01
-##  7         7  7.00
-##  8         8  6.99
-##  9         9  7.00
-## 10        10  7.01
+##  3         3  6.98
+##  4         4  6.98
+##  5         5  7.09
+##  6         6  6.95
+##  7         7  7.01
+##  8         8  7.06
+##  9         9  7.01
+## 10        10  7.00
 ## # … with 1,490 more rows</code></pre>
 <p>Calculate the mean observed weight and pull out the value.</p>
 <pre class="r"><code>weight_mean_obs &lt;- ncbirths %&gt;%
@@ -226,7 +226,7 @@ weight_mean_ht</code></pre>
 <pre><code>## # A tibble: 1 x 2
 ##   one_sided_p_val two_sided_p_val
 ##             &lt;dbl&gt;           &lt;dbl&gt;
-## 1           0.014           0.028</code></pre>
+## 1           0.016           0.032</code></pre>
 </div>
 <div id="references" class="section level2">
 <h2>References</h2>

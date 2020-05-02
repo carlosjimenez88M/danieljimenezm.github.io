@@ -21,6 +21,8 @@ theme = "hugo-theme-chunky-poster"
     name = "About"
     url = "/about/"
     weight = 0
+  
+   
 
 [taxonomies]
 category = "categories"
