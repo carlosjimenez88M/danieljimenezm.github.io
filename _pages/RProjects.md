@@ -1,8 +1,8 @@
 ---
 layout: archive
-permalink: /RProjects/
-title: "R Projects"
-
+permalink: /Projects/
+title: "Projects"
+image: "/images/Perfil2.jpg"
 ---
 {% include base_path %}
 {% include group-by-array collection=site.posts field="tags" %}

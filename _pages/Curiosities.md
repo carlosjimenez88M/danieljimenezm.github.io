@@ -3,6 +3,7 @@ layout: archive
 permalink: /Media/
 title: "Publicaciones"
 output: ioslides_presentation
+image: "images/IMagen.jpg"
 ---
 
 
