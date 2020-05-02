@@ -6,23 +6,47 @@ aliases = ["about-us","about-hugo","contact"]
 author = "Hugo Authors"
 +++
 
-Written in Go, Hugo is an open source static site generator available under the [Apache Licence 2.0.](https://github.com/gohugoio/hugo/blob/master/LICENSE) Hugo supports TOML, YAML and JSON data file types, Markdown and HTML content files and uses shortcodes to add rich content. Other notable features are taxonomies, multilingual mode, image processing, custom output formats, HTML/CSS/JS minification and support for Sass SCSS workflows.
+Hi! I am Daniel Jiménez, Principal Data Scientist in [Chiper](https://chiper.co/), where I develop advanced analytics,machine learning model and statistical programming for differents company needs.At the same time I am teacher in [Universidad Nacional de colombia](https://unal.edu.co/),
+where I teach the following subjects: Big Data, Introduction to Data Science and Statistical Learning and Machine Learning.
 
-Hugo makes use of a variety of open source projects including:
+I am passionate about Applied Machine Learning, Statistical Modelling, Bayesian Data Analysis and Forecasting models. I more than nine years of experience developing and applying for differents industries,mainly for public institutions and strartups.
 
-* https://github.com/russross/blackfriday
-* https://github.com/alecthomas/chroma
-* https://github.com/muesli/smartcrop
-* https://github.com/spf13/cobra
-* https://github.com/spf13/viper
 
-Hugo is ideal for blogs, corporate websites, creative portfolios, online magazines, single page applications or even a website with thousands of pages.
+### Frameworks
 
-Hugo is for people who want to hand code their own website without worrying about setting up complicated runtimes, dependencies and databases.
+I use the foollowings frameworks
 
-Websites built with Hugo are extremelly fast, secure and can be deployed anywhere including, AWS, GitHub Pages, Heroku, Netlify and any other hosting provider.
+* [Tidymodels](https://www.tidymodels.org/) +1 year, principal goal: Modeling and Machine Learning models
 
-Learn more and contribute on [GitHub](https://github.com/gohugoio).
+* [Keras](https://keras.io/) +3 years, principal goal: Deep learning and visual recognition.
+
+* [Tenserflow](https://www.tensorflow.org/) + 3 years, principal goal: Deep Learning 
+
+* [Tidyverse](https://www.tidyverse.org/) + 3 years, principal goal: Data Science.
+
+### Development 
+
+I am fanatic of the following tools
+
+* [Docker](https://www.docker.com/): Create images for Machine Learning Industrialization.
+
+* [Jenkis](https://www.jenkins.io/): For automatization projects.
+
+* [Github](www.github.com): For create repositories and differents tools.
+
+* [Google Cloud Platform](https://console.cloud.google.com/freetrial?_ga=2.205139024.1787439701.1587844230-88612942.1587844230&_gac=1.27985614.1587944809.CjwKCAjw4pT1BRBUEiwAm5QuR_gWCIcu0tY7VaF4r5QIg3uEMwGk60bx6XNRRiUr1WvrfALNmWuXixoCE7AQAvD_BwE&pli=1), For create workflow and models automatization, but the principal characteristic is Big Query for create the best Data Bases with Big Data.
+
+
+### Tools
+
+* __Data Science/ Machine Learning:__ R + 10 years, Python +3 years and Octave + 4 years
+
+* __Econometrics:__ Stata + 5 years
+
+* __Data Visualization:__ Shiny + 6 years, Looker +2 years, PowerBI >1 year 😣 (I don`t like it!)
+
+* __Text editors:__ Markdown, LaTeX, Sublime Text,  Vs Code Studio, pages.
+
 
 
 

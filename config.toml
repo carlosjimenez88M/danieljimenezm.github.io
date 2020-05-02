@@ -1,5 +1,5 @@
 baseURL = "https://example.com"
-title = "Hugo Themes"
+title = "Un Data Scientist Dice"
 copyright = "Copyright © 2008–2019, Steve Francia and the Hugo Authors; all rights reserved."
 paginate = 2
 languageCode = "en"
@@ -21,6 +21,18 @@ theme = "hugo-theme-chunky-poster"
     name = "About"
     url = "/about/"
     weight = 0
+  
+  [[menu.main]]
+    identifier = "courses"
+    name = "Courses"
+    url = "/courses/"
+    weight = 1
+
+  [[menu.main]]
+    identifier = "publications"
+    name = "Publications"
+    url = "/publications/"
+    weight = 2
 
 [taxonomies]
 category = "categories"
@@ -41,9 +53,9 @@ author = "authors"
 
   [params.social]
     rss = true
-    email = "example@example.com"
-    facebook = "https://facebook.com"
-    twitter = "https://twitter.com"
+    email = "cjimenez187@aol.com"
+    #facebook = "https://facebook.com"
+    twitter = ""
     linkedin = "https://linkedin.com"
     stack-overflow = "https://stackoverflow.com"
     instagram = "https://stackoverflow.com"

@@ -1,0 +1,919 @@
+---
+title: "PCA"
+date: 2020-04-20
+output: html_document
+---
+
+
+
+<p>Es de reconocer que soy un gran fanático del trabajo de <a href="https://juliasilge.com/">Julia Silge</a>, quien hace poco empezo a trabajar como software engineer en R Studio. Su comprensión de la estadística es profundo y su capacidad de desarrollo de esta herramienta y generar una experiencia en <code>tidymodels</code> es de sobrada admiración.</p>
+<p>En su nuevo post sobre la aplicación del <strong>Principal Component Analysis</strong> sobre canciones de Hip Hop vía <code>recipes</code> es un caso de estudio el cual abordaré de manera desagregada.</p>
+<div id="en-qué-consiste-los-pcas" class="section level2">
+<h2>¿ En qué consiste los PCAs?</h2>
+<p>Una definición muy acertada que alberga <a href="https://es.wikipedia.org/wiki/An%C3%A1lisis_de_componentes_principales">wikipedia</a> es la siguiente :</p>
+<blockquote>
+<p>“Es una técnica utilizada para describir un conjunto de datos en términos de nuevas variables no correlacionadas”</p>
+</blockquote>
+<p>Esto llevado al plano de Machine Learning tiene un gran potencial. Lo importante en esta técnica es la capacidad que tiene para reducir la dimensionalidad de los datos.</p>
+<p>Otra definición que vale la pena rescatar es dada por <a href="https://www.cienciadedatos.net/documentos/35_principal_component_analysis">Joaquín Amat</a>, en donde la describe de la siguiente manera:</p>
+<blockquote>
+<p>“Es un método estadístico que permite simplificar la complejidad de las variables de los espacios muestrales, a través de muchas dimensiones que conservan la información”</p>
+</blockquote>
+<p>La información en estos términos debe leerse como: Varianza. Dicho de otro modo Los PCAs son dichas técnicas que logran simplificar los set de datos vía un número menor de features en un número optimo de componentes.</p>
+<div id="componentes-de-los-pcas." class="section level3">
+<h3>Componentes de los PCAs.</h3>
+<ul>
+<li><p>Eigenvector: Una forma simple de entender los vectores propios es la de dotadores de dirección</p></li>
+<li><p>Eigenvalue: los valores propios es la que indica cuanta varianza hay en los datos del eigenvector.</p></li>
+</ul>
+</div>
+<div id="una-aproximación-del-pca" class="section level3">
+<h3>una aproximación del PCA</h3>
+<p>Un ejemplo simple para entender esta técnica es la siguiente, se usará la base de datos <code>mtcars</code> que viene por defecto en R.</p>
+<p>Se seleccionaran nueve variables para este proceso y se usará la función <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/prcomp">prcomp</a>, la cual dada una matriz, retorna los resultados como objetos de los componentes.</p>
+<pre class="r"><code>cars_PCA&lt;-prcomp(mtcars[,c(1:7,10,11)], center = TRUE,scale. = TRUE)
+cars_PCA%&gt;%
+  summary()</code></pre>
+<pre><code>## Importance of components:
+##                           PC1    PC2     PC3     PC4     PC5     PC6     PC7
+## Standard deviation     2.3782 1.4429 0.71008 0.51481 0.42797 0.35184 0.32413
+## Proportion of Variance 0.6284 0.2313 0.05602 0.02945 0.02035 0.01375 0.01167
+## Cumulative Proportion  0.6284 0.8598 0.91581 0.94525 0.96560 0.97936 0.99103
+##                           PC8     PC9
+## Standard deviation     0.2419 0.14896
+## Proportion of Variance 0.0065 0.00247
+## Cumulative Proportion  0.9975 1.00000</code></pre>
+<p>Como se trabaja con nueve features, los resultados seran iguales, más al ojo del buen observador podrá dar cuenta que en <code>Cumulative Proportion</code> en el <code>PC3</code> almacena la mayor cantidad de varianza posible, y de ahi en adelante la tasa de acumulación decae de manera exponencial sostenida.</p>
+<p><img src="/post/2020-04-20-PCA_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Y validando geométricamente como es el comportamiento de las variables, se observa lo siguiente.</p>
+<p><img src="/post/2020-04-20-PCA_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Todo lo que está sobre el coseno debe leerse como una variable explicativa que almacena gran porpiedad y valor y que por ende puede explicar las variables que se encuentran en contraposición (ejes opuestos).</p>
+<p>Sustentando el PCA es de notar que sobre el coseno <span class="math inline">\(x\)</span> hay tres variables, lo cual es de gran refuerzo para los pasos a seguir.</p>
+<p>Una forma de mejorar la interpretación de este PCA es a través de la caracterización de los carros
+<img src="/post/2020-04-20-PCA_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>En este caso los gradientes muestran la capacidad de correlaciones y por ende de explicaciones sobre los carros dada la marca.</p>
+<p><img src="/post/2020-04-20-PCA_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Es de notar la la mayor cantidad de información se almacena hasta los <code>duster 360</code></p>
+<p>Si se trabajase un feature el resultado sería más valioso. En esta parte tomo el ejemplo usado en Datacamp, puesto que su nivel de interpretación es invaluable.</p>
+<p><img src="/post/2020-04-20-PCA_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Se puede apreciar que los carros de origen americano tienen como caracteristícas de altos valores en en cylinders, Displacement y en Weight.</p>
+<p>Para verlo de una marena más amena se trabajaría con la siguiente gráfica (sustentar respuesta anterior)</p>
+<p><img src="/post/2020-04-20-PCA_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="ranking-de-las-canciones" class="section level3">
+<h3>Ranking de las canciones</h3>
+<p>El objetivo de este modelo es comprender cuales son las canciones mejor valoradas por los críticos.</p>
+<p>Se desarrolla un análisis corto de los datos</p>
+<pre><code>## Rows: 311
+## Columns: 12
+## $ ID     &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,…
+## $ title  &lt;chr&gt; &quot;Juicy&quot;, &quot;Fight The Power&quot;, &quot;Shook Ones (Part II)&quot;, &quot;The Messa…
+## $ artist &lt;chr&gt; &quot;The Notorious B.I.G.&quot;, &quot;Public Enemy&quot;, &quot;Mobb Deep&quot;, &quot;Grandmas…
+## $ year   &lt;dbl&gt; 1994, 1989, 1995, 1982, 1992, 1993, 1993, 1992, 1994, 1995, 20…
+## $ gender &lt;chr&gt; &quot;male&quot;, &quot;male&quot;, &quot;male&quot;, &quot;male&quot;, &quot;male&quot;, &quot;male&quot;, &quot;male&quot;, &quot;male&quot;…
+## $ points &lt;dbl&gt; 140, 100, 94, 90, 84, 62, 50, 48, 46, 42, 38, 36, 36, 34, 32, …
+## $ n      &lt;dbl&gt; 18, 11, 13, 14, 14, 10, 7, 6, 7, 6, 5, 5, 4, 6, 5, 5, 4, 5, 5,…
+## $ n1     &lt;dbl&gt; 9, 7, 4, 5, 2, 3, 2, 3, 1, 2, 2, 1, 2, 1, 1, 0, 2, 2, 1, 1, 1,…
+## $ n2     &lt;dbl&gt; 3, 3, 5, 3, 4, 1, 2, 2, 3, 1, 0, 1, 2, 0, 1, 3, 1, 0, 1, 1, 1,…
+## $ n3     &lt;dbl&gt; 3, 1, 1, 1, 2, 1, 2, 0, 1, 1, 3, 3, 0, 2, 2, 1, 0, 1, 1, 1, 0,…
+## $ n4     &lt;dbl&gt; 1, 0, 1, 0, 4, 4, 0, 0, 1, 2, 0, 0, 0, 3, 0, 0, 1, 0, 1, 0, 2,…
+## $ n5     &lt;dbl&gt; 2, 0, 2, 5, 2, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 2, 1, 2, 1,…</code></pre>
+<p>Hay una variable interesante sobre el set de datos y es el genero. Pero antes de desarrollar un análisis sobre ello trabajaré en dos fases de interpretación. Con <code>skim</code> describire rapidamente el comportamiento y la estructura de los datos</p>
+<table>
+<caption><span id="tab:unnamed-chunk-11">Table 1: </span>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">rankings</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">311</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">12</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">3</td>
+</tr>
+<tr class="odd">
+<td align="left">numeric</td>
+<td align="left">9</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">title</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">59</td>
+<td align="right">0</td>
+<td align="right">309</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">artist</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">56</td>
+<td align="right">0</td>
+<td align="right">207</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">gender</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ID</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">156.00</td>
+<td align="right">89.92</td>
+<td align="right">1</td>
+<td align="right">78.5</td>
+<td align="right">156</td>
+<td align="right">233.5</td>
+<td align="right">311</td>
+<td align="left">▇▇▇▇▇</td>
+</tr>
+<tr class="even">
+<td align="left">year</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2000.41</td>
+<td align="right">9.20</td>
+<td align="right">1979</td>
+<td align="right">1994.0</td>
+<td align="right">1999</td>
+<td align="right">2007.0</td>
+<td align="right">2019</td>
+<td align="left">▂▆▇▃▅</td>
+</tr>
+<tr class="odd">
+<td align="left">points</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">10.32</td>
+<td align="right">14.64</td>
+<td align="right">2</td>
+<td align="right">4.0</td>
+<td align="right">6</td>
+<td align="right">10.0</td>
+<td align="right">140</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">n</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1.72</td>
+<td align="right">2.01</td>
+<td align="right">1</td>
+<td align="right">1.0</td>
+<td align="right">1</td>
+<td align="right">2.0</td>
+<td align="right">18</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">n1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.34</td>
+<td align="right">0.89</td>
+<td align="right">0</td>
+<td align="right">0.0</td>
+<td align="right">0</td>
+<td align="right">0.0</td>
+<td align="right">9</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">n2</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.34</td>
+<td align="right">0.69</td>
+<td align="right">0</td>
+<td align="right">0.0</td>
+<td align="right">0</td>
+<td align="right">1.0</td>
+<td align="right">5</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">n3</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.34</td>
+<td align="right">0.59</td>
+<td align="right">0</td>
+<td align="right">0.0</td>
+<td align="right">0</td>
+<td align="right">1.0</td>
+<td align="right">3</td>
+<td align="left">▇▃▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">n4</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.34</td>
+<td align="right">0.62</td>
+<td align="right">0</td>
+<td align="right">0.0</td>
+<td align="right">0</td>
+<td align="right">1.0</td>
+<td align="right">4</td>
+<td align="left">▇▃▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">n5</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.34</td>
+<td align="right">0.60</td>
+<td align="right">0</td>
+<td align="right">0.0</td>
+<td align="right">0</td>
+<td align="right">1.0</td>
+<td align="right">5</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+</tbody>
+</table>
+<p>Me llama la atención el comportamiento de n3 y n4. Los n`s significan los votos #3 y #4.</p>
+<p>Exploraré la correlación de las variables cuantitativas.</p>
+<p><img src="/post/2020-04-20-PCA_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>Hay correlaciones lineales importantes entre los <code>points</code> y el número de votaciones, lo importante a destacar es que se disipan conforme aumenta el número de n. Este será un caso interesante para trabajar con redes neuronales.</p>
+<p>Una inquietud sobre estas relaciones va atada al genero, ¿cómo será su comportamiento?</p>
+<p><img src="/post/2020-04-20-PCA_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>Este tipo de correlación da un gran insigth sobre el camino a abordar para desarrollar un modelo.</p>
+<p><img src="/post/2020-04-20-PCA_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>La presencia de outliers es bastante alta en el caso de los hombres. Será mejor valorar este comportamiento por decadas</p>
+<pre class="r"><code>rankings%&gt;%
+  filter(decade!=1970)%&gt;%
+  ggplot(aes(reorder(gender,points),points, fill=gender))+
+  geom_boxplot()+
+  guides(fill=FALSE)+
+  labs(x=&quot;&quot;,
+       y=&quot;puntuación&quot;)+
+  facet_wrap(~decade, scales = &#39;free&#39;)</code></pre>
+<p><img src="/post/2020-04-20-PCA_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>Más curioso termino siendo el análsis por decada, parece ser que en efecto son outliers, más no anomalías. Pero para avanzar en este análisis primerio es mejor ordenar este gráfico.</p>
+<p><img src="/post/2020-04-20-PCA_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>Hay una clara relación entre la decada, la puntuación y los generos, esto debe explorarse más a fondo, pero en está oportunidad no será.</p>
+<p>Ahora trabajaré un modelo de regresión para entender que generos son los más escuchados.</p>
+<pre class="r"><code>ind&lt;-initial_split(rankings[,-c(1:3)],strata = gender)
+training_data&lt;-training(ind)
+testing_data&lt;-testing(ind)
+training_data%&gt;%
+  lm(log(points)~.,data=.)-&gt;ranking_lm
+
+ranking_lm%&gt;%
+  summary()</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = log(points) ~ ., data = .)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.91383 -0.31976 -0.02734  0.28668  1.40315 
+## 
+## Coefficients: (1 not defined because of singularities)
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 20.61157    6.49329   3.174  0.00171 ** 
+## year        -0.02232    0.01125  -1.985  0.04842 *  
+## gendermale  -0.01489    0.10459  -0.142  0.88689    
+## gendermixed -0.01419    0.15246  -0.093  0.92593    
+## n           -0.38973    0.05425  -7.185 9.89e-12 ***
+## n1           0.72929    0.07171  10.170  &lt; 2e-16 ***
+## n2           0.87363    0.07370  11.854  &lt; 2e-16 ***
+## n3           0.84114    0.07319  11.493  &lt; 2e-16 ***
+## n4           0.56041    0.06884   8.141 2.72e-14 ***
+## n5                NA         NA      NA       NA    
+## decade       0.01282    0.01088   1.179  0.23980    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.441 on 224 degrees of freedom
+## Multiple R-squared:  0.747,  Adjusted R-squared:  0.7368 
+## F-statistic: 73.49 on 9 and 224 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Aplicando el PCA</p>
+<pre class="r"><code>modelo &lt;- lm(log(points) ~ ., data = training_data)
+summary(modelo)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = log(points) ~ ., data = training_data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.91383 -0.31976 -0.02734  0.28668  1.40315 
+## 
+## Coefficients: (1 not defined because of singularities)
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 20.61157    6.49329   3.174  0.00171 ** 
+## year        -0.02232    0.01125  -1.985  0.04842 *  
+## gendermale  -0.01489    0.10459  -0.142  0.88689    
+## gendermixed -0.01419    0.15246  -0.093  0.92593    
+## n           -0.38973    0.05425  -7.185 9.89e-12 ***
+## n1           0.72929    0.07171  10.170  &lt; 2e-16 ***
+## n2           0.87363    0.07370  11.854  &lt; 2e-16 ***
+## n3           0.84114    0.07319  11.493  &lt; 2e-16 ***
+## n4           0.56041    0.06884   8.141 2.72e-14 ***
+## n5                NA         NA      NA       NA    
+## decade       0.01282    0.01088   1.179  0.23980    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.441 on 224 degrees of freedom
+## Multiple R-squared:  0.747,  Adjusted R-squared:  0.7368 
+## F-statistic: 73.49 on 9 and 224 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Al revisar el MSE, el resultado es el siguiente</p>
+<pre class="r"><code>training_mse &lt;- mean((modelo$fitted.values - log(training_data$points))^2)
+training_mse</code></pre>
+<pre><code>## [1] 0.1861446</code></pre>
+<pre class="r"><code>predicciones &lt;- predict(modelo, newdata = testing_data)
+test_mse &lt;- mean((predicciones - log(testing_data$points))^2)
+test_mse</code></pre>
+<pre><code>## [1] 0.1903569</code></pre>
+<p>Ahora la regresión con el PCA</p>
+<pre class="r"><code>pca_ranking&lt;-prcomp(training_data[,-c(1:4)],scale. = TRUE)
+pca_ranking%&gt;%
+  summary()</code></pre>
+<pre><code>## Importance of components:
+##                           PC1    PC2    PC3    PC4    PC5     PC6
+## Standard deviation     1.3716 1.0216 0.9732 0.9456 0.8825 0.67448
+## Proportion of Variance 0.3136 0.1739 0.1579 0.1490 0.1298 0.07582
+## Cumulative Proportion  0.3136 0.4875 0.6454 0.7944 0.9242 1.00000</code></pre>
+<p>Entender que hasta el PC5 hay alta alacenamiento de la información es necesario desarrollar un gráfico más</p>
+<pre class="r"><code>fviz_eig(pca_ranking, addlabels = TRUE, ylim = c(0, 50))</code></pre>
+<p><img src="/post/2020-04-20-PCA_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>A este modelo le falta un mayor desgloce</p>
+<pre class="r"><code>fviz_cos2(pca_ranking, choice = &quot;var&quot;, axes = 1:2)</code></pre>
+<p><img src="/post/2020-04-20-PCA_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p>En estas relaciones hace falta mayor detalle para poder trabajar de manera oportuna, más da una buena aproximación al siguiente trabajo</p>
+<pre class="r"><code>library( neuralnet )</code></pre>
+<pre><code>## 
+## Attaching package: &#39;neuralnet&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     compute</code></pre>
+<pre class="r"><code>n = names( training_data )
+f = as.formula( paste( &quot;gender ~&quot;, paste( n[!n %in% &quot;gender&quot;], collapse = &quot;+&quot; ) ) )
+nn = neuralnet( f, training_data, hidden = 4, linear.output = FALSE, threshold = 0.01 )
+
+plot( nn, rep = &quot;best&quot; )</code></pre>
+<p><img src="/post/2020-04-20-PCA_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p>Ahora con el PCA</p>
+<p>Se mantienen los cuatro componentes</p>
+<pre class="r"><code>pca$x</code></pre>
+<pre><code>##                  PC1          PC2           PC3         PC4          PC5
+##   [1,] -1.529473e+01  3.482086612  1.4664659852  1.28928926 -0.054961746
+##   [2,] -1.004918e+01  0.386934545  0.1524805961  1.84751632  3.234544754
+##   [3,] -1.053620e+01  2.036439621  1.6199365249 -1.31329743  2.689557188
+##   [4,] -1.039871e+01  1.911554498 -1.7200052898 -3.21739722 -1.083638526
+##   [5,] -6.948758e+00  0.802220494 -2.9333719915 -3.10448565 -1.956577775
+##   [6,] -5.133387e+00  0.653954276  1.1364903962  1.51082920 -0.121724525
+##   [7,] -4.487975e+00  0.020203526  1.4291624139 -0.44312316  1.927838574
+##   [8,] -4.922769e+00  0.464085090  0.1965186630 -0.58778553  1.018914707
+##   [9,] -3.975796e+00  0.132528582 -2.1865185839 -0.43425136 -0.406398756
+##  [10,] -2.604000e+00  2.934560163 -0.5202615689  3.40523950 -1.893441806
+##  [11,] -3.694973e+00 -0.875267492 -0.2824559074  3.44982342 -1.564783829
+##  [12,] -3.528102e+00 -0.027381043 -3.3941360926 -0.38096667 -2.964176963
+##  [13,] -3.427926e+00 -0.902226925  1.1652272703  1.52682558 -1.312635309
+##  [14,] -2.906044e+00  0.001492586  2.5668987687 -0.30999534 -1.681074078
+##  [15,] -2.940614e+00 -0.088798717  0.1738366355 -0.48717787 -0.784767818
+##  [16,] -2.764668e+00  0.437769547  2.5224206793 -0.45998702 -0.922337680
+##  [17,] -2.365873e+00  1.015103289 -0.8391828886 -2.50744389 -0.225638140
+##  [18,] -1.840551e+00  1.340477960 -1.2661869374  0.33931393  0.083770189
+##  [19,] -1.542397e+00  1.038024509  0.0693022418 -0.50147164 -1.544552199
+##  [20,] -2.247390e+00 -1.405413503  0.2286528901 -0.38010465 -1.789588229
+##  [21,] -1.945742e+00  0.149284778 -1.4661921444  2.41129899 -3.025322150
+##  [22,] -1.471726e+00 -0.699628248  1.3749937835 -0.43515799 -0.054118778
+##  [23,] -1.474208e+00 -0.716734839 -1.0355103276 -0.75450401  1.561846145
+##  [24,] -1.078084e+00 -0.602282972 -2.1068643265 -1.50223589 -0.539147387
+##  [25,] -1.320119e+00 -0.262785025  1.3184809385 -0.72574752  1.416460737
+##  [26,] -2.958596e-01  0.948070041 -0.0932862118  0.24603905  1.549708987
+##  [27,] -1.285000e+00 -2.439407816  0.1363583263  0.38775935  1.203070846
+##  [28,] -1.241285e+00 -2.294170916  0.1255438818  0.38462807  1.218701940
+##  [29,] -1.197570e+00 -2.148934017  0.1147294372  0.38149679  1.234333034
+##  [30,] -1.157867e+00 -0.102568345  1.1738436062  0.34707091 -0.417116889
+##  [31,] -6.172489e-01 -0.549142982 -0.1258048862  1.38893481 -0.453279936
+##  [32,] -6.828214e-01 -0.766998331 -0.1095832194  1.39363173 -0.476726577
+##  [33,] -6.427688e-02  1.734644612 -0.1525529579  0.05415154  2.337176837
+##  [34,]  3.318471e-01  1.849096479 -1.2239069568 -0.69358034  0.236183305
+##  [35,] -4.387187e-01 -0.812196881 -1.0483346415 -0.56751643 -0.032299367
+##  [36,] -3.731462e-01 -0.594341533 -1.0645563084 -0.57221335 -0.008852726
+##  [37,] -4.168612e-01 -0.739578432 -1.0537418638 -0.56908207 -0.024483820
+##  [38,]  1.854054e-01  2.185335090 -0.3188191794  1.12070741  0.534861399
+##  [39,] -3.200937e-01  0.455286937 -0.2012932992  1.19235038  0.357634555
+##  [40,] -6.507328e-01 -0.693813619 -0.1270251973  1.25146824  0.242932086
+##  [41,] -2.871442e-01  0.807638876 -3.2873703831 -2.59341260 -1.086121125
+##  [42,] -4.813468e-01 -1.011813113  1.3543216252 -0.52466919 -0.248024698
+##  [43,] -8.028417e-01 -2.105968075 -0.9752868506 -0.64586515  0.549210187
+##  [44,] -5.377751e-01 -1.174722867 -1.0333332857 -0.70028608  0.640466015
+##  [45,] -1.415634e-01  0.192233038 -1.1238230545 -0.76410086  0.778615124
+##  [46,] -3.791930e-01 -0.170504691 -0.2986986411  2.31645847 -1.551567805
+##  [47,] -7.941398e-01 -0.187166447  2.4931111184 -0.49841158 -2.021992636
+##  [48,] -4.853582e-01  0.889315659  2.4242502388 -0.55596379 -1.915105715
+##  [49,] -3.953448e-01  0.390167295 -0.8684924495 -2.54586844 -1.325293096
+##  [50,] -2.443777e-01 -0.578795489 -1.2104139518  0.36313851 -1.146218330
+##  [51,] -2.880927e-01 -0.724032389 -1.1995995072  0.36626979 -1.161849423
+##  [52,] -3.318077e-01 -0.869269288 -1.1887850626  0.36940107 -1.177480517
+##  [53,]  9.274979e-01  1.493945671 -0.1545628272  0.24427040  0.727400231
+##  [54,] -1.737070e-01 -2.316448246  0.0952775900  0.42945216  0.344215091
+##  [55,]  1.132171e-01 -1.312584589  0.0318239326  0.37346558  0.443286466
+##  [56,]  1.350746e-01 -1.239966139  0.0264167104  0.37189994  0.451102013
+##  [57,] -1.518495e-01 -2.243829797  0.0898703677  0.42788652  0.352030638
+##  [58,]  2.443621e-01 -0.876873891 -0.0006194011  0.36407175  0.490179747
+##  [59,]  2.443621e-01 -0.876873891 -0.0006194011  0.36407175  0.490179747
+##  [60,]  5.750012e-01  0.272226665 -0.0748875030  0.30495389  0.604882216
+##  [61,]  6.405737e-01  0.490082014 -0.0911091699  0.30025697  0.628328857
+##  [62,]  6.187162e-01  0.417463564 -0.0857019476  0.30182261  0.620513310
+##  [63,]  1.787896e-01 -1.094729240  0.0156022658  0.36876866  0.466733107
+##  [64,]  2.225046e-01 -0.949492341  0.0047878212  0.36563739  0.482364200
+##  [65,]  5.312863e-01  0.126989766 -0.0640730584  0.30808517  0.589251122
+##  [66,]  2.443621e-01 -0.876873891 -0.0006194011  0.36407175  0.490179747
+##  [67,]  2.006471e-01 -1.022110791  0.0101950435  0.36720303  0.474548654
+##  [68,] -1.299920e-01 -2.171211347  0.0844631454  0.42632088  0.359846185
+##  [69,]  1.014928e+00  1.784419469 -0.1761917164  0.23800784  0.758662419
+##  [70,]  1.350746e-01 -1.239966139  0.0264167104  0.37189994  0.451102013
+##  [71,]  1.787896e-01 -1.094729240  0.0156022658  0.36876866  0.466733107
+##  [72,]  5.750012e-01  0.272226665 -0.0748875030  0.30495389  0.604882216
+##  [73,]  6.405737e-01  0.490082014 -0.0911091699  0.30025697  0.628328857
+##  [74,] -2.611370e-01 -2.606922045  0.1169064791  0.43571472  0.312952904
+##  [75,] -2.651484e-01 -0.705793272  1.1868350927  0.40442011 -1.354128113
+##  [76,]  2.403507e-01  1.024254881  1.0693092124  0.33277714 -1.176901270
+##  [77,]  5.054174e-01  1.955500089  1.0112627774  0.27835621 -1.085645442
+##  [78,]  2.184932e-01  0.951636432  1.0747164347  0.33434278 -1.184716817
+##  [79,]  2.327357e-01 -0.948926079 -0.0072469344  0.22503954  1.194207317
+##  [80,]  2.108782e-01 -1.021544528 -0.0018397121  0.22660518  1.186391770
+##  [81,]  2.327357e-01 -0.948926079 -0.0072469344  0.22503954  1.194207317
+##  [82,]  1.890207e-01 -1.094162978  0.0035675101  0.22817082  1.178576223
+##  [83,]  1.671632e-01 -1.166781427  0.0089747324  0.22973646  1.170760676
+##  [84,]  6.508048e-01  0.490648276 -0.1031439255  0.15965913  1.340171973
+##  [85,]  2.983082e-01 -0.731070730 -0.0234686013  0.22034262  1.217653958
+##  [86,]  6.945198e-01  0.635885175 -0.1139583701  0.15652785  1.355803067
+##  [87,]  5.852323e-01  0.272792927 -0.0869222586  0.16435604  1.316725332
+##  [88,]  1.025159e+00  1.784985732 -0.1882264720  0.09740999  1.470505535
+##  [89,] -1.634759e-01 -2.315881984  0.0832428343  0.28885431  1.056058208
+##  [90,]  5.196598e-01  0.054937579 -0.0707005918  0.16905296  1.293278691
+##  [91,]  5.415173e-01  0.127556028 -0.0761078140  0.16748732  1.301094238
+##  [92,]  1.112589e+00  2.075459530 -0.2098553611  0.09114743  1.501767723
+##  [93,]  2.983082e-01 -0.731070730 -0.0234686013  0.22034262  1.217653958
+##  [94,]  1.090731e+00  2.002841081 -0.2044481388  0.09271307  1.493952176
+##  [95,]  1.003301e+00  1.712367282 -0.1828192497  0.09897563  1.462689988
+##  [96,]  2.545932e-01 -0.876307629 -0.0126541567  0.22347390  1.202022864
+##  [97,]  1.890207e-01 -1.094162978  0.0035675101  0.22817082  1.178576223
+##  [98,]  1.003301e+00  1.712367282 -0.1828192497  0.09897563  1.462689988
+##  [99,]  2.108782e-01 -1.021544528 -0.0018397121  0.22660518  1.186391770
+## [100,]  2.764507e-01 -0.803689179 -0.0180613790  0.22190826  1.209838411
+## [101,]  2.327357e-01 -0.948926079 -0.0072469344  0.22503954  1.194207317
+## [102,]  2.983082e-01 -0.731070730 -0.0234686013  0.22034262  1.217653958
+## [103,]  1.234482e-01 -1.312018327  0.0197891770  0.23286774  1.155129582
+## [104,] -1.197609e-01 -2.170645085  0.0724283898  0.28572303  1.071689302
+## [105,]  2.108782e-01 -1.021544528 -0.0018397121  0.22660518  1.186391770
+## [106,]  6.289473e-01  0.418029827 -0.0977367032  0.16122477  1.332356426
+## [107,]  9.595865e-01  1.567130383 -0.1720048051  0.10210691  1.447058894
+## [108,]  1.068874e+00  1.930222631 -0.1990409166  0.09427871  1.486136629
+## [109,]  9.814440e-01  1.639748833 -0.1774120274  0.10054127  1.454874441
+## [110,] -1.634759e-01 -2.315881984  0.0832428343  0.28885431  1.056058208
+## [111,]  1.890207e-01 -1.094162978  0.0035675101  0.22817082  1.178576223
+## [112,]  1.068874e+00  1.930222631 -0.1990409166  0.09427871  1.486136629
+## [113,] -1.197609e-01 -2.170645085  0.0724283898  0.28572303  1.071689302
+## [114,]  2.327357e-01 -0.948926079 -0.0072469344  0.22503954  1.194207317
+## [115,]  4.188809e-01  0.761200982  0.1467794572 -1.62367410 -0.755920700
+## [116,]  8.118262e-04 -0.678373372  0.2426764482 -1.55829368 -0.901885356
+## [117,]  4.605605e-01 -0.570854050 -0.1681059337  1.29316105 -0.615923668
+## [118,]  3.949880e-01 -0.788709399 -0.1518842668  1.29785797 -0.639370309
+## [119,]  3.949880e-01 -0.788709399 -0.1518842668  1.29785797 -0.639370309
+## [120,]  4.605605e-01 -0.570854050 -0.1681059337  1.29316105 -0.615923668
+## [121,]  3.731305e-01 -0.861327848 -0.1464770445  1.29942361 -0.647185856
+## [122,]  4.249143e-02 -2.010428405 -0.0722089426  1.35854146 -0.761888324
+## [123,]  3.294156e-01 -1.006564747 -0.1356625999  1.30255489 -0.662816950
+## [124,]  1.099981e+00  1.654728613 -0.3112349152  1.17649098 -0.394334279
+## [125,]  8.786297e-01  0.868720305 -0.2640029247  1.22778064 -0.469959012
+## [126,]  3.949880e-01 -0.788709399 -0.1518842668  1.29785797 -0.639370309
+## [127,]  7.911997e-01  0.578246507 -0.2423740356  1.23404319 -0.501221200
+## [128,]  1.296699e+00  2.308294660 -0.3598999158  1.16240022 -0.323994356
+## [129,]  7.037697e-01  0.287772708 -0.2207451464  1.24030575 -0.532483388
+## [130,]  7.911997e-01  0.578246507 -0.2423740356  1.23404319 -0.501221200
+## [131,]  1.252984e+00  2.163057761 -0.3490854712  1.16553150 -0.339625450
+## [132,]  3.512731e-01 -0.933946298 -0.1410698222  1.30098925 -0.655001403
+## [133,]  3.731305e-01 -0.861327848 -0.1464770445  1.29942361 -0.647185856
+## [134,]  1.143696e+00  1.799965513 -0.3220493598  1.17335970 -0.378703185
+## [135,]  1.121839e+00  1.727347063 -0.3166421375  1.17492534 -0.386518732
+## [136,]  1.296699e+00  2.308294660 -0.3598999158  1.16240022 -0.323994356
+## [137,]  1.274841e+00  2.235676210 -0.3544926935  1.16396586 -0.331809903
+## [138,]  8.567722e-01  0.796101855 -0.2585957024  1.22934628 -0.477774559
+## [139,] -2.308107e-02 -2.228283753 -0.0559872757  1.36323838 -0.785334965
+## [140,]  1.252984e+00  2.163057761 -0.3490854712  1.16553150 -0.339625450
+## [141,] -2.308107e-02 -2.228283753 -0.0559872757  1.36323838 -0.785334965
+## [142,]  3.949880e-01 -0.788709399 -0.1518842668  1.29785797 -0.639370309
+## [143,]  1.231126e+00  2.090439311 -0.3436782489  1.16709714 -0.347440997
+## [144,]  7.693422e-01  0.505628057 -0.2369668133  1.23560883 -0.509036747
+## [145,]  1.231126e+00  2.090439311 -0.3436782489  1.16709714 -0.347440997
+## [146,]  1.143696e+00  1.799965513 -0.3220493598  1.17335970 -0.378703185
+## [147,]  1.209269e+00  2.017820861 -0.3382710266  1.16866278 -0.355256544
+## [148,]  1.252984e+00  2.163057761 -0.3490854712  1.16553150 -0.339625450
+## [149,]  1.274841e+00  2.235676210 -0.3544926935  1.16396586 -0.331809903
+## [150,] -1.542260e-01 -2.663994451 -0.0235439420  1.37263222 -0.832228247
+## [151,]  8.349147e-01  0.723483406 -0.2531884802  1.23091192 -0.485590106
+## [152,]  1.165554e+00  1.872583962 -0.3274565821  1.17179406 -0.370887638
+## [153,]  4.605605e-01 -0.570854050 -0.1681059337  1.29316105 -0.615923668
+## [154,] -3.287404e-01 -1.881853262  2.7087863723 -1.45945986 -1.216682062
+## [155,]  3.543953e-01  0.488966301  2.5548429462 -1.57926122 -0.979461578
+## [156,]  1.344084e+00  1.609530063 -1.2499863373 -0.78465718  0.050092932
+## [157,]  5.079458e-01 -1.269618646 -1.0581923552 -0.65389635 -0.241836381
+## [158,]  6.172333e-01 -0.906526398 -1.0852284666 -0.66172455 -0.202758646
+## [159,]  4.423733e-01 -1.487473995 -1.0419706883 -0.64919944 -0.265283021
+## [160,]  5.079458e-01 -1.269618646 -1.0581923552 -0.65389635 -0.241836381
+## [161,]  1.409656e+00  1.827385412 -1.2662080042 -0.78935410  0.073539572
+## [162,]  1.013445e+00  0.460429507 -1.1757182354 -0.72553932 -0.064609537
+## [163,]  1.387799e+00  1.754766962 -1.2608007819 -0.78778846  0.065724025
+## [164,]  2.210216e-01 -2.273482304 -0.9947386979 -0.59790978 -0.340907755
+## [165,]  1.453371e+00  1.972622311 -1.2770224488 -0.79248538  0.089170666
+## [166,]  9.260149e-01  0.169955708 -1.1540893463 -0.71927677 -0.095871725
+## [167,]  6.172333e-01 -0.906526398 -1.0852284666 -0.66172455 -0.202758646
+## [168,]  1.013445e+00  0.460429507 -1.1757182354 -0.72553932 -0.064609537
+## [169,]  1.322226e+00  1.536911614 -1.2445791150 -0.78309154  0.042277385
+## [170,]  5.953758e-01 -0.979144848 -1.0798212444 -0.66015891 -0.210574193
+## [171,]  5.953758e-01 -0.979144848 -1.0798212444 -0.66015891 -0.210574193
+## [172,]  1.335917e-01 -2.563956102 -0.9731098087 -0.59164722 -0.372169943
+## [173,]  1.013445e+00  0.460429507 -1.1757182354 -0.72553932 -0.064609537
+## [174,]  6.390908e-01 -0.833907949 -1.0906356889 -0.66329019 -0.194943099
+## [175,]  8.822999e-01  0.024718809 -1.1432749017 -0.71614549 -0.111502818
+## [176,]  1.387799e+00  1.754766962 -1.2608007819 -0.78778846  0.065724025
+## [177,]  8.822999e-01  0.024718809 -1.1432749017 -0.71614549 -0.111502818
+## [178,]  5.953758e-01 -0.979144848 -1.0798212444 -0.66015891 -0.210574193
+## [179,]  6.390908e-01 -0.833907949 -1.0906356889 -0.66329019 -0.194943099
+## [180,]  8.822999e-01  0.024718809 -1.1432749017 -0.71614549 -0.111502818
+## [181,]  6.172333e-01 -0.906526398 -1.0852284666 -0.66172455 -0.202758646
+## [182,]  1.365941e+00  1.682148513 -1.2553935596 -0.78622282  0.057908479
+## [183,]  8.604424e-01 -0.047899640 -1.1378676794 -0.71457985 -0.119318365
+## [184,]  5.953758e-01 -0.979144848 -1.0798212444 -0.66015891 -0.210574193
+## [185,]  9.697299e-01  0.315192608 -1.1649037908 -0.72240805 -0.080240631
+## [186,]  4.860883e-01 -1.342237096 -1.0527851329 -0.65233072 -0.249651928
+## [187,]  5.953758e-01 -0.979144848 -1.0798212444 -0.66015891 -0.210574193
+## [188,]  5.079458e-01 -1.269618646 -1.0581923552 -0.65389635 -0.241836381
+## [189,]  5.735183e-01 -1.051763298 -1.0744140221 -0.65859327 -0.218389740
+## [190,]  5.735183e-01 -1.051763298 -1.0744140221 -0.65859327 -0.218389740
+## [191,]  5.079458e-01 -1.269618646 -1.0581923552 -0.65389635 -0.241836381
+## [192,]  1.014532e+00  0.406050174  1.2161235868 -0.68582336 -0.264703774
+## [193,]  1.014532e+00  0.406050174  1.2161235868 -0.68582336 -0.264703774
+## [194,]  6.183201e-01 -0.960905731  1.3066133555 -0.62200859 -0.402852883
+## [195,]  1.388886e+00  1.700387630  1.1310410403 -0.74807249 -0.134370211
+## [196,]  7.057501e-01 -0.670431933  1.2849844664 -0.62827114 -0.371590695
+## [197,]  6.401776e-01 -0.888287282  1.3012061332 -0.62357423 -0.395037336
+## [198,]  6.838926e-01 -0.743050382  1.2903916887 -0.62670550 -0.379406242
+## [199,]  6.838926e-01 -0.743050382  1.2903916887 -0.62670550 -0.379406242
+## [200,]  5.746051e-01 -1.106142630  1.3174278001 -0.61887731 -0.418483977
+## [201,]  6.838926e-01 -0.743050382  1.2903916887 -0.62670550 -0.379406242
+## [202,]  1.498173e+00  2.063479878  1.1040049288 -0.75590069 -0.095292477
+## [203,]  7.057501e-01 -0.670431933  1.2849844664 -0.62827114 -0.371590695
+## [204,]  5.746051e-01 -1.106142630  1.3174278001 -0.61887731 -0.418483977
+## [205,]  1.520031e+00  2.136098327  1.0985977065 -0.75746633 -0.087476930
+## [206,]  1.367028e+00  1.627769180  1.1364482626 -0.74650686 -0.142185758
+## [207,]  9.489592e-01  0.188194825  1.2323452536 -0.68112644 -0.288150415
+## [208,]  1.367028e+00  1.627769180  1.1364482626 -0.74650686 -0.142185758
+## [209,]  5.964626e-01 -1.033524181  1.3120205778 -0.62044295 -0.410668430
+## [210,]  1.036389e+00  0.478668624  1.2107163645 -0.68738900 -0.256888227
+## [211,]  6.183201e-01 -0.960905731  1.3066133555 -0.62200859 -0.402852883
+## [212,]  1.454458e+00  1.918242978  1.1148193734 -0.75276941 -0.110923571
+## [213,]  5.090326e-01 -1.323997979  1.3336494670 -0.61418039 -0.441930618
+## [214,]  1.345171e+00  1.555150730  1.1418554848 -0.74494122 -0.150001305
+## [215,]  1.388886e+00  1.700387630  1.1310410403 -0.74807249 -0.134370211
+## [216,]  1.454458e+00  1.918242978  1.1148193734 -0.75276941 -0.110923571
+## [217,]  1.454458e+00  1.918242978  1.1148193734 -0.75276941 -0.110923571
+## [218,]  1.541888e+00  2.208716777  1.0931904842 -0.75903197 -0.079661383
+## [219,]  1.520031e+00  2.136098327  1.0985977065 -0.75746633 -0.087476930
+## [220,]  6.401776e-01 -0.888287282  1.3012061332 -0.62357423 -0.395037336
+## [221,]  5.308901e-01 -1.251379530  1.3282422447 -0.61574603 -0.434115071
+## [222,]  2.439660e-01 -2.255243187  1.3916959020 -0.55975945 -0.533186445
+## [223,]  9.926742e-01  0.333431724  1.2215308090 -0.68425772 -0.272519321
+## [224,]  1.541888e+00  2.208716777  1.0931904842 -0.75903197 -0.079661383
+## [225,]  6.401776e-01 -0.888287282  1.3012061332 -0.62357423 -0.395037336
+## [226,]  9.926742e-01  0.333431724  1.2215308090 -0.68425772 -0.272519321
+## [227,]  5.964626e-01 -1.033524181  1.3120205778 -0.62044295 -0.410668430
+## [228,]  1.036389e+00  0.478668624  1.2107163645 -0.68738900 -0.256888227
+## [229,]  6.183201e-01 -0.960905731  1.3066133555 -0.62200859 -0.402852883
+## [230,]  5.746051e-01 -1.106142630  1.3174278001 -0.61887731 -0.418483977
+## [231,]  1.080104e+00  0.623905523  1.1999019199 -0.69052028 -0.241257133
+## [232,]  5.964626e-01 -1.033524181  1.3120205778 -0.62044295 -0.410668430
+## [233,]  1.388886e+00  1.700387630  1.1310410403 -0.74807249 -0.134370211
+## [234,]  1.058247e+00  0.551287073  1.2053091422 -0.68895464 -0.249072680
+##                PC6          PC7           PC8           PC9
+##   [1,] -3.15343077  0.065979293 -6.513789e-15  1.069671e-15
+##   [2,] -2.97217819  0.324510186 -3.569788e-15 -4.854695e-16
+##   [3,]  1.63611053  0.109491666 -3.627209e-15  6.255821e-16
+##   [4,]  3.28195378 -0.092600758 -4.075625e-16  1.957850e-15
+##   [5,] -0.70111375 -0.032307601  1.197934e-16  2.679495e-15
+##   [6,]  0.92733606 -0.146942874 -1.823097e-15 -4.291298e-16
+##   [7,] -0.82111192 -0.185125877 -2.933320e-15 -4.846409e-16
+##   [8,]  2.21562403 -0.045697406 -8.794073e-16  5.700710e-16
+##   [9,] -0.35704902  0.024853907 -1.716401e-16  1.055794e-15
+##  [10,] -0.61343590 -0.378854338 -4.252607e-16  2.664167e-16
+##  [11,]  1.22148965  0.068292546 -4.611634e-16 -5.409806e-16
+##  [12,]  0.23310538 -0.209915209  2.270851e-15  1.555394e-15
+##  [13,]  0.97724464  0.197754236 -9.468860e-16 -4.577139e-16
+##  [14,] -0.95670829 -0.173236615 -1.684319e-15 -5.956632e-16
+##  [15,]  0.57263043 -0.124524338 -4.353181e-16  2.370041e-16
+##  [16,]  0.66358507  0.276940256 -1.406763e-15  1.814929e-16
+##  [17,]  0.15523918 -0.139088915  2.427833e-16  1.153767e-15
+##  [18,]  0.26065671  0.170510374  1.178832e-16  9.733554e-16
+##  [19,] -0.31987806 -0.175749225  2.427833e-16  5.986551e-16
+##  [20,] -0.19382598  0.232516115 -3.196450e-18  9.739763e-17
+##  [21,]  1.26500809  0.027234334  1.382672e-15  5.561932e-16
+##  [22,] -1.65093479 -0.199367651 -1.379008e-15 -7.621967e-16
+##  [23,]  1.51466860 -0.085121002 -1.716401e-16  9.822618e-17
+##  [24,] -0.83780510  0.178619424  9.385829e-16  1.000282e-15
+##  [25,]  1.60881749  0.239415092 -1.156963e-15 -9.606284e-17
+##  [26,] -0.33303237  0.315058433 -8.813175e-16  4.043661e-16
+##  [27,] -0.16545492 -0.276746720 -8.497415e-16 -1.429159e-15
+##  [28,] -0.17184344 -0.122889721 -8.497415e-16 -1.207114e-15
+##  [29,] -0.17823196  0.030967278 -9.052527e-16 -1.040581e-15
+##  [30,]  1.25336219  0.225264799 -4.353181e-16  1.495946e-17
+##  [31,] -0.60629608  0.043469813 -1.716401e-16 -3.458630e-16
+##  [32,] -0.59671330 -0.187315685 -1.161290e-16 -6.789299e-16
+##  [33,]  1.26256607 -0.362039360 -6.473054e-16  4.437214e-17
+##  [34,] -1.08990763 -0.098298934  4.351621e-16  9.464283e-16
+##  [35,] -0.95427277  0.079180907  3.002047e-16  1.676151e-16
+##  [36,] -0.96385555  0.309966406  2.446935e-16  5.006820e-16
+##  [37,] -0.95746703  0.156109407  2.724491e-16  2.786374e-16
+##  [38,]  0.89433372 -0.068475656 -3.668269e-17  5.439725e-16
+##  [39,]  0.97971958 -0.402842482  6.860895e-18 -4.283012e-16
+##  [40,]  1.03955136 -0.121781312 -6.061782e-17 -5.401521e-16
+##  [41,]  0.02241875  0.292367427  2.060773e-15  2.250112e-15
+##  [42,] -0.83137554 -0.288639493 -6.018515e-16 -9.287301e-16
+##  [43,]  0.75140644  0.194990951  2.604815e-16 -8.301361e-17
+##  [44,]  0.70115745 -0.316855716  4.389825e-16 -2.903519e-16
+##  [45,]  0.63174289 -0.367131387  5.064613e-16  1.406881e-16
+##  [46,]  0.66812475  0.248710892  4.944937e-16  1.495946e-17
+##  [47,]  0.66324465  0.109790698 -2.965402e-16 -4.055169e-17
+##  [48,]  0.60660713 -0.248198971 -1.735503e-16 -1.196757e-17
+##  [49,]  0.15489876 -0.306238472  1.353006e-15  1.042744e-15
+##  [50,]  0.32653658  0.130564987  1.049605e-15  4.174153e-16
+##  [51,]  0.33292510 -0.023292012  1.049605e-15  1.953707e-16
+##  [52,]  0.33931362 -0.177149010  1.105116e-15 -2.667391e-17
+##  [53,] -1.19998678 -0.351594450 -2.032161e-16 -1.221613e-16
+##  [54,] -1.00452015  0.106946561 -4.611634e-16 -9.850698e-16
+##  [55,] -1.05796341 -0.327971607 -3.381736e-16 -1.067508e-15
+##  [56,] -1.06115767 -0.251043108 -3.381736e-16 -9.564857e-16
+##  [57,] -1.00771441  0.183875060 -4.611634e-16 -8.740475e-16
+##  [58,] -1.07712896  0.133599389 -4.491959e-16 -4.568853e-16
+##  [59,] -1.07712896  0.133599389 -4.491959e-16 -4.568853e-16
+##  [60,] -1.13696074 -0.147461780 -3.262060e-16 -3.172789e-16
+##  [61,] -1.14654352  0.083323718 -3.262060e-16  1.578801e-17
+##  [62,] -1.14334926  0.006395219 -3.262060e-16 -9.523429e-17
+##  [63,] -1.06754619 -0.097186109 -3.381736e-16 -7.344411e-16
+##  [64,] -1.07393470  0.056670890 -3.936847e-16 -5.679076e-16
+##  [65,] -1.13057222 -0.301318779 -2.706949e-16 -5.393235e-16
+##  [66,] -1.07712896  0.133599389 -4.491959e-16 -4.568853e-16
+##  [67,] -1.07074044 -0.020257610 -3.936847e-16 -6.234188e-16
+##  [68,] -1.01090867  0.260803560 -5.166746e-16 -7.630252e-16
+##  [69,] -1.21276382 -0.043880452 -3.142384e-16  3.219279e-16
+##  [70,] -1.06115767 -0.251043108 -3.381736e-16 -9.564857e-16
+##  [71,] -1.06754619 -0.097186109 -3.381736e-16 -7.344411e-16
+##  [72,] -1.13696074 -0.147461780 -3.262060e-16 -3.172789e-16
+##  [73,] -1.14654352  0.083323718 -3.262060e-16  1.578801e-17
+##  [74,] -0.99174311 -0.200767437 -3.501411e-16 -1.429159e-15
+##  [75,]  0.44623956 -0.160326914  6.428227e-17 -5.401521e-16
+##  [76,]  0.36085370  0.174039912  7.624983e-17  4.321216e-16
+##  [77,]  0.31060470 -0.337806756  2.547509e-16  1.831500e-16
+##  [78,]  0.36404796  0.097111413  7.624983e-17  3.210993e-16
+##  [79,]  0.56552421  0.045276763 -3.381736e-16 -4.568853e-16
+##  [80,]  0.56871847 -0.031651736 -3.381736e-16 -5.679076e-16
+##  [81,]  0.56552421  0.045276763 -3.381736e-16 -4.568853e-16
+##  [82,]  0.57191273 -0.108580235 -3.381736e-16 -6.789299e-16
+##  [83,]  0.57510699 -0.185508735 -3.381736e-16 -7.899522e-16
+##  [84,]  0.49291540  0.071929592 -3.262060e-16  7.129916e-17
+##  [85,]  0.55594144  0.276062262 -4.491959e-16 -1.238184e-16
+##  [86,]  0.48652688  0.225786591 -3.262060e-16  2.933438e-16
+##  [87,]  0.50249818 -0.158855906 -2.706949e-16 -2.617677e-16
+##  [88,]  0.42669510 -0.055274579 -2.587273e-16  4.329502e-16
+##  [89,]  0.63493877  0.095552435 -4.056523e-16 -8.740475e-16
+##  [90,]  0.51208096 -0.389641405 -2.151837e-16 -5.393235e-16
+##  [91,]  0.50888670 -0.312712905 -2.151837e-16 -4.283012e-16
+##  [92,]  0.41391806  0.252439419 -3.142384e-16  8.215283e-16
+##  [93,]  0.55594144  0.276062262 -4.491959e-16 -1.238184e-16
+##  [94,]  0.41711232  0.175510920 -3.142384e-16  7.105060e-16
+##  [95,]  0.42988936 -0.132203078 -2.032161e-16  3.219279e-16
+##  [96,]  0.56232995  0.122205263 -3.936847e-16 -3.458630e-16
+##  [97,]  0.57191273 -0.108580235 -3.381736e-16 -6.789299e-16
+##  [98,]  0.42988936 -0.132203078 -2.032161e-16  3.219279e-16
+##  [99,]  0.56871847 -0.031651736 -3.381736e-16 -5.679076e-16
+## [100,]  0.55913569  0.199133762 -3.936847e-16 -2.348407e-16
+## [101,]  0.56552421  0.045276763 -3.381736e-16 -4.568853e-16
+## [102,]  0.55594144  0.276062262 -4.491959e-16 -1.238184e-16
+## [103,]  0.58149551 -0.339365734 -2.826624e-16 -1.011997e-15
+## [104,]  0.62855025  0.249409433 -4.611634e-16 -6.520029e-16
+## [105,]  0.56871847 -0.031651736 -3.381736e-16 -5.679076e-16
+## [106,]  0.49610966 -0.004998908 -3.262060e-16 -3.972314e-17
+## [107,]  0.43627788 -0.286060077 -2.032161e-16  9.988329e-17
+## [108,]  0.42030658  0.098582420 -2.587273e-16  5.994836e-16
+## [109,]  0.43308362 -0.209131578 -2.032161e-16  2.109056e-16
+## [110,]  0.63493877  0.095552435 -4.056523e-16 -8.740475e-16
+## [111,]  0.57191273 -0.108580235 -3.381736e-16 -6.789299e-16
+## [112,]  0.42030658  0.098582420 -2.587273e-16  5.994836e-16
+## [113,]  0.62855025  0.249409433 -4.611634e-16 -6.520029e-16
+## [114,]  0.56552421  0.045276763 -3.381736e-16 -4.568853e-16
+## [115,]  0.01287701  0.209751007  5.758502e-16  9.317220e-16
+## [116,]  0.08548583  0.183098178  4.528603e-16  4.035375e-16
+## [117,]  0.20048613  0.261911969  2.724491e-16 -6.830727e-17
+## [118,]  0.21006891  0.031126470  3.279602e-16 -3.736186e-16
+## [119,]  0.21006891  0.031126470  3.279602e-16 -3.736186e-16
+## [120,]  0.20048613  0.261911969  2.724491e-16 -6.830727e-17
+## [121,]  0.21326317 -0.045802029  3.834714e-16 -4.846409e-16
+## [122,]  0.27309495  0.235259140  2.604815e-16 -5.964918e-16
+## [123,]  0.21965169 -0.199659028  3.834714e-16 -7.066855e-16
+## [124,]  0.08401683 -0.377138869  5.184288e-16  4.437214e-17
+## [125,]  0.12787731  0.288564797  2.844167e-16  4.876328e-16
+## [126,]  0.21006891  0.031126470  3.279602e-16 -3.736186e-16
+## [127,]  0.14065435 -0.019149201  3.954390e-16  4.354359e-17
+## [128,]  0.05526850  0.315217625  3.518954e-16  1.015817e-15
+## [129,]  0.15343139 -0.326863198  5.064613e-16 -3.727900e-16
+## [130,]  0.14065435 -0.019149201  3.954390e-16  4.354359e-17
+## [131,]  0.06165702  0.161360627  4.074065e-16  7.937727e-16
+## [132,]  0.21645743 -0.122730528  3.834714e-16 -5.956632e-16
+## [133,]  0.21326317 -0.045802029  3.834714e-16 -4.846409e-16
+## [134,]  0.07762831 -0.223281871  5.184288e-16  2.664167e-16
+## [135,]  0.08082257 -0.300210370  5.184288e-16  1.553944e-16
+## [136,]  0.05526850  0.315217625  3.518954e-16  1.015817e-15
+## [137,]  0.05846276  0.238289126  4.074065e-16  9.047950e-16
+## [138,]  0.13107157  0.211636298  3.399278e-16  3.766105e-16
+## [139,]  0.28267773  0.004473642  2.604815e-16 -9.295587e-16
+## [140,]  0.06165702  0.161360627  4.074065e-16  7.937727e-16
+## [141,]  0.28267773  0.004473642  2.604815e-16 -9.295587e-16
+## [142,]  0.21006891  0.031126470  3.279602e-16 -3.736186e-16
+## [143,]  0.06485128  0.084432127  4.074065e-16  6.827504e-16
+## [144,]  0.14384861 -0.096077700  3.954390e-16 -6.747872e-17
+## [145,]  0.06485128  0.084432127  4.074065e-16  6.827504e-16
+## [146,]  0.07762831 -0.223281871  5.184288e-16  2.664167e-16
+## [147,]  0.06804554  0.007503628  4.074065e-16  5.994836e-16
+## [148,]  0.06165702  0.161360627  4.074065e-16  7.937727e-16
+## [149,]  0.05846276  0.238289126  4.074065e-16  9.047950e-16
+## [150,]  0.30184328 -0.457097355  3.715038e-16 -1.567937e-15
+## [151,]  0.13426583  0.134707798  3.954390e-16  2.655882e-16
+## [152,]  0.07443405 -0.146353371  4.629177e-16  3.774390e-16
+## [153,]  0.20048613  0.261911969  2.724491e-16 -6.830727e-17
+## [154,]  0.26182632  0.250195946 -5.860635e-16 -7.352696e-16
+## [155,]  0.13896850 -0.234997894 -3.400838e-16 -3.450345e-16
+## [156,] -0.27354264 -0.110642277  1.018029e-15  9.464283e-16
+## [157,] -0.12832500 -0.163947933  9.385829e-16 -1.376962e-16
+## [158,] -0.14429630  0.220694564  8.275606e-16  3.896597e-16
+## [159,] -0.11874222 -0.394733432  9.940941e-16 -4.430075e-16
+## [160,] -0.12832500 -0.163947933  9.385829e-16 -1.376962e-16
+## [161,] -0.28312541  0.120143222  9.625180e-16  1.251740e-15
+## [162,] -0.21371086  0.170418893  8.950393e-16  8.345775e-16
+## [163,] -0.27993116  0.043214722  9.625180e-16  1.168473e-15
+## [164,] -0.07488174  0.270970235  7.600819e-16 -2.750246e-17
+## [165,] -0.28951393  0.274000221  9.070069e-16  1.473784e-15
+## [166,] -0.20093382 -0.137295105  9.505505e-16  4.182439e-16
+## [167,] -0.14429630  0.220694564  8.275606e-16  3.896597e-16
+## [168,] -0.21371086  0.170418893  8.950393e-16  8.345775e-16
+## [169,] -0.27034838 -0.187570776  1.018029e-15  8.354060e-16
+## [170,] -0.14110204  0.143766064  8.275606e-16  3.063930e-16
+## [171,] -0.14110204  0.143766064  8.275606e-16  3.063930e-16
+## [172,] -0.06210471 -0.036743763  8.155930e-16 -4.715917e-16
+## [173,] -0.21371086  0.170418893  8.950393e-16  8.345775e-16
+## [174,] -0.14749056  0.297623063  8.275606e-16  5.006820e-16
+## [175,] -0.19454530 -0.291152104  1.006062e-15  1.961993e-16
+## [176,] -0.27993116  0.043214722  9.625180e-16  1.168473e-15
+## [177,] -0.19454530 -0.291152104  1.006062e-15  1.961993e-16
+## [178,] -0.14110204  0.143766064  8.275606e-16  3.063930e-16
+## [179,] -0.14749056  0.297623063  8.275606e-16  5.006820e-16
+## [180,] -0.19454530 -0.291152104  1.006062e-15  1.961993e-16
+## [181,] -0.14429630  0.220694564  8.275606e-16  3.896597e-16
+## [182,] -0.27673690 -0.033713777  9.625180e-16  1.057451e-15
+## [183,] -0.19135104 -0.368080603  1.006062e-15  8.517695e-17
+## [184,] -0.14110204  0.143766064  8.275606e-16  3.063930e-16
+## [185,] -0.20732234  0.016561894  8.950393e-16  6.125329e-16
+## [186,] -0.12513074 -0.240876433  9.385829e-16 -2.487185e-16
+## [187,] -0.14110204  0.143766064  8.275606e-16  3.063930e-16
+## [188,] -0.12832500 -0.163947933  9.385829e-16 -1.376962e-16
+## [189,] -0.13790778  0.066837565  8.830717e-16  1.953707e-16
+## [190,] -0.13790778  0.066837565  8.830717e-16  1.953707e-16
+## [191,] -0.12832500 -0.163947933  9.385829e-16 -1.376962e-16
+## [192,] -0.09720214 -0.043544509 -3.477247e-17 -6.747872e-17
+## [193,] -0.09720214 -0.043544509 -3.477247e-17 -6.747872e-17
+## [194,] -0.02778759  0.006731162 -1.022512e-16 -5.401521e-16
+## [195,] -0.16342244 -0.170748680  3.270625e-17  2.386612e-16
+## [196,] -0.04056462  0.314445160 -1.577623e-16 -9.606284e-17
+## [197,] -0.03098185  0.083659661 -1.022512e-16 -4.291298e-16
+## [198,] -0.03737037  0.237516660 -1.577623e-16 -2.070851e-16
+## [199,] -0.03737037  0.237516660 -1.577623e-16 -2.070851e-16
+## [200,] -0.02139907 -0.147125837 -4.674003e-17 -7.066855e-16
+## [201,] -0.03737037  0.237516660 -1.577623e-16 -2.070851e-16
+## [202,] -0.17939374  0.213893818 -7.831605e-17  7.937727e-16
+## [203,] -0.04056462  0.314445160 -1.577623e-16 -9.606284e-17
+## [204,] -0.02139907 -0.147125837 -4.674003e-17 -7.066855e-16
+## [205,] -0.18258800  0.290822317 -7.831605e-17  9.047950e-16
+## [206,] -0.16022818 -0.247677179  3.270625e-17  1.276389e-16
+## [207,] -0.08761936 -0.274330007  2.073868e-17 -4.005456e-16
+## [208,] -0.16022818 -0.247677179  3.270625e-17  1.276389e-16
+## [209,] -0.02459333 -0.070197338 -1.022512e-16 -6.511744e-16
+## [210,] -0.10039640  0.033383990 -9.028362e-17  4.354359e-17
+## [211,] -0.02778759  0.006731162 -1.022512e-16 -5.401521e-16
+## [212,] -0.17300522  0.060036819 -2.280490e-17  5.717281e-16
+## [213,] -0.01181629 -0.377911335  8.771116e-18 -1.039752e-15
+## [214,] -0.15703392 -0.324605679  8.821740e-17  1.661656e-17
+## [215,] -0.16342244 -0.170748680  3.270625e-17  2.386612e-16
+## [216,] -0.17300522  0.060036819 -2.280490e-17  5.717281e-16
+## [217,] -0.17300522  0.060036819 -2.280490e-17  5.717281e-16
+## [218,] -0.18578226  0.367750816 -7.831605e-17  9.603061e-16
+## [219,] -0.18258800  0.290822317 -7.831605e-17  9.047950e-16
+## [220,] -0.03098185  0.083659661 -1.022512e-16 -4.291298e-16
+## [221,] -0.01501055 -0.300982836 -4.674003e-17 -9.287301e-16
+## [222,]  0.03843271  0.133935332 -1.697299e-16 -8.462919e-16
+## [223,] -0.09400788 -0.120473009 -3.477247e-17 -1.785010e-16
+## [224,] -0.18578226  0.367750816 -7.831605e-17  9.603061e-16
+## [225,] -0.03098185  0.083659661 -1.022512e-16 -4.291298e-16
+## [226,] -0.09400788 -0.120473009 -3.477247e-17 -1.785010e-16
+## [227,] -0.02459333 -0.070197338 -1.022512e-16 -6.511744e-16
+## [228,] -0.10039640  0.033383990 -9.028362e-17  4.354359e-17
+## [229,] -0.02778759  0.006731162 -1.022512e-16 -5.401521e-16
+## [230,] -0.02139907 -0.147125837 -4.674003e-17 -7.066855e-16
+## [231,] -0.10678492  0.187240989 -9.028362e-17  2.100770e-16
+## [232,] -0.02459333 -0.070197338 -1.022512e-16 -6.511744e-16
+## [233,] -0.16342244 -0.170748680  3.270625e-17  2.386612e-16
+## [234,] -0.10359066  0.110312490 -9.028362e-17  1.545659e-16</code></pre>
+<pre class="r"><code>train = data.frame(gender = training_data$gender, pca$x)
+t = as.data.frame( predict( pca, newdata = pca_testset ) )
+
+new_trainset = train[, c(1,2,3,4:10)]
+new_testset =  t[, , c(1,3,4:10)]
+
+
+
+n = names( new_trainset )
+f = as.formula( paste( &quot;gender ~&quot;, paste( n[!n %in% &quot;gender&quot; ], collapse = &quot;+&quot; ) ) )
+nn = neuralnet( f, new_trainset, hidden = 4, linear.output = FALSE, threshold=0.01 )
+
+
+plot( nn, rep = &quot;best&quot; )</code></pre>
+<p><img src="/post/2020-04-20-PCA_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+</div>
+</div>
