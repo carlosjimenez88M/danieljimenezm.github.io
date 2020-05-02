@@ -30,33 +30,33 @@ library(FactoMineR)</code></pre>
 <div id="explorar-la-data" class="section level2">
 <h2>Explorar la data</h2>
 <p>Lo primero es ver como es el comportamiento criminal por país entre los años 2019 y 2020. EL resultado se imprime en pantalla</p>
-<p><img src="/www.danieljimenezm.compost/2020-04-21-NLP_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="/post/2020-04-21-NLP_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Es interesante ver el comportamiento de España, pues tiene una tasa sostenida entre los años evaluados.</p>
-<p><img src="/www.danieljimenezm.compost/2020-04-21-NLP_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="/post/2020-04-21-NLP_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>A nivel de variedad de delitos, España almacena la mayor variedad. Casos interesantes estan entre Rumania e Italia.</p>
 <p>Ahora trabajaré un análisis de multicorrespondencia para entender que tanta relación hay entre los delitos y los países.</p>
-<p><img src="/www.danieljimenezm.compost/2020-04-21-NLP_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/post/2020-04-21-NLP_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>Parece ser que hay 3 vectores propios que almacenan una gran cantidad de información para la definición que se busca y la construcción de las relaciones.</p>
 <p>La relación entre paises y los delitos tiene una correspondencia interesante de apreciar.</p>
-<p><img src="/www.danieljimenezm.compost/2020-04-21-NLP_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/post/2020-04-21-NLP_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>Una forma de evaluar este aprendizaje es a través del gradiente.</p>
-<p><img src="/www.danieljimenezm.compost/2020-04-21-NLP_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/post/2020-04-21-NLP_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>El anteiror gráfico muestra que hay una fuerte relación entre los pocos países y un tipo de delito especifico.</p>
 <p>Ahora estudiaré la contribución de los datos a construir un concepto</p>
-<p><img src="/www.danieljimenezm.compost/2020-04-21-NLP_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/post/2020-04-21-NLP_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>La contribución es muy parecida a la del MCA. Un análisis individual de los casos vs país tiene un nivel de interpretación mucho más profundo.</p>
-<p><img src="/www.danieljimenezm.compost/2020-04-21-NLP_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-<p><img src="/www.danieljimenezm.compost/2020-04-21-NLP_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/post/2020-04-21-NLP_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="/post/2020-04-21-NLP_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>Voy a mirar el Caso de España que me llamo la atención</p>
-<p><img src="/www.danieljimenezm.compost/2020-04-21-NLP_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="/post/2020-04-21-NLP_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>Indudablemente acá hay un material único para trabajar. Veamos como es el comportamiento del delito a través de los años y el costo de los mismos.</p>
-<p><img src="/www.danieljimenezm.compost/2020-04-21-NLP_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="/post/2020-04-21-NLP_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>Esto es oro puro!!! Acá hay una cantidad de relaciones importantes.</p>
-<p><img src="/www.danieljimenezm.compost/2020-04-21-NLP_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="/post/2020-04-21-NLP_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>Acá estan los delitos relacionados y explicados por el país. Ahora intentaré entender cuales son los más relacionados y de mayor correspondencia individual.</p>
-<p><img src="/www.danieljimenezm.compost/2020-04-21-NLP_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="/post/2020-04-21-NLP_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>Y ahora la contribución del desarrollo de uno con respecto a otro.</p>
-<p><img src="/www.danieljimenezm.compost/2020-04-21-NLP_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="/post/2020-04-21-NLP_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>Interesante que el que más aporta es la no cooperación. Esto sería pertinente para un análisis sociologico.</p>
 </div>
 <div id="nlp" class="section level2">
@@ -149,7 +149,7 @@ grams_tf_idf%&gt;%
 <pre><code>## The following object is masked from &#39;package:base&#39;:
 ## 
 ##     union</code></pre>
-<p><img src="/www.danieljimenezm.compost/2020-04-21-NLP_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p><img src="/post/2020-04-21-NLP_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>Se crea una matriz de palabras y se verifica sus distancias .</p>
 <pre><code>## Joining, by = &quot;word&quot;</code></pre>
 <pre><code>## &lt;&lt;DocumentTermMatrix (documents: 6, terms: 18)&gt;&gt;
@@ -186,7 +186,7 @@ grams_tf_idf%&gt;%
 ## 19     1 lawful     0.0294 
 ## 20     2 lawful     0.0252</code></pre>
 <p>Ahora se generan los topics, los cuales serán la semilla del target</p>
-<p><img src="/www.danieljimenezm.compost/2020-04-21-NLP_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><img src="/post/2020-04-21-NLP_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <p>Estos topics estan interesantes. Ahora un análisis con una matriz gamma para generar clasificaciones.</p>
 <pre><code>## # A tibble: 6 x 3
 ##   document topic gamma
@@ -198,9 +198,9 @@ grams_tf_idf%&gt;%
 ## 5 3            4 0.171
 ## 6 2            5 0.170</code></pre>
 <p>Parece ser que ya se tienen los tipics por articulo. Para validar el supuesto un análisis gráfico ayuda bastante</p>
-<p><img src="/www.danieljimenezm.compost/2020-04-21-NLP_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p><img src="/post/2020-04-21-NLP_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 <p>Quiero validar el nivel de certidumbre sobre lo que estoy haciendo</p>
-<p><img src="/www.danieljimenezm.compost/2020-04-21-NLP_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p><img src="/post/2020-04-21-NLP_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <p>Las distribuciones de probabilidades dan seña que el trabajo va por buen camino. Ahora un camino más espinoso, generar el target y eliminar la inceritdumbre.</p>
 <pre><code>## # A tibble: 28 x 4
 ##    document term       count .topic
@@ -250,7 +250,7 @@ grams_tf_idf%&gt;%
 ## 5     5     6
 ## 6     6     6</code></pre>
 <p>Los targets estan completos</p>
-<p><img src="/www.danieljimenezm.compost/2020-04-21-NLP_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p><img src="/post/2020-04-21-NLP_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 <pre><code>##   topic                           category
 ## 1     1 cooperation,protection,supervisory
 ## 2     4                         protection
