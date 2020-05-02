@@ -1,0 +1,99 @@
+---
+title: "Tidytuesday #18"
+name: metrics_broadway
+owner : cjimenez187@aol.com
+metrics:
+  usd_gross:
+    title: Total Gross (USD)
+    description: Not adjusted for inflation.
+  avg_ticket_price:
+    title: Average Ticket Price
+    description: Not adjusted for inflation.
+  pct_capacity:
+    title: Percent capacity
+    description: Averaged across weeks in the time period.
+dimensions:
+  show:
+    title: Show
+    description: Show's title
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r,echo=FALSE, cache=FALSE,message=FALSE,warning=FALSE}
+library(tidyverse);
+library(tidymodels);
+library(tidymetrics);
+library(shinymetrics);
+theme_set(theme_classic())
+```
+
+
+
+## Tidytuesday # 18
+
+
+
+
+```{r, echo=FALSE, cache=FALSE, message=FALSE,warning=FALSE}
+grosses <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-04-28/grosses.csv', guess_max = 40000)
+```
+
+
+
+```{r}
+grosses%>%
+  glimpse()
+```
+
+
+```{r}
+grosses%>%
+  filter(show%in%c("Hamilton","The Lion King"))%>%
+  ggplot(aes(week_ending,weekly_gross, color=show))+
+  geom_line()+
+  scale_y_continuous(labels = scales::dollar)+
+  expand_limits(y=0)
+```
+
+
+
+```{r}
+library(tidymetrics)
+#grosses$week_ending<-as.Date(grosses$week_ending)
+
+shows_summarized <- grosses %>%
+  filter(!is.na(show),!is.na(weekly_gross),!is.na(avg_ticket_price),!is.na(pct_capacity))%>%
+  filter(show %in% c("Hamilton", "The Lion King",
+                     "Les Miserables", "Rent",
+                     "The Phantom of the Opera", "Wicked",
+                     "Harry Potter and the Cursed Child, Parts One and Two",
+                     "The Book of Mormon")) %>%
+  mutate(show = str_remove(show, "\\, Parts.*")) %>%
+  rename(date = week_ending) %>%
+  cross_by_dimensions(show) %>%
+  cross_by_periods(c("month", "quarter", "year"),
+                   windows = 28) %>%
+  summarize(usd_gross = sum(weekly_gross),
+            avg_ticket_price = mean(avg_ticket_price),
+            pct_capacity = mean(pct_capacity))%>%
+  ungroup()
+
+
+show_metrics <- create_metrics(shows_summarized)
+saveRDS(show_metrics,"broadway//shiny_metrics.rds")
+```
+
+
+
+
+```{r}
+preview_metric(show_metrics$broadway_NA_avg_ticket_price)
+preview_metric(show_metrics$broadway_NA_usd_gross)
+
+```
+

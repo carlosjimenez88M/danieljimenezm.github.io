@@ -1,0 +1,20 @@
+name: Main Dashboard
+sidebar:
+  - text: Charts
+    icon: bar-chart-o
+    tabs:
+      - text: Revenue
+        module: 
+             metric_panel:
+                 metric: !expr DATA$broadway_NA_pct_capacity
+      - text: Price
+        module:
+              metric_panel:
+                  metric: !expr DATA$broadway_NA_avg_ticket_price
+      - text: Capacity
+        module:
+              metric_panel:
+                  metric: !expr DATA$broadway_NA_pct_capacity
+              
+            
+      
