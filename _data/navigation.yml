@@ -6,8 +6,8 @@ main:
     #url: /Data-Science/
   - title: "Clases"
     url: /Courses/
- # - title: "R Projects"
-    #url: /RProjects/
+  - title: "R Projects"
+    url: /RProjects/
   - title: "Publicaciones"
     url: /Media/
 

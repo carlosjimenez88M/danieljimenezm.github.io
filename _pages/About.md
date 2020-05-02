@@ -1,8 +1,8 @@
 ---
 layout: archive
-title: "About"
+title: "Sobre mi"
 permalink: /about/
-image: "/images/Perfil.jpg"
+
 ---
 
 <img src="/images/Perfil2.jpg" alt="hi" class="inline"/>
