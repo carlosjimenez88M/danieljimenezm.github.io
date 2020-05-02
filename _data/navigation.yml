@@ -1,7 +1,7 @@
 # main links
 main:
   - title: "Sobre mi"
-    url: /about/
+    url: /About/
   #- title: "Servicios"
     #url: /Data-Science/
   - title: "Clases"
