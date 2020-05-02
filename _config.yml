@@ -251,5 +251,5 @@ defaults:
         layout: single
         author_profile: true
 
-theme: hugo-academic
+theme: minima
 
