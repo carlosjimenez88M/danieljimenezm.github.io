@@ -2,10 +2,9 @@
 layout: archive
 title: "Sobre mi"
 permalink: /about/
-
 ---
 
-<img src="/images/Perfil2.jpg" alt="hi" class="inline"/>
+
 
 Hi! I am Daniel Jiménez, Principal Data Scientist in [Chiper](https://chiper.co/), where I develop advanced analytics,machine learning model and statistical programming for differents company needs.At the same time I am teacher in [Universidad Nacional de colombia](https://unal.edu.co/),
 where I teach the following subjects: Big Data, Introduction to Data Science and Statistical Learning and Machine Learning.
