@@ -1,10 +1,10 @@
 # Site Settings
 locale                   : "en-US"
-title                    : "Un Data Scientist Dice"
+title                    : "Un Data Scientist Dice:<br/> Blog sobre estadística aplicada y Machine Learning"
 title_separator          : "-"
-subtitle                 : #"Applied Statistics , Machine Learning and R projects"
+subtitle                 : "Applied Statistics , Machine Learning and R projects"
 name                     : "Daniel Jiménez"
-url                      :  #"www.danieljimenezm.com"
+url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
@@ -24,7 +24,7 @@ comments:
 staticman:
   allowedFields          : # ['name', 'email', 'url', 'message']
   branch                 : # "master"
-  commitMessage          :  "New comment."
+  commitMessage          : # "New comment."
   filename               : # comment-{@timestamp}
   format                 : # "yml"
   moderation             : # true
@@ -76,9 +76,9 @@ analytics:
 # Site Author
 author:
   name             : "Daniel Jiménez"
-  avatar           :  https://avatars3.githubusercontent.com/u/25884888?s=460&u=592ceef80903432eac6569ed9c3478eccdb7188e&v=4
-  bio              : "Data and Machine Learnign Scientist - Statistical Enginner"
-  location         : "Bogotá-Colombia"
+  avatar           :  https://cdn.imgbin.com/24/3/14/imgbin-rick-sanchez-pocket-mortys-morty-smith-rick-and-morty-season-3-meeseeks-and-destroy-others-ByZ1x7hMUSmMfFPwr3NY1xXA4.jpg   
+  bio              : "Senior Data Scientist and Machine Learning Engineering at Chiper."
+  location         : "Medellín-Colombia"
   email            :  "cjimenez187@aol.com"
   uri              :
   home             : www.danieljimenezm.com
@@ -100,7 +100,7 @@ author:
   stackoverflow    : # "123456/username" (the last part of your profile url, e.g. https://stackoverflow.com/users/123456/username)
   steam            : # "steamId" (the last part of your profile url, e.g. https://steamcommunity.com/id/steamId/)
   tumblr           :
-  twitter          : DanielJimenezM9
+  twitter          :
   vine             :
   weibo            :
   xing             :
@@ -252,4 +252,6 @@ defaults:
         author_profile: true
 
 theme: minima
+
+
 
