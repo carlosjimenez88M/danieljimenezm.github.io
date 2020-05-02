@@ -1,0 +1,351 @@
+---
+title: "Un problema de reducción"
+date: 2019-08-03
+output: html_document
+mathjax: "true"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Quizás este sea uno de los post más difíciles de escribir desde el entendido que tiene una rigurosidad matemática fuerte, pero dado ello, he preferido explicarlo desde una óptica visual, sin dejar de lado alguna breve explicación.
+
+# La ciencia de datos verdadera necesita estadística
+
+El análisis multivariado es una vertiente de la estadística que estudia el efecto de varias variables predictivas sobre la predictiva, en este panorama, el EDA es fundamental, pues da un contexto y una realidad .
+
+
+En el libro del profesor [Kassambara](http://www.alboukadel.com/), da una idea en forma de mapa de navegación de una ruta por la cual se puede explicar los problemas multivariados
+
+![](https://www.datanovia.com/en/wp-content/uploads/dn-tutorials/principal-component-methods/images/multivariate-analysis-factoextra.png)
+
+
+
+
+
+## ¿Cuándo usar PCA?
+
+Cuando trabajamos con una cantidad de variables y no es tan evidente cuales ayudan a desarrollar un modelo optimo el mejor camino es usar un PCA, por:
+
+* Muestran cuales son las variables que aportan valor al modelo;
+
+* Se puede despejar todo aquello que tenga una varianza cercana a cero
+
+* Ayuda a desarrollar un EDA mucho más preciso
+
+Para tener una idea más clara desarrollaré el siguiente ejemplo de manual
+
+
+```{r, echo=FALSE, cache=FALSE, message=FALSE}
+library(tidyverse); # Manipulación de datos
+#library(corrr) # Correlaciones 
+#library(corrplot) # Gráficos de correlación 
+library(factoextra) # Análisis de componentes principales
+library(FactoMineR) # Mineria de datos a nivel de modelos matemáticos
+library(caret) # Modelos de Redes neuronales 
+library( neuralnet ) # Libreria de redes neuronales
+library(e1071) # Matriz dfe confusión
+
+```
+
+
+
+# ¿ Cómo es el comportamiento de un PCA?
+
+Lo primero a construir es la matriz de correlación de las variables de interés 
+
+$$
+cov(x,y)=\frac{\sum_{n}^{i=j}(x-\hat{x})(y-\hat{y})}{n-1}
+$$
+
+
+
+Después de ello se debe calcular los pesos de las variables, a través de la varianza
+
+$$
+\sigma^2_{w}=\frac{1}{n}\sum_{i=j}^{n}(x_iw_i)
+$$
+
+La cual termina adquierendo la forma
+
+$$
+\frac{1}{n}(\mathbf{Xw})^T(Xw)
+$$
+
+
+
+Lo que resulta en 
+
+$$
+\mathbf(W^TVw)
+$$
+
+
+Se genera una función larangiana para poder estimar los puntos óptimos 
+
+
+$$
+\frac{\delta u}{\delta w}=0=\frac{\delta f}{\delta w}\lambda\frac{\delta g}{\lambda w}
+$$
+
+
+
+
+$$
+\frac{\delta u}{\delta \lambda}=0=-(g(w)-c)
+$$
+
+
+
+# PCA en acción
+
+Se trabajará con la base de datos de [pokemon](https://www.kaggle.com/abcsds/pokemon) , disponible en kaggle, el ejercicio se hace sin conocer resultados previos, para llevarlo a la mejor lección posible
+
+```{r, echo=FALSE, cache=FALSE}
+Pokemon<-read.csv("https://gist.githubusercontent.com/armgilles/194bcff35001e7eb53a2a8b441e8b2c6/raw/92200bc0a673d5ce2110aaad4544ed6c4010f687/pokemon.csv")
+```
+
+
+Se deben seleccionar las variables de interés para el ejercicio, y paso seguido definir un problema de clasificación, que para este caso, será identificar pokemones de **water** dada las demás características 
+
+```{r, echo=FALSE, cache=FALSE}
+Pokemon%>%
+  select(c(2,5:10))->Pokemon_tidy
+Pokemon_tidy$Type.1<-as.character(Pokemon$Type.1)
+Pokemon_tidy$Type.1[Pokemon$Type.1!="Water"]<-"Other"
+
+Pokemon_tidy%>%
+  count(Type.1, sort = TRUE) %>%
+  mutate(Prop=n/sum(n))
+
+```
+
+Para lo anterior fue necesario hacer una transformación de las variables donde todas aquellas que no fuesen **water**(86%) debían ser llamadas **Other**
+
+```{r, echo=FALSE, cache=FALSE}
+Pokemon_obj<-Pokemon_tidy%>%
+  filter(Type.1=="Other"|Type.1=="Water")%>%
+  transform(Type.1=ifelse(Type.1=="Water",0,1))
+
+Pokemon_obj = as.data.frame( sapply( Pokemon_obj, as.numeric ) )
+
+
+
+```
+
+
+Se genera un gráfico que almacene todas las variables de interés dada su varianza acumulada
+
+```{r, echo=FALSE, cache=FALSE}
+res.pca <- PCA(Pokemon_obj[,-1], graph = FALSE)
+fviz_eig(res.pca, addlabels = TRUE)
+```
+
+Ahora se visualiza en el *coseno* , cuales son las variables más importantes
+
+```{r, echo=FALSE, cache=FALSE}
+fviz_pca_var(res.pca, col.var = "black")
+```
+
+
+Ahora a través de las dimensiones se busca entender las correlaciones entre ellas
+
+
+```{r, echo=FALSE, cache=FALSE, message=FALSE}
+library("corrplot")
+var <- get_pca_var(res.pca)
+corrplot(var$cos2, is.corr = FALSE)
+```
+
+```{r, echo=FALSE, cache=FALSE}
+fviz_cos2(res.pca, choice = "var",top = 4)
+```
+
+```{r, echo=FALSE, cache=FALSE}
+fviz_pca_var(res.pca, col.var = "cos2",
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), 
+             repel = TRUE)
+```
+
+Ahora se ven las variables que ayudan a explicar mejor un modelo
+
+```{r, echo=FALSE, cache=FALSE}
+fviz_contrib(res.pca, choice = "var", axes = 1)
+```
+
+> " Solo hay tres variables importantes"
+
+
+# Construyendo una red neuronal
+
+A continuación desarrollaré una red neuronal para clasificar a través de las propiedades que hay en el set de datos, a todos aquellos que son pokemones de Agua
+
+```{r, echo=FALSE, cache=FALSE}
+index<-createDataPartition(Pokemon_obj$Type.1, times = 1,list = FALSE,p = .8)
+Pokemon_obj[index,]->Prueba
+Pokemon_obj[-index,]->Testeo
+
+testset = Testeo %>% select( -Type.1 )
+
+n = names(Prueba)
+f = as.formula( paste( "Type.1 ~", paste( n[!n %in% "Type.1"], collapse = "+" )) )
+nn = neuralnet( f, Prueba, hidden = 4, linear.output = FALSE, threshold = 0.01 )
+plot( nn, rep = "best" )
+```
+EL error no es muy alto, pero el ajuste es lo que más preocupa a la hora de clasificar
+```{r, echo=FALSE, cache=FALSE}
+nn_results = compute( nn, testset )
+results = data.frame( actual = Testeo$Type.1, prediction = nn_results$net.result)
+t = table( results )
+x<-as.integer(results$prediction)
+y<-results$actual
+u<-union(x,y)
+Tabla<-table(factor(x,u),factor(y,u))
+confusionMatrix(Tabla)
+```
+
+
+
+
+# Aplicando PCA
+
+
+```{r, echo=FALSE, cache=FALSE}
+pca_trainset = Prueba %>% select( -Type.1 )
+pca_testset = testset
+pca = prcomp( pca_trainset, scale = T )
+
+pr_var = ( pca$sdev )^2 
+
+# % of variance
+prop_varex = pr_var / sum( pr_var )
+
+# Plot
+plot( prop_varex, xlab = "Principal Component", 
+      ylab = "Proportion of Variance Explained", type = "b" )
+
+
+plot( cumsum( prop_varex ), xlab = "Principal Component", 
+      ylab = "Cumulative Proportion of Variance Explained", type = "b" )
+
+
+
+```
+
+
+
+Parece ser que las seis variables son explicativas al modelo 
+
+```{r, echo=FALSE, cache=FALSE}
+train = data.frame( class = Prueba$Type.1, pca$x )
+t = as.data.frame( predict( pca, newdata = pca_testset ) )
+
+new_trainset = train[,1:6]
+new_testset =  t[,1:5]
+
+n = names( new_trainset )
+f = as.formula( paste( "class ~", paste( n[!n %in% "class" ], collapse = "+" ) ) )
+nn = neuralnet( f, new_trainset, hidden = 4, linear.output = FALSE, threshold=0.01 )
+
+
+plot( nn, rep = "best" )
+
+
+
+```
+
+Al bajarle uno de los componentes , el error se redujo en tres puntos, aproximadamente, mientras el ajuste aumento de manera considerable y desde acá un modelo puede entrar a integración.
+
+
+```{r, echo=FALSE, cache=FALSE}
+nn.results = compute( nn, new_testset )
+
+# Results
+results = data.frame( actual = Testeo$Type.1, 
+                      prediction = round( nn.results$net.result ) )
+
+
+x<-as.integer(results$prediction)
+y<-results$actual
+u<-union(x,y)
+Tabla<-table(factor(x,u),factor(y,u))
+confusionMatrix(Tabla)
+
+```
+
+# Una última alternativa
+
+Al ver el comportamiento de las dimensiones sobre las variables, me quedo una duda, más no se que tan apropiado pueda ser, y es trabajar con las dos mejores dimensiones
+
+
+```{r, echo=FALSE, cache=FALSE}
+train = data.frame( class = Prueba$Type.1, pca$x )
+t = as.data.frame( predict( pca, newdata = pca_testset ) )
+
+new_trainset = train[,1:3]
+new_testset =  t[,1:2]
+n = names( new_trainset )
+f = as.formula( paste( "class ~", paste( n[!n %in% "class" ], collapse = "+" ) ) )
+nn = neuralnet( f, new_trainset, hidden = 4, linear.output = FALSE, threshold=0.01 )
+
+
+plot( nn, rep = "best" )
+```
+
+Con dos dimensiones el error se mantiene.
+
+
+
+# Una representación con un árbol de decisión
+
+
+Con todas las variables el modelos sería el siguiente
+
+```{r, echo=FALSE, cache=FALSE}
+library(rpart)
+library(rpart.plot)
+tree <- rpart(Type.1 ~ . , data = Pokemon_obj, method = "class")
+rpart.plot(tree)
+```
+
+Donde
+* O : es Water
+* 1 : son las demás categorías
+
+# Dedicatoria
+
+Este post va dedicado a la mejor agencia de medio y publicidad que tiene Colombia a [Resolve Studio](http://resolvestudio.co/). Después de haber vivido en muchos países y trabajado en distintos roles , puedo decir , para todos aquellos interesados, que es el mejor lugar para trabajar y el mejor aliado de su negocio.
+
+Resalto al mejor científico de datos que conocí, a Lorenzo 
+
+![](http://resolvestudio.co/wp-content/uploads/2018/03/lorenzo.jpg)
+Quien es el director de la empresa, nunca había conocido a alguien tan analítico como el , su liderazgo y proyección es descomunal.
+
+Al ingeniero [Ricardo Montes](https://www.linkedin.com/in/ricardo-montes-88b914b2/), de quien aprendí mucho y en especial trabajé de la mano.
+
+![](http://resolvestudio.co/wp-content/uploads/2018/03/ricardo.jpg)
+
+
+A la pequeña Ney, quien es la chica más dura en impuestos y todo el tema fiscal que he conocido en el país (a mis amigos del Banco de la República, si es ella de quien les he hablado )
+
+![](http://resolvestudio.co/wp-content/uploads/2018/03/neydi.jpg)
+
+
+A la estrella de pop, estilo RCN, a quién le enseño a postear pendejadas a todos los artistas de moda, al ex ingeniero, y ahora soft, pero de los intelectuales Juan Nicolás Moreno, porque a pesar que se dedica al mundo de lo superficial, es supremamente dedicado y organizado
+
+![](http://resolvestudio.co/wp-content/uploads/2018/03/juan-nicolas.jpg)
+
+
+
+
+
+Y por último, a aquel que cuando me había retirado del mundo de la ciencia de datos, me hizo volver no solo con más fuerzas sino con un reto, al mejor jefe (guardando diferencias con LORENZO), al único ingeniero que después de hacer un MBA no se convirtió en alguien ligero (entendiendo que trabajaba en una agencia de medios), al gran Rafael Mejía.
+
+![](http://resolvestudio.co/wp-content/uploads/2018/03/rafael.jpg)
+
+
+
+Gracias 
+

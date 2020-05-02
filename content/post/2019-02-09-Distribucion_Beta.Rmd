@@ -1,0 +1,292 @@
+---
+title: "Distribución Beta"
+date: 2019-02-13
+description: "Introducción en el sentido de la abstracción de la distribución beta"
+output: html_document
+mathjax: "true"
+---
+
+
+
+```{r, echo=FALSE, cache=FALSE, message=FALSE, warning=FALSE}
+library(markdown)
+library(tidyverse)
+library(ggplot2)
+library(PerformanceAnalytics)
+theme_set(theme_light())
+```
+
+
+```{r, echo=FALSE, cache=FALSE}
+p = seq(0,1, length=200)
+plot(p, dbeta(p, 200, 200), ylab="densidad", type ="l", col=4)
+lines(p, dbeta(p, 50, 50), type ="l", col=3)
+lines(p, dbeta(p, 20, 20), col=2) 
+lines(p, dbeta(p, 10, 10), col=1) 
+legend(0.7,8, c("Beta(200,200)","Beta(50,50)","Beta(20,20)", "Beta(10,10)"),lty=c(1,1,1,1),col=c(4,3,2,1))
+title("Distribución Beta")
+```
+
+
+Durante muchos años, tanto en el ambito acádemico como en el mundo de la estadística aplicada la *distribución beta* ha sido tratada con especial rezago en su definición y aplicación, dicho lo anterior esta entrada intenta dar una visión sobre la filosofía de la distribución y en especial darle una aplicación empirica para ver su potencial en el mundo real.
+
+Parto de una afirmación, los mayores usos de esta distribución se dan en el plano del mundo **bayesiano**, sobre todo para el desarrollo de ciencias experimentales y la teoría de la decisión. Lo anterior no quiere decir que no tenga espacio en otros ambitos de la estadística, más si da un uso claro en ramas primordiales.
+
+Por último reafirmando en palabras de [David Robinson](http://varianceexplained.org/), es de vital importancia en el mundo de la ciencia de datos dado que ** empirical bayes (de donde parte el uso de la distribución beta) is especially well suited to the modern field of data science**. Sobre este autor se hablara más adelante.
+
+
+## Aproximaciones sobre la distribución beta
+
+
+
+Se parte de una antesala:
+
+
+> "La distribución beta difiere de las distribuciones continuas [...] dado que solo se puede usar para describir variables aleatorias que tomen valores entre 0 y 1" Gutierrez (2010)[^1]
+
+Estos limites de intervalos son pieza fundamental para entender después del uso de parámetros y los posibles resultados que se pueden obtener sobre eventos estudiados.
+
+Complementando la definición de Gutiérrez en 2013 los profesores Paul Johnson y Matt Beverlin la describieron de la siguiente manera
+
+> "La función de densidad beta es una forma muy versátil de representar resultados como proporciones o probabilidades"[^2]
+
+Los mismos autores reafirman la antesala sobre el uso de esta distribución al decir que **"The Beta can be used to describe not only the variety observed across people, but it can
+also describe your subjective degree of belief (in a Bayesian sense)"**[^3]. 
+
+Más, la definición que a mi parecer logra definir mejor lo que es la *beta*, es aquella que dio David Robinson en 2017 en su libro Introduction to Empirical Bayes, donde la describe de la siguiente manera 
+
+> "The beta distribution is good at representing a probability distribution of probabilities- that is, it represents all the possible values of a probability when we don´t know what that probability is."[^4]
+
+Antes de entrar en el terreno de las aplicaciones desarrollare la matemáticas que hay detrás de ella.
+
+
+## Aspectos matemáticos
+### Función de densidad
+
+Una variable aleatoria $\mathrm{X}$ tiene distribución beta si su función de densidad está dada de la siguiente manera:
+
+$$
+\mbox{ Función Beta}=B(a,b)=\frac{\Gamma(a) \Gamma(b)}{\Gamma(a+b)}=\int_{0}^{1} u^{a-1}(1-u)^{b-1 }du
+$$
+
+$$
+f_{X}(x)=\frac{1}{B(a,b)}x^{a-1}(1-x)^{b-1}I_{(0,1)}(x) \mbox{ Dado los parámetros }a>0 \mbox{ y } b>0
+$$
+
+
+Visto lo anterior se puede decir que la **Beta** toma valores de $(1,1)$ en los parámetros $(a,b)$ pasa a ser una uniforme continua $Unif(0,1)$
+
+### Momentos de la beta
+
+Si $\mathrm{X}$ es una variable aleatoria con distribución beta en los parámetros $(a,b)$ el valor esperado tiene la siguiente forma
+
+$$
+E(x)=\mu=\frac{a}{a+b}
+$$
+
+Mientras que la varianza 
+
+$$
+Varianza(x)=\frac{ab}{(a+b)^2(a+b+1)}
+$$
+
+Aunque desarrollandola sería
+
+$$
+Varianza(x)=\frac{ab}{(a^2+2ab+b^2)(a+b+1)}=\frac{ab}{a^3+a^2+3a^2b+3ab^2+2ab+b^3+b^2}
+$$
+Aunque si lo quiere ver como un *Modelo Lineal Generalizado*(MLG) entonces la construcción sería 
+
+$$
+Varianza(\mu)=\frac{b}{(a+b)(a+b+1)}\mu
+$$
+
+Una demostración interesante que da Gutiérrez sobre la simetría para $f(x)$ y $f(1-x)$ donde sugiere que 1-X puede ser una distribución beta si $\mathrm{X}$ se porta de la siguiente manera:
+
+$$
+X\sim Beta(a,b) \mbox{ entonces } Y=1-X \sim Beta(a,b)
+$$
+
+Demostrando la distribución de $\mathrm{Y}$ se tiene que $y \in (0,1)$
+$$
+F_Y(y)=Pr(Y\le y)=Pr(1-X \le y)
+$$
+
+$$
+Pr(X\ge1-y)= \int_{1-y}^{1} \frac{x^{a-1}(1-x)^{b-1}}{B(a,b)}dx
+$$
+Haciendo un juego $x= 1-u$
+
+$$
+F_Y(y)=\int_{0}^{y} \frac{(1-u)^{a-1}u^{b-1}}{B(a,b)}dx
+$$
+y queda demostrado.
+
+### Abstracción y aplicación
+
+Un ejemplo de Robinson dice que el promedio de bateos esta dado por el número de hits(H) dividido sobre el número de turnos(AB)
+
+$$
+\mbox{Promedio de bateos}=\frac{H}{AB}
+$$
+
+Observese que el promedio esta dado en el intervalo de porcentajes de 0 a 1. El promedio tipicoes del 27%, mientras que el 30% es considerado como excepcional.
+
+Suponga que desea predecir el promedio de bateo de la temporada. Si se usa el promedio de bateo al inicio de temporada se dara cuenta que es una medida muy pobre, más a través de los calculos bayesianos se podría los éxitos en bateo. Suponga que el promedio de bateo en una temporada estan dados entre 21% y 36% .
+
+
+Se parte del supuesto que la mejor manera de representar esto (hits de bateo dado el turno del bateo) es con una distribución binomial ya que cuenta el número de éxitos de un total, por lo tanto está es la mejor manera de representar una beta.
+
+Lo primero que hay que representar es su promedio de bateo, el dominio del mismo está dado entre (0,1) como una probabilidad.
+
+Ya se tiene una expectativa de que el promedio de bateo en una temporada es del 27%, pero el rango razonable en el cual se da un bateo en promedio esta entre 21% y el 35%. Esto representa la distribución beta donde los parámetros estan dados de la siguiente manera:
+
+$$
+\alpha=81 \\ \beta=219
+$$
+
+Ahora se desarrolla el gráfico de densidad de la distribución 'prior'
+
+```{r, echo=FALSE, cache=FALSE}
+library(ggplot2)
+library(dplyr)
+sim <- data.frame(a = c(81, 82, 81 + 100),
+                  b = c(219, 219, 219 + 200)) %>%
+  group_by(a, b) %>%
+  do(data_frame(x = seq(0, .5, .001), y = dbeta(x, .$a, .$b))) %>%
+  mutate(Parametros = paste0("\u03B1 = ", a, ", \u03B2 = ", b)) %>%
+  ungroup() %>%
+  mutate(Parametros = factor(Parametros, levels = unique(Parametros)))
+```
+
+```{r, echo=FALSE, cache=FALSE}
+sim %>%
+  filter(a == 81) %>%
+  ggplot(aes(x, y, color = Parametros)) +
+  geom_line() +
+  xlab("Promedio de bateos") +
+  ylab("Densidad de la beta")
+```
+
+La $x$ representa la distribución de posibles bateos promedios mientras que la $y$ representa la probabilidad de la densidad, la cual describe que tan probable es que el promedio de bateo caiga en un punto en particular, por lo tanto la $y$ representa la probabilidad de la densidad de la distribución beta.
+
+Por lo tanto al efectuar un hit el jugador se pueden actualizar las probabilidades y comenzar con una distribución previa para después seguir con una posterior.
+
+$$
+Beta(\alpha_0+Exitos,\beta_0+Fracasos)
+$$
+Por lo tanto si $\alpha$ se incrementa uno (un éxito más) mientras que $\beta$ no crece, entonces el promedio de la nueva distribución está dada por 
+
+$$
+Beta(81+1,2019)
+$$
+
+
+```{r, echo=FALSE, cache=FALSE, warning=FALSE}
+sim %>%
+  filter(a == c(81,82)) %>%
+  ggplot(aes(x, y, color = Parametros)) +
+  geom_line() +
+  xlab("Promedio de bateos") +
+  ylab("Densidad de la beta")
+```
+
+Ahora vease la distribución de la posterior de beta junto a la posterior después de un hit o cien hits después de 300 turnos de bateo
+
+```{r, echo=FALSE, cache=FALSE, warning=FALSE}
+sim %>%
+  ggplot(aes(x, y, color = Parametros)) +
+  geom_line() +
+  xlab("Promedio de bateos") +
+  ylab("Densidad de la beta")
+```
+
+Dicho lo anterior para calcular la posterior del promedio de la beta será
+
+$$
+E(x)=\mu=\frac{a}{a+b}
+$$
+Así que después de 300 bateos , donde 100 son aciertos, mientras 200 fracasos, el nuevo valor de la distribución de la beta es 
+
+$$
+E(x)=\frac{82+100}{82+100+219+200}=\frac{182}{601}=0.303
+$$
+Teniendo presente que la inferior del estimativo está dado por
+
+$$
+\frac{100}{200+100}=0.333
+$$
+
+EL cual es más alto que el estimativo con que empezo la temporada
+
+$$
+\frac{81}{81+219}=0.27
+$$
+
+Esto da la convinación de la expectativa previa y las estimadas.
+
+### Conjugando la previa
+
+Se debe anexar una actualización de la beta a través de la binomial por lo que son matematicamente convenientes. Dicho lo anterio ver un promedio de bateos de $\frac{100}{300}$ no es preciso sobre la realidad de los jugadores, a menos que se construya una previa en se pueda encontrar dichos resultados.
+
+Simularemos diez millones de jugadores, con las expectativas previas $Beta(81,219)$ y a cada uno de ellos se les dara la oportunidad de batear 300 veces 
+
+```{r, echo=FALSE, cache=FALSE}
+pruebas<-10e6
+
+
+Simulaciones <- data_frame(
+  true_average = rbeta(pruebas, 81, 219),
+  hits = rbinom(pruebas, 300, true_average)
+)
+
+Simulaciones%>%
+  head()
+```
+
+Ahora se debe buscar los jugadores que realmente cumplieron el estimativo de $\frac{100}{300}$
+
+```{r, echo=FALSE, cache=FALSE}
+hit_100 <- Simulaciones %>%
+  filter(hits == 100)
+hit_100%>%
+  head()
+
+```
+
+
+Ahora toca visualizar los promedios de bateo de estos $\frac{100}{300}$ e identificar que tan bueno era el jugador mediano
+
+```{r, echo=FALSE, cache=FALSE}
+dens <- function(x) dbeta(x, 81 + 100, 219 + 200)
+ggplot(hit_100, aes(true_average)) +
+  geom_histogram(aes(y = ..density..)) +
+  stat_function(color = "red", fun = dens) +
+  labs(x = "Promedio de bateos de jugadores con  100 Hits / 300 Turnos")
+```
+
+
+Notese que los resultados de la previa no abrian existido bateadores con la forma $\frac{100}{300}$, por lo cual fue necesario hacer las simulaciones y encontrar los resultados.
+
+Lo anterior muestra que se esta actualizando la previa 
+
+```{r, echo=FALSE, cache=FALSE}
+Simulaciones%>%
+  filter(hits %in% c(60, 80, 100)) %>%
+  ggplot(aes(true_average, color = factor(hits))) +
+  geom_density() +
+  labs(x = "Verdadero promedio jugadores  H hits / 300 turnos",
+       color = "H")
+```
+
+La anterior gráfica de los valores verdaderos de bateo promedio, selecciona especificamente a los jugadores que han tenido records de $60/300$, $80/300$ y $100/300$.
+
+
+
+
+[^4]: Tomado del libro [Empirical Bayes](http://varianceexplained.org/r/empirical-bayes-book/)
+[^3]: Tomado del siguiente [articulo](http://pj.freefaculty.org/guides/stat/Distributions/DistributionWriteups/Beta/Beta.pdf)
+[^2]: El articulo sobre la distribución beta esta disponible [aqui](http://pj.freefaculty.org/guides/stat/Distributions/DistributionWriteups/Beta/Beta.pdf)[^3]
+
+
+[^1]: En la página [data literacy](https://drive.google.com/file/d/0ByzoHkgSB8F3UGhmSktWaG5FWlU/view) podra encontrar el libro de Gutiérrez que cuenta de manera detallada los conceptos sobres las distribuciones.

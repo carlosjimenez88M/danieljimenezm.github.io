@@ -1,0 +1,238 @@
+---
+title: "infer 02 - Numerical inference Boostrap"
+mathjax: "true"
+data: 2020-01-04
+output:
+  html_document: default
+---
+
+
+
+<div id="some-approach" class="section level1">
+<h1>Some approach</h1>
+<div id="bootstrapping-techniques" class="section level2">
+<h2>Bootstrapping techniques</h2>
+<ul>
+<li><p>First : Bootstrap is a powerful method for statistical inference (with based on computational algorithms) that allows assigning measures of accuracy to sample estimates.</p></li>
+<li>Second : It`s widely applied in other statistical inference such as
+<ul>
+<li>Confidence interval</li>
+<li>Regression Models</li>
+<li>Machine Learning</li>
+</ul></li>
+</ul>
+<p>Some conceptions : i) Assume the data is representative, ii) use random sample with replacement to make inferences about the unknown population (statistical universe). iii) Calculate or compute robust statistics tools - mean, variance , error , median , etc through on samples. iv) repeat steps many times to creat bootstrap distribution</p>
+<p>In this example , with iris , I generate bootstrap distribution for median.</p>
+<pre class="r"><code>sepal_med_ci&lt;-iris%&gt;%
+  specify(response = Sepal.Length )%&gt;% # Specify the variable of interes
+  generate(reps = 100, type=&quot;bootstrap&quot;)%&gt;%
+  calculate(stat = &quot;median&quot;)
+
+sepal_med_ci%&gt;%
+  head()%&gt;%
+  knitr::kable(format = &#39;markdown&#39;, caption = &#39;Bootstrap Distribution for media&#39;)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">replicate</th>
+<th align="right">stat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">6.00</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">5.65</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">5.80</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">5.80</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">6.00</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="right">5.80</td>
+</tr>
+</tbody>
+</table>
+<p>Now , is necessary generate histogram plot about this</p>
+<pre class="r"><code>sepal_med_ci%&gt;%
+  ggplot(aes(stat))+
+  geom_histogram(bins = 10)+
+  labs(title = &#39;Boostrap Distribution&#39;)+
+  theme(plot.title = element_text(hjust = 0.5))</code></pre>
+<p><img src="/www.danieljimenezm.compost/2020-01-04-Boostrap_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="percentile-and-standard-error-methods" class="section level2">
+<h2>Percentile and Standard Error Methods</h2>
+<p>Is necessary computing intervals for median <code>Sepal.length</code> using <a href="https://en.wikipedia.org/wiki/Percentile">percentile method</a></p>
+<p>But first this step</p>
+<pre class="r"><code>sepal_med_obs&lt;-iris%&gt;%
+  summarize(Sepal_med = median(Sepal.Length))%&gt;%
+  pull() # pull out value</code></pre>
+<p>Computing freedom degrees</p>
+<pre class="r"><code>degrees_of_freedom &lt;- nrow(iris) - 1</code></pre>
+<p>Determinig the critical values</p>
+<pre class="r"><code>t_star &lt;- qt(0.975, df=degrees_of_freedom)
+print(t_star)</code></pre>
+<pre><code>## [1] 1.976013</code></pre>
+<p>Calculate the Confidence interval using std error method</p>
+<pre class="r"><code>sepal_med_ci%&gt;%
+  summarize(boot_se=sd(stat))%&gt;%
+  summarize(
+    u = sepal_med_obs - t_star * boot_se,
+    l = sepal_med_obs + t_star * boot_se
+  )</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##       u     l
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1  5.60  6.00</code></pre>
+<p>And recall the interval confindence the percentile method</p>
+<pre class="r"><code>sepal_med_ci %&gt;%
+  summarize(
+    l = quantile(stat, 0.025),
+    u = quantile(stat, 0.975)
+  )</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##       l     u
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1   5.6     6</code></pre>
+<p>The standard error method is a better estimate.</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Standard_deviation_diagram.svg/325px-Standard_deviation_diagram.svg.png" /></p>
+<pre class="r"><code>visualize(sepal_med_ci,bins = 10)+
+  shade_confidence_interval(endpoints =c(5.564156,6.035844))</code></pre>
+<p><img src="/www.danieljimenezm.compost/2020-01-04-Boostrap_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+</div>
+<div id="re-centering-a-bootstrap-distribution" class="section level2">
+<h2>Re-centering a bootstrap distribution</h2>
+<p>Boostrap distribution are by design centered at the observed sample statistics. However since in a Hypothesis test we assume that the null hypothesis is true, we shift the bootstrap distribution to be centered at the null value.</p>
+<p>The p-value is then defined as proportion of simulations that yield a sample statistic at least as favorable to the alternative hypothesis as observed sample statistics.</p>
+<pre class="r"><code>n_replicates&lt;-300
+
+sepal_med_ht &lt;- iris %&gt;%
+  specify(response = Sepal.Length) %&gt;%
+  hypothesize(null = &quot;point&quot;, med = 5.8) %&gt;% 
+  generate(reps = n_replicates, type = &quot;bootstrap&quot;) %&gt;% 
+  calculate(stat = &quot;median&quot;)
+
+sepal_med_ht%&gt;%
+  head()%&gt;%
+  knitr::kable(caption = &quot;Generate 15000 bootstrap samples centered at null.&quot;)</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-10">Table 1: </span>Generate 15000 bootstrap samples centered at null.</caption>
+<thead>
+<tr class="header">
+<th align="right">replicate</th>
+<th align="right">stat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">5.8</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">5.8</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">6.0</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">6.0</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">5.8</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="right">5.5</td>
+</tr>
+</tbody>
+</table>
+<p>Now Calculate the observed median Sepal</p>
+<pre class="r"><code>sepal_med_obs &lt;- iris %&gt;%
+  summarize(median_sepal = median(Sepal.Length)) %&gt;%
+  pull()
+
+print(sepal_med_obs)</code></pre>
+<pre><code>## [1] 5.8</code></pre>
+<p>Now Calculate the p-value as the proportion of bootstrap statistics greater than the observed statistic.</p>
+<pre class="r"><code>sepal_med_ht %&gt;%
+  # Filter for bootstrap stat greater than or equal to observed stat
+  filter(stat &gt;= sepal_med_obs) %&gt;%
+  # Calculate the p-value
+  summarize(p_val = n() / n_replicates)</code></pre>
+<pre><code>## # A tibble: 1 x 1
+##   p_val
+##   &lt;dbl&gt;
+## 1  0.63</code></pre>
+<p>Now one question : We would like to evaluate whether this data provides evidence that the median Sepal of Iris Sepal Length is greater than 5.8 cm. <strong>What is the conclusion of the hypothesis test at the 5% significance level?</strong></p>
+<p>We dont have evidence that median Sepal Length in Iris is grater that 5.8. We fail to reject H0 since the p-value is above the significance level</p>
+</div>
+<div id="other-example" class="section level2">
+<h2>Other example</h2>
+<p>We’ll wrap up inference on a single parameter of a numerical distribution by revisiting the ncbirths dataset, specifically the weight variable, indicating the birth weight of the baby. Do these data provide convincing evidence that the average birth weight of babies born in North Carolina is different than 7 pounds?</p>
+<pre class="r"><code>data(ncbirths)
+
+n_replicates &lt;- 1500
+
+weight_mean_ht &lt;- ncbirths %&gt;%
+  specify(response = weight) %&gt;%
+  hypothesize(null = &quot;point&quot;, mu = 7) %&gt;% 
+  generate(reps = n_replicates, type = &quot;bootstrap&quot;) %&gt;% 
+  calculate(stat = &quot;mean&quot;)
+
+
+weight_mean_ht</code></pre>
+<pre><code>## # A tibble: 1,500 x 2
+##    replicate  stat
+##  *     &lt;int&gt; &lt;dbl&gt;
+##  1         1  7.00
+##  2         2  7.03
+##  3         3  7.02
+##  4         4  6.96
+##  5         5  6.97
+##  6         6  7.01
+##  7         7  7.00
+##  8         8  6.99
+##  9         9  7.00
+## 10        10  7.01
+## # … with 1,490 more rows</code></pre>
+<p>Calculate the mean observed weight and pull out the value.</p>
+<pre class="r"><code>weight_mean_obs &lt;- ncbirths %&gt;%
+  summarize(mean_weight = mean(weight)) %&gt;%
+  pull()</code></pre>
+<p>Calculate the two-sided p-value.</p>
+<pre class="r"><code>weight_mean_ht %&gt;%
+  filter(stat &gt;= weight_mean_obs) %&gt;%
+  summarize(
+    one_sided_p_val = n() / n_replicates,
+    two_sided_p_val = 2 * one_sided_p_val
+  )</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##   one_sided_p_val two_sided_p_val
+##             &lt;dbl&gt;           &lt;dbl&gt;
+## 1           0.014           0.028</code></pre>
+</div>
+<div id="references" class="section level2">
+<h2>References</h2>
+<ul>
+<li><p><a href="https://towardsdatascience.com/an-introduction-to-the-bootstrap-method-58bcb51b4d60" class="uri">https://towardsdatascience.com/an-introduction-to-the-bootstrap-method-58bcb51b4d60</a></p></li>
+<li><p><a href="https://en.wikipedia.org/wiki/Bootstrapping_(statistics)" class="uri">https://en.wikipedia.org/wiki/Bootstrapping_(statistics)</a></p></li>
+</ul>
+</div>
+</div>
