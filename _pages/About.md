@@ -1,7 +1,7 @@
 ---
 layout: archive
 title: "Sobre mi"
-permalink: /about/
+permalink: /About/
 ---
 
 
