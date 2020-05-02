@@ -2,12 +2,15 @@
 main:
   - title: "Sobre mi"
     url: /about/
+  #- title: "Servicios"
+    #url: /Data-Science/
   - title: "Clases"
     url: /Courses/
   - title: "R Projects"
     url: /RProjects/
   - title: "Publicaciones"
     url: /Media/
+
 
   # - title: "Sample Posts"
   #   url: /year-archive/
