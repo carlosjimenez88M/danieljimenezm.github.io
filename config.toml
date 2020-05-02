@@ -29,8 +29,8 @@ series = "series"
 author = "authors"
 
 [params]
-  author = "Hugo Authors"
-  description = "Lorem ipsum dolor sit amet."
+  author = "Un Data Scientist Dice"
+  description = "Machine Learning and Statistical Modelling"
   homepageImage = "/images/homepage-image.jpg"
   share = true
   showLanguageSwitcher = false
