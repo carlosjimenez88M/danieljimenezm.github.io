@@ -1,14 +1,14 @@
 # main links
 main:
-  - title: "Sobre mi"
+  - title: "About"
     url: /about/
   #- title: "Servicios"
     #url: /Data-Science/
-  - title: "Clases"
+  - title: "Courses"
     url: /Courses/
-  - title: "R Projects"
-    url: /RProjects/
-  - title: "Publicaciones"
+  - title: "Projects"
+    url: /Projects/
+  - title: "Publications"
     url: /Media/
 
 
