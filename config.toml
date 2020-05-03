@@ -54,19 +54,10 @@ author = "authors"
   [params.social]
     rss = true
     email = "cjimenez187@aol.com"
-    #facebook = "https://facebook.com"
     twitter = "https://twitter.com/DanielJimenezM9"
     linkedin = "https://www.linkedin.com/in/djimenezm/"
-    #stack-overflow = "https://stackoverflow.com"
-    #instagram = "https://stackoverflow.com"
     github = "https://github.com/carlosjimenez88M"
-    #weibo = "https://www.weibo.com"
-    #medium = "https://medium.com"
-    #pinterest = "https://pinterest.com"
-    #reddit = "https://reddit.com"
-    #gitlab = "https://gitlab.com"
-    #mastodon = "https://mastodon.social"
-    #keybase = "https://keybase.io/"
+
 
   [params.prismJS]
     enable = true
