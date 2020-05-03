@@ -1,4 +1,4 @@
-baseURL = "www.danieljimenezm.com"
+baseURL = "/"
 title = "Un Data Scientist Dice"
 copyright = "Copyright © 2008–2019, Steve Francia and the Hugo Authors; all rights reserved."
 paginate = 2
