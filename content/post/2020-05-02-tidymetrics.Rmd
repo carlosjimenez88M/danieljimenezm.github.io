@@ -1,0 +1,135 @@
+---
+title: "tidymetrics"
+author: "Daniel Jiménez"
+date: 2020-05-02
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r, echo=FALSE, cache=FALSE,warning=FALSE,message=FALSE}
+library(tidyverse);
+library(tidymetrics);
+library(tidymodels);
+library(shinybones);
+library(shinybones);
+library(shinydashboard);
+library(scales);
+library(lubridate);
+library(tidytext);
+library(skimr)
+theme_set(theme_classic())
+```
+
+
+
+## Tidymetrics and Shinymetrics
+
+Hi guys! in this opportunity I wanna talk about `tidymetrics`. Why?, Well I have a reason list for say this : **Tidymetrics is a packages that generate the real revolution for Data Science** 
+Data science defined as:
+
+>Data science is distinguished from the other [...] fields because its goal is an especially human one: to gain insight and understanding (Robinson,2018)
+
+
+### Tidymetrics
+
+Tidymetrics is a packages that try to develop new shape for Data analysis through `cross by` functions (periods and dimensions), where aggregated metrics.
+
+### Example with Tidytuesday
+
+```{r, echo=FALSE, cache=FALSE, message=FALSE,warning=FALSE}
+tuesdata <- tidytuesdayR::tt_load('2020-04-28')
+tuesdata$grosses->grosses
+```
+
+
+### Understanding Data (EDA)
+
+
+Explore compose data group
+```{r}
+grosses%>%
+  skim()
+```
+
+
+
+```{r, echo=FALSE, cache=FALSE}
+library(tidyverse)
+grosses%>%
+  group_by(show)%>%
+  count(sort = TRUE)%>%
+  ungroup()%>%
+  top_n(10)%>%
+  mutate(show=fct_reorder(show,n))%>%
+  ggplot(aes(show,n,fill=factor(show)))+
+  geom_col(show.legend = FALSE)+
+  labs(x="Show",
+       y="Total events")+
+  coord_flip()
+  
+  
+  
+```
+
+
+Comportamiento por decada del show
+
+
+```{r}
+
+## crear el año
+grosses%>%
+  mutate(year=year(week_ending))%>%
+  mutate(decade=(year%/%10)*10)->grosses
+
+grosses%>%
+  filter(decade>=1990)%>%
+  group_by(decade,show)%>%
+  summarize(total_seats=sum(seats_sold),
+            capacity=mean(pct_capacity))%>%
+  mutate(decade=factor(decade),
+         show=reorder_within(show,capacity,decade))%>%
+  top_n(20)%>%
+  ggplot(aes(show,capacity,fill=decade))+
+  geom_col(show.legend = FALSE)+
+  facet_wrap(~decade,scales="free_y")+
+  scale_x_reordered()+
+  scale_y_continuous(expand=c(0,0))+
+  labs(y = "Percent seats show occupaded",
+         x = NULL,
+         title = "Top 15 shows")+
+  coord_flip()
+```
+
+
+
+
+```{r}
+grosses%>%
+  filter(show %in% c("Hamilton","The Lion King"))%>%
+  ggplot(aes(week_ending,weekly_gross,color=show))+
+  geom_line()+
+  scale_y_continuous(labels = dollar)+
+  expand_limits(y=0)
+```
+
+
+```{r}
+the_Lion_summarized<-grosses%>%
+  filter(show=="The Lion King")%>%
+  rename(date=week_ending)%>%
+  cross_by_periods(c("month","quarter","year"))%>%
+  summarize(usd_gross=sum(weekly_gross),
+            avg_ticket_price=mean(avg_ticket_price))
+
+
+the_Lion_summarized%>%
+  ggplot(aes(date,avg_ticket_price,color=period))+
+  geom_line(size=1)
+```
+

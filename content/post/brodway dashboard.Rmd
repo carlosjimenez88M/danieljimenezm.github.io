@@ -1,0 +1,69 @@
+---
+title: "bordway dash"
+name: metrics_for_shows
+owner: cjimenez187@aol.com
+metrics:
+  income:
+    title: Total Income
+    description: Total Income per year
+  avg_ticket_price:
+    title: Average ticket price
+    description: This is average ticket price per year
+  pct_capacity:
+    title: Percet capacity
+    description: "Percent capacity(in seats) for theater"
+  variation_ticke_price:
+    title: Mean Variation price Tickets
+    description: Mean Variation price Tickets
+dimensions:
+  show:
+    title: Show`s
+    description: "Top 10 Shows"
+---
+
+```{r}
+library(tidyverse);
+library(tidymetrics);
+library(shinymetrics);
+library(scales);
+library(shiny);
+library(shinybones);
+theme_set(theme_classic())
+```
+
+
+```{r}
+grosses <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-04-28/grosses.csv', guess_max = 40000)
+```
+
+
+
+```{r}
+grosses<-grosses%>%
+  rename(date=week_ending)
+
+show_summarized<-grosses%>%
+  filter(show %in% c("The Phantom of the Opera","Chicago",
+                     "The Lion King","Les Miserables","Cats","Wicked",
+                     "Mamma Mia!","Beauty and the Beast","Jersey Boys","Rent"))%>%
+  cross_by_dimensions(show)%>%
+  filter(show!="All")%>%
+  cross_by_periods(c("year","month","week"))%>%
+  summarize(income=sum(weekly_gross),
+            avg_ticket_price=mean(avg_ticket_price),
+            pct_capacity=mean(pct_capacity))%>%
+  mutate(variation_ticke_price=round(avg_ticket_price-lag(avg_ticket_price),2))%>%
+  ungroup()
+```
+
+
+
+```{r}
+show_metrics<-create_metrics(show_summarized)
+#saveRDS(show_metrics,"../Dashboards/Dashboard_brodway/show_metrics.rds")
+saveRDS(show_metrics,"../Dashboards/Brodway/show_metrics.rds")
+#saveRDS(show_metrics$for_shows_avg_ticket_price,"../Dashboards/Dashboard_brodway/show_metrics2.rds")
+#saveRDS(show_metrics$for_shows_pct_capacity,"../Dashboards/Dashboard_brodway/show_metrics3.rds")
+#saveRDS(show_metrics$for_shows_variation_ticke_price,"../Dashboards/Dashboard_brodway/show_metrics4.rds")
+```
+
