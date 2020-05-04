@@ -150,14 +150,14 @@ And next step is create metrics
 show_metrics<-create_metrics(show_summarized)
 ```
 
-And Final you can use preview_metric for your dashboard.
+And finally you can use preview_metric for your dashboard.
 
 
-![](../images/Dashboard.png)
+![](https://github.com/carlosjimenez88M/Dashboards/blob/master/Dashboard.png?raw=true)
 
 
 Is the most similar that [looker](https://looker.com/)
 
 
-You can find my Dashboard final version [here](https://danieljimenez.shinyapps.io/Brodway/), and de code [here]()
+You can find my Dashboard final version [here](https://danieljimenez.shinyapps.io/Brodway/), and de code [here](https://github.com/carlosjimenez88M/Dashboards)
 
