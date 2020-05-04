@@ -1,7 +1,7 @@
 ---
 title: "tidymetrics"
 author: "Daniel Jiménez"
-date: 2020-05-02
+date: 2020-05-03
 output: html_document
 ---
 
@@ -10,126 +10,155 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-
-```{r, echo=FALSE, cache=FALSE,warning=FALSE,message=FALSE}
+```{r, echo=FALSE, cache=FALSE,message=FALSE,warning=FALSE}
 library(tidyverse);
 library(tidymetrics);
-library(tidymodels);
-library(shinybones);
-library(shinybones);
-library(shinydashboard);
+library(shinymetrics);
 library(scales);
-library(lubridate);
-library(tidytext);
-library(skimr)
 theme_set(theme_classic())
 ```
 
 
 
-## Tidymetrics and Shinymetrics
-
-Hi guys! in this opportunity I wanna talk about `tidymetrics`. Why?, Well I have a reason list for say this : **Tidymetrics is a packages that generate the real revolution for Data Science** 
-Data science defined as:
-
->Data science is distinguished from the other [...] fields because its goal is an especially human one: to gain insight and understanding (Robinson,2018)
-
 
 ### Tidymetrics
 
-Tidymetrics is a packages that try to develop new shape for Data analysis through `cross by` functions (periods and dimensions), where aggregated metrics.
+Tidymetrics is a great package, developed by [Ramnath Vaidyanathan](https://www.datacamp.com/instructors/ramnath) and [David Robinson](http://varianceexplained.org/), in this package you can aggregated some particular dimensional modeling for understand the real changes in your data. Working with two types of parameter `cross_by` and `create_metrics` is possible develop data science 
+Understood as 
 
-### Example with Tidytuesday
+>"Data science [...]  goal is an especially human one: to gain insight and understanding" (Robinson,2017)
 
-```{r, echo=FALSE, cache=FALSE, message=FALSE,warning=FALSE}
-tuesdata <- tidytuesdayR::tt_load('2020-04-28')
-tuesdata$grosses->grosses
-```
+For the `cross_by` case, this function prerpare data to be aggregated in differntes ways useful for create dimensional modeling. 
 
+With `cross_by_periods` prepares data with the dates (calendar format) and you cand aggregated rolling windows(weeks,days,and more)
 
-### Understanding Data (EDA)
+And `cross_by_dimensional` aggregated levels.
 
+For example, with the last tidytuesday
 
-Explore compose data group
-```{r}
+```{r,warning=FALSE,message=FALSE}
+grosses <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-04-28/grosses.csv', guess_max = 40000)
+
+grosses<-grosses%>%
+  rename(date=week_ending)
+
 grosses%>%
-  skim()
+  filter(show=="The Phantom of the Opera")%>%
+  cross_by_periods(c("week","month"))%>%
+  summarize(income=sum(weekly_gross))%>%
+  ggplot(aes(date,income,color=period))+
+  geom_line()+
+  scale_y_continuous(labels = dollar)
+
+
 ```
 
+Is incredible!!! but now I wanna make new levels 
 
 
-```{r, echo=FALSE, cache=FALSE}
-library(tidyverse)
+```{r}
 grosses%>%
   group_by(show)%>%
-  count(sort = TRUE)%>%
-  ungroup()%>%
-  top_n(10)%>%
-  mutate(show=fct_reorder(show,n))%>%
-  ggplot(aes(show,n,fill=factor(show)))+
-  geom_col(show.legend = FALSE)+
-  labs(x="Show",
-       y="Total events")+
-  coord_flip()
-  
-  
-  
-```
-
-
-Comportamiento por decada del show
-
-
-```{r}
-
-## crear el año
-grosses%>%
-  mutate(year=year(week_ending))%>%
-  mutate(decade=(year%/%10)*10)->grosses
+  count(sort = TRUE)
 
 grosses%>%
-  filter(decade>=1990)%>%
-  group_by(decade,show)%>%
-  summarize(total_seats=sum(seats_sold),
-            capacity=mean(pct_capacity))%>%
-  mutate(decade=factor(decade),
-         show=reorder_within(show,capacity,decade))%>%
-  top_n(20)%>%
-  ggplot(aes(show,capacity,fill=decade))+
-  geom_col(show.legend = FALSE)+
-  facet_wrap(~decade,scales="free_y")+
-  scale_x_reordered()+
-  scale_y_continuous(expand=c(0,0))+
-  labs(y = "Percent seats show occupaded",
-         x = NULL,
-         title = "Top 15 shows")+
-  coord_flip()
-```
-
-
-
-
-```{r}
-grosses%>%
-  filter(show %in% c("Hamilton","The Lion King"))%>%
-  ggplot(aes(week_ending,weekly_gross,color=show))+
-  geom_line()+
-  scale_y_continuous(labels = dollar)+
-  expand_limits(y=0)
-```
-
-
-```{r}
-the_Lion_summarized<-grosses%>%
-  filter(show=="The Lion King")%>%
-  rename(date=week_ending)%>%
+  filter(show %in% c("The Phantom of the Opera","Chicago",
+                     "The Lion King","Les Miserables","Cats","Wicked",
+                     "Mamma Mia!","Beauty and the Beast","Jersey Boys","Rent"))%>%
+  cross_by_dimensions(show)%>%
   cross_by_periods(c("month","quarter","year"))%>%
-  summarize(usd_gross=sum(weekly_gross),
-            avg_ticket_price=mean(avg_ticket_price))
-
-
-the_Lion_summarized%>%
-  ggplot(aes(date,avg_ticket_price,color=period))+
-  geom_line(size=1)
+  summarize(income=sum(weekly_gross),
+            avg_ticket_price=mean(avg_ticket_price))%>%
+  head()
 ```
+
+
+And for design the graph 
+
+
+```{r}
+grosses%>%
+  filter(show %in% c("The Phantom of the Opera","Chicago",
+                     "The Lion King","Les Miserables","Cats","Wicked",
+                     "Mamma Mia!","Beauty and the Beast","Jersey Boys","Rent"))%>%
+  cross_by_dimensions(show)%>%
+  cross_by_periods(c("year"))%>%
+  summarize(income=sum(weekly_gross),
+            avg_ticket_price=mean(avg_ticket_price))%>%
+  filter(show!="All")%>%
+  ggplot(aes(date,income,color=show))+
+  geom_line(size=1,alpha=.8)+
+  scale_y_continuous(labels = dollar)
+  
+```
+
+
+
+Imagine working with this in econometrics, is Awsome!!! And now create your Dashboard. The first step is save your metrics.
+
+
+
+```{r}
+show_summarized<-grosses%>%
+  filter(show %in% c("The Phantom of the Opera","Chicago",
+                     "The Lion King","Les Miserables","Cats","Wicked",
+                     "Mamma Mia!","Beauty and the Beast","Jersey Boys","Rent"))%>%
+  cross_by_dimensions(show)%>%
+  filter(show!="All")%>%
+  cross_by_periods(c("year","month","week"))%>%
+  summarize(income=sum(weekly_gross),
+            avg_ticket_price=mean(avg_ticket_price),
+            pct_capacity=mean(pct_capacity))%>%
+  mutate(variation_ticke_price=round(avg_ticket_price-lag(avg_ticket_price),2))%>%
+  ungroup()
+
+```
+
+With `use_metrics_scaffold` you create the first step and the most important input for create your Dashboard, copy and paste in the HEAD
+```{r}
+use_metrics_scaffold(show_summarized)
+```
+
+
+```{r,eval=FALSE}
+title: "bordway dash"
+name: metrics_for_shows
+owner: cjimenez187@aol.com
+metrics:
+  income:
+    title: Total Income
+    description: Total Income per year
+  avg_ticket_price:
+    title: Average ticket price
+    description: This is average ticket price per year
+  pct_capacity:
+    title: Percet capacity
+    description: "Percent capacity(in seats) for theater"
+  variation_ticke_price:
+    title: Mean Variation price Tickets
+    description: Mean Variation price Tickets
+dimensions:
+  show:
+    title: Show`s
+    description: "Top 10 Shows"
+```
+
+
+And next step is create metrics
+
+
+```{r,eval=FALSE}
+show_metrics<-create_metrics(show_summarized)
+```
+
+And Final you can use preview_metric for your dashboard.
+
+
+![](../images/Dashboard.png)
+
+
+Is the most similar that [looker](https://looker.com/)
+
+
+You can find my Dashboard final version [here](https://danieljimenez.shinyapps.io/Brodway/), and de code [here]()
 
