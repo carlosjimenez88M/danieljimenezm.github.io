@@ -1,6 +1,5 @@
 ---
-title: "tidymetrics"
-author: "Daniel Jiménez"
+title: "tidymetrics and shinydahs"
 date: 2020-05-03
 output: html_document
 ---
