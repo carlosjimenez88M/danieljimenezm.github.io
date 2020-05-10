@@ -137,6 +137,7 @@ Solo para contextualizar un poco este ejemplo volvamos al caso de los jugadores 
 $$
 \mbox{prior_jugador_b}=\frac{300+\alpha}{100+\alpha+\beta}=\frac{300+101.9089}{1000+101.9089+289.4558}=0.2888595
 $$
+
 Mientras que en el caso del jugador a
 
 
@@ -163,8 +164,8 @@ $$
 
 
 ```{r, echo=FALSE, cache=FALSE}
-ggplot(carrer_eb, aes(average, eb_estimation, color = AB)) +
-  geom_hline(yintercept = alpha / (alpha + beta), color = "red", lty = 2) +
+ggplot(career_eb, aes(average, eb_estimate, color = AB)) +
+  geom_hline(yintercept = alpha0 / (alpha0 + beta0), color = "red", lty = 2) +
   geom_point() +
   geom_abline(color = "red") +
   scale_colour_gradient(trans = "log", breaks = 10 ^ (1:5)) +
