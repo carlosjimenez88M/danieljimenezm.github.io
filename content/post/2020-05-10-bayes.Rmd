@@ -147,8 +147,6 @@ $$
 
 Esta increíble precisión nos indica que el jugador b es mejor que el jugador a y hemos eliminado la incertidumbre. Esto es fenomenal, increíble!!!
 
-![](https://media.tenor.com/images/9195a2abc31d871d83747abfe68b402e/tenor.gif)
-
 
 Ahora se hace lo mismo para cada uno de los jugadores y se estima como con el empirical bayes se cambiaron o ajustaron las estimaciones de bateo.
 
