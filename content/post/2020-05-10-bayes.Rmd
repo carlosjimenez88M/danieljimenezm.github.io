@@ -1,8 +1,8 @@
 ---
-title: "Empirical Bayes Method"
-author: "Daniel Jiménez"
+title: "Métodos de empirismo bayesiano"
 date: 2020-05-10
 output: html_document
+mathjax: "true"
 ---
 
 ```{r setup, include=FALSE}
