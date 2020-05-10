@@ -20,7 +20,7 @@ Dicho lo anterior extraigo una frase de [Robinson](http://varianceexplained.org/
 
 La estructura de este método se basa en el siguiente workflow:
 
-![](https://www.researchgate.net/profile/Muneki_Yasuda/publication/333815353/figure/fig1/AS:770618689609728@1560741221674/Illustration-of-scheme-of-empirical-Bayes-method-considered-in-this-study.png)
+![](../images/bayes.png)
 
 
 ## Estimaciones Bayesianas
