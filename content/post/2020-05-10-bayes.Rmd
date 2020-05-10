@@ -261,8 +261,7 @@ yankee_1998_career %>%
 Esto es todo por este post! Espero que les guste.
 
 
-[^1]:Fragmento de: David Robinson. “Introduction to Empirical Bayes”. Apple Books. https://books.apple.com/co/book/introduction-to-empirical-bayes/id1204090411"
-
+[^1]:Fragmento de: David Robinson. "Introduction to Empirical Bayes". 
 
 
 
