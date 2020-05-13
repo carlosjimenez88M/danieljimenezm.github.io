@@ -1,5 +1,5 @@
 ---
-title: "tidytuesdat#19"
+title: "tidytuesday#19"
 author: "Daniel Jiménez"
 date: 2020-05-11
 output: html_document
@@ -32,6 +32,7 @@ library(ggridges);
 library(ggthemes);
 library(gganimate)
 library(anim.plots)
+library(gifski)
 
 ```
 
@@ -164,7 +165,7 @@ volcano_full%>%
 Well I have one question How are the volcano activity?
 
 
-```{r,echo=FALSE, cache=FALSE}
+```{r,echo=FALSE, cache=FALSE,warning=FALSE,message=FALSE}
 volcano_full%>%
   filter(start_year >= 1970)%>%
   ggplot(aes(2020 - start_year))+
@@ -176,7 +177,7 @@ We have more activity in this last years.
 
 and Where?
 
-```{r, echo=FALSE, cache=FALSE}
+```{r, echo=FALSE, cache=FALSE,warning=FALSE, cache=FALSE}
 volcano_full%>%
   mutate(volume=.00001*10^vei)%>%
   ggplot(aes(longitude,latitude))+
@@ -190,27 +191,31 @@ volcano_full%>%
 ```
 
 
-And Finally
-```{r,warning=FALSE,message=FALSE}
+And Finally 
+
+
+
+```{r,warning=FALSE,message=FALSE, echo=FALSE, cache=FALSE}
 w2hr <- map_data("world") # world map
 
 # Data formatting & analysis ---------
 
 volcanoerupt<-left_join(volcano, eruptions) %>%
   drop_na(c(start_year,vei)) %>%
-  filter(start_year>1970, start_year<2019)
+  filter(start_year>1980, start_year<2020)
 
 
 plotv<- ggplot() +
   geom_polygon(data=w2hr, 
                aes(x=long, y=lat, group=group), 
-               fill="blue", color="red") +
-  geom_point(volcano_full, 
+               fill="grey", color="black") +
+  geom_point(volcanoerupt, 
              mapping = aes(x = longitude, y = latitude,
                            color = elevation, size=vei,
                            # add a group so the points don't animate from each other
                            group=as.factor(start_year)), 
              shape=17, alpha=0.8)+
+  theme_map()+
   scale_colour_viridis_c("Elevation (m)", option="magma")+
   scale_size_continuous("Volcano \nExplosivity \nIndex")+
   scale_x_continuous(expand=c(0,0)) + scale_y_continuous(expand=c(0,0)) +
@@ -226,12 +231,13 @@ plotanimate<-plotv+
 
 # render animation
 animate(plot = plotanimate, 
-  nframes = length(unique(volcano_full$start_year)), 
-  fps = 4, end_pause = 8, height = 380, width =600)
+  nframes = length(unique(volcanoerupt$start_year)), 
+  fps = 4, end_pause = 8, height = 380, width =600,
+   renderer = gifski_renderer())
 
 ## Saving -----------------------------
 
-anim_save("Volcanoes_plot.gif")
+anim_save("Volcanoes_plot.gif",)
 ```
 
 

@@ -1,0 +1,83 @@
+---
+title: "tidytuesday#19"
+author: "Daniel Jiménez"
+date: 2020-05-11
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+
+
+<p>I am very excited, becouse is my first time working with Georeferencial Data analysis! In this opportunity I wanna develop only Visual Data Analysis for this project.</p>
+<p>Well let’s do it!!!</p>
+<div id="eda" class="section level2">
+<h2>EDA</h2>
+<p>I try understand type of events and <code>eruption_category</code> in this step.</p>
+<p>The first step to develop is to cross the databases.</p>
+<pre class="r"><code>volcano_full&lt;-volcano%&gt;%
+  left_join(eruptions,by=c(&quot;volcano_number&quot;,&quot;volcano_name&quot;,&quot;latitude&quot;,&quot;longitude&quot;))%&gt;%
+  left_join(events,by=c(&quot;volcano_number&quot;,&quot;volcano_name&quot;,&quot;eruption_number&quot;))
+
+volcano_full$last_eruption_year&lt;-as.numeric(volcano_full$last_eruption_year)</code></pre>
+<pre><code>## Warning: NAs introduced by coercion</code></pre>
+<p>Whit this information, I create a visualization per decade of the number of eruptions given the region</p>
+<p><img src="/post/2020-05-12-volcano_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+Is incredible this association, maybe is necesary understad (whit this information) the correlation for elevation and number of events</p>
+<pre class="r"><code>volcano_full%&gt;%
+  group_by(region,country)%&gt;%
+  summarize(events=n(),
+            elevation=mean(elevation,na.rm = TRUE))%&gt;%
+  ungroup()%&gt;%
+  group_by(region)%&gt;%
+  mutate(cor=cor(events,elevation))%&gt;%
+  na.omit()%&gt;%
+  ggplot(aes(fct_reorder(region,cor),cor,color=cor&gt;0))+
+  geom_point(aes(size=cor))+
+  coord_flip()+
+  labs(x=&quot;Region&quot;,
+       y=&quot;Correlation&quot;)</code></pre>
+<p><img src="/post/2020-05-12-volcano_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>I think that is possible this relation, maybe is necesary other analysis.</p>
+<p><img src="/post/2020-05-12-volcano_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Well Here We Have the real information</p>
+<pre class="r"><code>volcano_full%&gt;%
+  group_by(region,eruption_category)%&gt;%
+  count()%&gt;%
+  ungroup()%&gt;%
+  mutate(eruption_category=factor(eruption_category),
+         region=reorder_within(region,n,eruption_category))%&gt;%
+  ggplot(aes(region,n))+
+  geom_col()+
+  scale_x_reordered()+
+  facet_wrap(~eruption_category,scales=&quot;free&quot;,ncol = 1)+
+  coord_flip()</code></pre>
+<p><img src="/post/2020-05-12-volcano_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Now I make a map</p>
+<pre class="r"><code>volcano_full%&gt;%
+  mutate(primary_volcano_type=str_remove(primary_volcano_type,&quot;\\(.*\\)&quot;),
+    primary_volcano_type=fct_lump(primary_volcano_type,10))%&gt;%
+  ggplot(aes(longitude,latitude))+
+  geom_point(aes(color=primary_volcano_type))+
+  borders()+
+  theme_map()</code></pre>
+<p><img src="/post/2020-05-12-volcano_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Now with the event type</p>
+<pre class="r"><code>volcano_full%&gt;%
+  filter(!is.na(event_type))%&gt;%
+  mutate(event_type=str_remove(event_type,&quot;\\(.*\\)&quot;),
+         event_type=fct_lump(event_type,5))%&gt;%
+  ggplot(aes(longitude,latitude))+
+  geom_point(aes(color=event_type),size=.5)+
+  borders()+
+  theme_map()</code></pre>
+<p><img src="/post/2020-05-12-volcano_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>Well I have one question How are the volcano activity?</p>
+<p><img src="/post/2020-05-12-volcano_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>We have more activity in this last years.</p>
+<p>and Where?</p>
+<p><img src="/post/2020-05-12-volcano_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>And Finally</p>
+<p><img src="/post/2020-05-12-volcano_files/figure-html/unnamed-chunk-12-1.gif" /><!-- --></p>
+<p>Thks 4 all Guys!!</p>
+</div>
