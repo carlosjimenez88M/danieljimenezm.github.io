@@ -30,7 +30,7 @@ theme = "hugo-theme-chunky-poster"
 
   [[menu.main]]
     identifier = "publications"
-    name = "Publications"
+    name = "Machine Learning codes"
     url = "/publications/"
     weight = 2
 
