@@ -29,9 +29,9 @@ theme = "hugo-theme-chunky-poster"
     weight = 1
 
   [[menu.main]]
-    identifier = "publications"
+    identifier = "machine"
     name = "Machine Learning codes"
-    url = "/publications/"
+    url = "/machine/"
     weight = 2
 
 [taxonomies]
