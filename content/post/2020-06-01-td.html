@@ -1,0 +1,111 @@
+---
+title: "Una verdad un tanto incomoda"
+author: "Daniel Jiménez"
+date: "6/1/2020"
+output: html_document
+---
+
+
+
+<div id="una-verdad-un-tanto-incomoda" class="section level2">
+<h2>Una verdad un tanto incomoda</h2>
+<p>En esta oportunidad no voy a desarrollar mi <code>tidytuesday</code> para prestar atención a un asunto más importante y que afecta mucho la realidad del país donde vivo -Colombia-, y es el desempleo. Este tema es bastante espinoso y por ello intentaré no hablar desde un aspecto político y mantenerme en el plano del científico y hablar de lo que los datos nos muestran. Tampoco abordaré el tema desde un punto de vista <strong>Macroeconómico</strong> ya que desde mi foro interno la considero como algo obsoleto, con propuestas del siglo XIX que se fuerzan aplicarse al siglo XXI. En contra partida si usare un instrumento de la ciencia política que es el imperio de la ley para demostrar una tesis que más adelante comentaré.</p>
+<p>Aspectos importantes a tener presente:</p>
+<ul>
+<li>La tasa de Desempleo se mide desde el 2001</li>
+<li>Los ciclos políticos en materia económica del país responden a distintos sucesos (conflicto, corrupción) que no tocaré en esta entrada.</li>
+<li>Los efectos de las guerras comerciales los tendré presente a la hora de desarrollar las ideas que a continuación vienen, más no los tocaré a profundidad</li>
+</ul>
+</div>
+<div id="un-problema-con-diferentes-frentes" class="section level2">
+<h2>Un problema con diferentes frentes</h2>
+<p>Es indudable que Colombia entro en una recesión en el 2020, según el Banco Mundial la economía caerá entre 2.4% y el 5%<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, mis proyecciones son un poco más modestas y pienso que la caída será del 2.9%. Esto significa un punto de quiebre puesto ni en el 99 habíamos vivido, por lo tanto es difícil tener un punto de referencia sobre lo que opinaré. Lo anterior se sustenta en lo siguiente:</p>
+<ul>
+<li>En la recesión del 99 no todas las economías se quebraron</li>
+<li>China creció durante el periodo 1999-2001, lo cual arrastro la economía mundial</li>
+<li>El precio de las materias primas en el 99 se recupero rápidamente.</li>
+</ul>
+<p>Ahora lo que hace diferente a está crisis es lo siguiente:</p>
+<ul>
+<li><p>El mapa geopolitico del mundo cambio, existe una sinergia en que la mayoría de países viven una economía de derecha</p></li>
+<li>Vivimos el periodo de mayor tensión en termino de guerras comerciales (la pelea entre China y EEUU).</li>
+<li>El Covid 19 planteo un problema y es ¿salud o economía?.</li>
+<li>El valor del dolar empezó a tener un comportamiento aleatorio.</li>
+<li>El impacto de los mandatarios (presidentes) frente a la emergencia.</li>
+<li><p>El precio del petroleo llego en su momento a ser el más bajo de la historia.</p></li>
+</ul>
+</div>
+<div id="colombia-y-el-desempleo" class="section level2">
+<h2>Colombia y el desempleo</h2>
+<p>Colombia no es una economía fuerte en términos de generación de empleos y esto responde a un tema de instituciones, en el siguiente gráfico mostraré como ha sido el histórico del desempleo en el país.
+<img src="/post/2020-06-01-td_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Es obvio que el país presenta estacionalidad (débil) en su tasa de desempleo, pero de esto hablaré más adelante.</p>
+<p>La tasa de desempleo de Colombia en las últimas décadas a estado en promedio en el 11.4%, siendo la mínima del 7% y la máxima la actual 19.8%, si evaluamos las variaciones de la tasa obtendremos una sorpresa importante, puesto que el desempleo ya venia subiendo, el covid simplemente lo acelero. Cabe recordar que muchas firmas decidieron irse del país por distintas razones,y esto aumento el número de cesantes del país, paso seguido que las variaciones del dolar (puntualmente su encarecimiento) también hicieron insostenible su participación en el mercado local.</p>
+<p><img src="/post/2020-06-01-td_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Por un lado este problema del crecimiento del desempleo se debe a la suma de diferentes factores institucionales que atraviesa el país, por un lado la inyección de capital por parte del gobierno hacia la economía a sido bastante tímido, y esto no ha permitido mantener o sostener la demanda de los hogares, mientras que el Banco de la República a inyectado de liquidez de capital a los bancos para evitar la quiebra del sistema, más esto solo ha sido una medida liviana ante el problema real.</p>
+<p>Dicho lo anterior, el país atraviesa un movimiento importante en donde se está robusteciendo la clase baja, gracias a la migración de la media que vive la destrucción de las firmas y por ende aportan el fortalecimiento de la pobreza que en el país no se ha dejado de vivir y en este sentido y muy a contra corriente a las afirmaciones del ministro de hacienda (donde sostiene que Colombia es un país de rentas medias) se confirma que la economía domestica es tan débil que basto dos meses para ver como se genero el retroceso de dos décadas de desarrollo económico frágil y condicionado, pues esta es una economía de deuda. Ahora dicho lo anterior, es obvio que el país vivirá una caída de los ingresos fiscales y esto sumado a los 20 puntos que aumento la deuda externa, el país tiene el cocktel perfecto para ir aun periodo de recesión sin precedentes.</p>
+<p>Dicho lo anterior quiero presentar como será según mis cálculos el desempleo del país.</p>
+</div>
+<div id="entendiendo-la-tasa-de-desempleo" class="section level2">
+<h2>Entendiendo la tasa de desempleo</h2>
+<p>El tema del desempleo lo abordaré como una serie de tiempo, la cual consiste en evaluar los outputs con respecto al momento en que se dan. Por lo anterior buscaré desarrollar un modelo ARIMA para ver en este momento como sería el desempleo en los próximos tres meses.</p>
+<p>Los modelos ARIMA son Modelos auto regresivos de media móvil que tienen un factor de integración, en donde lo importante a evaluar es el resultado de los errores, para dar unas estimaciones más robustas.</p>
+<p>Algo importante a tener presente es que este modelo es que tiene un comportamiento no estacionario (media sostenida y eliminación de la tendencia) y una parte estacionaria dinámica por este nuevo efecto.</p>
+<p>Con esta salvedad, y después de hacer varias pruebas, el modelo pasa a ser un SARIMA y tiene el siguiente comportamiento</p>
+<pre><code>## initial  value -0.070698 
+## iter   2 value -0.091594
+## iter   3 value -0.108556
+## iter   4 value -0.109689
+## iter   5 value -0.109712
+## iter   6 value -0.109751
+## iter   6 value -0.109751
+## iter   6 value -0.109751
+## final  value -0.109751 
+## converged
+## initial  value -0.099169 
+## iter   2 value -0.100574
+## iter   3 value -0.101914
+## iter   4 value -0.101916
+## iter   4 value -0.101916
+## final  value -0.101916 
+## converged</code></pre>
+<p><img src="/post/2020-06-01-td_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<pre><code>##      Estimate     SE t.value p.value
+## sma1  -0.4151 0.1684 -2.4652  0.0152</code></pre>
+<p>Teniendo en cuenta el valor atípico en la prueba Ljung-Box, puedo plantear un ajuste al modelo si la prueba lo exige.</p>
+<p><img src="/post/2020-06-01-td_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<pre><code>## 
+##  Ljung-Box test
+## 
+## data:  Residuals from ARIMA(0,1,0)(0,1,1)[12]
+## Q* = 3.3111, df = 23, p-value = 1
+## 
+## Model df: 1.   Total lags used: 24</code></pre>
+<p>Lo anterior muestra que no es necesario hacerle mayores modificaciones a esta estimación, pero dado los efectos de los ciclos lo más prudente es trabajar las estimaciones en términos de intervalos.</p>
+<p>Primero lo expresaré en términos mixtos antes de desglosar la tesis que traigo en este post.</p>
+<p><img src="/post/2020-06-01-td_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Mi punto de partida es que el desempleo estará en Junio en el 21%. Pero al evaluarlo en términos de probabilidades debemos tener presente dos cosas:</p>
+<ul>
+<li><p>El alza de 8 puntos del desempleo es muy poco probable que se de nuevamente, pues las condiciones son diferentes</p></li>
+<li><p>Ahora es importante tener presente, hay muchas empresas puedan quebrar en este nuevo mes, y en este caso hablaremos de destrucción del empleo.</p></li>
+</ul>
+<p>Dicho lo anterior el modelo tendrá esta nueva forma</p>
+<pre><code>##          Point Forecast    Lo 80    Hi 80    Lo 95    Hi 95
+## May 2020       20.02567 18.87485 21.17648 18.26565 21.78569
+## Jun 2020       19.14464 17.51715 20.77214 16.65560 21.63369
+## Jul 2020       20.19940 18.20613 22.19267 17.15096 23.24785</code></pre>
+<p>Estos intervalos nos dan una buena ruta de navegación para saber lo que es muy probable que suceda.
+Dicho lo anterior y sumandole al modelo lo que puede suceder en el escenario de quiebras de empresa y un debilitamiento de la economía de los hogares el panorama pasa a ser el siguiente</p>
+<p><img src="/post/2020-06-01-td_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>En términos generales el desempleo estará entre el 21% y el 24% bajo las premisas que comente anteriormente y es acá donde viene mi tesis más importante. El desempleo en Colombia ya venia creciendo, si miramos la serie sin el último mes el crecimiento del mismo iba a ser importante.</p>
+<p><img src="/post/2020-06-01-td_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>Era muy probable que el desempleo del país sin covid estuviese en el 15%, por lo tanto el problema del empleo no debe ser dado o proclamado por este solo factor, en los últimos dos meses del presente año la tasa de desempleo ha estado subiendo y es ahí donde debemos entender que hay una fragilidad profunda en el país en estos términos.</p>
+<p>Quiero finalizar esta entrada con varias reflexiones, es fácil criticar y no aportar, más el objetivo de está salida es sentar las bases de que el covid a penas tiene la culpa del 50% del desempleo que vivimos. Segundo, soy un fiel creyente de la economía de mercado, pero soy más creyente de la debilidad que tiene el país por su tasa de dependencia, lo que nos sigue dejando como un país satelite, siendo así que sospecho que si fortalecemos la economía domestica y nos basamos en producción local, y para esto hay que mejorar los costos de la producción y en especial el del transporte de insumos, lograriamos tener una fortaleza financiera y fomento de los empleos de manera más eficiente, con lo cual no llegaremos al pleno empleo, el cual es una fantasía, pero si al bienestar nacional, en el contexto del sustento del hogar, que al final debería ser lo más importante para cualquier sociedad.</p>
+<p>Gracias!</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p><a href="https://www.dinero.com/economia/articulo/cuanto-caera-el-pib-de-colombia-en-2020/287351#" class="uri">https://www.dinero.com/economia/articulo/cuanto-caera-el-pib-de-colombia-en-2020/287351#</a>:~:text=Banco%20Mundial%20rebaj%C3%B3%20a%20%2D4%2C9%25%20la%20proyecci%C3%B3n%20del,PIB%20de%20Colombia%20en%202020&amp;text=El%20pron%C3%B3stico%20anterior%20del%20Banco,los%20esperados%20por%20las%20autoridades.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
