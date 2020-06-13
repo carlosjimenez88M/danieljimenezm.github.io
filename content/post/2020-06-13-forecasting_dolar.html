@@ -93,7 +93,7 @@ Serie</code></pre>
 ## 10 2020-06-01    3730   3717.
 ## # … with 13 more rows</code></pre>
 <p>Para este análisis me basaré puntualmente en el cierre</p>
-<p><img src="/post/2020-06-14-forecasting_dolar_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/post/2020-06-13-forecasting_dolar_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
 </div>
 <div id="build-a-model" class="section level2">
@@ -105,7 +105,7 @@ Serie</code></pre>
   geom_smooth(se=FALSE)+
   labs(title = &#39;Tendencia del comportamiento del dolar&#39;,
        subtitle = &#39;a través de la estructura de una regresión mixta&#39;)</code></pre>
-<p><img src="/post/2020-06-14-forecasting_dolar_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/post/2020-06-13-forecasting_dolar_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>Me llama bastante la atención del mínimo local de $3.600, acá puede que exista un cambio de estructura de la información, pero también puede que exista una correlación escalonada con factores exógenos. Para entender mejor esto, voy a trabajar con algunas tranformaciones</p>
 <p>Lo primero es convertir los datos en una serie de tiempo, paso seguido descomponer la serie a ver que insigths podemos extraer de los comportamientos individualizados y pot último es determinar que tipo de modelo aplicar. Todo lo anterior lo desarrollaré en un solo código.</p>
 <pre class="r"><code>Serie%&gt;%
@@ -114,7 +114,7 @@ Serie</code></pre>
   ts()%&gt;%
   mstl()%&gt;%
   autoplot()</code></pre>
-<p><img src="/post/2020-06-14-forecasting_dolar_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/post/2020-06-13-forecasting_dolar_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Particularmente la estacionalidad y la tendencia de los componentes parece indicar presencia de una correlación fuerte entre los períodos de tiempo, pero a la par no dejo de sentir algo de ruido y se evidencia una tendencia al alza de manera no constante!</p>
 <p>Es interesante ver este comportamiento, pues muestra que en efecto un modelo de memoria corta podría ser el indicado.</p>
 <pre class="r"><code>Serie%&gt;%
@@ -122,9 +122,9 @@ Serie</code></pre>
   select(Cierre)%&gt;%
   ts()%&gt;%
   ggtsdisplay()</code></pre>
-<p><img src="/post/2020-06-14-forecasting_dolar_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/post/2020-06-13-forecasting_dolar_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>Increible los datos pierden potencia de correlación con su pasado, hay que ser cauto a la hora de tratar la serie, a demás todo parece indicar que existe un modelo AR (1), más tengo mis reservas aun, puede que se trate de un factor de integración simplemente y que realmente la serie tenga un comportamiento de caminata aleatoría por los cambios de nivel.</p>
-<p>VOy a trabajar con la serie diferenciada a ver si encuentro la tendencia que es lo que más llama mi atención</p>
+<p>Voy a trabajar con la serie diferenciada a ver si encuentro la tendencia que es lo que más llama mi atención</p>
 <pre class="r"><code>Serie%&gt;%
   arrange(Fecha)%&gt;%
   select(Cierre)%&gt;%
@@ -132,7 +132,7 @@ Serie</code></pre>
   diff()%&gt;%
   mstl()%&gt;%
   autoplot()</code></pre>
-<p><img src="/post/2020-06-14-forecasting_dolar_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<p><img src="/post/2020-06-13-forecasting_dolar_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 Bueno, en efecto hay una tendencia bastante fuerte [-20,20], pero este efecto por la magnitud que tiene confirma mi sospecha de caminata aleatoria, for la fuerza del despliegue que tiene la curva, lo cual me lleva a concluir que existe una constante de integración o en términos técnicos un <strong>Random walk with drift</strong></p>
 <p>Gracias a todos los insigths que tenemos, ya se puede construir un modelo ARIMA, de la siguiente manera</p>
 <pre class="r"><code>Serie_ts&lt;-Serie%&gt;%
@@ -149,7 +149,7 @@ sarima(Serie_ts,p=0,d=1,q=0)</code></pre>
 ## iter   1 value 3.673162
 ## final  value 3.673162 
 ## converged</code></pre>
-<p><img src="/post/2020-06-14-forecasting_dolar_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/post/2020-06-13-forecasting_dolar_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <pre><code>## $fit
 ## 
 ## Call:
@@ -181,7 +181,7 @@ sarima(Serie_ts,p=0,d=1,q=0)</code></pre>
 ## [1] 10.4652</code></pre>
 <p>La evidencia indica que este es el modelo adecuado, los errores tiene un buen desempeño. Pero para concluirlo este es un modelo de Ruido Blanco</p>
 <p>Por lo tanto paso hacer el modelo para pronósticar.</p>
-<p><img src="/post/2020-06-14-forecasting_dolar_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+<p><img src="/post/2020-06-13-forecasting_dolar_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 El dolar el día 12 de Junio cerro en $3.776,50 y el modelo pronóstico $3.778,499</p>
 </div>
 <div id="explorando-resultados" class="section level2">
@@ -212,7 +212,7 @@ autoplot(Serie_ts) +
   autolayer(fc2, series=&quot;Tendencia estocástica&quot;) +
   autolayer(fc1, series=&quot;Tendencia determinístico&quot;)+
   labs(title = &#39;Comparación del modelo determinístico vs estocástico&#39;)</code></pre>
-<p><img src="/post/2020-06-14-forecasting_dolar_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="/post/2020-06-13-forecasting_dolar_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>En efecto hay una tendencia AR1, y la predicción del dolar bajo este foco fue 99.6% acertada.</p>
 <p>Esto fue todo por esta oportunidad, espero que les haya gustado!</p>
 </div>
@@ -268,11 +268,11 @@ autoplot(Serie_ts) +
 </table>
 <p>Y acá dejo los valores de la predicción a través de una red neuronal</p>
 <pre><code>##    Point Forecast
-## 24       3753.469
-## 25       3735.193
-## 26       3718.564
-## 27       3706.545</code></pre>
-<p><img src="/post/2020-06-14-forecasting_dolar_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+## 24       3751.323
+## 25       3738.956
+## 26       3721.075
+## 27       3707.809</code></pre>
+<p><img src="/post/2020-06-13-forecasting_dolar_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 </div>
 <div class="footnotes">
 <hr />
