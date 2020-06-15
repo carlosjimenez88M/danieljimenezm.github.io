@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Introducción
 
-En esta oportunidad quiero trabajar con dos desarrollos muy interesantes a nivel de implementación, la primera tiene que ver con un web scraping, dado un proyecto en el cual estoy trabajando con una persona que admiro demasiado, el doctor [Carlos Ospino](https://www.linkedin.com/in/cospino/) y por otro lado respondiendo a un reto, sobre trading financiero por parte de [Daniel Cordoba](https://www.linkedin.com/in/daniel-alejandro-cordoba-pulido-6b9199103/), el cual me a obligado a pensar fuera de la caja con una serie de metodologias. Por lo anterior el trabajo que hoy desarrollaré es intentar predecir el precio del dolar, con modelos de memoria corta.
+En esta oportunidad quiero trabajar con dos desarrollos muy interesantes a nivel de implementación, la primera tiene que ver con un web scraping, dado un proyecto en el cual estoy trabajando con una persona que admiro demasiado, el doctor [Carlos Ospino](https://www.linkedin.com/in/cospino/) y por otro lado respondiendo a un reto, sobre trading financiero por parte de [Daniel Cordoba](https://www.linkedin.com/in/daniel-alejandro-cordoba-pulido-6b9199103/), el cual me a obligado a pensar fuera de la caja con una serie de metodologías. Por lo anterior el trabajo que hoy desarrollaré es intentar predecir el precio del dolar, con modelos de memoria corta.
 
 
 La fuente de datos es [investing](https://es.investing.com/currencies/usd-cop-historical-data), y la bibliografía que consulte para esta post es la siguiente:
@@ -41,7 +41,7 @@ theme_set(theme_classic())
 
 ### Web Scraping
 
-hacer web scraping es un arte practicamente, hay que tener presente como esta el protocolo http, si es 200 se puede trabajar perfectamente, de lo contrario, tocaría hacer un par de cosas sobre el texto que intenta leer a nivel de tranformación `.html`. Si desea tener más información al respecto le recomiendo ver el siguiente [link](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes), por otro lado, si desea integrar y mantener un deploy sobre esto, por experiencia le recomiendo trabajar con Flask, hace parte de las buenas prácticas.
+hacer web scraping es un arte prácticamente, hay que tener presente cómo esta el protocolo http, si es 200 se puede trabajar perfectamente, de lo contrario, tocaría hacer un par de cosas sobre el texto que intenta leer a nivel de transformación `.html`. Si desea tener más información al respecto le recomiendo ver el siguiente [link](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes), por otro lado, si desea integrar y mantener un deploy sobre esto, por experiencia le recomiendo trabajar con Flask, hace parte de las buenas prácticas.
 
 
 Para revisar el `status code`, puede ejecutar el siguiente código
@@ -107,9 +107,9 @@ Serie%>%
 
 ## Build a model
 
-El comportamiento del dolar ha sido bastante dinámico, por lo tanto trabajar con un modelo de memoría corta puede ser un camino correcto, aunque no estoy muy seguro que el mejor,pero veamos esto a través de los resultados.
+El comportamiento del dólar ha sido bastante dinámico, por lo tanto trabajar con un modelo de memoria corta puede ser un camino correcto, aunque no estoy muy seguro que el mejor, pero veamos esto a través de los resultados.
 
-Lo primero que quiero evaluar es el tipo de comportamiento de los datos, a través de la tendencia. Lo más importante  adestacar es que se trata de una regresión Loess o local[^1], por lo cual entender los segmentos de tiempo será la clave de este asunto.
+Lo primero que quiero evaluar es el tipo de comportamiento de los datos, a través de la tendencia. Lo más importante  a destacar es que se trata de una regresión Loess o local[^1], por lo cual entender los segmentos de tiempo será la clave de este asunto.
 
 ```{r, warning=FALSE, message=FALSE}
 Serie%>%
@@ -119,7 +119,7 @@ Serie%>%
        subtitle = 'a través de la estructura de una regresión mixta')
 ```
 
-Me llama bastante la atención del mínimo local de $3.600, acá puede que exista un cambio de estructura de la información, pero también puede que exista una correlación escalonada con factores exógenos. Para entender mejor esto, voy a trabajar con algunas tranformaciones 
+Me llama bastante la atención del mínimo local de $3.600, acá puede que exista un cambio de estructura de la información, pero también puede que exista una correlación escalonada con factores exógenos. Para entender mejor esto, voy a trabajar con algunas transformaciones 
 
 Lo primero es convertir los datos en una serie de tiempo, paso seguido descomponer la serie a ver que insigths podemos extraer de los comportamientos individualizados y pot último es determinar que tipo de modelo aplicar. Todo lo anterior lo desarrollaré en un solo código.
 
@@ -147,7 +147,7 @@ Serie%>%
   ggtsdisplay()
 ```
 
-Increible los datos pierden potencia de correlación con su pasado, hay que ser cauto a la hora de tratar la serie, a demás todo parece indicar que existe un modelo AR (1), más tengo mis reservas aun, puede que se trate de un factor de integración simplemente y que realmente la serie tenga un comportamiento de caminata aleatoría por los cambios de nivel.
+Increíble los datos pierden potencia de correlación con su pasado, hay que ser cauto a la hora de tratar la serie, a demás todo parece indicar que existe un modelo AR (1), más tengo mis reservas aun, puede que se trate de un factor de integración simplemente y que realmente la serie tenga un comportamiento de caminata aleatoria por los cambios de nivel.
 
 
 Voy a trabajar con la serie diferenciada a ver si encuentro la tendencia que es lo que más llama mi atención
@@ -177,7 +177,7 @@ sarima(Serie_ts,p=0,d=1,q=0)
 
 La evidencia indica que este es el modelo adecuado, los errores tiene un buen desempeño. Pero para concluirlo este es un modelo de Ruido Blanco
 
-Por lo tanto paso hacer el modelo para pronósticar.
+Por lo tanto paso hacer el modelo para pronosticar.
 
 
 ```{r, echo=FALSE, cache=FALSE}
@@ -191,7 +191,7 @@ El dolar el día 12 de Junio cerro en \$3.776,50  y el modelo pronóstico \$3.77
 
 ## Explorando resultados
 
-Al principio sospeche que existia un AR(1), en el modelo, y la evidencia arroja que es un ARIMA (0,1,0), que es lo mismo que ruido, por lo tanto dada la predicción real del dolar evaluare que tan real es la idea del Autoregresivo.
+Al principio sospeche que existía un AR(1), en el modelo, y la evidencia arroja que es un ARIMA (0,1,0), que es lo mismo que ruido, por lo tanto dada la predicción real del dólar evaluare qué tan real es la idea del Autoregresivo.
 ```{r}
 
 trend <- seq_along(Serie_ts)
@@ -214,7 +214,7 @@ Esto fue todo por esta oportunidad, espero que les haya gustado!
 
 ## Una apuesta más
 
-Dejo los datos del modelo determinístico para ver que tanto se ajustan los valores con la realidad.
+Dejo los datos del modelo determinístico para ver qué tanto se ajustan los valores con la realidad.
 
 ```{r, echo=FALSE, cache=FALSE}
 fc1%>%

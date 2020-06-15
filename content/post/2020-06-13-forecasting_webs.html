@@ -8,7 +8,7 @@ output: html_document
 
 <div id="introducción" class="section level2">
 <h2>Introducción</h2>
-<p>En esta oportunidad quiero trabajar con dos desarrollos muy interesantes a nivel de implementación, la primera tiene que ver con un web scraping, dado un proyecto en el cual estoy trabajando con una persona que admiro demasiado, el doctor <a href="https://www.linkedin.com/in/cospino/">Carlos Ospino</a> y por otro lado respondiendo a un reto, sobre trading financiero por parte de <a href="https://www.linkedin.com/in/daniel-alejandro-cordoba-pulido-6b9199103/">Daniel Cordoba</a>, el cual me a obligado a pensar fuera de la caja con una serie de metodologias. Por lo anterior el trabajo que hoy desarrollaré es intentar predecir el precio del dolar, con modelos de memoria corta.</p>
+<p>En esta oportunidad quiero trabajar con dos desarrollos muy interesantes a nivel de implementación, la primera tiene que ver con un web scraping, dado un proyecto en el cual estoy trabajando con una persona que admiro demasiado, el doctor <a href="https://www.linkedin.com/in/cospino/">Carlos Ospino</a> y por otro lado respondiendo a un reto, sobre trading financiero por parte de <a href="https://www.linkedin.com/in/daniel-alejandro-cordoba-pulido-6b9199103/">Daniel Cordoba</a>, el cual me a obligado a pensar fuera de la caja con una serie de metodologías. Por lo anterior el trabajo que hoy desarrollaré es intentar predecir el precio del dolar, con modelos de memoria corta.</p>
 <p>La fuente de datos es <a href="https://es.investing.com/currencies/usd-cop-historical-data">investing</a>, y la bibliografía que consulte para esta post es la siguiente:</p>
 <ul>
 <li><a href="https://otexts.com/fpp2/">Forecasting: Principles and Practices</a>, de Rob J Hyndman</li>
@@ -21,7 +21,7 @@ output: html_document
 <h2>EDA</h2>
 <div id="web-scraping" class="section level3">
 <h3>Web Scraping</h3>
-<p>hacer web scraping es un arte practicamente, hay que tener presente como esta el protocolo http, si es 200 se puede trabajar perfectamente, de lo contrario, tocaría hacer un par de cosas sobre el texto que intenta leer a nivel de tranformación <code>.html</code>. Si desea tener más información al respecto le recomiendo ver el siguiente <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes">link</a>, por otro lado, si desea integrar y mantener un deploy sobre esto, por experiencia le recomiendo trabajar con Flask, hace parte de las buenas prácticas.</p>
+<p>hacer web scraping es un arte prácticamente, hay que tener presente cómo esta el protocolo http, si es 200 se puede trabajar perfectamente, de lo contrario, tocaría hacer un par de cosas sobre el texto que intenta leer a nivel de transformación <code>.html</code>. Si desea tener más información al respecto le recomiendo ver el siguiente <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes">link</a>, por otro lado, si desea integrar y mantener un deploy sobre esto, por experiencia le recomiendo trabajar con Flask, hace parte de las buenas prácticas.</p>
 <p>Para revisar el <code>status code</code>, puede ejecutar el siguiente código</p>
 <pre class="r"><code>url&lt;-&quot;https://es.investing.com/currencies/usd-cop-historical-data&quot;
 url%&gt;%  
@@ -51,16 +51,16 @@ dolar_table&lt;-url%&gt;%
 <pre><code>## # A tibble: 23 x 6
 ##    Fecha      Último   Apertura Máximo   Mínimo   `% var.`
 ##    &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;   
-##  1 12.06.2020 3.778,50 3.773,00 3.782,33 3.736,96 0,23%   
-##  2 11.06.2020 3.769,89 3.673,50 3.775,51 3.668,50 2,67%   
-##  3 10.06.2020 3.672,00 3.657,50 3.691,50 3.643,00 0,49%   
-##  4 09.06.2020 3.654,16 3.609,99 3.666,24 3.603,82 1,26%   
-##  5 08.06.2020 3.608,61 3.573,20 3.613,26 3.564,00 0,99%   
-##  6 05.06.2020 3.573,20 3.588,50 3.592,37 3.542,06 -0,25%  
-##  7 04.06.2020 3.582,00 3.607,00 3.625,17 3.582,00 -0,69%  
-##  8 03.06.2020 3.607,00 3.636,44 3.647,75 3.562,29 -0,75%  
-##  9 02.06.2020 3.634,15 3.719,90 3.725,25 3.617,49 -2,23%  
-## 10 01.06.2020 3.716,90 3.730,00 3.734,00 3.702,84 -0,35%  
+##  1 15.06.2020 3.782,18 3.778,50 3.784,18 3.775,77 0,10%   
+##  2 14.06.2020 3.778,50 3.778,50 3.778,50 3.778,50 0,00%   
+##  3 12.06.2020 3.778,50 3.773,00 3.782,33 3.736,96 0,23%   
+##  4 11.06.2020 3.769,89 3.673,50 3.775,51 3.668,50 2,67%   
+##  5 10.06.2020 3.672,00 3.657,50 3.691,50 3.643,00 0,49%   
+##  6 09.06.2020 3.654,16 3.609,99 3.666,24 3.603,82 1,26%   
+##  7 08.06.2020 3.608,61 3.573,20 3.613,26 3.564,00 0,99%   
+##  8 05.06.2020 3.573,20 3.588,50 3.592,37 3.542,06 -0,25%  
+##  9 04.06.2020 3.582,00 3.607,00 3.625,17 3.582,00 -0,69%  
+## 10 03.06.2020 3.607,00 3.636,44 3.647,75 3.562,29 -0,75%  
 ## # … with 13 more rows</code></pre>
 <p>Bueno, hay que hacerle un par de modificaciones a la tabla para poder trabajar con ella.</p>
 <pre class="r"><code>Serie&lt;-dolar_table%&gt;%
@@ -80,16 +80,16 @@ Serie</code></pre>
 <pre><code>## # A tibble: 23 x 3
 ##    Fecha      Apertura Cierre
 ##    &lt;date&gt;        &lt;dbl&gt;  &lt;dbl&gt;
-##  1 2020-06-12    3773   3778.
-##  2 2020-06-11    3674.  3770.
-##  3 2020-06-10    3658.  3672 
-##  4 2020-06-09    3610.  3654.
-##  5 2020-06-08    3573.  3609.
-##  6 2020-06-05    3588.  3573.
-##  7 2020-06-04    3607   3582 
-##  8 2020-06-03    3636.  3607 
-##  9 2020-06-02    3720.  3634.
-## 10 2020-06-01    3730   3717.
+##  1 2020-06-15    3778.  3782.
+##  2 2020-06-14    3778.  3778.
+##  3 2020-06-12    3773   3778.
+##  4 2020-06-11    3674.  3770.
+##  5 2020-06-10    3658.  3672 
+##  6 2020-06-09    3610.  3654.
+##  7 2020-06-08    3573.  3609.
+##  8 2020-06-05    3588.  3573.
+##  9 2020-06-04    3607   3582 
+## 10 2020-06-03    3636.  3607 
 ## # … with 13 more rows</code></pre>
 <p>Para este análisis me basaré puntualmente en el cierre</p>
 <p><img src="/post/2020-06-13-forecasting_webs_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
@@ -97,15 +97,15 @@ Serie</code></pre>
 </div>
 <div id="build-a-model" class="section level2">
 <h2>Build a model</h2>
-<p>El comportamiento del dolar ha sido bastante dinámico, por lo tanto trabajar con un modelo de memoría corta puede ser un camino correcto, aunque no estoy muy seguro que el mejor,pero veamos esto a través de los resultados.</p>
-<p>Lo primero que quiero evaluar es el tipo de comportamiento de los datos, a través de la tendencia. Lo más importante adestacar es que se trata de una regresión Loess o local<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, por lo cual entender los segmentos de tiempo será la clave de este asunto.</p>
+<p>El comportamiento del dólar ha sido bastante dinámico, por lo tanto trabajar con un modelo de memoria corta puede ser un camino correcto, aunque no estoy muy seguro que el mejor, pero veamos esto a través de los resultados.</p>
+<p>Lo primero que quiero evaluar es el tipo de comportamiento de los datos, a través de la tendencia. Lo más importante a destacar es que se trata de una regresión Loess o local<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, por lo cual entender los segmentos de tiempo será la clave de este asunto.</p>
 <pre class="r"><code>Serie%&gt;%
   ggplot(aes(Fecha,Cierre))+
   geom_smooth(se=FALSE)+
   labs(title = &#39;Tendencia del comportamiento del dolar&#39;,
        subtitle = &#39;a través de la estructura de una regresión mixta&#39;)</code></pre>
 <p><img src="/post/2020-06-13-forecasting_webs_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<p>Me llama bastante la atención del mínimo local de $3.600, acá puede que exista un cambio de estructura de la información, pero también puede que exista una correlación escalonada con factores exógenos. Para entender mejor esto, voy a trabajar con algunas tranformaciones</p>
+<p>Me llama bastante la atención del mínimo local de $3.600, acá puede que exista un cambio de estructura de la información, pero también puede que exista una correlación escalonada con factores exógenos. Para entender mejor esto, voy a trabajar con algunas transformaciones</p>
 <p>Lo primero es convertir los datos en una serie de tiempo, paso seguido descomponer la serie a ver que insigths podemos extraer de los comportamientos individualizados y pot último es determinar que tipo de modelo aplicar. Todo lo anterior lo desarrollaré en un solo código.</p>
 <pre class="r"><code>Serie%&gt;%
   arrange(Fecha)%&gt;%
@@ -122,7 +122,7 @@ Serie</code></pre>
   ts()%&gt;%
   ggtsdisplay()</code></pre>
 <p><img src="/post/2020-06-13-forecasting_webs_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<p>Increible los datos pierden potencia de correlación con su pasado, hay que ser cauto a la hora de tratar la serie, a demás todo parece indicar que existe un modelo AR (1), más tengo mis reservas aun, puede que se trate de un factor de integración simplemente y que realmente la serie tenga un comportamiento de caminata aleatoría por los cambios de nivel.</p>
+<p>Increíble los datos pierden potencia de correlación con su pasado, hay que ser cauto a la hora de tratar la serie, a demás todo parece indicar que existe un modelo AR (1), más tengo mis reservas aun, puede que se trate de un factor de integración simplemente y que realmente la serie tenga un comportamiento de caminata aleatoria por los cambios de nivel.</p>
 <p>Voy a trabajar con la serie diferenciada a ver si encuentro la tendencia que es lo que más llama mi atención</p>
 <pre class="r"><code>Serie%&gt;%
   arrange(Fecha)%&gt;%
@@ -140,13 +140,13 @@ Bueno, en efecto hay una tendencia bastante fuerte [-20,20], pero este efecto po
   ts()
   
 sarima(Serie_ts,p=0,d=1,q=0)</code></pre>
-<pre><code>## initial  value 3.673162 
-## iter   1 value 3.673162
-## final  value 3.673162 
+<pre><code>## initial  value 3.647767 
+## iter   1 value 3.647767
+## final  value 3.647767 
 ## converged
-## initial  value 3.673162 
-## iter   1 value 3.673162
-## final  value 3.673162 
+## initial  value 3.647767 
+## iter   1 value 3.647767
+## final  value 3.647767 
 ## converged</code></pre>
 <p><img src="/post/2020-06-13-forecasting_webs_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <pre><code>## $fit
@@ -158,34 +158,34 @@ sarima(Serie_ts,p=0,d=1,q=0)</code></pre>
 ## 
 ## Coefficients:
 ##       constant
-##        -5.9777
-## s.e.    8.3951
+##        -5.8682
+## s.e.    8.1846
 ## 
-## sigma^2 estimated as 1550:  log likelihood = -112.03,  aic = 228.05
+## sigma^2 estimated as 1474:  log likelihood = -111.47,  aic = 226.94
 ## 
 ## $degrees_of_freedom
 ## [1] 21
 ## 
 ## $ttable
 ##          Estimate     SE t.value p.value
-## constant  -5.9777 8.3951 -0.7121  0.4843
+## constant  -5.8682 8.1846  -0.717  0.4813
 ## 
 ## $AIC
-## [1] 10.36602
+## [1] 10.31523
 ## 
 ## $AICc
-## [1] 10.37511
+## [1] 10.32432
 ## 
 ## $BIC
-## [1] 10.4652</code></pre>
+## [1] 10.41442</code></pre>
 <p>La evidencia indica que este es el modelo adecuado, los errores tiene un buen desempeño. Pero para concluirlo este es un modelo de Ruido Blanco</p>
-<p>Por lo tanto paso hacer el modelo para pronósticar.</p>
+<p>Por lo tanto paso hacer el modelo para pronosticar.</p>
 <p><img src="/post/2020-06-13-forecasting_webs_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 El dolar el día 12 de Junio cerro en $3.776,50 y el modelo pronóstico $3.778,499</p>
 </div>
 <div id="explorando-resultados" class="section level2">
 <h2>Explorando resultados</h2>
-<p>Al principio sospeche que existia un AR(1), en el modelo, y la evidencia arroja que es un ARIMA (0,1,0), que es lo mismo que ruido, por lo tanto dada la predicción real del dolar evaluare que tan real es la idea del Autoregresivo.</p>
+<p>Al principio sospeche que existía un AR(1), en el modelo, y la evidencia arroja que es un ARIMA (0,1,0), que es lo mismo que ruido, por lo tanto dada la predicción real del dólar evaluare qué tan real es la idea del Autoregresivo.</p>
 <pre class="r"><code>trend &lt;- seq_along(Serie_ts)
 (fit1 &lt;- auto.arima(Serie_ts, d=0, xreg=trend))</code></pre>
 <pre><code>## Series: Serie_ts 
@@ -193,17 +193,17 @@ El dolar el día 12 de Junio cerro en $3.776,50 y el modelo pronóstico $3.778,4
 ## 
 ## Coefficients:
 ##          ar1  intercept     xreg
-##       0.8769  3870.7974  -7.4602
-## s.e.  0.0965    77.5559   5.0639
+##       0.9006  3853.2640  -6.0010
+## s.e.  0.0809    88.8008   5.1913
 ## 
-## sigma^2 estimated as 1663:  log likelihood=-117.05
-## AIC=242.09   AICc=244.32   BIC=246.64</code></pre>
+## sigma^2 estimated as 1595:  log likelihood=-116.67
+## AIC=241.33   AICc=243.56   BIC=245.88</code></pre>
 <pre class="r"><code>(fit2&lt;-auto.arima(Serie_ts,d=1))</code></pre>
 <pre><code>## Series: Serie_ts 
 ## ARIMA(0,1,0) 
 ## 
-## sigma^2 estimated as 1587:  log likelihood=-112.28
-## AIC=226.55   AICc=226.75   BIC=227.64</code></pre>
+## sigma^2 estimated as 1509:  log likelihood=-111.72
+## AIC=225.44   AICc=225.64   BIC=226.53</code></pre>
 <pre class="r"><code>fc1 &lt;- forecast(fit1,
   xreg = length(Serie_ts) + 1:4)
 fc2 &lt;- forecast(fit2, h=4)
@@ -217,7 +217,7 @@ autoplot(Serie_ts) +
 </div>
 <div id="una-apuesta-más" class="section level2">
 <h2>Una apuesta más</h2>
-<p>Dejo los datos del modelo determinístico para ver que tanto se ajustan los valores con la realidad.</p>
+<p>Dejo los datos del modelo determinístico para ver qué tanto se ajustan los valores con la realidad.</p>
 <table>
 <caption><span id="tab:unnamed-chunk-13">Table 1: </span>Dolar con el modelo determinístico</caption>
 <thead>
@@ -233,44 +233,44 @@ autoplot(Serie_ts) +
 <tbody>
 <tr class="odd">
 <td>24</td>
-<td align="right">3761.278</td>
-<td align="right">3709.022</td>
-<td align="right">3813.534</td>
-<td align="right">3681.359</td>
-<td align="right">3841.196</td>
+<td align="right">3769.523</td>
+<td align="right">3718.346</td>
+<td align="right">3820.699</td>
+<td align="right">3691.255</td>
+<td align="right">3847.791</td>
 </tr>
 <tr class="even">
 <td>25</td>
-<td align="right">3745.257</td>
-<td align="right">3675.757</td>
-<td align="right">3814.758</td>
-<td align="right">3638.966</td>
-<td align="right">3851.549</td>
+<td align="right">3757.527</td>
+<td align="right">3688.657</td>
+<td align="right">3826.397</td>
+<td align="right">3652.199</td>
+<td align="right">3862.855</td>
 </tr>
 <tr class="odd">
 <td>26</td>
-<td align="right">3730.291</td>
-<td align="right">3650.012</td>
-<td align="right">3810.570</td>
-<td align="right">3607.514</td>
-<td align="right">3853.068</td>
+<td align="right">3746.128</td>
+<td align="right">3665.718</td>
+<td align="right">3826.538</td>
+<td align="right">3623.151</td>
+<td align="right">3869.104</td>
 </tr>
 <tr class="even">
 <td>27</td>
-<td align="right">3716.249</td>
-<td align="right">3628.578</td>
-<td align="right">3803.920</td>
-<td align="right">3582.168</td>
-<td align="right">3850.330</td>
+<td align="right">3735.265</td>
+<td align="right">3646.592</td>
+<td align="right">3823.938</td>
+<td align="right">3599.652</td>
+<td align="right">3870.878</td>
 </tr>
 </tbody>
 </table>
 <p>Y acá dejo los valores de la predicción a través de una red neuronal</p>
 <pre><code>##    Point Forecast
-## 24       3751.677
-## 25       3734.499
-## 26       3715.287
-## 27       3700.280</code></pre>
+## 24       3769.136
+## 25       3759.042
+## 26       3751.080
+## 27       3744.709</code></pre>
 <p><img src="/post/2020-06-13-forecasting_webs_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 </div>
 <div class="footnotes">
