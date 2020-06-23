@@ -30,7 +30,7 @@ I am fanatic of the following tools
 
 * [Docker](https://www.docker.com/): Create images for Machine Learning Industrialization.
 
-* [Jenkis](https://www.jenkins.io/): For automatization projects.
+* [Jenkins](https://www.jenkins.io/): For automatization projects.
 
 * [Github](www.github.com): For create repositories and differents tools.
 
