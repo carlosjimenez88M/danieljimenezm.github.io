@@ -6,7 +6,7 @@ aliases = ["about-us","about-hugo","contact"]
 author = "Hugo Authors"
 +++
 
-Hi! I am Daniel Jiménez, Deep Learning Engineer in [Oiga Technologies](https://oiga.com/), where I am  developing Machine Learning Applications to Video Games and Computational Vision .At the same time I am teacher in [Universidad Nacional de colombia](https://unal.edu.co/),
+Hi! I am Daniel Jiménez, Deep Learning Engineer at [Oiga Technologies](https://oiga.com/), where I am  developing Machine Learning Applications to Video Games and Computational Vision .At the same time I am teacher in [Universidad Nacional de colombia](https://unal.edu.co/),
 where I teach the following subjects: Big Data, Introduction to Data Science and Statistical Learning and Machine Learning.
 
 I am passionate about Applied Machine Learning, Statistical Modelling, Bayesian Data Analysis and Forecasting models. I more than nine years of experience developing and applying for differents industries,mainly for public institutions and strartups.
