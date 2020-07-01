@@ -60,14 +60,14 @@ En términos generales parece que a nivel mundial la noticia no hizo tanto eco, 
 
 ```{r, echo=FALSE, cache=FALSE, warning=FALSE, message=FALSE}
 Resultados$interest_by_country%>%
-  mutate(hits = str_replace(hits,'<1','1'),
+  dplyr::mutate(hits = str_replace(hits,'<1','1'),
          hits = as.numeric(hits),
          location= as.factor(location),
          keyword=as.factor(keyword))%>%
   filter(!is.na(hits))%>%
   group_by(location,keyword)%>%
   summarize(total=sum(hits))%>%
-  mutate(perc=total/sum(total))%>%
+  dplyr::mutate(perc=total/sum(total))%>%
   ungroup()%>%
   arrange(desc(total))%>%
   ggplot(aes(fct_reorder(location,total),total,fill=keyword))+
@@ -99,6 +99,7 @@ Resultados_MX<-gtrends(keyword = trends,
 
 Resultados_CO$interest_over_time%>%
   mutate(date=ymd(date),
+         hits = str_replace(hits,'<1','1'),
          hits=as.numeric(hits),
          keyword=as.factor(keyword))%>%
   group_by(date,keyword)%>%
@@ -110,6 +111,7 @@ Resultados_CO$interest_over_time%>%
 
 Resultados_CH$interest_over_time%>%
   mutate(date=ymd(date),
+         hits = str_replace(hits,'<1','1'),
          hits=as.numeric(hits),
          keyword=as.factor(keyword))%>%
   group_by(date,keyword)%>%
@@ -121,6 +123,7 @@ Resultados_CH$interest_over_time%>%
 
 Resultados_US$interest_over_time%>%
   mutate(date=ymd(date),
+         hits = str_replace(hits,'<1','1'),
          hits=as.numeric(hits),
          keyword=as.factor(keyword))%>%
   group_by(date,keyword)%>%
@@ -132,6 +135,7 @@ Resultados_US$interest_over_time%>%
 
 Resultados_MX$interest_over_time%>%
   mutate(date=ymd(date),
+         hits = str_replace(hits,'<1','1'),
          hits=as.numeric(hits),
          keyword=as.factor(keyword))%>%
   group_by(date,keyword)%>%
