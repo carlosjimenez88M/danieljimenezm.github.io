@@ -30,8 +30,8 @@ theme = "hugo-theme-chunky-poster"
 
   [[menu.main]]
     identifier = "publications"
-    name = "Machine Learning codes"
-    url = "/publications/"
+    name = "Tidytuesday"
+    url = "https://github.com/carlosjimenez88M/Tidy-tuesday"
     weight = 2
 
 [taxonomies]
