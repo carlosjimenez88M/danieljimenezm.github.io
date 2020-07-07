@@ -7,14 +7,14 @@ Hi Guys, in this section you can find my lastest clases for differents instituti
 
 * [Ingenieria de Datos](https://github.com/carlosjimenez88M/Curso-de-Big-Data-e-Ingenieria-de-datos)
 * [Marketing Digital para Digital Data Science](https://github.com/carlosjimenez88M/Marketing_Digital)
-* [Estadística Computacional]()
-* [Git y Github]()
+* [Estadística Computacional](https://github.com/carlosjimenez88M/Computational_statistics)
+* [Git y Github](https://github.com/carlosjimenez88M/Curso-de-Git-y-Github)
 
 
 ## Universidad Konrad Lorenz
 
-* [Introducción a la ciencia de datos]()
-* [Machine Learning I]()
+* [Introducción a la ciencia de datos y Digital Data Science](https://github.com/carlosjimenez88M/Digital_Data_Science)
+* [Machine Learning I](https://github.com/carlosjimenez88M/Machine-Learning-I)
 
 
 
