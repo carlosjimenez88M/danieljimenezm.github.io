@@ -6,7 +6,7 @@ aliases = ["about-us","about-hugo","contact"]
 author = "Hugo Authors"
 +++
 
-Hi! my name is Daniel Jiménez, I am a Machine Learning Engineer at [BID](https://www.iadb.org/es/acerca-del-bid/perspectiva-general), where I am  developing NLP applications,and Deep Learning Solutions for differents projects.At the same time I am a teacher at [Universidad Nacional de colombia](https://unal.edu.co/) and [Fundación Universitaria Konrad Lorenz](http://www.konradlorenz.edu.co/es/),
+Hi! my name is Daniel Jiménez, I am a Machine Learning Engineer at [Inter-American Development Bank ](https://www.iadb.org/es/acerca-del-bid/perspectiva-general), where I am  developing NLP applications,and Deep Learning Solutions for differents projects.At the same time I am a teacher at [Universidad Nacional de colombia](https://unal.edu.co/) and [Fundación Universitaria Konrad Lorenz](http://www.konradlorenz.edu.co/es/),
 where I teach the following subjects: Big Data, Introduction to Data Science and Statistical Learning and Machine Learning.
 
 I am passionate about Applied Machine Learning,Text Mining,Web Scrapping,NLP,Statistical Modelling, Bayesian Data Analysis and Forecasting models. I more than nine years of experience developing and applying for differents industries,mainly for public institutions and strartups.
