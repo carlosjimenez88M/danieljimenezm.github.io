@@ -36,7 +36,7 @@ I am fanatic of the following tools
 
 * [Google Cloud Platform](https://console.cloud.google.com/freetrial?_ga=2.205139024.1787439701.1587844230-88612942.1587844230&_gac=1.27985614.1587944809.CjwKCAjw4pT1BRBUEiwAm5QuR_gWCIcu0tY7VaF4r5QIg3uEMwGk60bx6XNRRiUr1WvrfALNmWuXixoCE7AQAvD_BwE&pli=1), For create workflow and models automatization, but the principal characteristic is Big Query for create the best Data Bases with Big Data.
 
-*[Flask](https://flask.palletsprojects.com/en/1.1.x/): For Micro web Framework services.
+* [Flask](https://flask.palletsprojects.com/en/1.1.x/): For Micro web Framework services.
 
 ### Tools
 
