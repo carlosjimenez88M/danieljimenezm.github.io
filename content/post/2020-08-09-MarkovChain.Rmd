@@ -141,7 +141,7 @@ acf(x)
 
 Dicho lo anterior pasaré a desarrollar un ejemplo y a explicar una seríe de conceptos teorícos importantes para poder utilizar a Markov.
 
-Hago uso de un estudio de [Decision Modelling for Health Economics Evaluation](https://global.oup.com/academic/product/decision-modelling-for-health-economic-evaluation-9780198526629?cc=us&lang=en&) sobre infecciones de VIH. Se reproduce una probabilidad de transaccion del grupo de estudio de las siguiente manera.
+Hago uso de un estudio y la implementación del estudio  [Decision Modelling for Health Economics Evaluation](https://global.oup.com/academic/product/decision-modelling-for-health-economic-evaluation-9780198526629?cc=us&lang=en&) sobre infecciones de VIH. Se reproduce una probabilidad de transaccion del grupo de estudio de las siguiente manera.
 ```{r, echo=FALSE, cache=FALSE, message=FALSE}
 library(heemod)
 
