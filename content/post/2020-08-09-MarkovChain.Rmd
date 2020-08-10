@@ -1,5 +1,5 @@
 ---
-title: "2020-08-09-MarkovChain"
+title: "MarkovChain"
 date:  2020-08-09
 output: html_document
 ---
@@ -297,5 +297,5 @@ plot(res_mod, type = "values", panel = "by_value",
   )
 ```
 
-Eso es todo por esta entrada espero que les 
+Eso es todo por esta entrada espero que les guste!
 
