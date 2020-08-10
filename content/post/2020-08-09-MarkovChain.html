@@ -21,10 +21,13 @@ P(X_{n}=i_n|X_{n-1}=i_{n-1})=P(X_{n}=i_n|X_{0}=i_{0},X_{1}=i_{1},...,X_{n}=i_{n}
 p(x_n,y_n)=min\{\frac{f_{(y_n)}q(x_n|y_n)}{f_{(y_n)}q(y_n|x_n)}\}
 \]</span></p>
 <p>En donde los valores de la cadena son</p>
-<ul>
-<li><span class="math inline">\(X_{n+1} = y_n\)</span>, con probabilidad <span class="math inline">\(p(x_n,y_n)\)</span>;</li>
-<li><span class="math inline">\(X_{n+1} = x_n\)</span>, con probabilidad <span class="math inline">\(1-p(x_n,y_n)\)</span></li>
-</ul>
+<p><span class="math display">\[
+ X_{n+1} =
+  \begin{cases}
+    y_n       &amp; \quad \text{Con probabilidad }  p(x_n,y_n) \\
+    x_n  &amp; \quad \text{Con probabilidad } 1-p(x_n,y_n)
+  \end{cases}
+\]</span></p>
 <p>Dicho lo anterior suponga que quiere modelar los siguientes valores:</p>
 <p><span class="math display">\[
 f(x) \propto e^{(-[x-4]/2)^{1/3}}
@@ -87,22 +90,9 @@ curve(full_int,add = TRUE,col=2)</code></pre>
 <p>A continuación se gráfica el grupo de terapia combinada:</p>
 <p><img src="/post/2020-08-09-MarkovChain_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>Ahora se estudia el costo de los medicamentos y de atención, para determinar la diferencia entre los tratamientos a través de un diferencial del 5%.</p>
-<pre class="r"><code>cost_zido &lt;- 2278
-cost_lami &lt;- 2086
-
-state_A &lt;- define_state(
-    cost_health = discount(2756, .06),
-    cost_drugs = discount(dispatch_strategy(
-      mono = cost_zido,
-      comb = cost_zido + cost_lami
-    ), .05),
-    cost_total = cost_health + cost_drugs,
-    life_year = 1
-  )
-state_A</code></pre>
 <pre><code>## A state with 4 values.
 ## 
-## cost_health = discount(2756, 0.06)
+## cost_health = discount(2756, 0.05)
 ## cost_drugs = discount(dispatch_strategy(mono = cost_zido, comb = cost_zido + 
 ##     cost_lami), 0.05)
 ## cost_total = cost_health + cost_drugs
@@ -123,14 +113,14 @@ state_A</code></pre>
 ## Values:
 ## 
 ##      cost_health cost_drugs cost_total life_year
-## mono    29750793   13485464   43236257  7162.832
-## comb    29854087   31678833   61532920  9019.740
+## mono    29884901   13485464   43370364  7162.832
+## comb    30184018   31678833   61862851  9019.740
 ## 
 ## Net monetary benefit difference:
 ## 
 ##          1000     5000     6000    10000
-## mono 16439.76 9012.124 7155.216   0.0000
-## comb     0.00    0.000    0.000 272.4151
+## mono 16635.58 9207.947 7351.039  0.00000
+## comb     0.00    0.000    0.000 76.59233
 ## 
 ## Efficiency frontier:
 ## 
@@ -139,7 +129,7 @@ state_A</code></pre>
 ## Differences:
 ## 
 ##      Cost Diff. Effect Diff.     ICER Ref.
-## comb   18296.66     1.856908 9853.296 mono</code></pre>
+## comb   18492.49     1.856908 9958.753 mono</code></pre>
 <p>El resultado es que la relación costo- eficiencia de la terapia es de $18296.66 por año de vida ganado. Gráficamente lo anterior se entiende así.</p>
 <p><img src="/post/2020-08-09-MarkovChain_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p><img src="/post/2020-08-09-MarkovChain_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>

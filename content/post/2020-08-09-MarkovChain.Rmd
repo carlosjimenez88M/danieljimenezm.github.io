@@ -64,10 +64,15 @@ $$
 
 En donde los valores de la cadena son 
 
-* $X_{n+1} = y_n$, con probabilidad $p(x_n,y_n)$;
-* $X_{n+1} = x_n$, con probabilidad $1-p(x_n,y_n)$
 
 
+$$
+ X_{n+1} =
+  \begin{cases}
+    y_n       & \quad \text{Con probabilidad }  p(x_n,y_n) \\
+    x_n  & \quad \text{Con probabilidad } 1-p(x_n,y_n)
+  \end{cases}
+$$
 
 
 
@@ -183,12 +188,12 @@ plot(mat_comb)
 
 Ahora se estudia el costo de los medicamentos y de atención, para determinar la diferencia entre los tratamientos a través de un diferencial del 5%.
 
-```{r}
+```{r, echo=FALSE, cache=FALSE}
 cost_zido <- 2278
 cost_lami <- 2086
 
 state_A <- define_state(
-    cost_health = discount(2756, .06),
+    cost_health = discount(2756, .05),
     cost_drugs = discount(dispatch_strategy(
       mono = cost_zido,
       comb = cost_zido + cost_lami
