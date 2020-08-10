@@ -1,0 +1,75 @@
+---
+title: "2020-08-09-MarkovChain"
+date:  2020-08-09
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r, echo=FALSE, cache=FALSE, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(ggthemes)
+theme_set(theme_economist())
+cap='#Undatascientistdice'
+```
+
+
+## Entendiendo las simulaciones de Markov
+
+Un tema o una rama de la estadística que ha cobrado un nuevo nivel de importancia dada su aplicación en temas como: las finanzas, logística, marketing y forecasting son las cadenas de Markov. Estas mismas pertenecen a lo que se conoce como procesos estocásticos, lo cual quiere decir que son magnitudes de procesos aleatorios que varia con el tiempo, y puntualmente en el caso de la simulación de monte carlo con Markov se aplica la siguiente regla:
+
+
+$$
+P(X_{n}=i_n|X_{n-1}=i_{n-1})=P(X_{n}=i_n|X_{0}=i_{0},X_{1}=i_{1},...,X_{n}=i_{n})
+$$
+
+Esta regla se le conoce como propiedad de Markov, en donde cada evento solo responde únicamente a $X_{n-1}$ y $P(X_{n}|X_{n-1})$ es una matriz de transacción, la cual contiene información sobre las probabilidades de los diferentes estados de los datos dada las condiciones antes mencionadas.
+
+
+Una característica del producto de las matrices es que pueden describir las probabilidades de las transacciones a lo largo de un período de tiempo definido. Por lo tanto los estados transitorios deben alcanzar la probabilidad 1 gracias al estado inicial de la función de distribución.
+
+
+Por lo tanto una propiedad fundamental de que la matriz sea estacionaria y tenga la regla de Markov es que la distribución limite del estado $X_{n-1}$ sea $X_{n-1} \sim f$ entonces $X_{n} \sim f$,lo que asegura la recurrencia, bajo la condición de $X_{n+1}=X_t + e_t$ donde $e_t$ sigue una distribución normal y la forma de la densidad se convierte en una normal. Esto quiere decir que la cadena tiene una propiedad de caminata aleatoria
+
+
+```{r, echo=FALSE, cache=FALSE}
+set.seed(123)
+x<-c(0)
+for(i in 1:10000){
+  x[i+1]<-rnorm(1,x[i],1)
+}
+qplot(seq_along(x),x)+
+  labs(title = 'Simulación de de Markov',
+       x='Datos Simulados a través de una normal',
+       y='',
+           caption = cap)
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
