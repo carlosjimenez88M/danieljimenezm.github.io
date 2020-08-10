@@ -21,13 +21,10 @@ P(X_{n}=i_n|X_{n-1}=i_{n-1})=P(X_{n}=i_n|X_{0}=i_{0},X_{1}=i_{1},...,X_{n}=i_{n}
 p(x_n,y_n)=min\{\frac{f_{(y_n)}q(x_n|y_n)}{f_{(y_n)}q(y_n|x_n)}\}
 \]</span></p>
 <p>En donde los valores de la cadena son</p>
-<p><span class="math display">\[
- X_{n+1} =
-  \begin{cases}
-    y_n       &amp; \quad \text{Con probabilidad }  p(x_n,y_n) \\
-    x_n  &amp; \quad \text{Con probabilidad } 1-p(x_n,y_n)
-  \end{cases}
-\]</span></p>
+<ul>
+<li><span class="math inline">\(X_{n+1} = y_n\)</span>, con probabilidad <span class="math inline">\(p(x_n,y_n)\)</span>;</li>
+<li><span class="math inline">\(X_{n+1} = x_n\)</span>, con probabilidad <span class="math inline">\(1-p(x_n,y_n)\)</span></li>
+</ul>
 <p>Dicho lo anterior suponga que quiere modelar los siguientes valores:</p>
 <p><span class="math display">\[
 f(x) \propto e^{(-[x-4]/2)^{1/3}}

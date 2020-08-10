@@ -64,14 +64,10 @@ $$
 
 En donde los valores de la cadena son 
 
+* $X_{n+1} = y_n$, con probabilidad $p(x_n,y_n)$;
+* $X_{n+1} = x_n$, con probabilidad $1-p(x_n,y_n)$
 
-$$
- X_{n+1} =
-  \begin{cases}
-    y_n       & \quad \text{Con probabilidad }  p(x_n,y_n) \\
-    x_n  & \quad \text{Con probabilidad } 1-p(x_n,y_n)
-  \end{cases}
-$$
+
 
 
 
