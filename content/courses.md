@@ -11,10 +11,7 @@ Hi Guys, in this section you can find my lastest clases for differents instituti
 * [Git y Github](https://github.com/carlosjimenez88M/Curso-de-Git-y-Github)
 
 
-## Universidad Konrad Lorenz
 
-* [Introducción a la ciencia de datos y Digital Data Science](https://github.com/carlosjimenez88M/Digital_Data_Science)
-* [Machine Learning I](https://github.com/carlosjimenez88M/Machine-Learning-I)
 
 
 
