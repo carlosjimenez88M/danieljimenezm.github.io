@@ -18,7 +18,7 @@ theme = "hugo-theme-chunky-poster"
     weight = 10
   [[menu.main]]
     identifier = "about"
-    name = "About"
+    name = "About me"
     url = "/about/"
     weight = 0
   
@@ -33,6 +33,12 @@ theme = "hugo-theme-chunky-poster"
     name = "Tidytuesday"
     url = "https://github.com/carlosjimenez88M/Tidy-tuesday"
     weight = 2
+  
+  [[menu.main]]
+    identifier = "Portfolio"
+    name = "Portfolio"
+    url = "https://github.com/carlosjimenez88M/Portfolio/blob/59968437284b79d5fb14d68168dda16e8fe0eb59/index.md"
+    weight = 3
 
 [taxonomies]
 category = "categories"
