@@ -37,7 +37,7 @@ theme = "hugo-theme-chunky-poster"
   [[menu.main]]
     identifier = "Portfolio"
     name = "Portfolio"
-    url = "https://github.com/carlosjimenez88M/Portfolio/blob/59968437284b79d5fb14d68168dda16e8fe0eb59/index.md"
+    url = "https://github.com/carlosjimenez88M/Portfolio/blob/gh-pages/index.md"
     weight = 3
 
 [taxonomies]
