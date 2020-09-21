@@ -1,5 +1,5 @@
 +++
-title = "About"
+title = "About me"
 description = "Hugo, the world’s fastest framework for building websites"
 date = "2019-02-28"
 aliases = ["about-us","about-hugo","contact"]
@@ -7,7 +7,7 @@ author = "Hugo Authors"
 +++
 
 
-Hi! my name is Daniel Jiménez, I am a Machine Learning Engineer at [Inter-American Development Bank ](https://www.iadb.org/es/acerca-del-bid/perspectiva-general), where I am  developing NLP applications,and Deep Learning Solutions for differents projects.At the same time I am a teacher at [Universidad Nacional de colombia](https://unal.edu.co/), where I teach the following subjects: Big Data,Git & Github, Digital Marketing ,Introduction to Data Science and Statistical Learning and Machine Learning.
+Hi! my name is Daniel Jiménez, I am a Machine Learning Engineer at [Inter-American Development Bank ](https://www.iadb.org/es/acerca-del-bid/perspectiva-general), where I am  developing NLP applications,and Deep Learning Solutions for differents projects.At the same time I am a teacher at [Universidad Nacional de Colombia](https://unal.edu.co/), where I teach the following subjects: Big Data,Git & Github, Digital Marketing ,Introduction to Data Science and Statistical Learning and Machine Learning.
 
 Experienced Senior Data Scientist with a demonstrated history of working in the Startups and public institutions between USA, Colombia, Chile and México. With more than ten years of experience applying and development Machine Learning models to real world.
 
