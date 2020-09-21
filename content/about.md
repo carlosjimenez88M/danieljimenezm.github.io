@@ -42,7 +42,7 @@ I am fanatic of the following tools
 
 ## Lenguaje and Tools
 
-<img align="left" alt="R" width="31px" src="https://avatars0.githubusercontent.com/u/513560?s=200&v=4" />&nbsp
+<pre class="tab"> <img align="left" alt="R" width="31px" src="https://avatars0.githubusercontent.com/u/513560?s=200&v=4" />
 
 
 
@@ -67,14 +67,13 @@ I am fanatic of the following tools
 
 
 
-<img align="left" alt="flask" width="31px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Flask_logo.svg/440px-Flask_logo.svg.png" />
+<img align="left" alt="flask" width="31px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Flask_logo.svg/440px-Flask_logo.svg.png" /></pre>
 
 <br />
 
 ## Connect with me
 
-[<img align="left" alt="Daniel | LinkedIn" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/linkedin.svg" />](https://www.linkedin.com/in/djimenezm/) 
-
+[<img align="left" alt="Daniel | LinkedIn" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/linkedin.svg" />](https://www.linkedin.com/in/djimenezm/)
 
 
 
