@@ -14,17 +14,9 @@ I am passionate about Applied Machine Learning,Text Mining,Web Scrapping,NLP,Sta
 
 ### Frameworks
 
-I use the foollowings frameworks
+<img align="left" alt="Keras" width="31px" src="https://keras.io/img/logo.png" />
 
-* [Tidymodels](https://www.tidymodels.org/) +1 year, principal goal: Modeling and Machine Learning models
-
-* [Keras](https://keras.io/) +3 years, principal goal: Deep learning and visual recognition.
-
-* [Tensorflow](https://www.tensorflow.org/) + 3 years, principal goal: Deep Learning 
-
-* [Tidyverse](https://www.tidyverse.org/) + 3 years, principal goal: Data Science.
-
-
+<img align="left" alt="Tensorflow" width="31px" src="https://torres.ai/wp-content/uploads/2019/09/tf_logo.png" />
 
 ## Lenguaje and Tools
 
