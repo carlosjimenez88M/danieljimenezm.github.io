@@ -42,7 +42,7 @@ I am fanatic of the following tools
 
 ## Lenguaje and Tools
 
-<pre class="tab"> <img align="left" alt="R" width="31px" src="https://avatars0.githubusercontent.com/u/513560?s=200&v=4" />
+<img align="left" alt="R" width="31px" src="https://avatars0.githubusercontent.com/u/513560?s=200&v=4" />
 
 
 
@@ -67,7 +67,7 @@ I am fanatic of the following tools
 
 
 
-<img align="left" alt="flask" width="31px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Flask_logo.svg/440px-Flask_logo.svg.png" /></pre>
+<img align="left" alt="flask" width="31px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Flask_logo.svg/440px-Flask_logo.svg.png" />
 
 <br />
 
