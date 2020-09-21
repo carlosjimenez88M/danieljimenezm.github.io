@@ -42,9 +42,9 @@ I am fanatic of the following tools
 
 ## Lenguaje and Tools
 
-<img align="left" alt="R" width="31px" src="https://avatars0.githubusercontent.com/u/513560?s=200&v=4" />
+<img align="left" alt="R" width="31px" src="https://avatars0.githubusercontent.com/u/513560?s=200&v=4" />             
 
-<br />
+
 
 <img align="left" alt="Python" width="31px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/python/python.png" />
 
@@ -65,7 +65,7 @@ I am fanatic of the following tools
 
 <img align="left" alt="LaTeX" width="31px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/LaTeX_logo.svg/1599px-LaTeX_logo.svg.png" />
 
-......
+
 
 <img align="left" alt="flask" width="31px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Flask_logo.svg/440px-Flask_logo.svg.png" />
 
