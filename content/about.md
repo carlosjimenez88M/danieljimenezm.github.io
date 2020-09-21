@@ -43,6 +43,9 @@ I am passionate about Applied Machine Learning,Text Mining,Web Scrapping,NLP,Sta
 
 <img align="left" alt="Visual Studio Code" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/visual-studio-code/visual-studio-code.png" />
 
+
+
+
 <img align="left" alt="MySQL" width="31px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/mysql/mysql.png" />
 
 
@@ -69,9 +72,13 @@ I am passionate about Applied Machine Learning,Text Mining,Web Scrapping,NLP,Sta
 
 <img align="left" alt="docker" width="81px" src="https://www.docker.com/sites/default/files/d8/styles/role_icon/public/2019-07/horizontal-logo-monochromatic-white.png?itok=SBlK2TGU" />
 
+
+
 <img align="left" alt="Jenkins" width="81px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Jenkins_logo_with_title.svg/1598px-Jenkins_logo_with_title.svg.png" />
 
+
 <br />
+
 
 ## Connect with me
 
