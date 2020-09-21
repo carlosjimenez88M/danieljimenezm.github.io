@@ -6,6 +6,8 @@ aliases = ["about-us","about-hugo","contact"]
 author = "Hugo Authors"
 +++
 
+If you’re a Data Science Recruiter, click [here](https://github.com/carlosjimenez88M/Resume/blob/master/Daniel-Jimenez.pdf)
+
 
 Hi! my name is Daniel Jiménez, I am a Machine Learning Engineer at [Inter-American Development Bank ](https://www.iadb.org/es/acerca-del-bid/perspectiva-general), where I am  developing NLP applications,and Deep Learning Solutions for differents projects.At the same time I am a teacher at [Universidad Nacional de Colombia](https://unal.edu.co/), where I teach the following subjects: Big Data,Git & Github, Digital Marketing ,Introduction to Data Science and Statistical Learning and Machine Learning.
 
