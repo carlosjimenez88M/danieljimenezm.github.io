@@ -11,12 +11,20 @@ Hi! my name is Daniel Jiménez, I am a Machine Learning Engineer at [Inter-Ameri
 
 I am passionate about Applied Machine Learning,Text Mining,Web Scrapping,NLP,Statistical Modelling, Bayesian Data Analysis and Forecasting models. I more than nine years of experience developing and applying for differents industries,mainly for public institutions and strartups.
 
+<br />
 
 ### Frameworks
 
-<img align="left" alt="Keras" width="31px" src="https://keras.io/img/logo.png" />
+<img align="left" alt="Keras" width="81px" src="https://keras.io/img/logo.png" />
 
-<img align="left" alt="Tensorflow" width="31px" src="https://torres.ai/wp-content/uploads/2019/09/tf_logo.png" />
+<img align="left" alt="Tensorflow" width="81px" src="https://torres.ai/wp-content/uploads/2019/09/tf_logo.png" />
+
+<img align="left" alt="Tidymodels" width="31px" src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/SVG/tidymodels.svg" />
+
+
+<br />
+
+
 
 ## Lenguaje and Tools
 
