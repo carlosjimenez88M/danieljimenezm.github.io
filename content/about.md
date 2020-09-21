@@ -85,12 +85,12 @@ I am passionate about Applied Machine Learning,Text Mining,Web Scrapping,NLP,Sta
 [<img align="left" alt="Daniel | LinkedIn" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/linkedin.svg" />](https://www.linkedin.com/in/djimenezm/)
 
 
-
+<img  />
 
 
 [<img align="left" alt="danielblog" width="22px" src="https://raw.githubusercontent.com/iconic/open-iconic/master/svg/globe.svg" />](www.danieljimenezm.com)
 
-
+<img  />
 
 
 [<img align="left" alt="danielmail" width="22px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Gmail_Icon.svg/1024px-Gmail_Icon.svg.png" />](danieljimenez88m@gmail.com)
