@@ -65,7 +65,7 @@ I am fanatic of the following tools
 
 <img align="left" alt="LaTeX" width="31px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/LaTeX_logo.svg/1599px-LaTeX_logo.svg.png" />
 
-
+......
 
 <img align="left" alt="flask" width="31px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Flask_logo.svg/440px-Flask_logo.svg.png" />
 
