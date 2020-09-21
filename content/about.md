@@ -24,20 +24,6 @@ I use the foollowings frameworks
 
 * [Tidyverse](https://www.tidyverse.org/) + 3 years, principal goal: Data Science.
 
-### Development 
-
-I am fanatic of the following tools
-
-* [Docker](https://www.docker.com/): Build images for Machine Learning Industrialization.
-
-* [Jenkins](https://www.jenkins.io/): For automatization projects.
-
-* [Github](www.github.com): For build repositories and differents tools.
-
-* [Google Cloud Platform](https://console.cloud.google.com/freetrial?_ga=2.205139024.1787439701.1587844230-88612942.1587844230&_gac=1.27985614.1587944809.CjwKCAjw4pT1BRBUEiwAm5QuR_gWCIcu0tY7VaF4r5QIg3uEMwGk60bx6XNRRiUr1WvrfALNmWuXixoCE7AQAvD_BwE&pli=1), For create workflow and models automatization, but the principal characteristic is Big Query for create the best Data Bases with Big Data.
-
-* [Flask](https://flask.palletsprojects.com/en/1.1.x/): For Micro web Framework services.
-
 
 
 ## Lenguaje and Tools
@@ -49,25 +35,41 @@ I am fanatic of the following tools
 <img align="left" alt="Python" width="31px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/python/python.png" />
 
 
+
+
 <img align="left" alt="GCP" width="31px" src="https://genuinocloud.com/wp-content/uploads/2019/09/mx-con-datos-de-genuinocloud-cloud-dns-de-gcp-logo-genuinocloud.com.jpg" />
+
+
 
 <img align="left" alt="Visual Studio Code" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/visual-studio-code/visual-studio-code.png" />
 
 <img align="left" alt="MySQL" width="31px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/mysql/mysql.png" />
 
+
+
 <img align="left" alt="Git" width="31px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/git/git.png" />
+
+
 
 <img align="left" alt="GitHub" width="31px" src="https://raw.githubusercontent.com/github/explore/78df643247d429f6cc873026c0622819ad797942/topics/github/github.png" />
 
 
 
+
 <img align="left" alt="Terminal" width="31px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/terminal/terminal.png" />
 
-<img align="left" alt="LaTeX" width="31px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/LaTeX_logo.svg/1599px-LaTeX_logo.svg.png" />
+
+
+<img align="left" alt="LaTeX" width="81px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/LaTeX_logo.svg/1599px-LaTeX_logo.svg.png" />
 
 
 
-<img align="left" alt="flask" width="31px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Flask_logo.svg/440px-Flask_logo.svg.png" />
+<img align="left" alt="flask" width="81px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Flask_logo.svg/440px-Flask_logo.svg.png" />
+
+
+<img align="left" alt="docker" width="81px" src="https://www.docker.com/sites/default/files/d8/styles/role_icon/public/2019-07/horizontal-logo-monochromatic-white.png?itok=SBlK2TGU" />
+
+<img align="left" alt="Jenkins" width="81px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Jenkins_logo_with_title.svg/1598px-Jenkins_logo_with_title.svg.png" />
 
 <br />
 
@@ -77,7 +79,11 @@ I am fanatic of the following tools
 
 
 
+
+
 [<img align="left" alt="danielblog" width="22px" src="https://raw.githubusercontent.com/iconic/open-iconic/master/svg/globe.svg" />](www.danieljimenezm.com)
+
+
 
 
 [<img align="left" alt="danielmail" width="22px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Gmail_Icon.svg/1024px-Gmail_Icon.svg.png" />](danieljimenez88m@gmail.com)
