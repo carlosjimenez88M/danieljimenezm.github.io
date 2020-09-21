@@ -9,7 +9,11 @@ author = "Hugo Authors"
 
 Hi! my name is Daniel Jiménez, I am a Machine Learning Engineer at [Inter-American Development Bank ](https://www.iadb.org/es/acerca-del-bid/perspectiva-general), where I am  developing NLP applications,and Deep Learning Solutions for differents projects.At the same time I am a teacher at [Universidad Nacional de colombia](https://unal.edu.co/), where I teach the following subjects: Big Data,Git & Github, Digital Marketing ,Introduction to Data Science and Statistical Learning and Machine Learning.
 
-I am passionate about Applied Machine Learning,Text Mining,Web Scrapping,NLP,Statistical Modelling, Bayesian Data Analysis and Forecasting models. I more than nine years of experience developing and applying for differents industries,mainly for public institutions and strartups.
+Experienced Senior Data Scientist with a demonstrated history of working in the Startups and public institutions between USA, Colombia, Chile and México. With more than ten years of experience applying and development Machine Learning models to real world.
+
+Appasionate for applied statistics, machine learning modeling and bayesian statistics and skilled in : Applied Machine Learning, Statistical Modeling, NLP, Deep Learning, Bayesian Data Analysis, Marketing Analytics, Bio-statistics (Genomic Data analysis) , LaTeX and Markdown.
+
+Active Speaker at conferences in Colombia and Chile about Data Science and Statistic Modelling.
 
 <br />
 
@@ -85,12 +89,11 @@ I am passionate about Applied Machine Learning,Text Mining,Web Scrapping,NLP,Sta
 [<img align="left" alt="Daniel | LinkedIn" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/linkedin.svg" />](https://www.linkedin.com/in/djimenezm/)
 
 
-<img  />
 
 
 [<img align="left" alt="danielblog" width="22px" src="https://raw.githubusercontent.com/iconic/open-iconic/master/svg/globe.svg" />](www.danieljimenezm.com)
 
-<img  />
+
 
 
 [<img align="left" alt="danielmail" width="22px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Gmail_Icon.svg/1024px-Gmail_Icon.svg.png" />](danieljimenez88m@gmail.com)
