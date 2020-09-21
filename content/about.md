@@ -23,6 +23,12 @@ Active Speaker at conferences in Colombia and Chile about Data Science and Stati
 
 <img align="left" alt="Tensorflow" width="81px" src="https://torres.ai/wp-content/uploads/2019/09/tf_logo.png" />
 
+
+<img align="left" alt="skt" width="81px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Scikit_learn_logo_small.svg/520px-Scikit_learn_logo_small.svg.png" />
+
+
+
+
 <img align="left" alt="Tidymodels" width="31px" src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/SVG/tidymodels.svg" />
 
 
