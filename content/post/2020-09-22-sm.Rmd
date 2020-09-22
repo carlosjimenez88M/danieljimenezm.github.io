@@ -1,0 +1,65 @@
+---
+title: "Selección del modelo correcto"
+date: 2020-09-22
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, cache = FALSE)
+```
+
+```{r, echo=FALSE,cache=FALSE,message=FALSE, warning=FALSE}
+library(tidyverse)
+library(tidymodels)
+library(palmerpenguins)
+library(ggthemes)
+library(skimr)
+library(plotly)
+theme_set(theme_tufte())
+data(package = 'palmerpenguins')
+```
+
+
+## ¿Cómo seleccionar el mejor modelo de Machine Learning?
+
+Uno de los problemas más comunes cuando se desarrollan modelos de Machine Learning tiene que ver con la selección del mejor modelo, ya que estos deben responder a varios asuntos técnicos como Overfitting o su contrapartida Underfitting, a la par de la selección de los mejores parámetros entre otras particularidades y es por ello que en este post trabajaré un ejemplo de un modelo de clasificación haciendo uso de la base de datos `palmerpenguins`.
+
+![](https://github.com/allisonhorst/palmerpenguins/raw/master/man/figures/lter_penguins.png)
+
+Dado el foco de este post, no haré un análisis exploratorio tan profundo, si desean ver el tidytuesday de esta base les recomiendo el siguiente video: **[LINK](https://www.youtube.com/watch?v=ImpXawPNCfM&t=842s)**. Lo que si haré es ver la completitud de la base de datos y  entender un poco de que se trata.
+
+Lo primero a evaluar es la forma de los datos y para ello trabajaré con `skim` para poder ver de manera organizada estos datos.
+```{r}
+penguins%>%
+  skim()
+```
+
+
+La tasa de datos completos es bastante buena, pero me llamo la atención que en la variable **sex** faltan 11 datos, por lo tanto el modelo que diseñe trabajará sobre está variable e intentaré predecir el genero de estos pinguinos.
+
+Otra cosa que me llama la atención es que la data está un poco desbalanceada, por lo cual deberé ser precabido a la hora de crear los **resamples**.
+
+```{r}
+penguins%>%
+  group_by(species)%>%
+  count()
+```
+
+Otra particularidad sobre estos amiguitos, es el tamaño del pico 
+
+```{r, message=FALSE}
+penguins%>%
+  filter(!is.na(bill_length_mm))%>%
+  ggplot(aes(bill_length_mm,fill=species))+
+  geom_histogram()+
+  labs(x='Tamaño del pico en ml',
+       y='',
+       title = 'Relación del tamaño del pico de los Pinguinos',
+       subtitle = 'por especie',
+       caption = '#Undatascientistdice',
+       fill='Especies')
+```
+
+
+
+
