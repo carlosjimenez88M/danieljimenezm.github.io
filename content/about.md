@@ -44,6 +44,9 @@ Active Speaker at conferences in Colombia and Chile about Data Science and Stati
 
 ## Lenguaje and Tools
 
+
+
+
 <img align="left" alt="R" width="31px" src="https://avatars0.githubusercontent.com/u/513560?s=200&v=4" />
 
 
@@ -57,7 +60,7 @@ Active Speaker at conferences in Colombia and Chile about Data Science and Stati
 
 
 
-<img align="left" alt="Visual Studio Code" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/visual-studio-code/visual-studio-code.png" />
+<img align="left" alt="Visual Studio Code" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/visual-studio-code/visual-studio-code.png"/> 
 
 
 
