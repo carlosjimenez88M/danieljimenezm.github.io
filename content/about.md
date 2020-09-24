@@ -2,6 +2,7 @@
 If you’re a Data Science Recruiter, click [here](https://github.com/carlosjimenez88M/Resume/blob/master/Daniel-Jimenez.pdf)
 
 
+
 Hi! my name is Daniel Jiménez, I am a Machine Learning Engineer at [Inter-American Development Bank ](https://www.iadb.org/es/acerca-del-bid/perspectiva-general), where I am  developing NLP applications,and Deep Learning Solutions for differents projects.At the same time I am a teacher at [Universidad Nacional de Colombia](https://unal.edu.co/), where I teach the following subjects: Big Data,Git & Github, Digital Marketing ,Introduction to Data Science and Statistical Learning and Machine Learning.
 
 Experienced Senior Data Scientist with a demonstrated history of working in the Startups and public institutions between USA, Colombia, Chile and México. With more than ten years of experience applying and development Machine Learning models to real world.
@@ -11,8 +12,12 @@ Appasionate for applied statistics, machine learning modeling and bayesian stati
 Active Speaker at conferences in Colombia and Chile about Data Science and Statistic Modelling.
 
 <br />
+<br />
+
 
 ### Frameworks
+
+
 
 <img align="left" alt="Keras" width="81px" src="https://keras.io/img/logo.png" />
 
@@ -32,7 +37,7 @@ Active Speaker at conferences in Colombia and Chile about Data Science and Stati
 
 
 <br />
-
+<br />
 
 
 ## Lenguaje and Tools
@@ -94,6 +99,8 @@ Active Speaker at conferences in Colombia and Chile about Data Science and Stati
 
 
 <br />
+<br />
+
 
 
 ## Connect with me
