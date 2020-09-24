@@ -58,6 +58,7 @@ grosses%&gt;%
   summarize(income=sum(weekly_gross),
             avg_ticket_price=mean(avg_ticket_price))%&gt;%
   head()</code></pre>
+<pre><code>## `summarise()` regrouping output by &#39;show&#39;, &#39;period&#39; (override with `.groups` argument)</code></pre>
 <pre><code>## # A tibble: 6 x 5
 ## # Groups:   show, period [1]
 ##   show  period date        income avg_ticket_price
@@ -81,6 +82,7 @@ grosses%&gt;%
   ggplot(aes(date,income,color=show))+
   geom_line(size=1,alpha=.8)+
   scale_y_continuous(labels = dollar)</code></pre>
+<pre><code>## `summarise()` regrouping output by &#39;show&#39;, &#39;period&#39; (override with `.groups` argument)</code></pre>
 <p><img src="/post/2020-05-03-tidymetrics_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>Imagine working with this in econometrics, is Awsome!!! And now create your Dashboard. The first step is save your metrics.</p>
 <pre class="r"><code>show_summarized&lt;-grosses%&gt;%
@@ -95,6 +97,7 @@ grosses%&gt;%
             pct_capacity=mean(pct_capacity))%&gt;%
   mutate(variation_ticke_price=round(avg_ticket_price-lag(avg_ticket_price),2))%&gt;%
   ungroup()</code></pre>
+<pre><code>## `summarise()` regrouping output by &#39;show&#39;, &#39;period&#39; (override with `.groups` argument)</code></pre>
 <p>With <code>use_metrics_scaffold</code> you create the first step and the most important input for create your Dashboard, copy and paste in the HEAD</p>
 <pre class="r"><code>use_metrics_scaffold(show_summarized)</code></pre>
 <pre><code>## metrics:

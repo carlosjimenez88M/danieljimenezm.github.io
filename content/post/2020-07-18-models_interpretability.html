@@ -78,17 +78,17 @@ Con esta sencilla ecuación se logrará comprender como es la tasa de participac
 <div id="creando-un-modelo-de-machine-learning-con-intepretación" class="section level2">
 <h2>Creando un modelo de Machine Learning con intepretación</h2>
 <p>Lo primero que se debe desarrollar en esta fase es es la arquitectura del <code>Random Forest</code>, se logre catalogar siete variables que he seleccionado después de leer el diccionario del frame y analizarlas desde una óptica de la definición del problema.</p>
-<pre><code>## ══ Workflow [trained] ═════════════════
+<pre><code>## ══ Workflow [trained] ══════════════════
 ## Preprocessor: Recipe
 ## Model: rand_forest()
 ## 
-## ── Preprocessor ───────────────────────
+## ── Preprocessor ────────────────────────
 ## 2 Recipe Steps
 ## 
 ## ● step_other()
 ## ● step_dummy()
 ## 
-## ── Model ──────────────────────────────
+## ── Model ───────────────────────────────
 ## 
 ## Call:
 ##  randomForest(x = as.data.frame(x), y = y) 
@@ -108,8 +108,22 @@ Con esta sencilla ecuación se logrará comprender como es la tasa de participac
 </ul>
 <p>las otras variables aportan poco valor, aunque no despreciable, exceptuando military civilian la cual tiene cero participación en la construcción de la varianza del modelo.</p>
 <p>Con esta parte se tiene cubierto la selección de features. Ahora se busca entender el efecto de cada variable en el modelo y con ello ir formalizando la interpretación del modelo, suponga que quiere evaluar el efecto del año de la misión sobre el resultado de la duración de la misma, para esto se trabaja con lo que se conoce como feature effects, al cual describe la influencia de la variable sobre el modelo y la predicción.</p>
+<pre><code>## Warning: UNRELIABLE VALUE: Future (&#39;future_lapply-1&#39;) unexpectedly generated
+## random numbers without specifying argument &#39;[future.]seed&#39;. There is a risk that
+## those random numbers are not statistically sound and the overall results might
+## be invalid. To fix this, specify argument &#39;[future.]seed&#39;, e.g. &#39;seed=TRUE&#39;.
+## This ensures that proper, parallel-safe random numbers are produced via the
+## L&#39;Ecuyer-CMRG method. To disable this check, use [future].seed=NULL, or set
+## option &#39;future.rng.onMisuse&#39; to &quot;ignore&quot;.</code></pre>
 <p><img src="/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>Lo que se puede observar con respecto a la influencia de la variable del <strong>Año de la misión</strong> es que empezo teniendo efectos inversamente proporcionales y con el paso del tiempo se ha convertido en un factor directo en la duración de las misiones. Ahora haré lo mismo para el resto de variables</p>
+<pre><code>## Warning: UNRELIABLE VALUE: Future (&#39;future_lapply-1&#39;) unexpectedly generated
+## random numbers without specifying argument &#39;[future.]seed&#39;. There is a risk that
+## those random numbers are not statistically sound and the overall results might
+## be invalid. To fix this, specify argument &#39;[future.]seed&#39;, e.g. &#39;seed=TRUE&#39;.
+## This ensures that proper, parallel-safe random numbers are produced via the
+## L&#39;Ecuyer-CMRG method. To disable this check, use [future].seed=NULL, or set
+## option &#39;future.rng.onMisuse&#39; to &quot;ignore&quot;.</code></pre>
 <p><img src="/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p>Acá podemos concluir que hay dos variables que poco o nada ayudan a definir la tendencia de la duración de las misiones, una que ya se habia comentado es el military_civilian y la otra es total_eva_hrs, las demás tienen efectos que se pueden medir y con ello se construye un concepto sobre su influencia en la predicción.</p>
 <p>Para poder finalizar con este análisis se debe desarrollar la interaccion de la varianza, entre las variables</p>
@@ -136,8 +150,8 @@ Con esta sencilla ecuación se logrará comprender como es la tasa de participac
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>En el siguiente link encontrará el texto completo sobre la taxonomía del IML <a href="https://arxiv.org/pdf/1702.08608.pdf" class="uri">https://arxiv.org/pdf/1702.08608.pdf</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
-<li id="fn2"><p><a href="https://towardsdatascience.com/interpretable-machine-learning-1dec0f2f3e6b" class="uri">https://towardsdatascience.com/interpretable-machine-learning-1dec0f2f3e6b</a><a href="#fnref2" class="footnote-back">↩</a></p></li>
-<li id="fn3"><p><a href="https://es.wikipedia.org/wiki/Valor_de_Shapley" class="uri">https://es.wikipedia.org/wiki/Valor_de_Shapley</a><a href="#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn1"><p>En el siguiente link encontrará el texto completo sobre la taxonomía del IML <a href="https://arxiv.org/pdf/1702.08608.pdf" class="uri">https://arxiv.org/pdf/1702.08608.pdf</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p><a href="https://towardsdatascience.com/interpretable-machine-learning-1dec0f2f3e6b" class="uri">https://towardsdatascience.com/interpretable-machine-learning-1dec0f2f3e6b</a><a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p><a href="https://es.wikipedia.org/wiki/Valor_de_Shapley" class="uri">https://es.wikipedia.org/wiki/Valor_de_Shapley</a><a href="#fnref3" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>

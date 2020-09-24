@@ -30,6 +30,8 @@ library(FactoMineR)</code></pre>
 <div id="explorar-la-data" class="section level2">
 <h2>Explorar la data</h2>
 <p>Lo primero es ver como es el comportamiento criminal por país entre los años 2019 y 2020. EL resultado se imprime en pantalla</p>
+<pre><code>## `summarise()` regrouping output by &#39;year&#39;, &#39;name&#39; (override with `.groups` argument)</code></pre>
+<pre><code>## `summarise()` regrouping output by &#39;year&#39; (override with `.groups` argument)</code></pre>
 <p><img src="/post/2020-04-21-NLP_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Es interesante ver el comportamiento de España, pues tiene una tasa sostenida entre los años evaluados.</p>
 <p><img src="/post/2020-04-21-NLP_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
@@ -50,6 +52,7 @@ library(FactoMineR)</code></pre>
 <p>Voy a mirar el Caso de España que me llamo la atención</p>
 <p><img src="/post/2020-04-21-NLP_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>Indudablemente acá hay un material único para trabajar. Veamos como es el comportamiento del delito a través de los años y el costo de los mismos.</p>
+<pre><code>## `summarise()` regrouping output by &#39;year&#39; (override with `.groups` argument)</code></pre>
 <p><img src="/post/2020-04-21-NLP_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>Esto es oro puro!!! Acá hay una cantidad de relaciones importantes.</p>
 <p><img src="/post/2020-04-21-NLP_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
@@ -65,7 +68,7 @@ library(FactoMineR)</code></pre>
 <p>Con un análisis de bigrams podré entender como crear unos targets después de verficar los patrones.</p>
 <pre><code>## # A tibble: 26 x 2
 ##    bigram               n
-##  * &lt;chr&gt;            &lt;int&gt;
+##    &lt;chr&gt;            &lt;int&gt;
 ##  1 non compliance       3
 ##  2 basis for            2
 ##  3 compliance with      2
@@ -158,10 +161,6 @@ grams_tf_idf%&gt;%
 ## Maximal term length: 11
 ## Weighting          : term frequency (tf)</code></pre>
 <p>Paso seguido un análisis lineal discriminado, en el cual lo importante es ver el comportamiento de beta.</p>
-<pre><code>## Warning: `tbl_df()` is deprecated as of dplyr 1.0.0.
-## Please use `tibble::as_tibble()` instead.
-## This warning is displayed once every 8 hours.
-## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
 <pre><code>## # A tibble: 20 x 3
 ##    topic term          beta
 ##    &lt;int&gt; &lt;chr&gt;        &lt;dbl&gt;
@@ -204,7 +203,7 @@ grams_tf_idf%&gt;%
 <p>Las distribuciones de probabilidades dan seña que el trabajo va por buen camino. Ahora un camino más espinoso, generar el target y eliminar la inceritdumbre.</p>
 <pre><code>## # A tibble: 28 x 4
 ##    document term       count .topic
-##  * &lt;chr&gt;    &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;
+##    &lt;chr&gt;    &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;
 ##  1 1        basis          1      4
 ##  2 3        basis          1      4
 ##  3 1        compliance     1      3
@@ -242,7 +241,7 @@ grams_tf_idf%&gt;%
 ## 6 2            5 0.170</code></pre>
 <pre><code>## # A tibble: 6 x 2
 ##   topic     n
-## * &lt;int&gt; &lt;int&gt;
+##   &lt;int&gt; &lt;int&gt;
 ## 1     1     6
 ## 2     2     6
 ## 3     3     6

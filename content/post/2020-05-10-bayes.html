@@ -82,6 +82,7 @@ y=\frac{\alpha}{\alpha+\beta}=0.2603937
 <p>A este proceso se le conoce como contracción y consiste en mover las estimaciones hacia el promedio, entre más se muevan las estimaciones es clara la relación con el número de evidencias que tenemos. Con poca evidencia el movimiento será mayor, mientras que con mucha el movimiento será menor.</p>
 <p>Ahora suponga que quiere conocer el grado de incertidumbre de la estimación, para ello se trabajara con los intervalos de credibilidad que ofrece el método del empirical bayes.</p>
 <p>Se usará el estimador bayesiano trabajado antes que reduce el ruido de los datos en una proporción importante, y calculado la posterior, con lo cual actualizaremos la información.</p>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <p>Veamos un ejemplo de como es el intervalo de credibilidad de Scott Brosius.</p>
 <pre class="r"><code>brosius &lt;- yankee_beta %&gt;%
   filter(name == &quot;Scott Brosius&quot;)
@@ -111,6 +112,6 @@ Cabe notar que la distribución beta de Brosius es 1001 H, con un AB de 3889, co
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>Fragmento de: David Robinson. “Introduction to Empirical Bayes”.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn1"><p>Fragmento de: David Robinson. “Introduction to Empirical Bayes”.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>

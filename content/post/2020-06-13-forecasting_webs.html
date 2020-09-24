@@ -51,16 +51,16 @@ dolar_table&lt;-url%&gt;%
 <pre><code>## # A tibble: 23 x 6
 ##    Fecha      Último   Apertura Máximo   Mínimo   `% var.`
 ##    &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;   
-##  1 15.06.2020 3.782,18 3.778,50 3.784,18 3.775,77 0,10%   
-##  2 14.06.2020 3.778,50 3.778,50 3.778,50 3.778,50 0,00%   
-##  3 12.06.2020 3.778,50 3.773,00 3.782,33 3.736,96 0,23%   
-##  4 11.06.2020 3.769,89 3.673,50 3.775,51 3.668,50 2,67%   
-##  5 10.06.2020 3.672,00 3.657,50 3.691,50 3.643,00 0,49%   
-##  6 09.06.2020 3.654,16 3.609,99 3.666,24 3.603,82 1,26%   
-##  7 08.06.2020 3.608,61 3.573,20 3.613,26 3.564,00 0,99%   
-##  8 05.06.2020 3.573,20 3.588,50 3.592,37 3.542,06 -0,25%  
-##  9 04.06.2020 3.582,00 3.607,00 3.625,17 3.582,00 -0,69%  
-## 10 03.06.2020 3.607,00 3.636,44 3.647,75 3.562,29 -0,75%  
+##  1 23.09.2020 3.853,75 3.827,65 3.875,10 3.823,91 0,90%   
+##  2 22.09.2020 3.819,34 3.789,50 3.841,65 3.777,77 1,03%   
+##  3 21.09.2020 3.780,23 3.730,00 3.802,48 3.728,10 1,38%   
+##  4 18.09.2020 3.728,88 3.715,11 3.739,00 3.710,59 0,41%   
+##  5 17.09.2020 3.713,80 3.687,50 3.729,00 3.686,00 0,75%   
+##  6 16.09.2020 3.686,00 3.700,10 3.720,00 3.680,16 -0,08%  
+##  7 15.09.2020 3.689,00 3.691,91 3.704,26 3.668,11 -0,00%  
+##  8 14.09.2020 3.689,13 3.705,50 3.723,50 3.667,00 -0,40%  
+##  9 11.09.2020 3.703,88 3.710,10 3.726,10 3.688,00 -0,12%  
+## 10 10.09.2020 3.708,48 3.713,91 3.716,66 3.675,00 0,08%   
 ## # … with 13 more rows</code></pre>
 <p>Bueno, hay que hacerle un par de modificaciones a la tabla para poder trabajar con ella.</p>
 <pre class="r"><code>Serie&lt;-dolar_table%&gt;%
@@ -80,16 +80,16 @@ Serie</code></pre>
 <pre><code>## # A tibble: 23 x 3
 ##    Fecha      Apertura Cierre
 ##    &lt;date&gt;        &lt;dbl&gt;  &lt;dbl&gt;
-##  1 2020-06-15    3778.  3782.
-##  2 2020-06-14    3778.  3778.
-##  3 2020-06-12    3773   3778.
-##  4 2020-06-11    3674.  3770.
-##  5 2020-06-10    3658.  3672 
-##  6 2020-06-09    3610.  3654.
-##  7 2020-06-08    3573.  3609.
-##  8 2020-06-05    3588.  3573.
-##  9 2020-06-04    3607   3582 
-## 10 2020-06-03    3636.  3607 
+##  1 2020-09-23    3828.  3854.
+##  2 2020-09-22    3790.  3819.
+##  3 2020-09-21    3730   3780.
+##  4 2020-09-18    3715.  3729.
+##  5 2020-09-17    3688.  3714.
+##  6 2020-09-16    3700.  3686 
+##  7 2020-09-15    3692.  3689 
+##  8 2020-09-14    3706.  3689.
+##  9 2020-09-11    3710.  3704.
+## 10 2020-09-10    3714.  3708.
 ## # … with 13 more rows</code></pre>
 <p>Para este análisis me basaré puntualmente en el cierre</p>
 <p><img src="/post/2020-06-13-forecasting_webs_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
@@ -140,13 +140,13 @@ Bueno, en efecto hay una tendencia bastante fuerte [-20,20], pero este efecto po
   ts()
   
 sarima(Serie_ts,p=0,d=1,q=0)</code></pre>
-<pre><code>## initial  value 3.647767 
-## iter   1 value 3.647767
-## final  value 3.647767 
+<pre><code>## initial  value 3.443548 
+## iter   1 value 3.443548
+## final  value 3.443548 
 ## converged
-## initial  value 3.647767 
-## iter   1 value 3.647767
-## final  value 3.647767 
+## initial  value 3.443548 
+## iter   1 value 3.443548
+## final  value 3.443548 
 ## converged</code></pre>
 <p><img src="/post/2020-06-13-forecasting_webs_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <pre><code>## $fit
@@ -158,26 +158,26 @@ sarima(Serie_ts,p=0,d=1,q=0)</code></pre>
 ## 
 ## Coefficients:
 ##       constant
-##        -5.8682
-## s.e.    8.1846
+##         0.0141
+## s.e.    6.6727
 ## 
-## sigma^2 estimated as 1474:  log likelihood = -111.47,  aic = 226.94
+## sigma^2 estimated as 979.6:  log likelihood = -106.97,  aic = 217.95
 ## 
 ## $degrees_of_freedom
 ## [1] 21
 ## 
 ## $ttable
 ##          Estimate     SE t.value p.value
-## constant  -5.8682 8.1846  -0.717  0.4813
+## constant   0.0141 6.6727  0.0021  0.9983
 ## 
 ## $AIC
-## [1] 10.31523
+## [1] 9.90679
 ## 
 ## $AICc
-## [1] 10.32432
+## [1] 9.915881
 ## 
 ## $BIC
-## [1] 10.41442</code></pre>
+## [1] 10.00598</code></pre>
 <p>La evidencia indica que este es el modelo adecuado, los errores tiene un buen desempeño. Pero para concluirlo este es un modelo de Ruido Blanco</p>
 <p>Por lo tanto paso hacer el modelo para pronosticar.</p>
 <p><img src="/post/2020-06-13-forecasting_webs_files/figure-html/unnamed-chunk-11-1.png" width="672" />
@@ -193,17 +193,17 @@ El dolar el día 12 de Junio cerro en $3.776,50 y el modelo pronóstico $3.778,4
 ## 
 ## Coefficients:
 ##          ar1  intercept     xreg
-##       0.9006  3853.2640  -6.0010
-## s.e.  0.0809    88.8008   5.1913
+##       0.9145  3799.7895  -0.2773
+## s.e.  0.0742    78.9063   4.4842
 ## 
-## sigma^2 estimated as 1595:  log likelihood=-116.67
-## AIC=241.33   AICc=243.56   BIC=245.88</code></pre>
+## sigma^2 estimated as 1068:  log likelihood=-112.13
+## AIC=232.25   AICc=234.47   BIC=236.79</code></pre>
 <pre class="r"><code>(fit2&lt;-auto.arima(Serie_ts,d=1))</code></pre>
 <pre><code>## Series: Serie_ts 
 ## ARIMA(0,1,0) 
 ## 
-## sigma^2 estimated as 1509:  log likelihood=-111.72
-## AIC=225.44   AICc=225.64   BIC=226.53</code></pre>
+## sigma^2 estimated as 980.2:  log likelihood=-106.97
+## AIC=215.95   AICc=216.15   BIC=217.04</code></pre>
 <pre class="r"><code>fc1 &lt;- forecast(fit1,
   xreg = length(Serie_ts) + 1:4)
 fc2 &lt;- forecast(fit2, h=4)
@@ -222,7 +222,7 @@ autoplot(Serie_ts) +
 <caption><span id="tab:unnamed-chunk-13">Table 1: </span>Dolar con el modelo determinístico</caption>
 <thead>
 <tr class="header">
-<th></th>
+<th align="left"></th>
 <th align="right">Point Forecast</th>
 <th align="right">Lo 80</th>
 <th align="right">Hi 80</th>
@@ -232,50 +232,50 @@ autoplot(Serie_ts) +
 </thead>
 <tbody>
 <tr class="odd">
-<td>24</td>
-<td align="right">3769.523</td>
-<td align="right">3718.346</td>
-<td align="right">3820.699</td>
-<td align="right">3691.255</td>
-<td align="right">3847.791</td>
+<td align="left">24</td>
+<td align="right">3848.314</td>
+<td align="right">3806.439</td>
+<td align="right">3890.189</td>
+<td align="right">3784.271</td>
+<td align="right">3912.356</td>
 </tr>
 <tr class="even">
-<td>25</td>
-<td align="right">3757.527</td>
-<td align="right">3688.657</td>
-<td align="right">3826.397</td>
-<td align="right">3652.199</td>
-<td align="right">3862.855</td>
+<td align="left">25</td>
+<td align="right">3843.318</td>
+<td align="right">3786.573</td>
+<td align="right">3900.063</td>
+<td align="right">3756.534</td>
+<td align="right">3930.102</td>
 </tr>
 <tr class="odd">
-<td>26</td>
-<td align="right">3746.128</td>
-<td align="right">3665.718</td>
-<td align="right">3826.538</td>
-<td align="right">3623.151</td>
-<td align="right">3869.104</td>
+<td align="left">26</td>
+<td align="right">3838.726</td>
+<td align="right">3772.045</td>
+<td align="right">3905.408</td>
+<td align="right">3736.746</td>
+<td align="right">3940.706</td>
 </tr>
 <tr class="even">
-<td>27</td>
-<td align="right">3735.265</td>
-<td align="right">3646.592</td>
-<td align="right">3823.938</td>
-<td align="right">3599.652</td>
-<td align="right">3870.878</td>
+<td align="left">27</td>
+<td align="right">3834.503</td>
+<td align="right">3760.530</td>
+<td align="right">3908.477</td>
+<td align="right">3721.371</td>
+<td align="right">3947.636</td>
 </tr>
 </tbody>
 </table>
 <p>Y acá dejo los valores de la predicción a través de una red neuronal</p>
 <pre><code>##    Point Forecast
-## 24       3769.136
-## 25       3759.042
-## 26       3751.080
-## 27       3744.709</code></pre>
+## 24       3839.190
+## 25       3828.290
+## 26       3819.364
+## 27       3811.614</code></pre>
 <p><img src="/post/2020-06-13-forecasting_webs_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 </div>
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p><a href="https://es.wikipedia.org/wiki/Regresi%C3%B3n_local" class="uri">https://es.wikipedia.org/wiki/Regresi%C3%B3n_local</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn1"><p><a href="https://es.wikipedia.org/wiki/Regresi%C3%B3n_local" class="uri">https://es.wikipedia.org/wiki/Regresi%C3%B3n_local</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>

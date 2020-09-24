@@ -1,10 +1,6 @@
-+++
-title = "About"
-description = "Hugo, the world’s fastest framework for building websites"
-date = "2020-09-24"
-aliases = ["about-us","about-hugo","contact"]
-author = "Daniel Jimenez"
-+++
+
+
+
 
 If you’re a Data Science Recruiter, click [here](https://github.com/carlosjimenez88M/Resume/blob/master/Daniel-Jimenez.pdf)
 
@@ -60,7 +56,11 @@ Active Speaker at conferences in Colombia and Chile about Data Science and Stati
 
 
 
-<img align="left" alt="Visual Studio Code" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/visual-studio-code/visual-studio-code.png"/> 
+
+
+
+<img align="left" alt="CODE" width="26px" src="https://avatars0.githubusercontent.com/in/2406?s=41&u=650876af224cfecf886751aeeaf597b7c86edb5d&v=4" />
+
 
 
 

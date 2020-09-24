@@ -20,6 +20,12 @@ output: html_document
 </div>
 <div id="eda" class="section level2">
 <h2>EDA</h2>
+<pre><code>## 
+##  Downloading file 1 of 2: `cocktails.csv`
+##  Downloading file 2 of 2: `boston_cocktails.csv`</code></pre>
+<pre><code>## 
+##  Downloading file 1 of 2: `cocktails.csv`
+##  Downloading file 2 of 2: `boston_cocktails.csv`</code></pre>
 <p>Veamos de primera mano que información trae este set de datos</p>
 <pre class="r"><code>cocktails%&gt;%
   head()</code></pre>
@@ -252,6 +258,7 @@ ingredientes_vaso%&gt;%
   summarize(total=n())%&gt;%
   arrange(desc(total))%&gt;%
   top_n(10)</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## Selecting by total</code></pre>
 <pre class="r"><code>cocktail_log_odds%&gt;%
   filter(glass %in% top10$glass)%&gt;%
@@ -272,6 +279,7 @@ top3&lt;-cocktail_log_odds%&gt;%
   summarize(total=n())%&gt;%
   arrange(desc(total))%&gt;%
   top_n(3)</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## Selecting by total</code></pre>
 <pre class="r"><code>cocktail_log_odds %&gt;%
   filter(glass %in% top3$glass ,
