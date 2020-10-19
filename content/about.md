@@ -1,3 +1,12 @@
++++
+title = "About"
+description = "Hugo, the world’s fastest framework for building websites"
+date = "2019-02-28"
+aliases = ["about-us","about-hugo","contact"]
+author = "Hugo Authors"
++++
+
+
 
 If you’re a Data Science Recruiter, click [here](https://github.com/carlosjimenez88M/Resume/blob/master/Daniel-Jimenez.pdf)
 
