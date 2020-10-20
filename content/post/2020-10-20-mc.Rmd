@@ -27,7 +27,7 @@ Suponga que quiere entender el nivel de correlación lineal entre las variables 
 cor(iris[,-5])
 ```
 
-Notesé que lo que estamos viendo se define como 
+nótese que lo que estamos viendo se define como 
 
 $$
 r_{(x,y)}=\frac{cov(x,y)}{sd(x) sd(y)}
@@ -41,7 +41,7 @@ cor(iris[,-5])%>%
 ```
 
 
-Notesé que en esta gráfica los colores azules entre más oscuros indican que las variables se mueven en la misma dirección con la misma fuerza, mientras que los colores de tonos rojos indican que la proporción contraria y el tamaño de la bola la fuerza.
+nótese que en esta gráfica los colores azules entre más oscuros indican que las variables se mueven en la misma dirección con la misma fuerza, mientras que los colores de tonos rojos indican que la proporción contraria y el tamaño de la bola la fuerza.
 
 Quizás si vemos esto con números en el gráfico, la interpretación sería más sencilla
 
