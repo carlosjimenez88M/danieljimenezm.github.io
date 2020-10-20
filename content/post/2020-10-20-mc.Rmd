@@ -104,7 +104,7 @@ iris%>%
 
 Sino lograr llevarlo al entendimiento de un problema, como el siguiente: Se quiere saber como ha sido la evolución de los torneos de basket femenino, en donde lo principal a comprender es el patron de juegos victoriosos, para ello primero se interpreta el problema de la siguiente manera 
 
-```{r}
+```{r, message=FALSE}
 tournament <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-10-06/tournament.csv')
 
 tournament<-tournament%>%

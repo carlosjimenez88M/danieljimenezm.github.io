@@ -57,31 +57,9 @@ r_{(x,y)}=\frac{cov(x,y)}{sd(x) sd(y)}
 <p>La ídea principal de este gráfico no esta en usarlo como una simple geometría, como se presenta en el siguiente ejemplo:</p>
 <p><img src="/post/2020-10-20-mc_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Sino lograr llevarlo al entendimiento de un problema, como el siguiente: Se quiere saber como ha sido la evolución de los torneos de basket femenino, en donde lo principal a comprender es el patron de juegos victoriosos, para ello primero se interpreta el problema de la siguiente manera</p>
-<pre class="r"><code>tournament &lt;- readr::read_csv(&#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-10-06/tournament.csv&#39;)</code></pre>
-<pre><code>## 
-## ── Column specification ────────────────────────────────────────────────────────
-## cols(
-##   year = col_double(),
-##   school = col_character(),
-##   seed = col_double(),
-##   conference = col_character(),
-##   conf_w = col_double(),
-##   conf_l = col_double(),
-##   conf_percent = col_double(),
-##   conf_place = col_character(),
-##   reg_w = col_double(),
-##   reg_l = col_double(),
-##   reg_percent = col_double(),
-##   how_qual = col_character(),
-##   x1st_game_at_home = col_character(),
-##   tourney_w = col_double(),
-##   tourney_l = col_double(),
-##   tourney_finish = col_character(),
-##   full_w = col_double(),
-##   full_l = col_double(),
-##   full_percent = col_double()
-## )</code></pre>
-<pre class="r"><code>tournament&lt;-tournament%&gt;%
+<pre class="r"><code>tournament &lt;- readr::read_csv(&#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-10-06/tournament.csv&#39;)
+
+tournament&lt;-tournament%&gt;%
   filter(year&gt;=1994)
 
 levels&lt;-c(&quot;1st&quot;,&quot;2nd&quot;,&quot;RSF&quot;,&quot;RF&quot;,&quot;NSF&quot;,&quot;N2nd&quot;,&quot;Champ&quot;)
