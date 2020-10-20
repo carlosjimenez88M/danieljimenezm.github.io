@@ -24,7 +24,7 @@ theme = "hugo-theme-chunky-poster"
   
   [[menu.main]]
     identifier = "courses"
-    name = "Courses"
+    name = "Cursos"
     url = "/courses/"
     weight = 1
 
@@ -48,8 +48,8 @@ author = "authors"
 
 [params]
   author = "Un Data Scientist Dice"
-  description = "Machine Learning and Statistical Modelling"
-  homepageImage = "/images/homepage-image.jpg"
+  description = "Machine Learning y modelamiento estadístico"
+  homepageImage = "/images/bayes.png"
   share = true
   showLanguageSwitcher = false
 
