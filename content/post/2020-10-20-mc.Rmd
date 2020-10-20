@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
 
 ## Visualización de datos 
 
-```{r, echo=FALSE, cache=FALSE}
+```{r, echo=FALSE, cache=FALSE, warning=FALSE, message=FALSE}
 library(tidyverse)
 library(corrplot) 
 library(scales)
