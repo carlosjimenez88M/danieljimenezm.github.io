@@ -8,7 +8,7 @@ Hola! Soy Daniel Jiménez, Actualmente trabajo como :
 Cuento con más de nueve años de experiencia laboral trabajando entre Instituciones públicas y startups,en países como: Colombia, Chile, Estados Unidos, México y España, desarrollando modelos de machine learning o aplicando estadística a problemas del `real-world`, implementando soluciones del tipo: Marketing Analitycs, NLP, Bio - estadística, pronóstico de la demanda, diseño de soluciones logísticas, planeación de la demanda, churn, human analytics, clasificación de usuarios, speech recognition, entre otras.
 
 
-Extremadamente apasionado por: la programación, los modelos por reforzamiento, la visualización de datos, el análisis Bayesiano, modelamiento estadístico, la biología computacional (Genomic Data analysis) y el álgebra matricial.
+Soy extremadamente apasionado por: la programación, los modelos por reforzamiento, la visualización de datos, el análisis Bayesiano, modelamiento estadístico, la biología computacional (Genomic Data analysis) y el álgebra matricial.
 
 Fanático de R y Docker! 
 
