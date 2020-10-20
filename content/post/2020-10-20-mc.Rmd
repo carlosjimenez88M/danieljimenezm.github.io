@@ -2,10 +2,11 @@
 title: "Mapas de Calor"
 date: 2020-10-20
 output: html_document
+mathjax: "true"
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
 ```
 
 ## Visualización de datos 

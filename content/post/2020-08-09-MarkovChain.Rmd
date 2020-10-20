@@ -2,6 +2,7 @@
 title: "MarkovChain"
 date:  2020-08-09
 output: html_document
+mathjax: "true"
 ---
 
 ```{r setup, include=FALSE}
