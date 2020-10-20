@@ -19,7 +19,7 @@ theme_set(theme_classic())
 ```
 
 
-En la `gramática de los gráficos` de  Leland Wilkinson, diseña las reglas básicas y fundamentales para que a la hora de hacer uno, donde su output pueda tener interpretación. Veamos un ejemplo y contextualicemos sobre ello.
+En la `gramática de los gráficos` de  Leland Wilkinson, diseña las reglas básicas y fundamentales para que a la hora de hacer un gráfico,su output tenga una interpretación. Veamos un ejemplo y contextualicemos sobre ello.
 
 Suponga que quiere entender el nivel de correlación lineal entre las variables de `iris`, para ello usaremos la siguiente función.
 
