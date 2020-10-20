@@ -1,0 +1,1 @@
+If you’re a Data Science Recruiter, click [here](https://github.com/carlosjimenez88M/Resume/blob/master/Daniel-Jimenez.pdf)
