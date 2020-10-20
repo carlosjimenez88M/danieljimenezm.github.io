@@ -102,7 +102,6 @@ tournament%&gt;%
   geom_tile()+
   scale_fill_gradient2(high = &#39;red&#39;)</code></pre>
 <p><img src="/post/2020-10-20-mc_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-<p>Este gráfico indica que a medida que</p>
 <p>Ahora ajustamos con base al problema el número de <code>seed</code> y agregamos el número porcentual de participantes por posición y el resultado será el siguiente:</p>
 <pre class="r"><code>tournament%&gt;%
   count(seed,tourney_finish)%&gt;%

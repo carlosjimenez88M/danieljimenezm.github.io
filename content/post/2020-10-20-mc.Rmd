@@ -137,7 +137,7 @@ tournament%>%
 
 
 
-Este gráfico indica que a medida que 
+
 
 Ahora ajustamos con base al problema el número de `seed` y  agregamos el número porcentual de participantes por posición y el resultado será el siguiente:
 
