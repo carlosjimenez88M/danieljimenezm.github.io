@@ -1,14 +1,16 @@
 
-Hola! Soy Daniel Jiménez, Actualmente trabajo como :
+Hola! Soy Daniel Jiménez, Data Scientist y estadístico aplicado, de corte Bayesiano , con un gran interés por todas las tecnologías asociadas al trabajo de de la ciencia de datos, la distribución de sistemas y la biología computacional.
+
+Actualmente trabajo como :
 
 * Machine Learning Engineer - Banco Interamericano de Desarrollo 
 * Senior Data Scientist - Globant
 * Profesor catedrático - Universidad Nacional de Colombia
 
-Cuento con más de nueve años de experiencia laboral trabajando entre Instituciones públicas y startups,en países como: Colombia, Chile, Estados Unidos, México y España, desarrollando modelos de machine learning o aplicando estadística a problemas del `real-world`, implementando soluciones del tipo: Marketing Analitycs, NLP, Bio - estadística, pronóstico de la demanda, diseño de soluciones logísticas, planeación de la demanda, churn, human analytics, clasificación de usuarios, speech recognition, entre otras.
+Cuento con más de nueve años de experiencia laboral trabajando entre Instituciones públicas y startups,en países como: Colombia, Chile, Estados Unidos, México y España, desarrollando modelos de machine learning o aplicando estadística a problemas del `real-world`, implementando soluciones del tipo: Marketing Analitycs, NLP, Bio - estadística, pronóstico de la demanda, diseño de soluciones logísticas,sistemas de recomendación,forecasting, churn, human analytics, clasificación de usuarios,Text Mining, speech recognition, entre otras.
 
 
-Soy extremadamente apasionado por: la programación, los modelos por reforzamiento, la visualización de datos, el análisis Bayesiano, modelamiento estadístico, la biología computacional (Genomic Data analysis) y el álgebra matricial.
+Soy extremadamente apasionado por: la programación, los modelos por reforzamiento, la visualización de datos, el análisis Bayesiano, modelamiento estadístico,  biología computacional (Genomic Data analysis), Neurociencias, Ciencias de la decisión,series de tiempo y el álgebra matricial.
 
 Fanático de R y Docker! 
 
