@@ -1,0 +1,497 @@
+---
+title: "Series de tiempo"
+date: 2020-10-25
+output: html_document
+---
+
+
+
+<div id="machine-learning-y-series-de-tiempo" class="section level2">
+<h2>Machine Learning y series de tiempo</h2>
+<p>Gracias a la evolución en la implementación del <code>Machine Learning</code>, las series de tiempo han sido integradas a esta rama de la ciencia de datos, permitiendo así que los nuevos modelos más estables y con mayor fortaleza en la parte de <code>feature engineering</code>, lo cual deriva en un mejor <strong>perfomance</strong>.</p>
+<p>Para entender esta parte hay que definir el <code>feature</code> en términos de estacionalidad y tendencia, y es por ello, que la mejor manera será construyendo un ejemplo y definiendo cada uno de los pasos que se van a desarrollar. Definamos un problema : Desea construir un modelo que le permita predecir el recuento de transacciones de bicicletas compartidas, durante tres meses, esta base de datos la encuentra en el repositorio de Machine Learning de la UCI, puede ver el reto que ellos proponen haciendo click <a href="https://archive.ics.uci.edu/ml/datasets/bike+sharing+dataset">aquí</a>.</p>
+<p>Sabiendo que el objetivo es <strong>calcular el número de transacciones</strong> se debe definir una estrategia del feature engineering, que permita calcular el número de interacciones entre los términos y las variables.</p>
+<p>Como es costumbre, se debe desarrollar un EDA, para tener un poco más de contexto sobre el problema, pero para ello es necesario tener el diccionario de las variables, por ello tomare definiciones de la UCI</p>
+<ul>
+<li><p>instant: record index</p></li>
+<li><p>dteday : date</p></li>
+<li><p>season : season (1:winter, 2:spring, 3:summer, 4:fall)</p></li>
+<li><p>yr : year (0: 2011, 1:2012)</p></li>
+<li><p>mnth : month ( 1 to 12)</p></li>
+<li><p>hr : hour (0 to 23)</p></li>
+<li><p>holiday : weather day is holiday or not (extracted from [Web Link])</p></li>
+<li><p>weekday : day of the week</p></li>
+<li><p>workingday : if day is neither weekend nor holiday is 1, otherwise is 0.</p></li>
+<li><p>weathersit :</p>
+<ul>
+<li>1: Clear, Few clouds, Partly cloudy, Partly cloudy</li>
+<li>2: Mist + Cloudy, Mist + Broken clouds, Mist + Few clouds, Mist</li>
+<li>3: Light Snow, Light Rain + Thunderstorm + Scattered clouds, Light Rain + Scattered clouds</li>
+<li>4: Heavy Rain + Ice Pallets + Thunderstorm + Mist, Snow + Fog</li>
+</ul></li>
+</ul>
+<p>*temp : Normalized temperature in Celsius. The values are derived via (t-t_min)/(t_max-t_min), t_min=-8, t_max=+39 (only in hourly scale)</p>
+<ul>
+<li><p>atemp: Normalized feeling temperature in Celsius. The values are derived via (t-t_min)/(t_max-t_min), t_min=-16, t_max=+50 (only in hourly scale)</p></li>
+<li><p>hum: Normalized humidity. The values are divided to 100 (max)</p></li>
+<li><p>windspeed: Normalized wind speed. The values are divided to 67 (max)</p></li>
+<li><p>casual: count of casual users</p></li>
+<li><p>registered: count of registered users</p></li>
+<li><p>cnt: count of total rental bikes including both casual and registered</p></li>
+</ul>
+<pre class="r"><code>bikes&lt;-read.csv(&#39;../data/day.csv&#39;)
+bikes%&gt;%
+  head()</code></pre>
+<pre><code>##   instant     dteday season yr mnth holiday weekday workingday weathersit
+## 1       1 2011-01-01      1  0    1       0       6          0          2
+## 2       2 2011-01-02      1  0    1       0       0          0          2
+## 3       3 2011-01-03      1  0    1       0       1          1          1
+## 4       4 2011-01-04      1  0    1       0       2          1          1
+## 5       5 2011-01-05      1  0    1       0       3          1          1
+## 6       6 2011-01-06      1  0    1       0       4          1          1
+##       temp    atemp      hum windspeed casual registered  cnt
+## 1 0.344167 0.363625 0.805833 0.1604460    331        654  985
+## 2 0.363478 0.353739 0.696087 0.2485390    131        670  801
+## 3 0.196364 0.189405 0.437273 0.2483090    120       1229 1349
+## 4 0.200000 0.212122 0.590435 0.1602960    108       1454 1562
+## 5 0.226957 0.229270 0.436957 0.1869000     82       1518 1600
+## 6 0.204348 0.233209 0.518261 0.0895652     88       1518 1606</code></pre>
+<p>Lo primero que se debe hacer,es una recategorización de la variable <code>season</code>, para crear un poco de <code>interpretability</code> sobre las transacciones</p>
+<pre class="r"><code>season_feature &lt;- c(&quot;Winter&quot;,&quot;Spring&quot;,&quot;Summer&quot;,&quot;Fall&quot;)
+
+bikes&lt;-bikes%&gt;%
+  mutate(season=case_when(
+    str_detect(season,&quot;1&quot;)~season_feature[1],
+    str_detect(season,&quot;2&quot;)~season_feature[2],
+    str_detect(season,&quot;3&quot;)~season_feature[3],
+    str_detect(season,&quot;4&quot;)~season_feature[4]
+  ),season=as.factor(season))
+
+bikes%&gt;%
+  head()</code></pre>
+<pre><code>##   instant     dteday season yr mnth holiday weekday workingday weathersit
+## 1       1 2011-01-01 Winter  0    1       0       6          0          2
+## 2       2 2011-01-02 Winter  0    1       0       0          0          2
+## 3       3 2011-01-03 Winter  0    1       0       1          1          1
+## 4       4 2011-01-04 Winter  0    1       0       2          1          1
+## 5       5 2011-01-05 Winter  0    1       0       3          1          1
+## 6       6 2011-01-06 Winter  0    1       0       4          1          1
+##       temp    atemp      hum windspeed casual registered  cnt
+## 1 0.344167 0.363625 0.805833 0.1604460    331        654  985
+## 2 0.363478 0.353739 0.696087 0.2485390    131        670  801
+## 3 0.196364 0.189405 0.437273 0.2483090    120       1229 1349
+## 4 0.200000 0.212122 0.590435 0.1602960    108       1454 1562
+## 5 0.226957 0.229270 0.436957 0.1869000     82       1518 1600
+## 6 0.204348 0.233209 0.518261 0.0895652     88       1518 1606</code></pre>
+<p>Paso seguido, intentaré ver el comportamiento de <code>season</code> versus <code>cnt</code></p>
+<pre class="r"><code>bikes%&gt;%
+  ggplot(aes(cnt,season))+
+  geom_jitter(alpha=.3)+
+  labs(title = &#39;Relación entre la temporada y el número de transacciones&#39;,
+       y=&#39;Season&#39;,
+       x=&#39;Transactions&#39;)</code></pre>
+<p><img src="/post/2020-10-25-series_de_tiempo_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Se puede ver la existencia de una correlación fuerte entre la estación y el número de transacciones, pero es necesario ordenar estos datos para comprender donde hay mayor nivel transaccional.</p>
+<pre class="r"><code>bikes%&gt;%
+  group_by(season)%&gt;%
+  summarize(Total=sum(cnt))%&gt;%
+  ungroup()%&gt;%
+  mutate(season=fct_reorder(season,Total))%&gt;%
+  ggplot(aes(Total,season,fill=season))+
+  geom_col(show.legend = FALSE)+
+  scale_x_continuous(labels = scales::comma_format())+
+  labs(title = &#39;Temporada donde más se usan las bicicletas compartidas&#39;)</code></pre>
+<p><img src="/post/2020-10-25-series_de_tiempo_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+Bueno, acá hay una obviedad: En verano es cuando más se usa bicicletas compartidas. Ahora hagamos más profundo, veamos como es el comportamiento de la temporara dado el día y el uso de bicicletas.</p>
+<pre class="r"><code>bikes%&gt;%
+  mutate(weekday=case_when(
+    str_detect(weekday,&quot;0&quot;)~&quot;Monday&quot;,
+    str_detect(weekday,&quot;1&quot;)~&quot;Tuesday&quot;,
+    str_detect(weekday,&quot;2&quot;)~&quot;Wednesday&quot;,
+    str_detect(weekday,&quot;3&quot;)~&quot;Thursday&quot;,
+    str_detect(weekday,&quot;4&quot;)~&quot;Friday&quot;,
+    str_detect(weekday,&quot;5&quot;)~&quot;Saturday&quot;,
+    str_detect(weekday,&quot;6&quot;)~&quot;Sunday&quot;
+  ))%&gt;%
+  group_by(season,weekday)%&gt;%
+  summarize(Total=sum(cnt))%&gt;%
+  ungroup()%&gt;%
+  mutate(weekday=reorder_within(weekday,Total,season))%&gt;%
+  ggplot(aes(weekday,Total,fill=season))+
+  geom_col(show.legend = FALSE)+
+  scale_y_continuous(labels = comma_format())+
+  facet_wrap(~season,scales = &#39;free&#39;)+
+  scale_x_reordered()+
+  coord_flip()+
+  labs(title = &#39;Relación de la temporada versus el día en que más se usan las biciletas&#39;)</code></pre>
+<p><img src="/post/2020-10-25-series_de_tiempo_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+Bueno, de esta gráfica se puede aprender dos cosas</p>
+<ul>
+<li>Los días que más se usan bicicletas entre otoño y primavera son los domingos;</li>
+<li>La relación entre las temporadas de otoño y primavera varia en un 25% con respecto al uso;</li>
+<li>En verano, los días viernes son los días en que más hay transacciones y en invierno los días sabados, pero la relación en invierno de una variación de almenos el 50%</li>
+</ul>
+<pre class="r"><code>Total_season&lt;-bikes%&gt;%
+  select(season,cnt)%&gt;%
+  group_by(season)%&gt;%
+  summarize(Total=sum(cnt))%&gt;%
+  tbl_df()
+
+crossing(var1=Total_season$season,var2=Total_season$season)%&gt;%
+  left_join(Total_season,by=c(&#39;var1&#39;=&#39;season&#39;))%&gt;%
+  left_join(Total_season,by=c(&#39;var2&#39;=&#39;season&#39;))%&gt;%
+  group_by(var1,var2)%&gt;%
+  summarize(differences=Total.x-Total.y)%&gt;%
+  arrange(desc(differences))%&gt;%
+  mutate(var2=reorder_within(var2,differences,var1))%&gt;%
+  filter(differences!=&#39;0&#39;)%&gt;%
+  ggplot(aes(differences,var2,fill=var1))+
+  geom_col(show.legend = FALSE)+
+  scale_y_reordered()+
+  facet_wrap(~var1, scales=&#39;free&#39;)+
+  scale_x_continuous(labels = comma_format())+
+  labs(title = &#39;Comparativa de las diferencias por estación&#39;,
+       subtitle = &#39;Con respecto al uso de bicicletas compartidas&#39;,
+       y=&#39;&#39;)</code></pre>
+<p><img src="/post/2020-10-25-series_de_tiempo_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+Dado que ahora si se comprende la volatilidad por periodo, es posible crear un análisis preliminar de la tendencia de los datos , de la siguiente manera</p>
+<pre class="r"><code>bikes%&gt;%
+  mutate(dteday=ymd(dteday))%&gt;%
+  ggplot(aes(dteday,cnt, color=season))+
+  geom_point()+
+  geom_smooth()</code></pre>
+<p><img src="/post/2020-10-25-series_de_tiempo_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>El primer indicio da pistas que el tipo de comportamiento de las variables es <code>loess</code>, o sea <strong>regresiones locales</strong>, para comprobar esta tesis, trabajare con un emparejamiento de datos, en el cual medire las distancias euclidianas entre las <code>season</code>, para determinar el comportamiento local de los datos.</p>
+<pre class="r"><code>bikes%&gt;%
+  mutate(dteday=ymd(dteday))%&gt;%
+  pairwise_dist(season,dteday,cnt,sort=TRUE)%&gt;%
+  ggplot(aes(distance,reorder(item2,distance),fill=item1))+
+  geom_col(show.legend = FALSE)+
+  facet_wrap(~item1,scales=&#39;free&#39;)+
+  labs(title = &#39;Relación Euclidiana entre las temporadas&#39;,
+       y=&#39;&#39;,
+       x=&#39;&#39;)</code></pre>
+<p><img src="/post/2020-10-25-series_de_tiempo_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>Para finalizar esta parte es necesario entender el nivel de correlación de pearson que tienen las variables.</p>
+<pre class="r"><code>cor_bikes&lt;-bikes%&gt;%
+  mutate(dteday=ymd(dteday))%&gt;%
+  pairwise_cor(season,dteday,cnt,sort=TRUE)%&gt;%
+  mutate(correlation=abs(correlation))
+
+cor_bikes%&gt;%
+  ggplot(aes(correlation,item1))+
+  geom_jitter(alpha=0.3)</code></pre>
+<p><img src="/post/2020-10-25-series_de_tiempo_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>Después de entender esta parte, se procede a diseñar un modelo de serie de tiempo. Para esto se hace la partición de los datos de la siguiente manera</p>
+<pre class="r"><code>bikes_db &lt;- bikes %&gt;%
+    select(dteday, cnt) %&gt;%
+    rename(date  = dteday,
+           value = cnt)
+train_tbl &lt;- bikes_db %&gt;% 
+  mutate(date=ymd(date))%&gt;%
+  filter(date &lt; &quot;2012-06-01&quot;)
+test_tbl  &lt;- bikes_db %&gt;% 
+  mutate(date=ymd(date))%&gt;%
+  filter(date &gt;= &quot;2012-06-01&quot;)</code></pre>
+<p>Lo que gráficamente sería</p>
+<pre class="r"><code>bikes&lt;-bikes_db %&gt;%
+    mutate(date=ymd(date))
+bikes %&gt;%
+    ggplot(aes(x = date, y = value)) +
+    geom_rect(xmin = as.numeric(ymd(&quot;2012-06-01&quot;)),
+              xmax = as.numeric(ymd(&quot;2013-01-01&quot;)),
+              ymin = 0, ymax = 10000,
+              fill = palette_light()[[4]], alpha = 0.03) +
+    annotate(&quot;text&quot;, x = ymd(&quot;2011-10-01&quot;), y = 7800,
+             color = palette_light()[[1]], label = &quot;Región de entrenamiento&quot;) +
+    annotate(&quot;text&quot;, x = ymd(&quot;2012-10-01&quot;), y = 1550,
+             color = palette_light()[[1]], label = &quot;Región de testeo&quot;) +
+    geom_point(alpha = 0.4, color = palette_light()[[1]]) +
+    labs(title = &quot;Escenarios para la serie de tiempo&quot;, x = &quot;&quot;) +
+    theme_tq()</code></pre>
+<p><img src="/post/2020-10-25-series_de_tiempo_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>Ahora se debe crear el algoritmo que determine el aprendizaje de los datos, para ello se ejecuta la siguiente sentencia</p>
+<pre class="r"><code>recipe_time_series&lt;-recipe(value~.,data = train_tbl)%&gt;%
+  step_timeseries_signature(date)
+
+recipe_time_series%&gt;%
+  prep()%&gt;%
+  bake(new_data=train_tbl)%&gt;%
+  head()</code></pre>
+<pre><code>## # A tibble: 6 x 29
+##   date       value date_index.num date_year date_year.iso date_half date_quarter
+##   &lt;date&gt;     &lt;int&gt;          &lt;int&gt;     &lt;int&gt;         &lt;int&gt;     &lt;int&gt;        &lt;int&gt;
+## 1 2011-01-01   985     1293840000      2011          2010         1            1
+## 2 2011-01-02   801     1293926400      2011          2010         1            1
+## 3 2011-01-03  1349     1294012800      2011          2011         1            1
+## 4 2011-01-04  1562     1294099200      2011          2011         1            1
+## 5 2011-01-05  1600     1294185600      2011          2011         1            1
+## 6 2011-01-06  1606     1294272000      2011          2011         1            1
+## # … with 22 more variables: date_month &lt;int&gt;, date_month.xts &lt;int&gt;,
+## #   date_month.lbl &lt;ord&gt;, date_day &lt;int&gt;, date_hour &lt;int&gt;, date_minute &lt;int&gt;,
+## #   date_second &lt;int&gt;, date_hour12 &lt;int&gt;, date_am.pm &lt;int&gt;, date_wday &lt;int&gt;,
+## #   date_wday.xts &lt;int&gt;, date_wday.lbl &lt;ord&gt;, date_mday &lt;int&gt;, date_qday &lt;int&gt;,
+## #   date_yday &lt;int&gt;, date_mweek &lt;int&gt;, date_week &lt;int&gt;, date_week.iso &lt;int&gt;,
+## #   date_week2 &lt;int&gt;, date_week3 &lt;int&gt;, date_week4 &lt;int&gt;, date_mday7 &lt;int&gt;</code></pre>
+<p>Paso seguido con lo aprendido en la sección anterior, se crean los features, en donde se crearan variables por segmentos de tiempo.</p>
+<pre class="r"><code>recipe_final &lt;- recipe_time_series %&gt;%
+    step_rm(date) %&gt;%
+    step_rm(contains(&quot;iso&quot;), 
+            contains(&quot;second&quot;), contains(&quot;minute&quot;), contains(&quot;hour&quot;),
+            contains(&quot;am.pm&quot;), contains(&quot;xts&quot;)) %&gt;%
+    step_normalize(contains(&quot;index.num&quot;), date_year) %&gt;%
+    step_interact(~ date_month.lbl * date_day) %&gt;%
+    step_interact(~ date_month.lbl * date_mweek) %&gt;%
+    step_interact(~ date_month.lbl * date_wday.lbl * date_yday) %&gt;%
+    step_dummy(contains(&quot;lbl&quot;), one_hot = TRUE) 
+
+recipe_final%&gt;%
+  prep()%&gt;%
+  bake(new_data=train_tbl)%&gt;%
+  head()</code></pre>
+<pre><code>## # A tibble: 6 x 225
+##   value date_index.num date_year date_half date_quarter date_month date_day
+##   &lt;int&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;int&gt;        &lt;int&gt;      &lt;int&gt;    &lt;int&gt;
+## 1   985          -1.73    -0.645         1            1          1        1
+## 2   801          -1.72    -0.645         1            1          1        2
+## 3  1349          -1.71    -0.645         1            1          1        3
+## 4  1562          -1.71    -0.645         1            1          1        4
+## 5  1600          -1.70    -0.645         1            1          1        5
+## 6  1606          -1.69    -0.645         1            1          1        6
+## # … with 218 more variables: date_wday &lt;int&gt;, date_mday &lt;int&gt;, date_qday &lt;int&gt;,
+## #   date_yday &lt;int&gt;, date_mweek &lt;int&gt;, date_week &lt;int&gt;, date_week2 &lt;int&gt;,
+## #   date_week3 &lt;int&gt;, date_week4 &lt;int&gt;, date_mday7 &lt;int&gt;,
+## #   date_month.lbl.L_x_date_day &lt;dbl&gt;, date_month.lbl.Q_x_date_day &lt;dbl&gt;,
+## #   date_month.lbl.C_x_date_day &lt;dbl&gt;, `date_month.lbl^4_x_date_day` &lt;dbl&gt;,
+## #   `date_month.lbl^5_x_date_day` &lt;dbl&gt;, `date_month.lbl^6_x_date_day` &lt;dbl&gt;,
+## #   `date_month.lbl^7_x_date_day` &lt;dbl&gt;, `date_month.lbl^8_x_date_day` &lt;dbl&gt;,
+## #   `date_month.lbl^9_x_date_day` &lt;dbl&gt;, `date_month.lbl^10_x_date_day` &lt;dbl&gt;,
+## #   `date_month.lbl^11_x_date_day` &lt;dbl&gt;, date_month.lbl.L_x_date_mweek &lt;dbl&gt;,
+## #   date_month.lbl.Q_x_date_mweek &lt;dbl&gt;, date_month.lbl.C_x_date_mweek &lt;dbl&gt;,
+## #   `date_month.lbl^4_x_date_mweek` &lt;dbl&gt;,
+## #   `date_month.lbl^5_x_date_mweek` &lt;dbl&gt;,
+## #   `date_month.lbl^6_x_date_mweek` &lt;dbl&gt;,
+## #   `date_month.lbl^7_x_date_mweek` &lt;dbl&gt;,
+## #   `date_month.lbl^8_x_date_mweek` &lt;dbl&gt;,
+## #   `date_month.lbl^9_x_date_mweek` &lt;dbl&gt;,
+## #   `date_month.lbl^10_x_date_mweek` &lt;dbl&gt;,
+## #   `date_month.lbl^11_x_date_mweek` &lt;dbl&gt;,
+## #   date_month.lbl.L_x_date_wday.lbl.L &lt;dbl&gt;,
+## #   date_month.lbl.Q_x_date_wday.lbl.L &lt;dbl&gt;,
+## #   date_month.lbl.C_x_date_wday.lbl.L &lt;dbl&gt;,
+## #   `date_month.lbl^4_x_date_wday.lbl.L` &lt;dbl&gt;,
+## #   `date_month.lbl^5_x_date_wday.lbl.L` &lt;dbl&gt;,
+## #   `date_month.lbl^6_x_date_wday.lbl.L` &lt;dbl&gt;,
+## #   `date_month.lbl^7_x_date_wday.lbl.L` &lt;dbl&gt;,
+## #   `date_month.lbl^8_x_date_wday.lbl.L` &lt;dbl&gt;,
+## #   `date_month.lbl^9_x_date_wday.lbl.L` &lt;dbl&gt;,
+## #   `date_month.lbl^10_x_date_wday.lbl.L` &lt;dbl&gt;,
+## #   `date_month.lbl^11_x_date_wday.lbl.L` &lt;dbl&gt;,
+## #   date_month.lbl.L_x_date_wday.lbl.Q &lt;dbl&gt;,
+## #   date_month.lbl.Q_x_date_wday.lbl.Q &lt;dbl&gt;,
+## #   date_month.lbl.C_x_date_wday.lbl.Q &lt;dbl&gt;,
+## #   `date_month.lbl^4_x_date_wday.lbl.Q` &lt;dbl&gt;,
+## #   `date_month.lbl^5_x_date_wday.lbl.Q` &lt;dbl&gt;,
+## #   `date_month.lbl^6_x_date_wday.lbl.Q` &lt;dbl&gt;,
+## #   `date_month.lbl^7_x_date_wday.lbl.Q` &lt;dbl&gt;,
+## #   `date_month.lbl^8_x_date_wday.lbl.Q` &lt;dbl&gt;,
+## #   `date_month.lbl^9_x_date_wday.lbl.Q` &lt;dbl&gt;,
+## #   `date_month.lbl^10_x_date_wday.lbl.Q` &lt;dbl&gt;,
+## #   `date_month.lbl^11_x_date_wday.lbl.Q` &lt;dbl&gt;,
+## #   date_month.lbl.L_x_date_wday.lbl.C &lt;dbl&gt;,
+## #   date_month.lbl.Q_x_date_wday.lbl.C &lt;dbl&gt;,
+## #   date_month.lbl.C_x_date_wday.lbl.C &lt;dbl&gt;,
+## #   `date_month.lbl^4_x_date_wday.lbl.C` &lt;dbl&gt;,
+## #   `date_month.lbl^5_x_date_wday.lbl.C` &lt;dbl&gt;,
+## #   `date_month.lbl^6_x_date_wday.lbl.C` &lt;dbl&gt;,
+## #   `date_month.lbl^7_x_date_wday.lbl.C` &lt;dbl&gt;,
+## #   `date_month.lbl^8_x_date_wday.lbl.C` &lt;dbl&gt;,
+## #   `date_month.lbl^9_x_date_wday.lbl.C` &lt;dbl&gt;,
+## #   `date_month.lbl^10_x_date_wday.lbl.C` &lt;dbl&gt;,
+## #   `date_month.lbl^11_x_date_wday.lbl.C` &lt;dbl&gt;,
+## #   `date_month.lbl.L_x_date_wday.lbl^4` &lt;dbl&gt;,
+## #   `date_month.lbl.Q_x_date_wday.lbl^4` &lt;dbl&gt;,
+## #   `date_month.lbl.C_x_date_wday.lbl^4` &lt;dbl&gt;,
+## #   `date_month.lbl^4_x_date_wday.lbl^4` &lt;dbl&gt;,
+## #   `date_month.lbl^5_x_date_wday.lbl^4` &lt;dbl&gt;,
+## #   `date_month.lbl^6_x_date_wday.lbl^4` &lt;dbl&gt;,
+## #   `date_month.lbl^7_x_date_wday.lbl^4` &lt;dbl&gt;,
+## #   `date_month.lbl^8_x_date_wday.lbl^4` &lt;dbl&gt;,
+## #   `date_month.lbl^9_x_date_wday.lbl^4` &lt;dbl&gt;,
+## #   `date_month.lbl^10_x_date_wday.lbl^4` &lt;dbl&gt;,
+## #   `date_month.lbl^11_x_date_wday.lbl^4` &lt;dbl&gt;,
+## #   `date_month.lbl.L_x_date_wday.lbl^5` &lt;dbl&gt;,
+## #   `date_month.lbl.Q_x_date_wday.lbl^5` &lt;dbl&gt;,
+## #   `date_month.lbl.C_x_date_wday.lbl^5` &lt;dbl&gt;,
+## #   `date_month.lbl^4_x_date_wday.lbl^5` &lt;dbl&gt;,
+## #   `date_month.lbl^5_x_date_wday.lbl^5` &lt;dbl&gt;,
+## #   `date_month.lbl^6_x_date_wday.lbl^5` &lt;dbl&gt;,
+## #   `date_month.lbl^7_x_date_wday.lbl^5` &lt;dbl&gt;,
+## #   `date_month.lbl^8_x_date_wday.lbl^5` &lt;dbl&gt;,
+## #   `date_month.lbl^9_x_date_wday.lbl^5` &lt;dbl&gt;,
+## #   `date_month.lbl^10_x_date_wday.lbl^5` &lt;dbl&gt;,
+## #   `date_month.lbl^11_x_date_wday.lbl^5` &lt;dbl&gt;,
+## #   `date_month.lbl.L_x_date_wday.lbl^6` &lt;dbl&gt;,
+## #   `date_month.lbl.Q_x_date_wday.lbl^6` &lt;dbl&gt;,
+## #   `date_month.lbl.C_x_date_wday.lbl^6` &lt;dbl&gt;,
+## #   `date_month.lbl^4_x_date_wday.lbl^6` &lt;dbl&gt;,
+## #   `date_month.lbl^5_x_date_wday.lbl^6` &lt;dbl&gt;,
+## #   `date_month.lbl^6_x_date_wday.lbl^6` &lt;dbl&gt;,
+## #   `date_month.lbl^7_x_date_wday.lbl^6` &lt;dbl&gt;,
+## #   `date_month.lbl^8_x_date_wday.lbl^6` &lt;dbl&gt;,
+## #   `date_month.lbl^9_x_date_wday.lbl^6` &lt;dbl&gt;,
+## #   `date_month.lbl^10_x_date_wday.lbl^6` &lt;dbl&gt;,
+## #   `date_month.lbl^11_x_date_wday.lbl^6` &lt;dbl&gt;,
+## #   date_month.lbl.L_x_date_yday &lt;dbl&gt;, date_month.lbl.Q_x_date_yday &lt;dbl&gt;, …</code></pre>
+<p>Con este feature, se puede crear un modelo, para ello optare por un GML, con la siguiente arquitectura:</p>
+<pre class="r"><code>model_spec_glmnet &lt;- linear_reg(mode = &quot;regression&quot;, penalty = 10, mixture = 0.6) %&gt;%
+    set_engine(&quot;glmnet&quot;)
+
+workflow_glmnet &lt;- workflow() %&gt;%
+    add_recipe(recipe_final) %&gt;%
+    add_model(model_spec_glmnet)
+
+workflow_glmnet</code></pre>
+<pre><code>## ══ Workflow ════════════════════════════════════════════════════════════════════
+## Preprocessor: Recipe
+## Model: linear_reg()
+## 
+## ── Preprocessor ────────────────────────────────────────────────────────────────
+## 8 Recipe Steps
+## 
+## ● step_timeseries_signature()
+## ● step_rm()
+## ● step_rm()
+## ● step_normalize()
+## ● step_interact()
+## ● step_interact()
+## ● step_interact()
+## ● step_dummy()
+## 
+## ── Model ───────────────────────────────────────────────────────────────────────
+## Linear Regression Model Specification (regression)
+## 
+## Main Arguments:
+##   penalty = 10
+##   mixture = 0.6
+## 
+## Computational engine: glmnet</code></pre>
+<p>Al entrenar el modelo el resultado es el siguiente:</p>
+<pre class="r"><code>workflow_glmnet %&gt;% 
+  fit(data = train_tbl)-&gt;workflow_trained
+
+prediction_tbl &lt;- workflow_trained %&gt;% 
+    predict(test_tbl) %&gt;%
+    bind_cols(test_tbl)
+
+prediction_tbl%&gt;%
+  mutate(resid=value-.pred)%&gt;%
+  ggplot(aes(value,resid))+
+  geom_point(alpha=.3)+
+  geom_smooth()+
+  labs(title = &#39;Relación de los valores Residuales ante el modelo&#39;)</code></pre>
+<p><img src="/post/2020-10-25-series_de_tiempo_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>El comportamiento de los residuales es el siguiente:</p>
+<pre class="r"><code>residuales&lt;-prediction_tbl%&gt;%
+  mutate(resid=value-.pred)
+
+qqnorm(residuales$resid)
+qqline(residuales$resid)</code></pre>
+<p><img src="/post/2020-10-25-series_de_tiempo_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+Parece que hay datos que no cumplen la prueba de normalidad en su totalidad, pero se puede trabajar con varias pruebas teóricas a ver si una leve variación en los supuestos permiten aceptar la normalidad.</p>
+<pre class="r"><code>ks.test(x = residuales$resid,&quot;pnorm&quot;, mean(residuales$resid), sd(residuales$resid))</code></pre>
+<pre><code>## 
+##  One-sample Kolmogorov-Smirnov test
+## 
+## data:  residuales$resid
+## D = 0.11368, p-value = 0.007921
+## alternative hypothesis: two-sided</code></pre>
+<p>Esta prueba indica que los datos no proceden de una normal en el caso de los residuales, pero gracias a las métricas de de la predicción se puede ver que se puede trabajar con los datos.</p>
+<pre class="r"><code>prediction_tbl %&gt;%
+    ggplot(aes(x = date, y = value - .pred)) +
+    geom_hline(yintercept = 0, color = &quot;black&quot;) +
+    geom_point(color = palette_light()[[1]], alpha = 0.5) +
+    geom_smooth(span = 0.05, color = &quot;red&quot;) +
+    geom_smooth(span = 1.00, se = FALSE) +
+    theme_tq() +
+    labs(title = &quot;Residuales del modelo general linealizado&quot;, 
+         x = &quot;&quot;,
+         y=&#39;Residuales&#39;) +
+    scale_y_continuous(limits = c(-5000, 5000))</code></pre>
+<p><img src="/post/2020-10-25-series_de_tiempo_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>Ahora con base a este modelo, se procede a desarrollar un resumen por fechas</p>
+<pre class="r"><code>idx &lt;- bikes %&gt;% 
+  tk_index()
+bikes_summary &lt;- idx %&gt;% 
+  tk_get_timeseries_summary()
+
+bikes_summary</code></pre>
+<pre><code>## # A tibble: 1 x 12
+##   n.obs start      end        units scale tzone diff.minimum diff.q1 diff.median
+##   &lt;int&gt; &lt;date&gt;     &lt;date&gt;     &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt;       &lt;dbl&gt;
+## 1   731 2011-01-01 2012-12-31 days  day   UTC          86400   86400       86400
+## # … with 3 more variables: diff.mean &lt;dbl&gt;, diff.q3 &lt;dbl&gt;, diff.maximum &lt;dbl&gt;</code></pre>
+<p>Con base a esta información se procede a trabajar el modelo de predicción:</p>
+<pre class="r"><code>idx_future &lt;- idx %&gt;% 
+  tk_make_future_timeseries(n_future = 90)
+
+future_tbl &lt;- tibble(date = idx_future) 
+
+future_predictions_tbl &lt;- workflow_glmnet %&gt;% 
+    fit(data = bikes) %&gt;%
+    predict(future_tbl) %&gt;%
+    bind_cols(future_tbl)
+
+
+future_predictions_tbl</code></pre>
+<pre><code>## # A tibble: 90 x 2
+##    .pred date      
+##    &lt;dbl&gt; &lt;date&gt;    
+##  1 5266. 2013-01-01
+##  2 5191. 2013-01-02
+##  3 5504. 2013-01-03
+##  4 5544. 2013-01-04
+##  5 5304. 2013-01-05
+##  6 5045. 2013-01-06
+##  7 5176. 2013-01-07
+##  8 5502. 2013-01-08
+##  9 5367. 2013-01-09
+## 10 5657. 2013-01-10
+## # … with 80 more rows</code></pre>
+<p>Y por último este modelo se puede evaluar de la siguiente manera:</p>
+<pre class="r"><code>bikes %&gt;%
+    ggplot(aes(x = date, y = value)) +
+    geom_rect(xmin = as.numeric(ymd(&quot;2012-06-01&quot;)),
+              xmax = as.numeric(ymd(&quot;2013-01-01&quot;)),
+              ymin = 0, ymax = 10000,
+              fill = palette_light()[[4]], alpha = 0.01) +
+    geom_rect(xmin = as.numeric(ymd(&quot;2013-01-01&quot;)),
+              xmax = as.numeric(ymd(&quot;2013-07-01&quot;)),
+              ymin = 0, ymax = 10000,
+              fill = palette_light()[[3]], alpha = 0.01) +
+    annotate(&quot;text&quot;, x = ymd(&quot;2011-10-01&quot;), y = 7800,
+             color = palette_light()[[1]], label = &quot;Región de entrenamiento&quot;) +
+    annotate(&quot;text&quot;, x = ymd(&quot;2012-10-01&quot;), y = 1550,
+             color = palette_light()[[1]], label = &quot;Región de testeo&quot;) +
+    annotate(&quot;text&quot;, x = ymd(&quot;2013-4-01&quot;), y = 2750,
+             color = palette_light()[[1]], label = &quot;Región de predicción&quot;,angle=90) +
+    geom_point(alpha = 0.5, color = palette_light()[[1]]) +
+    geom_point(aes(x = date, y = .pred), data = future_predictions_tbl,
+               alpha = 0.5, color = palette_light()[[2]]) +
+    geom_smooth(aes(x = date, y = .pred), data = future_predictions_tbl,
+                method = &#39;loess&#39;) + 
+    labs(title = &quot;Modelo de pronóstico a tres meses&quot;, x = &quot;&quot;) +
+    theme_tq()</code></pre>
+<p><img src="/post/2020-10-25-series_de_tiempo_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p>Una cosa a tener clara: <strong>Los modelos de predicción no son perfectos</strong> y por ello hay que determinar como esta almacenada la información de estos datos , y para ello se crean los intervalos de confianza.</p>
+<p><img src="/post/2020-10-25-series_de_tiempo_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+El modelo aparenta capturar la tendencia, aunque dada la volatilidad, el rmse estimado es de 1340, esto indica que se debe trabajar con más variables para mejorar el performance del modelo, aunque este no esta del todo mal, ya que presenta valores del la predicción parecen ser insesgados (verifiquesé desde la cuasi-normalidad de los errores) y por los valores de la volatilidad de la predicción parecen ser constantes en el tiempo (indicios homocedasticos).</p>
+<pre class="r"><code>residuales%&gt;%
+  ggplot(aes(.pred,resid))+
+  geom_point()+
+  geom_hline(yintercept = 0)+
+  geom_smooth()+
+  labs(title = &#39;Indicios de homocedasticidad débil&#39;)</code></pre>
+<p><img src="/post/2020-10-25-series_de_tiempo_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+Eso es todo por esta entrada. Espero que les guste!</p>
+</div>
