@@ -26,16 +26,10 @@ Esta app nos permite, clonar, modificar, comentar, mergear y demás acciones nat
 
 Paso seguido si queremos trabajar de manera detallada los códigos , o en forma los modelos de analítica y Machine Learning podemos usar alguna de las siguientes opciones :
 
+* [Juno](https://juno.sh/junoconnect/): Es el Interfaz tipo Jupyter Notebook para Ipad.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+* [Google Colab](https://colab.research.google.com/notebooks/intro.ipynb): Cuadernos en google que nos permiten desarrollar el trabajo completo en las libretas de Jupyter. (Recuerden que acá se puede trabajar tanto R como Python).
 
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
 
 ```{r pressure, echo=FALSE}
 plot(pressure)
