@@ -16,6 +16,10 @@ Este es un post un poco diferente a los que normalmente acostumbro a escribir, p
 Unas de las razones por la cual empecé a usarla (la idea original) era aprovechar que el dispositivo tenia unas ventajas en GPU y procesamiento gráfico el cual poden ayudarme a la hora de entrenar modelos o hacer algo de ingeniera de datos, pero resulta que poco a poco fui aprendiendo a trabajar en cosas más profundas e interesantes que estas.
 
 Por lo tanto expondré algunas ideas de como generar un `workflow` del iPad para el trabajo de ciencia de datos.
+
+### Manejor y edición de repositorios
+
+Como es costumbre la mayoría de científicos de datos trabajamos en Github, dado que tenemos proyectos colaborativos, por lo tanto a la hora de hacer un `merge` o anexar cambios en una parte del código es necesario poder clonar el repo y hacerle las ediciones, para ello contamos con [Working Copy](https://workingcopyapp.com/).
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
