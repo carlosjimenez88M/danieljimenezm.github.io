@@ -20,7 +20,12 @@ Por lo tanto expondré algunas ideas de como generar un `workflow` del iPad para
 ### Manejor y edición de repositorios
 
 Como es costumbre la mayoría de científicos de datos trabajamos en Github, dado que tenemos proyectos colaborativos, por lo tanto a la hora de hacer un `merge` o anexar cambios en una parte del código es necesario poder clonar el repo y hacerle las ediciones, para ello contamos con [Working Copy](https://workingcopyapp.com/).
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+Esta app nos permite, clonar, modificar, comentar, mergear y demás acciones nativas de un repo de Github, más una buena practica es editar los códigos o lo que estemos trabajando con un editor tipo `Visual Studio Code` y para ello contamos con [Kodex](https://kodex.app/), el cual tiene un nivel de eficiencia bastante bueno!
+
+
+Paso seguido si queremos trabajar de manera detallada los códigos , o en forma los modelos de analítica y Machine Learning podemos usar alguna de las siguientes opciones :
+
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
