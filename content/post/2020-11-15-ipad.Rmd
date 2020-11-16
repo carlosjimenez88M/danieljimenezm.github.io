@@ -1,5 +1,5 @@
 ---
-title: "Ipad Pro para Machine Learning?"
+title: "Ipad Pro para Machine Learning"
 date: 2020-11-15
 output: html_document
 mathjax: "true"
