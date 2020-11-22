@@ -1,0 +1,66 @@
+---
+title: "Consejos para convertirse en un Data Scientist"
+date: 2020-11-22
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Consejos para convertirse en un Data Scientist
+
+Esta entrada es una ruta de navegación para todo aquel que quiera convertirse en científico de datos, por lo tanto parto desde dos experiencias las cuales siento que me faculta para tomar este riesgo gustoso. La primera es la del docente, ejercicio con el que nací en mi carrera profesional, durante algo más de ocho o siete años he sido profesor en distintas universidades entre Colombia, España y México, dictando materias al principio un poco idealistas -cosas de la juventud-, pero desde hace cuatro años decidí volcar todo esfuerzo en una nueva empresa, y es enseñar todo aquello que se puede aplicar al mundo real y gracias a ello, hoy muchos de mis ex estudiantes son científicos de datos en organizaciones como: Banco Mundial, Platzi, entre otras, de ahí y después de hablar con con alguno de ellos rescato varias lecciones. Paso seguido, la segunda experiencia que me permite hablar de este tema son los diez años trabajando en ello, entre Organizaciones Públicas (Secretaría de Educación de Bogotá, ONU, BID, entre otras), como organizaciones y consultoras como Globant, Merlin o Chiper.
+
+## El gusto de aprender y la necesidad misma
+
+Cuando se empieza en este mundo, se siente vivir el sueño literario de Issac  Asimov, y ver las cosas como automatas y entender un poco si en la diferencia como aprende un algoritmo de Deep Learning y una persona. Sin entrar en debates éticos, si hay algo que he aprendido del Machine Learning y es : **a aprender de los errores**, rescato en ese sentido la frase del Chef Colombiano Jorge Rausch, donde describe el éxito como : 5% talento y 95% de esfuerzo, y en ese 95% es donde  quiero centrar.
+
+Los errores que cometemos los científicos de datos pueden darse en dos vías, confiar en el algoritmo y forzarlo a aprender de manera espuria o decidir que todo se puede hacer desde un punto de vista estadístico. Confieso que una practica personal mía, es desarrollar la mayor parte del trabajo desde la óptica estadística, por ello baso mis `tidytuesday` en gran medida al modelamiento, pero hay un limite en esto y es que que hay mejores herramientas que consolidan mejores practicas  y mejores usos en el desarrollo de las predicciones o clasificaciones como los modelos de Machine Learning, y es por ello que es necesario comprender en que consisten estos modelos, sus fundamentos tanto estadísticos como algebraicos e ingenieriles, sus fortalezas y debilidades.
+
+Por lo tanto es necesario mantenerse al día en las distintas aplicaciones del Machine Learning y acá va otro consejo, siempre lean lo más posible y repliquen los ejemplos, recomiendo mucho la página de [medium](https://medium.com/), [R Bloggers](https://www.r-bloggers.com/) y [Towards Data Science](https://towardsdatascience.com/), pero junto a ello la practica, ese 95% que nos enseñara de los errores de otros y de los propios, y es [Kaggle](https://www.kaggle.com/) el mejor laboratorio para ello, junto a los  [Tidytuesday](https://github.com/rfordatascience/tidytuesday) son un grandes aliados para saber que aprender y como aprenderlo.
+
+Por otro lado, hay una piedra angular que como científicos debemos desarrollar y es el modelamiento matemático, esto nos permitirá entender como avanzan los modelos en especial los de deep learning.
+
+Finalizo esta parte hablando precisamente de ello, del deep learing, quizás usted sea de las personas que prefiere quedarse en el mundo del Machine, pero es necesario aprender de esto, tanto como se pueda, el mundo va para allá y poco a poco como otras disciplinas fueron relegadas y recicladas para obtener una mejor versión del proceso de aprendizaje automático, el deep learning es la evolución. Una recomendación para esta fase, Pytorch es una excelente herramienta.
+
+## El proceso de ingeniería 
+
+Otro problema de los científicos de datos es lo aislados que estamos del mundo del deployment y es por ello que quizás los modelos puedan ser eficiente , pero no replicables y dicho esto y a pesar de usar  diferentes tecnologías es fundamental, llamese Plumber, Flask o Jenkins, herramientas de automatización y despliegue, lo importante es asegurarse que los modelos puedan vivir de una manera de `contenedor` y por eso lo importante es poder dockerizar todos lo que hagamos.
+
+[Docker](https://www.docker.com/) es una herramienta que permite el deploy de los modelos independiente en el sistema en que se monten, puesto que crea imagenes que son replicables y cada imagen actua de manera local cumpliendo su función especifica de tal manera que nuestro proceso desarrollado tendrá siempre un output.
+
+Por otro lado hay que sacarle provecho y poder a nuestros computadores y para ello lo mejor es trabajar desde la consola ó terminal del PC, el perder interfaz gráfico, y estar conectados directamente al cerebro del computador, todos los procesamientos se desarrollan mucho más rápido y de paso de manera tal que el computador puede asignar cada vez más poder de procesamiento a lo que estemos construyendo. Solo por curiosidad usted puede correr desde la terminal SQL, Python, R entre otras aplicaciones. Otra buena practica es usar Visual Studio Code, el cual no solo es un editor de código, sino un integrador, con lo cual el trabajo final que desarrollé será más eficiente.
+
+## Tratamiento de los datos 
+
+Para finalizar esta rama de los consejos quiero mencionar la ingeniería de datos, proceso el cual nos permite tener unas bases de datos integradas y transaccionales, pero este producto tiene tantas tecnologías y flujos de por medio, que es necesario entender la fase de como limpiar la data, transformarla  y regularla, y con esto quiero decir es que : **No todo es SQL**
+
+## Colaboración 
+
+En esta fase me centraré en hablar del trabajo en Github, para quienes no lo conocen, esta plataforma es la red social del código, y en ella podemos mostrar fases de los proyectos en los cuales estamos trabajando como también mostar proyectos y desarrollos dentro de la comunidad, pero ojo..... Github no es solo Push, Pull, Merge y commits.
+
+Si de verdad quiere dedicarse a este oficio tan maravilloso, estudie a profundidad Github!
+
+## Lugares para aprender
+
+Para finalizar esta entrada, quiero mencionar tres maneras de aprender: La primera y la que me parece más importante es **leer los papers**, hay uno en especial que recomiendo : [Attention](https://papers.nips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf) en deep Learning.
+
+Los papers no solo nos enseñaran las buenas practicas de como desarrollar los algoritmos, sino que nos dan las abstracción de como el autor ideo la lógica de los modelos, lo cual nos permite desarrollar código de manera más optima.
+
+Otro lugar para aprender es en Blogs, hay muchos que son supremamente interesantes, en especial recomiendo el de [Julia Silge](https://juliasilge.com/), ya que combina Machine Learning con Ingeniería de Software.
+
+Por último estan los cursos : Coursera, Udemy, Datacamp y Udacity. Estos cursos nos permiten aprender de manera especifica cada tema y por ello son altamente recomendados.
+
+No siendo más espero que estos consejos les sean útiles.
+
+
+
+
+
+
+
+
+
+
+
