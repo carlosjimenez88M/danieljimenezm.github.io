@@ -25,6 +25,9 @@ Actualmente trabajo como Machine Learning Engineer en el **[Banco Interamericano
 * Empecé este blog para mis estudiantes y para aprender a escribir bien! Ahora el público se crecio. Gracias.
 
 
+
+
+
 ### Frameworks
 
 
