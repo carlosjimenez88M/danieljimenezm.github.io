@@ -22,8 +22,7 @@ Actualmente trabajo como Machine Learning Engineer en el **[Banco Interamericano
 * Empecé siendo historiador económico. No se que paso!!
 * Oficialmente mi hobbie es el raspberry pi.
 * Soy un Ipad enthusiast y trabajo todo lo que puedo desde ella, desde programación hasta deep learning.
-
-
+* Empecé este blog para mis estudiantes y para aprender a escribir bien! Ahora el público se crecio. Gracias.
 
 
 ### Frameworks
