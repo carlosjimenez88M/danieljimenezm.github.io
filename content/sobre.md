@@ -1,18 +1,30 @@
+## ¿Qué hace  Daniel?
 
-Hola! Soy Daniel Jiménez, Data Scientist y estadístico aplicado, de corte Bayesiano , con un gran interés por todas las tecnologías asociadas al trabajo de de la ciencia de datos, la distribución de sistemas y la biología computacional.
-
-Actualmente trabajo como :
-
-* Machine Learning Engineer - Banco Interamericano de Desarrollo 
-* Senior Data Scientist - Globant
-* Profesor catedrático - Universidad Nacional de Colombia
-
-Cuento con más de nueve años de experiencia laboral trabajando entre Instituciones públicas y startups,en países como: Colombia, Chile, Estados Unidos, México y España, desarrollando modelos de machine learning o aplicando estadística a problemas del `real-world`, implementando soluciones del tipo: Marketing Analitycs, NLP, Bio - estadística, pronóstico de la demanda, diseño de soluciones logísticas,sistemas de recomendación,forecasting, churn, human analytics, clasificación de usuarios,Text Mining, speech recognition, entre otras.
+Actualmente trabajo como Machine Learning Engineer en el **[Banco Interamericano de desarrollo](https://www.iadb.org/es/acerca-del-bid/financiamiento-del-bid/financiamiento-del-bid%2C6028.html)** y como Senior Data Scientist en **[Globant](https://www.globant.com)**. A la par soy profesor de ciencia de datos en la [Universidad Nacional de Colombia](https://unal.edu.co).
 
 
-Soy extremadamente apasionado por: la programación, los modelos por reforzamiento, la visualización de datos, el análisis Bayesiano, modelamiento estadístico,  biología computacional (Genomic Data analysis), Neurociencias, Ciencias de la decisión,series de tiempo y el álgebra matricial.
+### ¿Quién es Daniel?
 
-Fanático de R y Docker! 
+* Data Scientist y estadístico aplicado.
+* Entusiasta de la tecnología relacionada con el Machine Learning, Data Science, Bases de datos, entre otras.
+* Me encantá trabajar con análisis gráfico y trabajo constantemente en ello.
+* Uso Github con un placer indescriptible ..... 😎
+* Llevo alrededor  de una decada trabajando problemas del **real-world** y para ello he creando soluciones  soluciones del tipo: Marketing Analytics, Forecasting, Machine Learning aplicado, NLP (recientemente), modelamiento estadístico, BI y TRI.
+* He trabajado en : Chile, Colombia, México, Estados Unidos y España.
+* Mis intereses se centran en : Bayesian Data Analysis, Empirical Bayes, Sistemas de recomendación,Modelos por reforzamiento, Forecasting, Machine Learning aplicado, modelamiento estadístico, muestreo y bio-estadística.
+* Me encanta el Text Mining y el NLP.
+* Uso Docker cada vez que puedo!
+* Mi investigación se centra en la inferencia estadística 🤓 
+* Actualmente transito hacia el camino de la biología computacional (Genomic Data analysis).
+* Uso MAC por gusto y Linux porque soy una persona de bien.
+* Trabajo desde la terminal la mayor parte del tiempo.
+* Tengo una debilidad por las novelas policiacas! 
+* Empecé siendo historiador económico. No se que paso!!
+* Oficialmente mi hobbie es el raspberry pi.
+* Soy un Ipad enthusiast y trabajo todo lo que puedo desde ella, desde programación hasta deep learning.
+
+
+
 
 ### Frameworks
 
