@@ -20,14 +20,14 @@ params:
     analytics:
       trackerID: GA-000000000-0
   name: Daniel Jiménez
-  sharethis:
-    custom: no
-    property: '123456789012345678901234'
-  showClients: no
-  showDownload: no
-  showRecentWorks: no
-  showServices: no
-  showSubheader: no
+  # sharethis:
+  #   custom: no
+  #   property: '123456789012345678901234'
+  # showClients: no
+  # showDownload: no
+  # showRecentWorks: no
+  # showServices: no
+  # showSubheader: no
   social:
     - footer: yes
       icon: fab fa-facebook-square
