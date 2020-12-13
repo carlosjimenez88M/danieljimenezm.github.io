@@ -16,7 +16,7 @@ params:
   footerEnableContact: yes
   footerEnableFollowme: yes
   footerEnableFormWidget: yes
-  footerEnableTextWidget: yes
+  footerEnableTextWidget: no
   google:
     analytics:
       trackerID: GA-000000000-0
