@@ -1,0 +1,96 @@
+baseURL: https://www.danieljimenezm.com
+languageCode: en-us
+title: Initio - Free, multipurpose html5 template by GetTemplate
+theme: hugo-initio
+publishDir: docs
+params:
+  DateForm: January 2, 2006
+  address: 234 Hidden Pond Road, Ashland City, TN 37015
+  avatar: images/guy.jpg
+  avatarclass: circle
+  background: ''
+  banner: images/bg_head.jpg
+  disqus:
+    site: hugo-initio-site.disqus.com
+  email: anthony.russel42@example.com
+  favicon: images/gt_favicon.png
+  footerEnableContact: yes
+  footerEnableFollowme: yes
+  footerEnableFormWidget: yes
+  footerEnableTextWidget: yes
+  google:
+    analytics:
+      trackerID: GA-000000000-0
+  name: Anthony Russel
+  phone: +234 23 9873237
+  sharethis:
+    custom: yes
+    property: '123456789012345678901234'
+  showClients: yes
+  showDownload: yes
+  showRecentWorks: yes
+  showServices: yes
+  showSubheader: yes
+  social:
+    - footer: yes
+      icon: fab fa-facebook-square
+      network: facebook
+      sharethis: yes
+      title: facebook
+      url: https://www.facebook.com/nickname
+    - footer: yes
+      icon: fab fa-twitter-square
+      network: twitter
+      sharethis: yes
+      title: twitter
+      url: https://twitter.com/nickname
+    - footer: yes
+      icon: fab fa-instagram
+      network: ''
+      sharethis: no
+      title: instagram
+      url: https://www.instagram.com/nickname
+    - footer: no
+      icon: fab fa-google-plus-square
+      network: googleplus
+      sharethis: yes
+      title: google+
+      url: https://plus.google.com/+nickname
+    - footer: no
+      icon: fab fa-linkedin
+      network: linkedin
+      sharethis: yes
+      title: linkedin
+      url: https://www.linkedin.com/in/nickname
+    - footer: no
+      icon: fab fa-tumblr-square
+      network: tumblr
+      sharethis: no
+      title: tumblr
+      url: https://nickname.tumblr.com
+    - footer: yes
+      icon: fab fa-github
+      network: ''
+      sharethis: no
+      title: github
+      url: https://github.com/nickname
+    - footer: no
+      icon: fas fa-envelope-square
+      network: email
+      sharethis: yes
+      title: email
+      url: mailto:some.email@somewhere.com
+  year: 2017
+menu:
+  main:
+    - name: home
+      url: /
+      weight: 1
+    - name: blog
+      url: /post/
+      weight: 5
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
