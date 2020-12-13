@@ -1,21 +1,108 @@
-name = "#Un Data Scientist Dice"
-license = "MIT"
-licenselink = "https://github.com/miguelsimoni/hugo-initio/blob/master/LICENSE.md"
-description = ""
-homepage = "https://www.danieljimenezm.com"
-tags = ["blog","responsive","personal","google analytics","portfolio","disqus","bootstrap","font awesome","projects","creative","landing page","product","white","share this"]
-features = ["blog","responsive","personal","google analytics","portfolio","disqus","bootstrap","font awesome","projects","creative","landing page","product","white","share this"]
-min_version = "0.1"
+baseURL = "https://www.danieljimenezm.com/"
+languageCode = "en-us"
+title = "Un Data Scientist Dice"
+theme = "hugo-initio"
+publishDir = "docs"
 
-[author]
-  name = "Daniel Jiménez"
-  homepage = "https://www.danieljimenezm.com"
-  avatar: "images/daniel.jpg"
-  background: ''
-  banner: "logos/fondo.png"
+[params]
+    name = "Daniel Jiménez M."
+    email = "danieljimenez88m@gmail.com"
+    year = 2020
+    avatar = "images/daniel.jpg"
+    avatarclass = "circle"
+    background = ""
+    banner = "images/fondo.png"
+    favicon = "images/gt_favicon.png"
+    DateForm = "January 2, 2006"
 
-[original]
-  name = "Initio"
-  author = "Sergey Pozhilov"
-  homepage = "http://www.gettemplate.com/info/initio/"
-  repo = "https://github.com/pozh/Initio"
+    showSubheader = false
+    showServices = false
+    showRecentWorks = false
+    showDownload = false
+    showClients = false
+
+    footerEnableContact = true
+    footerEnableFollowme = true
+    footerEnableTextWidget = false
+    footerEnableFormWidget = true
+
+[[menu.main]]
+    name = "home"
+    url = "/post/"
+    weight = 1
+#[[menu.main]]
+#    name = "blog"
+#    url = "/post/"
+#    weight = 5
+
+[params.disqus]
+    site = "hugo-initio-site.disqus.com"
+
+[params.sharethis]
+    property = "123456789012345678901234"
+    custom = true
+
+[params.google.analytics]
+    trackerID = "GA-000000000-0"
+
+[[params.social]]
+	title = "facebook"
+	url = "https://www.facebook.com/nickname"
+    icon = "fab fa-facebook-square"
+    footer = true
+    sharethis = true
+    network = "facebook"
+[[params.social]]
+	title = "twitter"
+	url = "https://twitter.com/nickname"
+    icon = "fab fa-twitter-square"
+    footer = true
+    sharethis = true
+    network = "twitter"
+[[params.social]]
+	title = "instagram"
+	url = "https://www.instagram.com/nickname"
+    icon = "fab fa-instagram"
+    footer = true
+    sharethis = false
+    network = ""
+[[params.social]]
+	title = "google+"
+	url = "https://plus.google.com/+nickname"
+    icon = "fab fa-google-plus-square"
+    footer = false
+    sharethis = true
+    network = "googleplus"
+[[params.social]]
+	title = "linkedin"
+	url = "https://www.linkedin.com/in/nickname"
+    icon = "fab fa-linkedin"
+    footer = false
+    sharethis = true
+    network = "linkedin"
+[[params.social]]
+	title = "tumblr"
+	url = "https://nickname.tumblr.com"
+    icon = "fab fa-tumblr-square"
+    footer = false
+    sharethis = false
+    network = "tumblr"
+[[params.social]]
+	title = "github"
+	url = "https://github.com/nickname"
+    icon = "fab fa-github"
+    footer = true
+    sharethis = false
+    network = ""
+[[params.social]]
+	title = "email"
+	url = "mailto:some.email@somewhere.com"
+    icon = "fas fa-envelope-square"
+    footer = false
+    sharethis = true
+    network = "email"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
