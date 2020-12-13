@@ -27,7 +27,7 @@ publishDir = "docs"
     footerEnableFormWidget = false
 
 [[menu.main]]
-    name = "blog"
+    name = "home"
     url = "/post/"
     weight = 1
 #[[menu.main]]
