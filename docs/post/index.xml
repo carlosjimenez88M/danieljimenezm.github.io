@@ -6,10 +6,66 @@
     <description>Recent content in Posts on Un Data scientist dice</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 26 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 22 Nov 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.danieljimenezm.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Consejos para convertirse en un Data Scientist</title>
+      <link>https://www.danieljimenezm.com/post/2020-11-22-consejos/</link>
+      <pubDate>Sun, 22 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danieljimenezm.com/post/2020-11-22-consejos/</guid>
+      <description>Consejos para convertirse en un Data Scientist Esta entrada es una ruta de navegación para todo aquel que quiera convertirse en científico de datos, por lo tanto parto desde dos experiencias las cuales siento que me faculta para tomar este riesgo gustoso. La primera es la del docente, ejercicio con el que nací en mi carrera profesional, durante algo más de ocho o siete años he sido profesor en distintas universidades entre Colombia, España y México, dictando materias al principio un poco idealistas -cosas de la juventud-, pero desde hace cuatro años decidí volcar todo esfuerzo en una nueva empresa, y es enseñar todo aquello que se puede aplicar al mundo real y gracias a ello, hoy muchos de mis ex estudiantes son científicos de datos en organizaciones como: Banco Mundial, Platzi, entre otras, de ahí y después de hablar con con alguno de ellos rescato varias lecciones.</description>
+    </item>
+    
+    <item>
+      <title>¿Cómo ser un Data Scientist?</title>
+      <link>https://www.danieljimenezm.com/post/2020-11-22-consejos2/</link>
+      <pubDate>Sun, 22 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danieljimenezm.com/post/2020-11-22-consejos2/</guid>
+      <description>Consejos para convertirse en un Data Scientist Esta entrada es una ruta de navegación para todo aquel que quiera convertirse en científico de datos, por lo tanto parto desde dos experiencias las cuales siento que me faculta para tomar este riesgo gustoso. La primera es la del docente, ejercicio con el que nací en mi carrera profesional, durante algo más de ocho o siete años he sido profesor en distintas universidades entre Colombia, España y México, dictando materias al principio un poco idealistas -cosas de la juventud-, pero desde hace cuatro años decidí volcar todo esfuerzo en una nueva empresa, y es enseñar todo aquello que se puede aplicar al mundo real y gracias a ello, hoy muchos de mis ex estudiantes son científicos de datos en organizaciones como: Banco Mundial, Platzi, entre otras, de ahí y después de hablar con con alguno de ellos rescato varias lecciones.</description>
+    </item>
+    
+    <item>
+      <title>Ipad y Machine Learning</title>
+      <link>https://www.danieljimenezm.com/post/2020-11-16-ipad/</link>
+      <pubDate>Mon, 16 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danieljimenezm.com/post/2020-11-16-ipad/</guid>
+      <description>Una forma de usar el iPad como instrumento para el trabajo de Machine Learning Este es un post un poco diferente a los que normalmente acostumbro a escribir, pero la razón por la cual lo hago no es menos valedera a un tema de aplicación conceptual de estadística o machine learning. Sin ganas de entrar a una discusión tipo fanboy de una marca, hablo desde la experiencia de uso y desarrollo del iPad Pro como herramienta de trabajo como Data Scientist.</description>
+    </item>
+    
+    <item>
+      <title>Mapas de Calor</title>
+      <link>https://www.danieljimenezm.com/post/2020-10-20-mc/</link>
+      <pubDate>Tue, 20 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danieljimenezm.com/post/2020-10-20-mc/</guid>
+      <description>Visualización de datos En la gramática de los gráficos de Leland Wilkinson, diseña las reglas básicas y fundamentales para que a la hora de hacer un gráfico,su output tenga una interpretación. Veamos un ejemplo y contextualicemos sobre ello.
+Suponga que quiere entender el nivel de correlación lineal entre las variables de iris, para ello usaremos la siguiente función.
+cor(iris[,-5]) ## Sepal.Length Sepal.Width Petal.Length Petal.Width ## Sepal.Length 1.0000000 -0.1175698 0.</description>
+    </item>
+    
+    <item>
+      <title>MarkovChain</title>
+      <link>https://www.danieljimenezm.com/post/2020-08-09-markovchain/</link>
+      <pubDate>Sun, 09 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danieljimenezm.com/post/2020-08-09-markovchain/</guid>
+      <description>Entendiendo las simulaciones de Markov Un tema o una rama de la estadística que ha cobrado un nuevo nivel de importancia dada su aplicación en temas como: las finanzas, logística, marketing y forecasting son las cadenas de Markov. Estas mismas pertenecen a lo que se conoce como procesos estocásticos, lo cual quiere decir que son magnitudes de procesos aleatorios que varia con el tiempo, y puntualmente en el caso de la simulación de monte carlo con Markov se aplica la siguiente regla:</description>
+    </item>
+    
+    <item>
+      <title>Construyendo un modelo con sentido</title>
+      <link>https://www.danieljimenezm.com/post/2020-07-18-models_interpretability/</link>
+      <pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danieljimenezm.com/post/2020-07-18-models_interpretability/</guid>
+      <description>Uno de los mayores problemas a la hora de construir un modelo de Machine Learning o Deep Learning es aquello que muchos llaman cajas negras y esto se debe a la falta de la comprensión de los efectos de las variables sobre las predicciones. En teoría, la matemática que desarrollamos a la hora de implementar un modelo debe ser suficiente para poder describir dichos efectos, pero también puede ser la causante de muchos errores por falta de entender un contexto o problemas de lógica.</description>
+    </item>
     
     <item>
       <title>Cocktail ingredients</title>

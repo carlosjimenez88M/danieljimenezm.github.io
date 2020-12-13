@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta charset="utf-8">
+  	<meta name="viewport"    content="width=device-width, initial-scale=1.0">
+  	<meta name="description" content="">
+  	<meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
+    
+    
+	<title>MarkovChain</title>
+	<link rel="shortcut icon" href="https://www.danieljimenezm.comimages/gt_favicon.png">
+
+	
+	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
+	
+	
+	<script defer src="https://use.fontawesome.com/releases/v5.0.11/js/all.js" integrity="sha384-ImVoB8Er8knetgQakxuBS4G3RSkyD8IZVVQCAnmRJrDwqJFYUE4YOv+DbIofcO9C" crossorigin="anonymous"></script>
+	
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alice|Open+Sans:400,300,700">
+	
+	
+	<link rel="stylesheet" href="https://www.danieljimenezm.comcss/styles.css">
+	
+  
+
+   
+  
+
+</head>
+
+
+  </head>
+  
+  <body>
+
+    
+      <header id="header" style="padding: 0; height: 100%">
+	<div id="head" class="parallax" parallax-speed="2">
+     <div class="banner" style="background-image:url(https://www.danieljimenezm.comstatic/images/fondo.png);" >
+           <h1 id="logo" class="text-center">
+              <img class="img-circle" src="https://www.danieljimenezm.comstatic/images/daniel.jpg" alt="">
+              <span class="title">Daniel Jiménez</span>
+              <span class="tagline"><br>
+                 <a href="mailto:danieljimenez88m@gmail.com">danieljimenez88m@gmail.com</a>
+              </span>
+           </h1>
+        </div>
+
+    <nav class="navbar navbar-default navbar-sticky">
+    <div class="container-fluid">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="true">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
+
+            <ul class="nav navbar-nav">
+                 
+                <li>
+                    <a href="/post/">blog</a>
+                </li>
+                  
+                <li>
+                    <a href="/about/">Sobre mi</a>
+                </li>
+                 
+
+            </ul>
+
+        </div> 
+        
+    </div>
+</nav>
+<nav class="navbar navbar-fake"></nav>
+</header>
+
+    
+ 
+    
+<main id="main">
+
+	<div class="container">
+
+		<div class="row topspace">
+			<div class="col-sm-8 col-sm-offset-2">
+
+ 				<article class="post">
+					<header class="entry-header">
+ 						<div class="entry-meta">
+               <span class="posted-on">
+                  <time class="entry-date published" datetime="December 80, 9090">August 9, 2020</time>
+               </span>
+ 						</div>
+ 						<h1 class="entry-title"><a href="https://www.danieljimenezm.com/post/2020-08-09-markovchain/" rel="bookmark">MarkovChain</a></h1>
+					</header>
+					<div class="entry-content">
+						
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+
+
+<div id="entendiendo-las-simulaciones-de-markov" class="section level2">
+<h2>Entendiendo las simulaciones de Markov</h2>
+<p>Un tema o una rama de la estadística que ha cobrado un nuevo nivel de importancia dada su aplicación en temas como: las finanzas, logística, marketing y forecasting son las cadenas de Markov. Estas mismas pertenecen a lo que se conoce como procesos estocásticos, lo cual quiere decir que son magnitudes de procesos aleatorios que varia con el tiempo, y puntualmente en el caso de la simulación de monte carlo con Markov se aplica la siguiente regla:</p>
+<p><span class="math display">\[
+P(X_{n}=i_n|X_{n-1}=i_{n-1})=P(X_{n}=i_n|X_{0}=i_{0},X_{1}=i_{1},...,X_{n}=i_{n})
+\]</span></p>
+<p>Esta regla se le conoce como propiedad de Markov, en donde cada evento solo responde únicamente a <span class="math inline">\(X_{n-1}\)</span> y <span class="math inline">\(P(X_{n}|X_{n-1})\)</span> es una matriz de transacción, la cual contiene información sobre las probabilidades de los diferentes estados de los datos dada las condiciones antes mencionadas.</p>
+<p>Una característica del producto de las matrices es que pueden describir las probabilidades de las transacciones a lo largo de un período de tiempo definido. Por lo tanto los estados transitorios deben alcanzar la probabilidad 1 gracias al estado inicial de la función de distribución.</p>
+<p>Por lo tanto una propiedad fundamental de que la matriz sea estacionaria y tenga la regla de Markov es que la distribución limite del estado <span class="math inline">\(X_{n-1}\)</span> sea <span class="math inline">\(X_{n-1} \sim f\)</span> entonces <span class="math inline">\(X_{n} \sim f\)</span>,lo que asegura la recurrencia, bajo la condición de <span class="math inline">\(X_{n+1}=X_t + e_t\)</span> donde <span class="math inline">\(e_t\)</span> sigue una distribución normal y la forma de la densidad se convierte en una normal. Esto quiere decir que la cadena tiene una propiedad de caminata aleatoria</p>
+<p><img src="/post/2020-08-09-MarkovChain_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Un instrumento que sirve para validar los que se aceptan en la simulación es el Metrópolis - Hastings, el cual en vez de muestrear los valores de la distribución objetivo, lo que hace es muestrear la distrubución candidata y valida los resultados para saber que dichos datos sean aceptados a través de la siguiente formula:</p>
+<p><span class="math display">\[
+p(x_n,y_n)=min\{\frac{f_{(y_n)}q(x_n|y_n)}{f_{(y_n)}q(y_n|x_n)}\}
+\]</span></p>
+<p>En donde los valores de la cadena son</p>
+<p><span class="math display">\[
+ X_{n+1} =
+  \begin{cases}
+    y_n       &amp; \quad \text{Con probabilidad }  p(x_n,y_n) \\
+    x_n  &amp; \quad \text{Con probabilidad } 1-p(x_n,y_n)
+  \end{cases}
+\]</span></p>
+<p>Dicho lo anterior suponga que quiere modelar los siguientes valores:</p>
+<p><span class="math display">\[
+f(x) \propto e^{(-[x-4]/2)^{1/3}}
+\]</span></p>
+<ul>
+<li>Lo primero ha desarrollar es la distribución candidata</li>
+</ul>
+<pre class="r"><code>n_sim &lt;- 1000
+x=NULL
+fun_sim&lt;-function(x){
+  exp(-(abs(x-4)/2)^1/3)
+}
+
+x[1]&lt;-0
+for (i in 2:n_sim){
+  y&lt;-rnorm(1,x[i-1],1)
+  rho&lt;- fun_sim(y) * dnorm(x[i-1],y,1)/(fun_sim(x[i-1]) * dnorm(y,x[i-1],1))
+  prob&lt;-min(1,rho)
+  ifelse(runif(1)&lt; prob, x[i]&lt;-y,x[i]&lt;-x[i-1])
+}</code></pre>
+<pre class="r"><code>qplot(seq_along(x),x)+
+  labs(title = &#39;Simulación de de Markov A través del metódo de aceptación &#39;,
+       subtitle = &#39;Metrópolis - Hastings&#39;,
+       x=&#39;Datos Simulados&#39;,
+       y=&#39;&#39;,
+           caption = cap)</code></pre>
+<p><img src="/post/2020-08-09-MarkovChain_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Ahora al desarrollar la constante de integración, la cual consiste en determinar los procesos de simuluación cumplan con la aproximación a la distribución de los datos, através de los parámetros de aceptación e Metrópolis Hastings</p>
+<pre class="r"><code>Constante&lt;-1/integrate(fun_sim,-100,100)$val
+
+full_int&lt;-function(x){
+  exp(-(abs(x-4)/2)^1/3) * Constante
+}
+hist(x,freq = FALSE)
+curve(full_int,add = TRUE,col=2)</code></pre>
+<p><img src="/post/2020-08-09-MarkovChain_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Es de notar que la distribución se ajusta bastante bien, ahora se probará de otra forma la geometría de la distribución.</p>
+<p><img src="/post/2020-08-09-MarkovChain_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Por último se verifica que las autocorrelaciones tengan la forma de dependencia adecuada.</p>
+<p><img src="/post/2020-08-09-MarkovChain_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Dicho lo anterior pasaré a desarrollar un ejemplo y a explicar una seríe de conceptos teorícos importantes para poder utilizar a Markov.</p>
+<p>Hago uso de un estudio y la implementación del estudio <a href="https://global.oup.com/academic/product/decision-modelling-for-health-economic-evaluation-9780198526629?cc=us&amp;lang=en&amp;">Decision Modelling for Health Economics Evaluation</a> sobre infecciones de VIH. Se reproduce una probabilidad de transaccion del grupo de estudio de las siguiente manera.</p>
+<pre><code>## A transition matrix, 4 states.
+## 
+##   A     B     C     D    
+## A 0.721 0.202 0.067 0.01 
+## B       0.581 0.407 0.012
+## C             0.75  0.25 
+## D                   1</code></pre>
+<p>Las probabilidades de transaccion son multiplicadas por 0.509, dado el riesfo relativo de la población tratada.</p>
+<pre><code>## A transition matrix, 4 states.
+## 
+##   A B          C          D         
+## A C 0.202 * rr 0.067 * rr 0.01 * rr 
+## B   C          0.407 * rr 0.012 * rr
+## C              C          0.25 * rr 
+## D                         1</code></pre>
+<p>A continuación se calculan las probabilidades de transacción y se genera la matriz transaccional así como los estados.</p>
+<p><img src="/post/2020-08-09-MarkovChain_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>A continuación se gráfica el grupo de terapia combinada:</p>
+<p><img src="/post/2020-08-09-MarkovChain_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>Ahora se estudia el costo de los medicamentos y de atención, para determinar la diferencia entre los tratamientos a través de un diferencial del 5%.</p>
+<pre><code>## A state with 4 values.
+## 
+## cost_health = discount(2756, 0.05)
+## cost_drugs = discount(dispatch_strategy(mono = cost_zido, comb = cost_zido + 
+##     cost_lami), 0.05)
+## cost_total = cost_health + cost_drugs
+## life_year = 1</code></pre>
+<p>A continuación se genera la matriz de transacción y la lista de estados para empezar a desarrollar el re-sample con markov.</p>
+<p>Ahora se proyecta el modelo a 10 años con 1000 individuos como caso de estudio y se interpretan los resultados.</p>
+<pre><code>## 2 strategies run for 10 cycles.
+## 
+## Initial state counts:
+## 
+## A = 1000L
+## B = 0L
+## C = 0L
+## D = 0L
+## 
+## Counting method: &#39;life-table&#39;.
+## 
+## Values:
+## 
+##      cost_health cost_drugs cost_total life_year
+## mono    29884901   13485464   43370364  7162.832
+## comb    30184018   31678833   61862851  9019.740
+## 
+## Net monetary benefit difference:
+## 
+##          1000     5000     6000    10000
+## mono 16635.58 9207.947 7351.039  0.00000
+## comb     0.00    0.000    0.000 76.59233
+## 
+## Efficiency frontier:
+## 
+## mono -&gt; comb
+## 
+## Differences:
+## 
+##      Cost Diff. Effect Diff.     ICER Ref.
+## comb   18492.49     1.856908 9958.753 mono</code></pre>
+<p>El resultado es que la relación costo- eficiencia de la terapia es de $18296.66 por año de vida ganado. Gráficamente lo anterior se entiende así.</p>
+<p><img src="/post/2020-08-09-MarkovChain_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><img src="/post/2020-08-09-MarkovChain_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>Eso es todo por esta entrada espero que les guste!</p>
+</div>
+
+					</div>
+				</article>
+
+			</div>
+		</div> 
+
+        <div class="row">
+			<div class="col-sm-8 col-sm-offset-2">
+
+				<div id="share">
+                    
+				</div>
+			</div>
+		</div> 
+		<div class="clearfix"></div>
+
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-2">
+
+				<div id="comments">
+                    
+				</div>
+			</div>
+		</div> 
+		<div class="clearfix"></div>
+
+	</div>	
+
+</main>
+
+    
+    
+      <footer id="footer">
+	<div class="container">
+		<div class="row">
+			
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Contact</h3>
+				<div class="widget-body">
+					<p>
+					<a href="mailto:danieljimenez88m@gmail.com">danieljimenez88m@gmail.com</a><br>
+						<br>
+						
+					</p>
+				</div>
+			</div>
+			
+
+			
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Follow me</h3>
+				<div class="widget-body">
+					<p class="follow-me-icons">
+            
+                
+                    <a href="https://www.facebook.com/nickname" target="_blank"><i class="fab fa-facebook-square fa-1x"></i></a>
+                
+            
+                
+                    <a href="https://twitter.com/nickname" target="_blank"><i class="fab fa-twitter-square fa-1x"></i></a>
+                
+            
+                
+                    <a href="https://www.instagram.com/nickname" target="_blank"><i class="fab fa-instagram fa-1x"></i></a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a href="https://github.com/nickname" target="_blank"><i class="fab fa-github fa-1x"></i></a>
+                
+            
+                
+            
+					</p>
+				</div>
+			</div>
+			
+
+			
+
+			
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Form widget</h3>
+				<div class="widget-body">
+					<p>
+					<a href="mailto:danieljimenez88m@gmail.com">danieljimenez88m@gmail.com</a><br>
+						<br>
+						
+					</p>
+				</div>
+			</div>
+			
+
+		</div> 
+	</div>
+</footer>
+
+<footer id="underfooter">
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+					<p></p>
+				</div>
+			</div>
+
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+					<p class="text-right">
+						Copyright &copy; 2017, Daniel Jiménez<br>
+						Design: <a href="http://www.gettemplate.com" rel="designer">Initio by GetTemplate</a> - 
+                        Powered by: <a href="https://gohugo.io/" rel="poweredby">Hugo</a>
+                    </p>
+				</div>
+			</div>
+
+		</div> 
+	</div>
+</footer>
+
+
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="https://www.danieljimenezm.comjs/template.js"></script>
+<script id="dsq-count-scr" src="//hugo-initio-site.disqus.com/count.js" async></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'GA-000000000-0', 'auto');
+  ga('send', 'pageview');
+</script>
+
+</body>
+</html>
+
+    
+  </body>
+  
+</html>

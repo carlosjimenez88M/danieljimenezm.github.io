@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta charset="utf-8">
+  	<meta name="viewport"    content="width=device-width, initial-scale=1.0">
+  	<meta name="description" content="">
+  	<meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
+    
+    
+	<title>Mapas de Calor</title>
+	<link rel="shortcut icon" href="https://www.danieljimenezm.comimages/gt_favicon.png">
+
+	
+	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
+	
+	
+	<script defer src="https://use.fontawesome.com/releases/v5.0.11/js/all.js" integrity="sha384-ImVoB8Er8knetgQakxuBS4G3RSkyD8IZVVQCAnmRJrDwqJFYUE4YOv+DbIofcO9C" crossorigin="anonymous"></script>
+	
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alice|Open+Sans:400,300,700">
+	
+	
+	<link rel="stylesheet" href="https://www.danieljimenezm.comcss/styles.css">
+	
+  
+
+   
+  
+
+</head>
+
+
+  </head>
+  
+  <body>
+
+    
+      <header id="header" style="padding: 0; height: 100%">
+	<div id="head" class="parallax" parallax-speed="2">
+     <div class="banner" style="background-image:url(https://www.danieljimenezm.comstatic/images/fondo.png);" >
+           <h1 id="logo" class="text-center">
+              <img class="img-circle" src="https://www.danieljimenezm.comstatic/images/daniel.jpg" alt="">
+              <span class="title">Daniel Jiménez</span>
+              <span class="tagline"><br>
+                 <a href="mailto:danieljimenez88m@gmail.com">danieljimenez88m@gmail.com</a>
+              </span>
+           </h1>
+        </div>
+
+    <nav class="navbar navbar-default navbar-sticky">
+    <div class="container-fluid">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="true">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
+
+            <ul class="nav navbar-nav">
+                 
+                <li>
+                    <a href="/post/">blog</a>
+                </li>
+                  
+                <li>
+                    <a href="/about/">Sobre mi</a>
+                </li>
+                 
+
+            </ul>
+
+        </div> 
+        
+    </div>
+</nav>
+<nav class="navbar navbar-fake"></nav>
+</header>
+
+    
+ 
+    
+<main id="main">
+
+	<div class="container">
+
+		<div class="row topspace">
+			<div class="col-sm-8 col-sm-offset-2">
+
+ 				<article class="post">
+					<header class="entry-header">
+ 						<div class="entry-meta">
+               <span class="posted-on">
+                  <time class="entry-date published" datetime="December 100, 20200">October 20, 2020</time>
+               </span>
+ 						</div>
+ 						<h1 class="entry-title"><a href="https://www.danieljimenezm.com/post/2020-10-20-mc/" rel="bookmark">Mapas de Calor</a></h1>
+					</header>
+					<div class="entry-content">
+						
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+
+
+<div id="visualización-de-datos" class="section level2">
+<h2>Visualización de datos</h2>
+<p>En la <code>gramática de los gráficos</code> de Leland Wilkinson, diseña las reglas básicas y fundamentales para que a la hora de hacer un gráfico,su output tenga una interpretación. Veamos un ejemplo y contextualicemos sobre ello.</p>
+<p>Suponga que quiere entender el nivel de correlación lineal entre las variables de <code>iris</code>, para ello usaremos la siguiente función.</p>
+<pre class="r"><code>cor(iris[,-5])</code></pre>
+<pre><code>##              Sepal.Length Sepal.Width Petal.Length Petal.Width
+## Sepal.Length    1.0000000  -0.1175698    0.8717538   0.8179411
+## Sepal.Width    -0.1175698   1.0000000   -0.4284401  -0.3661259
+## Petal.Length    0.8717538  -0.4284401    1.0000000   0.9628654
+## Petal.Width     0.8179411  -0.3661259    0.9628654   1.0000000</code></pre>
+<p>nótese que lo que estamos viendo se define como</p>
+<p><span class="math display">\[
+r_{(x,y)}=\frac{cov(x,y)}{sd(x) sd(y)}
+\]</span></p>
+<p>Como ya sabemos que la correlación lineal indica la magnitud de cambio entre dos variables, recordando que estas están en el intervalo <span class="math inline">\({(-1,1)}\)</span>, entonces podremos visualizar esta relación de la siguiente manera:</p>
+<pre class="r"><code>cor(iris[,-5])%&gt;%
+  corrplot(method = &#39;circle&#39;)</code></pre>
+<p><img src="/post/2020-10-20-mc_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>nótese que en esta gráfica los colores azules entre más oscuros indican que las variables se mueven en la misma dirección con la misma fuerza, mientras que los colores de tonos rojos indican que la proporción contraria y el tamaño de la bola la fuerza.</p>
+<p>Quizás si vemos esto con números en el gráfico, la interpretación sería más sencilla</p>
+<pre class="r"><code>cor(iris[,-5])%&gt;%
+  corrplot(method = &#39;number&#39;)</code></pre>
+<p><img src="/post/2020-10-20-mc_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>La idea principal con la que nacio este gráfico,de entender el comportamiento de las variables entre sí, se cumplió, ahora que sabemos que <code>Sepal.Length</code> y el <code>Petal.Length</code>, tienen una correlación de .87 hagamos otra gráfica que desarrolle mejor la idea de entender el comportamiento de iris.</p>
+<pre class="r"><code>iris%&gt;%
+  ggplot(aes(Sepal.Length,Petal.Length, color=Species))+
+  geom_point()</code></pre>
+<p><img src="/post/2020-10-20-mc_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Gracias a la correlación lineal, se puedo saber que la fuerza de dos variables indica la tendencia de los datos y con el último gráfico se pudo inferir que dos de las tres variables tienen una correlación fuerte y con ella podríamos llegar a calcular una tendencia</p>
+<pre class="r"><code>iris%&gt;%
+  ggplot(aes(Sepal.Length,Petal.Length, color=Species))+
+  geom_point()+
+  geom_smooth()+
+  facet_wrap(~Species, scales = &#39;free&#39;)</code></pre>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="/post/2020-10-20-mc_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Toda esta interpretación fue posible por seguir los siguientes pasos :</p>
+<ul>
+<li>Se transformaron y trataron los datos (Correlación lineal y tratarlos individualmente);</li>
+<li>Se definió una geometría para entender los datos (<code>geom_point</code>)</li>
+<li>Se seleccionaron los datos para gráficar <code>x</code> contra <code>y</code></li>
+<li>Se definió una escala</li>
+<li>Y por último se partieron las gráficas por la naturaleza del problema</li>
+</ul>
+<p>Todos estos pasos son las reglas gramaticales para el diseño de gráficos</p>
+<p><img src="https://miro.medium.com/max/756/1*2X-8H_R2kKWBY1no1p8pYA.png" /></p>
+<p>Wickham en su texto <a href="https://vita.had.co.nz/papers/layered-grammar.pdf">A Layered Grammar of Graphics</a>, defiende la tesis sobre la creación de la interpretación de los gráficos a través de la geometría que se le asigna al mismo y es por ello que en este post se habla de uno en especial, que tiene gran potencial y que quizás sea de poco uso en términos generales. Se trata de los gráficos rectangulares. La primera vez que lo ví fue en un <a href="https://www.youtube.com/watch?v=-RD8GNCNsCk&amp;t=1887s"><code>tidytuesday</code></a> de David Robinson, una vez el hizo la lectura del mismo pude apreciar algo que no había visto antes, una lectura de un problema de manera casi total, en donde la variable tiempo,evolución y el parámetro de interés estuvieron incluidos.</p>
+<p>La ídea principal de este gráfico no esta en usarlo como una simple geometría, como se presenta en el siguiente ejemplo:</p>
+<p><img src="/post/2020-10-20-mc_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Sino lograr llevarlo al entendimiento de un problema, como el siguiente: Se quiere saber como ha sido la evolución de los torneos de basket femenino, en donde lo principal a comprender es el patron de juegos victoriosos, para ello primero se interpreta el problema de la siguiente manera</p>
+<pre class="r"><code>tournament &lt;- readr::read_csv(&#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-10-06/tournament.csv&#39;)
+
+tournament&lt;-tournament%&gt;%
+  filter(year&gt;=1994)
+
+levels&lt;-c(&quot;1st&quot;,&quot;2nd&quot;,&quot;RSF&quot;,&quot;RF&quot;,&quot;NSF&quot;,&quot;N2nd&quot;,&quot;Champ&quot;)
+tournament&lt;-tournament%&gt;%
+  mutate(tourney_finish=fct_relevel(tourney_finish,levels))
+
+tournament%&gt;%
+  ggplot(aes(full_w, tourney_w + reg_w))+
+  geom_point(alpha=0.1, color=&#39;blue&#39;)+
+  labs(title = &#39;Regular Wins before the tournament&#39;)+
+  theme(plot.title = element_text(hjust = .5))</code></pre>
+<p><img src="/post/2020-10-20-mc_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Se puede observar que el número de juegos versus las victorias esta directamente correlacionado, aunque hay algunos casos particulares que rompen el patron de los datos.</p>
+<p>Ahora ¿qué pasaría si se agrupan los torneos, a través de un conteo de campeonatos y evaluamos <span class="math inline">\(y\)</span> como el estado del torneo? los gráficos rectangulares tendrían que actuar como mapas de calor, para llegar a buen puerto, veamos paso a paso como sería esto.</p>
+<pre class="r"><code>tournament%&gt;%
+  count(seed,tourney_finish)%&gt;%
+  ggplot(aes(tourney_finish,seed,fill=n))+
+  geom_tile()+
+  scale_fill_gradient2(high = &#39;red&#39;)</code></pre>
+<p><img src="/post/2020-10-20-mc_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>Ahora ajustamos con base al problema el número de <code>seed</code> y agregamos el número porcentual de participantes por posición y el resultado será el siguiente:</p>
+<pre class="r"><code>tournament%&gt;%
+  count(seed,tourney_finish)%&gt;%
+  group_by(seed)%&gt;%
+  mutate(pct=n/sum(n))%&gt;%
+  ggplot(aes(tourney_finish,seed,fill=pct))+
+  geom_tile()+
+  geom_text(aes(label=paste0(round(pct*100,1),&quot;%&quot;)))+
+  scale_fill_gradient2(high = &#39;red&#39;)+
+  scale_y_continuous(breaks = seq(1,16))</code></pre>
+<p><img src="/post/2020-10-20-mc_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>Ahora se aplana un poco <code>x</code> para poder darle mayor solidez al gráfico.</p>
+<pre class="r"><code>tournament%&gt;%
+  count(seed,tourney_finish)%&gt;%
+  group_by(seed)%&gt;%
+  mutate(pct=n/sum(n))%&gt;%
+  ggplot(aes(tourney_finish,seed,fill=pct))+
+  geom_tile()+
+  geom_text(aes(label=paste0(round(pct*100,1),&quot;%&quot;)))+
+  scale_fill_gradient2(high = &#39;red&#39;, labels=percent)+
+  scale_x_discrete(expand = c(0,0))+
+  scale_y_continuous(breaks = seq(1,16),expand = c(0,0))+
+  theme(axis.ticks = element_blank())</code></pre>
+<p><img src="/post/2020-10-20-mc_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>Ahora podemos ver a través del mapa de calor lo siguiente: La evolución de cuando un equipo inicia en un torneo como terminan. En el gráfico se muestra que cuando participan en el primer torneo y juegan 16 rondas, solo el 1 % pasa al segundo torneo, mientras que si juegan una ronda en el primer torneo, el 18.8% acaban en la champion! Con esto tenemos un análisis de desempeño</p>
+<p>Ahora podemos evaluarlo de la siguiente manera: hay una correlación negativa entre la ronda o rondas y al torneo que se llegará.</p>
+<pre class="r"><code>tournament%&gt;%
+  mutate(tourney_finish=as.integer(tourney_finish))%&gt;%
+  ggplot(aes(seed,tourney_finish, color=factor(tourney_finish)))+
+  geom_point(alpha=.1, aes(size=tourney_finish))+
+  labs(title = &#39;Relación entre el número de rondas y el Torneo&#39;,
+       size= &#39;Torneo&#39;,
+       y=&#39;Torneos&#39;,
+       x=&#39;# total de rondas&#39;,
+       caption = &quot;#Undatascientistdice&quot;)+
+  guides(color=FALSE)+
+  theme(plot.title = element_text(hjust=.5))</code></pre>
+<p><img src="/post/2020-10-20-mc_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>Recapitulemos:</p>
+<ul>
+<li><p>Gracias al gráfico de calor pudimos deducir la correlación negativa entre las rondas y el torneo.</p></li>
+<li><p>El mapa de calor se pudo adaptar para entender un problema especifico sobre la participación entre los torneos y la evolución en los campeonatos</p></li>
+<li><p>Por último gracias a la dinámica del mapa de calor se pudo comprender mejor lo que indica la magintud de la correlación entre las rondas y el campeonato.</p></li>
+</ul>
+<p>Esto es todo por esta entrada, espero que les guste!</p>
+</div>
+
+					</div>
+				</article>
+
+			</div>
+		</div> 
+
+        <div class="row">
+			<div class="col-sm-8 col-sm-offset-2">
+
+				<div id="share">
+                    
+				</div>
+			</div>
+		</div> 
+		<div class="clearfix"></div>
+
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-2">
+
+				<div id="comments">
+                    
+				</div>
+			</div>
+		</div> 
+		<div class="clearfix"></div>
+
+	</div>	
+
+</main>
+
+    
+    
+      <footer id="footer">
+	<div class="container">
+		<div class="row">
+			
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Contact</h3>
+				<div class="widget-body">
+					<p>
+					<a href="mailto:danieljimenez88m@gmail.com">danieljimenez88m@gmail.com</a><br>
+						<br>
+						
+					</p>
+				</div>
+			</div>
+			
+
+			
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Follow me</h3>
+				<div class="widget-body">
+					<p class="follow-me-icons">
+            
+                
+                    <a href="https://www.facebook.com/nickname" target="_blank"><i class="fab fa-facebook-square fa-1x"></i></a>
+                
+            
+                
+                    <a href="https://twitter.com/nickname" target="_blank"><i class="fab fa-twitter-square fa-1x"></i></a>
+                
+            
+                
+                    <a href="https://www.instagram.com/nickname" target="_blank"><i class="fab fa-instagram fa-1x"></i></a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a href="https://github.com/nickname" target="_blank"><i class="fab fa-github fa-1x"></i></a>
+                
+            
+                
+            
+					</p>
+				</div>
+			</div>
+			
+
+			
+
+			
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Form widget</h3>
+				<div class="widget-body">
+					<p>
+					<a href="mailto:danieljimenez88m@gmail.com">danieljimenez88m@gmail.com</a><br>
+						<br>
+						
+					</p>
+				</div>
+			</div>
+			
+
+		</div> 
+	</div>
+</footer>
+
+<footer id="underfooter">
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+					<p></p>
+				</div>
+			</div>
+
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+					<p class="text-right">
+						Copyright &copy; 2017, Daniel Jiménez<br>
+						Design: <a href="http://www.gettemplate.com" rel="designer">Initio by GetTemplate</a> - 
+                        Powered by: <a href="https://gohugo.io/" rel="poweredby">Hugo</a>
+                    </p>
+				</div>
+			</div>
+
+		</div> 
+	</div>
+</footer>
+
+
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="https://www.danieljimenezm.comjs/template.js"></script>
+<script id="dsq-count-scr" src="//hugo-initio-site.disqus.com/count.js" async></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'GA-000000000-0', 'auto');
+  ga('send', 'pageview');
+</script>
+
+</body>
+</html>
+
+    
+  </body>
+  
+</html>
