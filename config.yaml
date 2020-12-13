@@ -22,7 +22,7 @@ params:
       trackerID: GA-000000000-0
   name: Daniel Jiménez
   sharethis:
-    custom: yes
+    custom: no
     property: '123456789012345678901234'
   showClients: no
   showDownload: no
