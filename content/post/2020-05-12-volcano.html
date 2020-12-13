@@ -7,6 +7,8 @@ editor_options:
   chunk_output_type: console
 ---
 
+<link href="/hugo-initio-site/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/hugo-initio-site/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>I am very excited, becouse is my first time working with Georeferencial Data analysis! In this opportunity I wanna develop only Visual Data Analysis for this project.</p>
@@ -22,7 +24,7 @@ editor_options:
 volcano_full$last_eruption_year&lt;-as.numeric(volcano_full$last_eruption_year)</code></pre>
 <pre><code>## Warning: NAs introduced by coercion</code></pre>
 <p>Whit this information, I create a visualization per decade of the number of eruptions given the region</p>
-<p><img src="/post/2020-05-12-volcano_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+<p><img src="/hugo-initio-site/post/2020-05-12-volcano_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 Is incredible this association, maybe is necesary understad (whit this information) the correlation for elevation and number of events</p>
 <pre class="r"><code>volcano_full%&gt;%
   group_by(region,country)%&gt;%
@@ -38,9 +40,9 @@ Is incredible this association, maybe is necesary understad (whit this informati
   labs(x=&quot;Region&quot;,
        y=&quot;Correlation&quot;)</code></pre>
 <pre><code>## `summarise()` regrouping output by &#39;region&#39; (override with `.groups` argument)</code></pre>
-<p><img src="/post/2020-05-12-volcano_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-05-12-volcano_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>I think that is possible this relation, maybe is necesary other analysis.</p>
-<p><img src="/post/2020-05-12-volcano_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-05-12-volcano_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>Well Here We Have the real information</p>
 <pre class="r"><code>volcano_full%&gt;%
   group_by(region,eruption_category)%&gt;%
@@ -53,7 +55,7 @@ Is incredible this association, maybe is necesary understad (whit this informati
   scale_x_reordered()+
   facet_wrap(~eruption_category,scales=&quot;free&quot;,ncol = 1)+
   coord_flip()</code></pre>
-<p><img src="/post/2020-05-12-volcano_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-05-12-volcano_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Now I make a map</p>
 <pre class="r"><code>volcano_full%&gt;%
   mutate(primary_volcano_type=str_remove(primary_volcano_type,&quot;\\(.*\\)&quot;),
@@ -62,7 +64,7 @@ Is incredible this association, maybe is necesary understad (whit this informati
   geom_point(aes(color=primary_volcano_type))+
   borders()+
   theme_map()</code></pre>
-<p><img src="/post/2020-05-12-volcano_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-05-12-volcano_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>Now with the event type</p>
 <pre class="r"><code>volcano_full%&gt;%
   filter(!is.na(event_type))%&gt;%
@@ -72,13 +74,13 @@ Is incredible this association, maybe is necesary understad (whit this informati
   geom_point(aes(color=event_type),size=.5)+
   borders()+
   theme_map()</code></pre>
-<p><img src="/post/2020-05-12-volcano_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-05-12-volcano_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Well I have one question How are the volcano activity?</p>
-<p><img src="/post/2020-05-12-volcano_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-05-12-volcano_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>We have more activity in this last years.</p>
 <p>and Where?</p>
-<p><img src="/post/2020-05-12-volcano_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-05-12-volcano_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>And Finally</p>
-<p><img src="/post/2020-05-12-volcano_files/figure-html/unnamed-chunk-12-1.gif" /><!-- --></p>
+<p><img src="/hugo-initio-site/post/2020-05-12-volcano_files/figure-html/unnamed-chunk-12-1.gif" /><!-- --></p>
 <p>Thks 4 all Guys!!</p>
 </div>

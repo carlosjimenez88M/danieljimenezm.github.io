@@ -6,9 +6,11 @@ output: html_document
 mathjax: "true"
 ---
 
+<link href="/hugo-initio-site/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/hugo-initio-site/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
-<p><img src="/post/2019-02-09-Distribucion_Beta_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2019-02-09-Distribucion_Beta_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>Durante muchos años, tanto en el ambito acádemico como en el mundo de la estadística aplicada la <em>distribución beta</em> ha sido tratada con especial rezago en su definición y aplicación, dicho lo anterior esta entrada intenta dar una visión sobre la filosofía de la distribución y en especial darle una aplicación empirica para ver su potencial en el mundo real.</p>
 <p>Parto de una afirmación, los mayores usos de esta distribución se dan en el plano del mundo <strong>bayesiano</strong>, sobre todo para el desarrollo de ciencias experimentales y la teoría de la decisión. Lo anterior no quiere decir que no tenga espacio en otros ambitos de la estadística, más si da un uso claro en ramas primordiales.</p>
 <p>Por último reafirmando en palabras de <a href="http://varianceexplained.org/">David Robinson</a>, es de vital importancia en el mundo de la ciencia de datos dado que ** empirical bayes (de donde parte el uso de la distribución beta) is especially well suited to the modern field of data science**. Sobre este autor se hablara más adelante.</p>
@@ -98,7 +100,7 @@ y queda demostrado.</p>
 ## Please use `tibble()` instead.
 ## This warning is displayed once every 8 hours.
 ## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
-<p><img src="/post/2019-02-09-Distribucion_Beta_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2019-02-09-Distribucion_Beta_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>La <span class="math inline">\(x\)</span> representa la distribución de posibles bateos promedios mientras que la <span class="math inline">\(y\)</span> representa la probabilidad de la densidad, la cual describe que tan probable es que el promedio de bateo caiga en un punto en particular, por lo tanto la <span class="math inline">\(y\)</span> representa la probabilidad de la densidad de la distribución beta.</p>
 <p>Por lo tanto al efectuar un hit el jugador se pueden actualizar las probabilidades y comenzar con una distribución previa para después seguir con una posterior.</p>
 <p><span class="math display">\[
@@ -108,9 +110,9 @@ Por lo tanto si <span class="math inline">\(\alpha\)</span> se incrementa uno (u
 <p><span class="math display">\[
 Beta(81+1,2019)
 \]</span></p>
-<p><img src="/post/2019-02-09-Distribucion_Beta_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2019-02-09-Distribucion_Beta_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>Ahora vease la distribución de la posterior de beta junto a la posterior después de un hit o cien hits después de 300 turnos de bateo</p>
-<p><img src="/post/2019-02-09-Distribucion_Beta_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2019-02-09-Distribucion_Beta_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>Dicho lo anterior para calcular la posterior del promedio de la beta será</p>
 <p><span class="math display">\[
 E(x)=\mu=\frac{a}{a+b}
@@ -136,28 +138,28 @@ Teniendo presente que la inferior del estimativo está dado por</p>
 <pre><code>## # A tibble: 6 x 2
 ##   true_average  hits
 ##          &lt;dbl&gt; &lt;int&gt;
-## 1        0.280    80
-## 2        0.250    73
-## 3        0.300    88
-## 4        0.292    93
-## 5        0.268    87
-## 6        0.284    89</code></pre>
+## 1        0.253    81
+## 2        0.266    73
+## 3        0.263    86
+## 4        0.249    79
+## 5        0.259    73
+## 6        0.287    97</code></pre>
 <p>Ahora se debe buscar los jugadores que realmente cumplieron el estimativo de <span class="math inline">\(\frac{100}{300}\)</span></p>
 <pre><code>## # A tibble: 6 x 2
 ##   true_average  hits
 ##          &lt;dbl&gt; &lt;int&gt;
-## 1        0.295   100
-## 2        0.319   100
-## 3        0.318   100
-## 4        0.319   100
-## 5        0.311   100
-## 6        0.309   100</code></pre>
+## 1        0.316   100
+## 2        0.298   100
+## 3        0.297   100
+## 4        0.299   100
+## 5        0.307   100
+## 6        0.327   100</code></pre>
 <p>Ahora toca visualizar los promedios de bateo de estos <span class="math inline">\(\frac{100}{300}\)</span> e identificar que tan bueno era el jugador mediano</p>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="/post/2019-02-09-Distribucion_Beta_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2019-02-09-Distribucion_Beta_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Notese que los resultados de la previa no abrian existido bateadores con la forma <span class="math inline">\(\frac{100}{300}\)</span>, por lo cual fue necesario hacer las simulaciones y encontrar los resultados.</p>
 <p>Lo anterior muestra que se esta actualizando la previa</p>
-<p><img src="/post/2019-02-09-Distribucion_Beta_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2019-02-09-Distribucion_Beta_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>La anterior gráfica de los valores verdaderos de bateo promedio, selecciona especificamente a los jugadores que han tenido records de <span class="math inline">\(60/300\)</span>, <span class="math inline">\(80/300\)</span> y <span class="math inline">\(100/300\)</span>.</p>
 </div>
 </div>

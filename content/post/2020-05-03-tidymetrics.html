@@ -4,6 +4,8 @@ date: 2020-05-03
 output: html_document
 ---
 
+<link href="/hugo-initio-site/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/hugo-initio-site/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <div id="tidymetrics" class="section level3">
@@ -29,7 +31,7 @@ grosses%&gt;%
   ggplot(aes(date,income,color=period))+
   geom_line()+
   scale_y_continuous(labels = dollar)</code></pre>
-<p><img src="/post/2020-05-03-tidymetrics_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-05-03-tidymetrics_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>Is incredible!!! but now I wanna make new levels</p>
 <pre class="r"><code>grosses%&gt;%
   group_by(show)%&gt;%
@@ -83,7 +85,7 @@ grosses%&gt;%
   geom_line(size=1,alpha=.8)+
   scale_y_continuous(labels = dollar)</code></pre>
 <pre><code>## `summarise()` regrouping output by &#39;show&#39;, &#39;period&#39; (override with `.groups` argument)</code></pre>
-<p><img src="/post/2020-05-03-tidymetrics_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-05-03-tidymetrics_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>Imagine working with this in econometrics, is Awsome!!! And now create your Dashboard. The first step is save your metrics.</p>
 <pre class="r"><code>show_summarized&lt;-grosses%&gt;%
   filter(show %in% c(&quot;The Phantom of the Opera&quot;,&quot;Chicago&quot;,

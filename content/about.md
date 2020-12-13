@@ -1,27 +1,38 @@
-+++
-title = "About"
-description = "Hugo, the world’s fastest framework for building websites"
-date = "2019-02-28"
-aliases = ["about-us","about-hugo","contact"]
-author = "Daniel"
-+++
+---
+menu: main
+title: Sobre mi
+type: about
+weight: 10
+---
+## ¿Qué hace  Daniel?
+
+Actualmente trabajo como Machine Learning Engineer en el **[Banco Interamericano de desarrollo](https://www.iadb.org/es/acerca-del-bid/financiamiento-del-bid/financiamiento-del-bid%2C6028.html)** y como Senior Data Scientist en **[Globant](https://www.globant.com)**. A la par soy profesor de ciencia de datos en la [Universidad Nacional de Colombia](https://unal.edu.co).
+
+
+### ¿Quién es Daniel?
+
+* Data Scientist y estadístico aplicado.
+* Entusiasta de la tecnología relacionada con el Machine Learning, Data Science, Bases de datos, entre otras.
+* Me encantá trabajar con análisis gráfico y trabajo constantemente en ello.
+* Uso Github con un placer indescriptible ..... 😎
+* Llevo alrededor  de una decada trabajando problemas del **real-world** y para ello he creando soluciones  soluciones del tipo: Marketing Analytics, Forecasting, Machine Learning aplicado, NLP (recientemente), modelamiento estadístico, BI y TRI.
+* He trabajado en : Chile, Colombia, México, Estados Unidos y España.
+* Mis intereses se centran en : Bayesian Data Analysis, Empirical Bayes, Sistemas de recomendación,Modelos por reforzamiento, Forecasting, Machine Learning aplicado, modelamiento estadístico, muestreo y bio-estadística.
+* Me encanta el Text Mining y el NLP.
+* Uso Docker cada vez que puedo!
+* Mi investigación se centra en la inferencia estadística 🤓 
+* Actualmente transito hacia el camino de la biología computacional (Genomic Data analysis).
+* Uso MAC por gusto y Linux porque soy una persona de bien.
+* Trabajo desde la terminal la mayor parte del tiempo.
+* Tengo una debilidad por las novelas policiacas! 
+* Empecé siendo historiador económico. No se que paso!!
+* Oficialmente mi hobbie es el raspberry pi.
+* Soy un Ipad enthusiast y trabajo todo lo que puedo con ella, desde programación hasta deep learning.
+* Solo tengo Twitter, ninguna otra red social me interesa.
+* Empecé este blog para mis estudiantes y para aprender a escribir bien! Ahora el público se crecio. Gracias.
 
 
 
-If you’re a Data Science Recruiter, click [here](https://github.com/carlosjimenez88M/Resume/blob/master/Daniel-Jimenez.pdf)
-
-
-
-Hi! my name is Daniel Jiménez, I am a Machine Learning Engineer at [Inter-American Development Bank ](https://www.iadb.org/es/acerca-del-bid/perspectiva-general), where I am  developing NLP applications,and Deep Learning Solutions for differents projects.At the same time I am a teacher at [Universidad Nacional de Colombia](https://unal.edu.co/), where I teach the following subjects: Big Data,Git & Github, Digital Marketing ,Introduction to Data Science and Statistical Learning and Machine Learning.
-
-Experienced Senior Data Scientist with a demonstrated history of working in the Startups and public institutions between USA, Colombia, Chile and México. With more than ten years of experience applying and development Machine Learning models to real world.
-
-Appasionate for applied statistics, machine learning modeling and bayesian statistics and skilled in : Applied Machine Learning, Statistical Modeling, NLP, Deep Learning, Bayesian Data Analysis, Marketing Analytics, Bio-statistics (Genomic Data analysis) , LaTeX and Markdown.
-
-Active Speaker at conferences in Colombia and Chile about Data Science and Statistic Modelling.
-
-<br />
-<br />
 
 
 ### Frameworks
@@ -112,7 +123,7 @@ Active Speaker at conferences in Colombia and Chile about Data Science and Stati
 
 
 
-## Connect with me
+## Contactame 
 
 [<img align="left" alt="Daniel | LinkedIn" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/linkedin.svg" />](https://www.linkedin.com/in/djimenezm/)
 
@@ -125,4 +136,5 @@ Active Speaker at conferences in Colombia and Chile about Data Science and Stati
 
 
 [<img align="left" alt="danielmail" width="22px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Gmail_Icon.svg/1024px-Gmail_Icon.svg.png" />](danieljimenez88m@gmail.com)
+
 

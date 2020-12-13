@@ -5,6 +5,8 @@ output: html_document
 mathjax: "true"
 ---
 
+<link href="/hugo-initio-site/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/hugo-initio-site/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <div id="entendiendo-las-simulaciones-de-markov" class="section level2">
@@ -16,7 +18,7 @@ P(X_{n}=i_n|X_{n-1}=i_{n-1})=P(X_{n}=i_n|X_{0}=i_{0},X_{1}=i_{1},...,X_{n}=i_{n}
 <p>Esta regla se le conoce como propiedad de Markov, en donde cada evento solo responde únicamente a <span class="math inline">\(X_{n-1}\)</span> y <span class="math inline">\(P(X_{n}|X_{n-1})\)</span> es una matriz de transacción, la cual contiene información sobre las probabilidades de los diferentes estados de los datos dada las condiciones antes mencionadas.</p>
 <p>Una característica del producto de las matrices es que pueden describir las probabilidades de las transacciones a lo largo de un período de tiempo definido. Por lo tanto los estados transitorios deben alcanzar la probabilidad 1 gracias al estado inicial de la función de distribución.</p>
 <p>Por lo tanto una propiedad fundamental de que la matriz sea estacionaria y tenga la regla de Markov es que la distribución limite del estado <span class="math inline">\(X_{n-1}\)</span> sea <span class="math inline">\(X_{n-1} \sim f\)</span> entonces <span class="math inline">\(X_{n} \sim f\)</span>,lo que asegura la recurrencia, bajo la condición de <span class="math inline">\(X_{n+1}=X_t + e_t\)</span> donde <span class="math inline">\(e_t\)</span> sigue una distribución normal y la forma de la densidad se convierte en una normal. Esto quiere decir que la cadena tiene una propiedad de caminata aleatoria</p>
-<p><img src="/post/2020-08-09-MarkovChain_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-08-09-MarkovChain_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>Un instrumento que sirve para validar los que se aceptan en la simulación es el Metrópolis - Hastings, el cual en vez de muestrear los valores de la distribución objetivo, lo que hace es muestrear la distrubución candidata y valida los resultados para saber que dichos datos sean aceptados a través de la siguiente formula:</p>
 <p><span class="math display">\[
 p(x_n,y_n)=min\{\frac{f_{(y_n)}q(x_n|y_n)}{f_{(y_n)}q(y_n|x_n)}\}
@@ -55,7 +57,7 @@ for (i in 2:n_sim){
        x=&#39;Datos Simulados&#39;,
        y=&#39;&#39;,
            caption = cap)</code></pre>
-<p><img src="/post/2020-08-09-MarkovChain_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-08-09-MarkovChain_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>Ahora al desarrollar la constante de integración, la cual consiste en determinar los procesos de simuluación cumplan con la aproximación a la distribución de los datos, através de los parámetros de aceptación e Metrópolis Hastings</p>
 <pre class="r"><code>Constante&lt;-1/integrate(fun_sim,-100,100)$val
 
@@ -64,11 +66,11 @@ full_int&lt;-function(x){
 }
 hist(x,freq = FALSE)
 curve(full_int,add = TRUE,col=2)</code></pre>
-<p><img src="/post/2020-08-09-MarkovChain_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-08-09-MarkovChain_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>Es de notar que la distribución se ajusta bastante bien, ahora se probará de otra forma la geometría de la distribución.</p>
-<p><img src="/post/2020-08-09-MarkovChain_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-08-09-MarkovChain_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>Por último se verifica que las autocorrelaciones tengan la forma de dependencia adecuada.</p>
-<p><img src="/post/2020-08-09-MarkovChain_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-08-09-MarkovChain_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Dicho lo anterior pasaré a desarrollar un ejemplo y a explicar una seríe de conceptos teorícos importantes para poder utilizar a Markov.</p>
 <p>Hago uso de un estudio y la implementación del estudio <a href="https://global.oup.com/academic/product/decision-modelling-for-health-economic-evaluation-9780198526629?cc=us&amp;lang=en&amp;">Decision Modelling for Health Economics Evaluation</a> sobre infecciones de VIH. Se reproduce una probabilidad de transaccion del grupo de estudio de las siguiente manera.</p>
 <pre><code>## A transition matrix, 4 states.
@@ -87,9 +89,9 @@ curve(full_int,add = TRUE,col=2)</code></pre>
 ## C              C          0.25 * rr 
 ## D                         1</code></pre>
 <p>A continuación se calculan las probabilidades de transacción y se genera la matriz transaccional así como los estados.</p>
-<p><img src="/post/2020-08-09-MarkovChain_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-08-09-MarkovChain_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>A continuación se gráfica el grupo de terapia combinada:</p>
-<p><img src="/post/2020-08-09-MarkovChain_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-08-09-MarkovChain_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>Ahora se estudia el costo de los medicamentos y de atención, para determinar la diferencia entre los tratamientos a través de un diferencial del 5%.</p>
 <pre><code>## A state with 4 values.
 ## 
@@ -132,7 +134,7 @@ curve(full_int,add = TRUE,col=2)</code></pre>
 ##      Cost Diff. Effect Diff.     ICER Ref.
 ## comb   18492.49     1.856908 9958.753 mono</code></pre>
 <p>El resultado es que la relación costo- eficiencia de la terapia es de $18296.66 por año de vida ganado. Gráficamente lo anterior se entiende así.</p>
-<p><img src="/post/2020-08-09-MarkovChain_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
-<p><img src="/post/2020-08-09-MarkovChain_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-08-09-MarkovChain_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-08-09-MarkovChain_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>Eso es todo por esta entrada espero que les guste!</p>
 </div>

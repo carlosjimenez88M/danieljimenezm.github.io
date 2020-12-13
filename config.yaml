@@ -1,0 +1,68 @@
+baseURL: https://miguelsimoni.github.io/hugo-initio-site/
+languageCode: en-us
+title: #Undatascientistdice
+theme: hugo-initio
+publishDir: docs
+params:
+  DateForm: December 14, 2020
+  avatar: images/daniel.jpg
+  avatarclass: circle
+  background: ''
+  banner: images/fondo.png
+  disqus:
+    site: hugo-initio-site.disqus.com
+  email: danieljimenez88m@gmail.com
+  favicon: images/find.png
+  footerEnableContact: yes
+  footerEnableFollowme: yes
+  footerEnableFormWidget: yes
+  footerEnableTextWidget: yes
+  google:
+    analytics:
+      trackerID: GA-000000000-0
+  name: Carlos Daniel Jiménez
+  sharethis:
+    custom: yes
+    property: '123456789012345678901234'
+  social:
+    - footer: yes
+      icon: fab fa-twitter-square
+      network: twitter
+      sharethis: yes
+      title: twitter
+      url: https://twitter.com/DanielJimenezM9
+    - footer: no
+      icon: fab fa-linkedin
+      network: linkedin
+      sharethis: yes
+      title: linkedin
+      url: https://www.linkedin.com/in/djimenezm/
+    - footer: yes
+      icon: fab fa-github
+      network: ''
+      sharethis: no
+      title: github
+      url: https://github.com/carlosjimenez88M
+    - footer: no
+      icon: fas fa-envelope-square
+      network: email
+      sharethis: yes
+      title: email
+      url: mailto:danieljimenez88m@gmail.com
+  year: 2020
+menu:
+  main:
+    # - name: home
+    #   url: /
+    #   weight: 1
+    - name: blog
+      url: /post/
+      weight: 5
+    - name: Cursos
+      url: /courses
+      weight: 5
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true

@@ -5,13 +5,15 @@ output: html_document
 mathjax: "true"
 ---
 
+<link href="/hugo-initio-site/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/hugo-initio-site/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <blockquote>
 <p>“It has long been an axiom of mine that the little things are infinitely
 the most important.” Arthur Conan Doyle</p>
 </blockquote>
-<p><img src="/post/2019-04-09-Monte_Carlo_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2019-04-09-Monte_Carlo_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <div id="en-qué-consiste-los-métodos-de-monte-carlo" class="section level3">
 <h3>¿ En qué consiste los métodos de Monte Carlo ?</h3>
 <p>El nombre del método no proviene de un autor como estamos acostumbrados en el mundo de la estadística, sino de un casino en Mónaco, y puntualmente le dieron este titulo debido a que los juegos de azar que son <em>generadores de número aleatorios</em>, como los resultados de las cartas, la ruletas y demás.</p>
@@ -41,7 +43,7 @@ P(\lim_{n \rightarrow \infty} \hat{X}_n =\mu)=1
 \int_{0}^{\infty} x^{\lambda-1} exp(-x) dx
 \]</span></p>
 <p>El resultado es el siguiente</p>
-<p><img src="/post/2019-04-09-Monte_Carlo_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2019-04-09-Monte_Carlo_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Se puede evidenciar que no hay discrepancia en los valores pequeños de <span class="math inline">\(\lambda\)</span>.</p>
 <p>Más lo anterior tiene un problema y es que la integración falla a la hora de detectar el área de importancia de la función. Por lo tanto los métodos de simulación se enfocan en esta región explotando la información de la función de densidad asociada a la integral.</p>
 <p><em>Observación:</em> La función de integración puede aceptar infinitos límites, pero sus salidas no son confiables.</p>
@@ -84,8 +86,8 @@ v_n=\frac{1}{n^2} \sum_{i=1}^{n}[h(x_i)-\hat{h}_n]^2
 \]</span></p>
 <p>Dicho lo anterior se calcula <span class="math inline">\(h(x)=[\cos(40x)+\sin(30x)]^2\)</span>, en donde se generaran muestras independientes e idénticamente distribuidas al rededor <span class="math inline">\(\int h(x)dx\)</span> con <span class="math inline">\(\h(U_i)/n\)</span> donde <span class="math inline">\(U_i\)</span> son variables aleatorias</p>
 <pre><code>## 0.8176594 with absolute error &lt; 5.4e-05</code></pre>
-<p><img src="/post/2019-04-09-Monte_Carlo_files/figure-html/unnamed-chunk-6-1.png" width="672" />
-<img src="/post/2019-04-09-Monte_Carlo_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2019-04-09-Monte_Carlo_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="/hugo-initio-site/post/2019-04-09-Monte_Carlo_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Otra forma de verlo es la siguiente</p>
 <p>Suponga que hay que integrar la función</p>
 <p><span class="math display">\[
@@ -103,7 +105,7 @@ mean(h(u))* (b-a)</code></pre>
 <pre class="r"><code>integrate(h1,a,b)</code></pre>
 <pre><code>## 0.9410708 with absolute error &lt; 6.6e-06</code></pre>
 <p>Al gráficar se obtiene que
-<img src="/post/2019-04-09-Monte_Carlo_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<img src="/hugo-initio-site/post/2019-04-09-Monte_Carlo_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>Ahora se evidencia la eficiencia de Monte Carlo a medida que aumenta el tamaño de la población <span class="math inline">\(n\)</span> junto a los intervalos de confianza</p>
 <pre class="r"><code>n_max=10^3
 x&lt;-h1(runif(n_max,a,b))
@@ -112,7 +114,7 @@ se&lt;-sqrt((cumsum(x-h_bar)^2))/(1:n_max)
 plot(h_bar, type = &quot;l&quot;)
 lines(h_bar+1.96*se, col=&quot;green&quot;)
 lines(h_bar-1.96*se, col=&quot;red&quot;)</code></pre>
-<p><img src="/post/2019-04-09-Monte_Carlo_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2019-04-09-Monte_Carlo_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>Observese que las integrales pueden usarse desde que <span class="math inline">\(n&gt;500\)</span></p>
 <pre class="r"><code>n_sim&lt;-100
 n&lt;-500

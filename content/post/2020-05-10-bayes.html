@@ -5,6 +5,8 @@ output: html_document
 mathjax: "true"
 ---
 
+<link href="/hugo-initio-site/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/hugo-initio-site/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <blockquote>
@@ -36,9 +38,9 @@ mathjax: "true"
 \]</span></p>
 <p>En este caso no se posee la suficiente evidencia para decir que el jugador a es mejor que el b, dado el histórico de la data, y es en este caso cuando se puede hacer uso del método del empirical bayes para determinar un valor aproximado de como será la tasa de bateo.</p>
 <p>En el paquete de Lahman se incluye una información sobre este problema, la cual usaremos para entender este problema de incertidumbre. Se seleccionará un grupo que tenga un promedio de bateo mayor a cero</p>
-<p><img src="/post/2020-05-10-bayes_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-05-10-bayes_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>En está información hay datos bien importantes del promedio de bateo, ahora veamos como es la distribución de los datos</p>
-<p><img src="/post/2020-05-10-bayes_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-05-10-bayes_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Se aproxima a la normal por el hecho de la teoría del limite central, en donde la variable independiente aleatoria y la varianza no nula se aproxima a una distribución normal, por lo que se cuenta con una gran cantidad de datos.</p>
 <p>Ahora lo primero a estimar es la prior de los datos.</p>
 <p><span class="math display">\[
@@ -59,7 +61,7 @@ ab &lt;- coef(m)
 alpha0 &lt;- ab[1]
 beta0 &lt;- ab[2]</code></pre>
 <p>El alpha calculado es 101.9089, mientras que beta es 289.4558, dicho lo anterior se genera el histograma para poder dar a entender como es el comportamiento de estos datos</p>
-<p><img src="/post/2020-05-10-bayes_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-05-10-bayes_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>Los parámetros se ajustan bastante bien!!! por lo tanto el fit del máximo likelihood es provechoso.</p>
 <p>Ahora se usa los datos del alpha y beta para hallar la prior de cada uno de los individuos.</p>
 <p>Solo para contextualizar un poco este ejemplo volvamos al caso de los jugadores a y b.</p>
@@ -78,7 +80,7 @@ beta0 &lt;- ab[2]</code></pre>
 <span class="math display">\[
 y=\frac{\alpha}{\alpha+\beta}=0.2603937
 \]</span></p>
-<p><img src="/post/2020-05-10-bayes_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-05-10-bayes_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>A este proceso se le conoce como contracción y consiste en mover las estimaciones hacia el promedio, entre más se muevan las estimaciones es clara la relación con el número de evidencias que tenemos. Con poca evidencia el movimiento será mayor, mientras que con mucha el movimiento será menor.</p>
 <p>Ahora suponga que quiere conocer el grado de incertidumbre de la estimación, para ello se trabajara con los intervalos de credibilidad que ofrece el método del empirical bayes.</p>
 <p>Se usará el estimador bayesiano trabajado antes que reduce el ruido de los datos en una proporción importante, y calculado la posterior, con lo cual actualizaremos la información.</p>
@@ -103,10 +105,10 @@ brosius %&gt;%
                 lty = 2, color = &quot;black&quot;) +
   geom_errorbarh(aes(xmin = brosius_low, xmax = brosius_high, y = 0), height = 3.5, color = &quot;red&quot;) +
   xlim(.18, .34)</code></pre>
-<p><img src="/post/2020-05-10-bayes_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<p><img src="/hugo-initio-site/post/2020-05-10-bayes_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 Cabe notar que la distribución beta de Brosius es 1001 H, con un AB de 3889, con un intervalo de credibilidad del 95%.</p>
 <p>Ahora se computa un top de jugadores para ver cómo es el comportamiento del histórico del bateo dada la beta.</p>
-<p><img src="/post/2020-05-10-bayes_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-05-10-bayes_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>Esto es todo por este post! Espero que les guste.</p>
 </div>
 <div class="footnotes">

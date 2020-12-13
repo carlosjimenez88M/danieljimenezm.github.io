@@ -4,6 +4,8 @@ date: 2020-07-18
 output: html_document
 ---
 
+<link href="/hugo-initio-site/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/hugo-initio-site/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>Uno de los mayores problemas a la hora de construir un modelo de Machine Learning o Deep Learning es aquello que muchos llaman <code>cajas negras</code> y esto se debe a la falta de la comprensión de los efectos de las variables sobre las predicciones. En teoría, la matemática que desarrollamos a la hora de implementar un modelo debe ser suficiente para poder describir dichos efectos, pero también puede ser la causante de muchos errores por falta de entender un contexto o problemas de lógica. Been Kim<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> de Cornell University postulo la siguiente idea con respecto a lo antes mencionado:</p>
@@ -24,28 +26,28 @@ output: html_document
 <div id="eda" class="section level3">
 <h3>EDA</h3>
 <p>Lo primero que quiero analizar es la relación entre las misiones desarrolladas por astronautas dado el genero y con ello empezar a buscar las respectivas variaciones que se han presentado a lo largo del tiempo.</p>
-<p><img src="/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>Se puede observar que en los últimos años pareciera estar cerrándose la brecha en la participación entre hombres y mujeres, esta idea quedaría más clara si se evaluan los resultados a manera de tendencia.</p>
-<p><img src="/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Hasta este punto parece que las tendencias de participación tienden a converger, pero para estar más claro en ello es necesario generar un nuevo cálculo.</p>
 <p><span class="math display">\[
 ratio =\sum_{i=1}^{i}\frac{\mbox{Total Mujeres}}{\mbox{Total Hombres}}
 \]</span>
 Con esta sencilla ecuación se logrará comprender como es la tasa de participación a través del radio de los totales entre ambos generos.</p>
-<p><img src="/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>El gráfico anterior muestra como al principio de la serie de tiempo(de los años 60’s hasta los 80’s) la tasa de participación por parte de las mujeres fue practimente nula, aunque en el 63 se presenta una participación mixta, lo cual llama mi antención, paso seguido la dinámica de la participación ha estado en un máximo del 30% en el 2000 y de ahí en adelante ha presentado un ligero descenso, con lo cual la tesis original sobre el trade off de las brechas de genero se elimina. Para confimar esta apreciación se desarrolla el siguiente gráfico.</p>
-<p><img src="/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>Ahora desarrollaré un análisis de la nacionalida de los miembros de cada equipo y de las misiones en que han participaron, con el objetivo de crear un feature que logre entender la dinámica de las misiones.</p>
-<p><img src="/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>Bueno, en este punto no hay mucho que decir, aunque si me parece oportuno lograr describir desde cuando USA tiene tanta presencia en las misiones espaciales y para ello usaré la lógica antes mencionada para construir un ratio de participación.</p>
-<p><img src="/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>En los años 90’s USA alcanzo su máximo de participación en misiones espaciales y desde el 2010 presenta una fuerte caída. Pero tengo la sospecha que esto obedece es al número de eventos de este tipo que se desarrollan en los últimos años. Para ello trabajaré un análisis de frecuencia de misiones por década dada la nacionalidad de los participantes.</p>
-<p><img src="/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>En efecto lo que se puede notar es una variación en negativo del número de total de misiones por década.</p>
 <p>Para finalizar este análisis estudiaré el cambio de la duración de las misiones por década, con el cual busco comprender la dependencia del tiempo con el resto de variables.</p>
-<p><img src="/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Todo parece indicar que si hay una relación entre la década en que se desarrollaron las misiones y su duración, lo cual es un buen punto de partida. Ahora estudiaré dichas relaciones con respecto al uso de vehículos en las misiones.</p>
-<p><img src="/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>Acá parece que hay una dinámica diferente, la relación en el comportamiento del uso de vehículo y la decada no presenta grandes patrones de relación, lo cual puede ser bueno a la hora de desarrollar un modelo con baja homocedasticidad.</p>
 </div>
 <div id="taxonomía-de-un-modelo-interpretativo" class="section level2">
@@ -69,29 +71,29 @@ Con esta sencilla ecuación se logrará comprender como es la tasa de participac
 ## 6          5.27 civilian         commander             1969 Apollo …
 ## # … with 2 more variables: eva_hrs_mission &lt;dbl&gt;, total_eva_hrs &lt;dbl&gt;</code></pre>
 <p>Lo primero que quiero resaltar es una mala practica que he visto a lo largo del tiempo por muchos científicos de datos y es la evaluación del aporte del modelo a través de factores lineales. Si se buscase una relación a través de intervalos de confianza con este método el resultado sería el siguiente:</p>
-<p><img src="/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>Hasta acá parece que el año de la misión no aporta nada a la duración de las mismas, gracias al interpreability estos errores se pueden corregir de manera eficiente. Ahora veamos este mismo ejemplo con las variables cualitativas.</p>
-<p><img src="/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>Por lo visto acá hay algo importante, a pesar que el método de evaluación de las variables a través de modelos líneales no es el mejor, en este caso si da a entender que la variable <strong>in_orbit</strong> aporta bastante información al modelo.</p>
 <p>A continuación constuire un modelo de Random Forest que me permita identificar la importancia de las variables como debe ser, y de paso ire construyendo su interpretación.</p>
 </div>
 <div id="creando-un-modelo-de-machine-learning-con-intepretación" class="section level2">
 <h2>Creando un modelo de Machine Learning con intepretación</h2>
 <p>Lo primero que se debe desarrollar en esta fase es es la arquitectura del <code>Random Forest</code>, se logre catalogar siete variables que he seleccionado después de leer el diccionario del frame y analizarlas desde una óptica de la definición del problema.</p>
-<pre><code>## ══ Workflow [trained] ══════════════════
+<pre><code>## ══ Workflow [trained] ══════════════════════════════════════════════════════════
 ## Preprocessor: Recipe
 ## Model: rand_forest()
 ## 
-## ── Preprocessor ────────────────────────
+## ── Preprocessor ────────────────────────────────────────────────────────────────
 ## 2 Recipe Steps
 ## 
 ## ● step_other()
 ## ● step_dummy()
 ## 
-## ── Model ───────────────────────────────
+## ── Model ───────────────────────────────────────────────────────────────────────
 ## 
 ## Call:
-##  randomForest(x = as.data.frame(x), y = y) 
+##  randomForest(x = maybe_data_frame(x), y = y) 
 ##                Type of random forest: regression
 ##                      Number of trees: 500
 ## No. of variables tried at each split: 7
@@ -99,7 +101,7 @@ Con esta sencilla ecuación se logrará comprender como es la tasa de participac
 ##           Mean of squared residuals: 0.2133017
 ##                     % Var explained: 89.58</code></pre>
 <p>Hasta acá con las variables que se eligieron recolectaron el 89.58% de la varianza. Ahora viene la parte más importante, con esta varianza explicada buscaré construir un identificador de la importancia de cada una sobre el objetivo de la predicción.</p>
-<p><img src="/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>Medido con un <code>mae</code>, las variables que más aportan a la predicción del modelo son :</p>
 <ul>
 <li><p>Occupation: En esta variable se almacena el oficio de cada uno de los miembros del equipo, acá hay un buen punto de partida en donde la arquitectura de los equipos define en buena parte la duración de la misión.</p></li>
@@ -115,7 +117,7 @@ Con esta sencilla ecuación se logrará comprender como es la tasa de participac
 ## This ensures that proper, parallel-safe random numbers are produced via the
 ## L&#39;Ecuyer-CMRG method. To disable this check, use [future].seed=NULL, or set
 ## option &#39;future.rng.onMisuse&#39; to &quot;ignore&quot;.</code></pre>
-<p><img src="/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>Lo que se puede observar con respecto a la influencia de la variable del <strong>Año de la misión</strong> es que empezo teniendo efectos inversamente proporcionales y con el paso del tiempo se ha convertido en un factor directo en la duración de las misiones. Ahora haré lo mismo para el resto de variables</p>
 <pre><code>## Warning: UNRELIABLE VALUE: Future (&#39;future_lapply-1&#39;) unexpectedly generated
 ## random numbers without specifying argument &#39;[future.]seed&#39;. There is a risk that
@@ -124,12 +126,12 @@ Con esta sencilla ecuación se logrará comprender como es la tasa de participac
 ## This ensures that proper, parallel-safe random numbers are produced via the
 ## L&#39;Ecuyer-CMRG method. To disable this check, use [future].seed=NULL, or set
 ## option &#39;future.rng.onMisuse&#39; to &quot;ignore&quot;.</code></pre>
-<p><img src="/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p>Acá podemos concluir que hay dos variables que poco o nada ayudan a definir la tendencia de la duración de las misiones, una que ya se habia comentado es el military_civilian y la otra es total_eva_hrs, las demás tienen efectos que se pueden medir y con ello se construye un concepto sobre su influencia en la predicción.</p>
 <p>Para poder finalizar con este análisis se debe desarrollar la interaccion de la varianza, entre las variables</p>
-<p><img src="/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>Acá se puede notar que en términos de la interacción de la varianza dada las variables, los efectos de total_eva_hrs son menores al 4% de la construcción de la información por lo cual está variable no se debe descartar del todo, ya que individualmente no tiene mucho efecto, pero combiana con las otras forma una tendencia sobre las horas de la misión. Para confirmar esto, buscaré la relación de la creación de varianza a través de la iteracción con total_eva_hrs.</p>
-<p><img src="/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <p>Con está gráfica el argumento anterior queda demostrado.</p>
 <p>Para finalizar este post, quiero mostrar como son los resultados locales y como estos ayudan a entender la participación de las variables en los modelos. Las predicciones locales son aquellas que se trabajan por row del set de datos, en donde se busca dos cosas, hacer una predicción y validarla con su valor real, a la par de ver como es el aporte de las variables al valor pronósticado.</p>
 <p>Suponga que el primer dato local a evaluar es el siguiente</p>
@@ -138,12 +140,12 @@ Con esta sencilla ecuación se logrará comprender como es la tasa de participac
 ##   total_eva_hrs
 ## 1    -0.3147107</code></pre>
 <p>Ahora con los modelos interpretativos el resultado es el siguiente</p>
-<p><img src="/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <p>Con un accuracy del 75%, el efecto del año de la misión prácticamente monopoliza los efectos sobre la predicción. A continuación dejo otros ejemplos que se construyen con esta lógica.</p>
-<p><img src="/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
-<p><img src="/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <p>Otra forma de desarrollar este análisis es a través de teoría de juegos con una técnica llamada <strong>Valor de Shapey</strong><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>, el cual evalua la cooperación de las variables en términos de generar ganancia de la información, dicha configuración arroja el siguiente resultado.</p>
-<p><img src="/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <p>Con un accuracy del 83%, la cooperación entre las variables tienen una configuración oportuna para el desarrollo de los modelos. Ahora la interpretación se puede obtener a través del <code>value</code> de cada una de las variables concatenando el sentido que le corresponde a cada una de ellas.</p>
 <p>Eso es todo por este post, espero que les guste.</p>
 </div>
