@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta charset="utf-8">
+  	<meta name="viewport"    content="width=device-width, initial-scale=1.0">
+  	<meta name="description" content="">
+  	<meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
+    
+    
+	<title>Construyendo un modelo con sentido</title>
+	<link rel="shortcut icon" href="https://miguelsimoni.github.io/hugo-initio-site/images/find.png">
+
+	
+	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
+	
+	
+	<script defer src="https://use.fontawesome.com/releases/v5.0.11/js/all.js" integrity="sha384-ImVoB8Er8knetgQakxuBS4G3RSkyD8IZVVQCAnmRJrDwqJFYUE4YOv+DbIofcO9C" crossorigin="anonymous"></script>
+	
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alice|Open+Sans:400,300,700">
+	
+	
+	<link rel="stylesheet" href="https://miguelsimoni.github.io/hugo-initio-site/css/styles.css">
+	
+  
+
+   
+  
+
+</head>
+
+
+  </head>
+  
+  <body>
+
+    
+      <header id="header" style="padding: 0; height: 100%">
+	<div id="head" class="parallax" parallax-speed="2">
+     <div class="banner" style="background-image:url(https://miguelsimoni.github.io/hugo-initio-site/images/fondo.png);" >
+           <h1 id="logo" class="text-center">
+              <img class="img-circle" src="https://miguelsimoni.github.io/hugo-initio-site/images/daniel.jpg" alt="">
+              <span class="title">Carlos Daniel Jiménez</span>
+              <span class="tagline"><br>
+                 <a href="mailto:danieljimenez88m@gmail.com">danieljimenez88m@gmail.com</a>
+              </span>
+           </h1>
+        </div>
+
+    <nav class="navbar navbar-default navbar-sticky">
+    <div class="container-fluid">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="true">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
+
+            <ul class="nav navbar-nav">
+                 
+                <li>
+                    <a href="/hugo-initio-site/post/">blog</a>
+                </li>
+                  
+                <li>
+                    <a href="/hugo-initio-site/courses">Cursos</a>
+                </li>
+                  
+                <li>
+                    <a href="/hugo-initio-site/about/">Sobre mi</a>
+                </li>
+                 
+
+            </ul>
+
+        </div> 
+        
+    </div>
+</nav>
+<nav class="navbar navbar-fake"></nav>
+</header>
+
+    
+ 
+    
+<main id="main">
+
+	<div class="container">
+
+		<div class="row topspace">
+			<div class="col-sm-8 col-sm-offset-2">
+
+ 				<article class="post">
+					<header class="entry-header">
+ 						<div class="entry-meta">
+               <span class="posted-on">
+                  <time class="entry-date published" datetime="December 70, 18180">July 18, 2020</time>
+               </span>
+ 						</div>
+ 						<h1 class="entry-title"><a href="https://miguelsimoni.github.io/hugo-initio-site/post/2020-07-18-models_interpretability/" rel="bookmark">Construyendo un modelo con sentido</a></h1>
+					</header>
+					<div class="entry-content">
+						
+<link href="/hugo-initio-site/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/hugo-initio-site/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+
+
+<p>Uno de los mayores problemas a la hora de construir un modelo de Machine Learning o Deep Learning es aquello que muchos llaman <code>cajas negras</code> y esto se debe a la falta de la comprensión de los efectos de las variables sobre las predicciones. En teoría, la matemática que desarrollamos a la hora de implementar un modelo debe ser suficiente para poder describir dichos efectos, pero también puede ser la causante de muchos errores por falta de entender un contexto o problemas de lógica. Been Kim<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> de Cornell University postulo la siguiente idea con respecto a lo antes mencionado:</p>
+<blockquote>
+<p>As machine learning systems become ubiquitous, there has been a surge of interest in interpretable machine learning: systems that provide explanation for their outputs. These explanations are often used to qualitatively assess other criteria such as safety or non-discrimination. However, despite the interest in interpretability, there is very little consensus on what interpretable machine learning is and how it should be measured.</p>
+</blockquote>
+<p>Con lo anterior y trabajando la taxonomía de los modelos de Machine Learning se puede evacuar cualquier factor de confusión a la hora de construir un algoritmo. Para formalizar la idea inicial del interpretability usaré un gráfico diseñado por Parul Pandey<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> el cual considero un buen punto de partida.</p>
+<p><img src="https://miro.medium.com/max/1400/0*IWLWbvl2xUJLD-va.png" /></p>
+<p>Este gráfico muestra como debe ser el flujo de trabajo de la cosntrucción de los modelos de Machine Learning, iniciando por la recolección de datos de un problema planteado, su respectivas transformaciones (ETL) para el diseño de una base de datos, paso seguido la construcción del los modelos, y con ello generar los métodos de interpretación para el entendimiento humano y la aplicación oportuna de esta solución.</p>
+<p>Las preguntas con las cuales debemos partir para construir una interpretación de los modelos son las siguientes:</p>
+<ul>
+<li>¿Cuáles son los proxies que tienen mejor aplicación en el mundo real?</li>
+<li>¿Cuáles son las tareas de principio a fin (end to end) fundamentales para lograr el objetivo del algoritmo?</li>
+<li>¿Cómo entender las variables explicativas del modelo?</li>
+</ul>
+<p>Para entender los dos primeros puntos lo fundamental es lograr captar como son los comportamientos de los resultados de los modelos de manera Global y Local, para así evaluar la consistencia de los resultados. Y para finalizar el entendimiento de las variables es necesario un buen desarrollo del Análisis Exploratorio de Datos (EDA).</p>
+<p>En esta oportunidad trabajaré con el <a href="https://github.com/rfordatascience/tidytuesday">tidytuesday</a> de <a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-07-14/readme.md">Astronautas</a> de los retos de <code>R</code> y con base a ello construire las fases del <code>Interpretable Machine Learning</code> y un modelo que prediga las horas de misión en un viaje al espacio.</p>
+<div id="eda" class="section level3">
+<h3>EDA</h3>
+<p>Lo primero que quiero analizar es la relación entre las misiones desarrolladas por astronautas dado el genero y con ello empezar a buscar las respectivas variaciones que se han presentado a lo largo del tiempo.</p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Se puede observar que en los últimos años pareciera estar cerrándose la brecha en la participación entre hombres y mujeres, esta idea quedaría más clara si se evaluan los resultados a manera de tendencia.</p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Hasta este punto parece que las tendencias de participación tienden a converger, pero para estar más claro en ello es necesario generar un nuevo cálculo.</p>
+<p><span class="math display">\[
+ratio =\sum_{i=1}^{i}\frac{\mbox{Total Mujeres}}{\mbox{Total Hombres}}
+\]</span>
+Con esta sencilla ecuación se logrará comprender como es la tasa de participación a través del radio de los totales entre ambos generos.</p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>El gráfico anterior muestra como al principio de la serie de tiempo(de los años 60’s hasta los 80’s) la tasa de participación por parte de las mujeres fue practimente nula, aunque en el 63 se presenta una participación mixta, lo cual llama mi antención, paso seguido la dinámica de la participación ha estado en un máximo del 30% en el 2000 y de ahí en adelante ha presentado un ligero descenso, con lo cual la tesis original sobre el trade off de las brechas de genero se elimina. Para confimar esta apreciación se desarrolla el siguiente gráfico.</p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Ahora desarrollaré un análisis de la nacionalida de los miembros de cada equipo y de las misiones en que han participaron, con el objetivo de crear un feature que logre entender la dinámica de las misiones.</p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Bueno, en este punto no hay mucho que decir, aunque si me parece oportuno lograr describir desde cuando USA tiene tanta presencia en las misiones espaciales y para ello usaré la lógica antes mencionada para construir un ratio de participación.</p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>En los años 90’s USA alcanzo su máximo de participación en misiones espaciales y desde el 2010 presenta una fuerte caída. Pero tengo la sospecha que esto obedece es al número de eventos de este tipo que se desarrollan en los últimos años. Para ello trabajaré un análisis de frecuencia de misiones por década dada la nacionalidad de los participantes.</p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>En efecto lo que se puede notar es una variación en negativo del número de total de misiones por década.</p>
+<p>Para finalizar este análisis estudiaré el cambio de la duración de las misiones por década, con el cual busco comprender la dependencia del tiempo con el resto de variables.</p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>Todo parece indicar que si hay una relación entre la década en que se desarrollaron las misiones y su duración, lo cual es un buen punto de partida. Ahora estudiaré dichas relaciones con respecto al uso de vehículos en las misiones.</p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>Acá parece que hay una dinámica diferente, la relación en el comportamiento del uso de vehículo y la decada no presenta grandes patrones de relación, lo cual puede ser bueno a la hora de desarrollar un modelo con baja homocedasticidad.</p>
+</div>
+<div id="taxonomía-de-un-modelo-interpretativo" class="section level2">
+<h2>Taxonomía de un modelo interpretativo</h2>
+<p>Esta parte se construye de la siguiente forma:</p>
+<ul>
+<li>Es necesario crear un <strong>Feature Summary Statistic</strong> el cual describe la importancia de las variables del modelo.</li>
+<li>Paso seguido se desarrolla la visualización del <strong>Feature Summary Statistic</strong> la cual logran describir el desempeño parcial de cada variable sobre el resultado de un pronóstico.</li>
+<li>Después se busca la construcción de los modelos particionados para conocer el aporte de la varianza.</li>
+<li>Por último se trabajan con estimaciones locales y globales sobre las predicciones para identificar la importancia de cada variable dado cada uno de los casos.</li>
+</ul>
+<p>Dado los pasos anteriores se construye una base de datos donde las variables character se transformen en factor, para asi empezar a evaluar de manera cauta la importancia de las variables</p>
+<pre><code>## # A tibble: 6 x 7
+##   hours_mission military_civili… occupation year_of_mission in_orbit
+##           &lt;dbl&gt; &lt;fct&gt;            &lt;fct&gt;                &lt;dbl&gt; &lt;fct&gt;   
+## 1          3.26 military         pilot                 1965 Voskhod…
+## 2          5.58 military         commander             1972 Apollo …
+## 3          4.58 military         pilot                 1965 Gemini 4
+## 4          5.50 military         commander             1969 Apollo …
+## 5          6.51 military         commander             1973 Skylab 2
+## 6          5.27 civilian         commander             1969 Apollo …
+## # … with 2 more variables: eva_hrs_mission &lt;dbl&gt;, total_eva_hrs &lt;dbl&gt;</code></pre>
+<p>Lo primero que quiero resaltar es una mala practica que he visto a lo largo del tiempo por muchos científicos de datos y es la evaluación del aporte del modelo a través de factores lineales. Si se buscase una relación a través de intervalos de confianza con este método el resultado sería el siguiente:</p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>Hasta acá parece que el año de la misión no aporta nada a la duración de las mismas, gracias al interpreability estos errores se pueden corregir de manera eficiente. Ahora veamos este mismo ejemplo con las variables cualitativas.</p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>Por lo visto acá hay algo importante, a pesar que el método de evaluación de las variables a través de modelos líneales no es el mejor, en este caso si da a entender que la variable <strong>in_orbit</strong> aporta bastante información al modelo.</p>
+<p>A continuación constuire un modelo de Random Forest que me permita identificar la importancia de las variables como debe ser, y de paso ire construyendo su interpretación.</p>
+</div>
+<div id="creando-un-modelo-de-machine-learning-con-intepretación" class="section level2">
+<h2>Creando un modelo de Machine Learning con intepretación</h2>
+<p>Lo primero que se debe desarrollar en esta fase es es la arquitectura del <code>Random Forest</code>, se logre catalogar siete variables que he seleccionado después de leer el diccionario del frame y analizarlas desde una óptica de la definición del problema.</p>
+<pre><code>## ══ Workflow [trained] ══════════════════════════════════════════════════════════
+## Preprocessor: Recipe
+## Model: rand_forest()
+## 
+## ── Preprocessor ────────────────────────────────────────────────────────────────
+## 2 Recipe Steps
+## 
+## ● step_other()
+## ● step_dummy()
+## 
+## ── Model ───────────────────────────────────────────────────────────────────────
+## 
+## Call:
+##  randomForest(x = maybe_data_frame(x), y = y) 
+##                Type of random forest: regression
+##                      Number of trees: 500
+## No. of variables tried at each split: 7
+## 
+##           Mean of squared residuals: 0.2133017
+##                     % Var explained: 89.58</code></pre>
+<p>Hasta acá con las variables que se eligieron recolectaron el 89.58% de la varianza. Ahora viene la parte más importante, con esta varianza explicada buscaré construir un identificador de la importancia de cada una sobre el objetivo de la predicción.</p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>Medido con un <code>mae</code>, las variables que más aportan a la predicción del modelo son :</p>
+<ul>
+<li><p>Occupation: En esta variable se almacena el oficio de cada uno de los miembros del equipo, acá hay un buen punto de partida en donde la arquitectura de los equipos define en buena parte la duración de la misión.</p></li>
+<li><p>Year_of_mission: Esta variable es importante porque a pesar que el número de misiones ha bajado con los años, la duración de las mismas aumentan conforme pasan los mismos, lo cual da pie a interpretar que existen externalidades que explican este fenómeno.</p></li>
+<li><p>In_orbit: Es la que mayor valor aporte, y esto se debe a que es la nave espacial destinada a cada misión.</p></li>
+</ul>
+<p>las otras variables aportan poco valor, aunque no despreciable, exceptuando military civilian la cual tiene cero participación en la construcción de la varianza del modelo.</p>
+<p>Con esta parte se tiene cubierto la selección de features. Ahora se busca entender el efecto de cada variable en el modelo y con ello ir formalizando la interpretación del modelo, suponga que quiere evaluar el efecto del año de la misión sobre el resultado de la duración de la misma, para esto se trabaja con lo que se conoce como feature effects, al cual describe la influencia de la variable sobre el modelo y la predicción.</p>
+<pre><code>## Warning: UNRELIABLE VALUE: Future (&#39;future_lapply-1&#39;) unexpectedly generated
+## random numbers without specifying argument &#39;[future.]seed&#39;. There is a risk that
+## those random numbers are not statistically sound and the overall results might
+## be invalid. To fix this, specify argument &#39;[future.]seed&#39;, e.g. &#39;seed=TRUE&#39;.
+## This ensures that proper, parallel-safe random numbers are produced via the
+## L&#39;Ecuyer-CMRG method. To disable this check, use [future].seed=NULL, or set
+## option &#39;future.rng.onMisuse&#39; to &quot;ignore&quot;.</code></pre>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>Lo que se puede observar con respecto a la influencia de la variable del <strong>Año de la misión</strong> es que empezo teniendo efectos inversamente proporcionales y con el paso del tiempo se ha convertido en un factor directo en la duración de las misiones. Ahora haré lo mismo para el resto de variables</p>
+<pre><code>## Warning: UNRELIABLE VALUE: Future (&#39;future_lapply-1&#39;) unexpectedly generated
+## random numbers without specifying argument &#39;[future.]seed&#39;. There is a risk that
+## those random numbers are not statistically sound and the overall results might
+## be invalid. To fix this, specify argument &#39;[future.]seed&#39;, e.g. &#39;seed=TRUE&#39;.
+## This ensures that proper, parallel-safe random numbers are produced via the
+## L&#39;Ecuyer-CMRG method. To disable this check, use [future].seed=NULL, or set
+## option &#39;future.rng.onMisuse&#39; to &quot;ignore&quot;.</code></pre>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>Acá podemos concluir que hay dos variables que poco o nada ayudan a definir la tendencia de la duración de las misiones, una que ya se habia comentado es el military_civilian y la otra es total_eva_hrs, las demás tienen efectos que se pueden medir y con ello se construye un concepto sobre su influencia en la predicción.</p>
+<p>Para poder finalizar con este análisis se debe desarrollar la interaccion de la varianza, entre las variables</p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>Acá se puede notar que en términos de la interacción de la varianza dada las variables, los efectos de total_eva_hrs son menores al 4% de la construcción de la información por lo cual está variable no se debe descartar del todo, ya que individualmente no tiene mucho efecto, pero combiana con las otras forma una tendencia sobre las horas de la misión. Para confirmar esto, buscaré la relación de la creación de varianza a través de la iteracción con total_eva_hrs.</p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>Con está gráfica el argumento anterior queda demostrado.</p>
+<p>Para finalizar este post, quiero mostrar como son los resultados locales y como estos ayudan a entender la participación de las variables en los modelos. Las predicciones locales son aquellas que se trabajan por row del set de datos, en donde se busca dos cosas, hacer una predicción y validarla con su valor real, a la par de ver como es el aporte de las variables al valor pronósticado.</p>
+<p>Suponga que el primer dato local a evaluar es el siguiente</p>
+<pre><code>##   military_civilian occupation year_of_mission  in_orbit eva_hrs_mission
+## 1          military      pilot            1965 Voskhod 2      -0.3147107
+##   total_eva_hrs
+## 1    -0.3147107</code></pre>
+<p>Ahora con los modelos interpretativos el resultado es el siguiente</p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>Con un accuracy del 75%, el efecto del año de la misión prácticamente monopoliza los efectos sobre la predicción. A continuación dejo otros ejemplos que se construyen con esta lógica.</p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>Otra forma de desarrollar este análisis es a través de teoría de juegos con una técnica llamada <strong>Valor de Shapey</strong><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>, el cual evalua la cooperación de las variables en términos de generar ganancia de la información, dicha configuración arroja el siguiente resultado.</p>
+<p><img src="/hugo-initio-site/post/2020-07-18-models_interpretability_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p>Con un accuracy del 83%, la cooperación entre las variables tienen una configuración oportuna para el desarrollo de los modelos. Ahora la interpretación se puede obtener a través del <code>value</code> de cada una de las variables concatenando el sentido que le corresponde a cada una de ellas.</p>
+<p>Eso es todo por este post, espero que les guste.</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>En el siguiente link encontrará el texto completo sobre la taxonomía del IML <a href="https://arxiv.org/pdf/1702.08608.pdf" class="uri">https://arxiv.org/pdf/1702.08608.pdf</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p><a href="https://towardsdatascience.com/interpretable-machine-learning-1dec0f2f3e6b" class="uri">https://towardsdatascience.com/interpretable-machine-learning-1dec0f2f3e6b</a><a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p><a href="https://es.wikipedia.org/wiki/Valor_de_Shapley" class="uri">https://es.wikipedia.org/wiki/Valor_de_Shapley</a><a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+
+					</div>
+				</article>
+
+			</div>
+		</div> 
+
+        <div class="row">
+			<div class="col-sm-8 col-sm-offset-2">
+
+				<div id="share">
+                    
+				</div>
+			</div>
+		</div> 
+		<div class="clearfix"></div>
+
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-2">
+
+				<div id="comments">
+                    
+				</div>
+			</div>
+		</div> 
+		<div class="clearfix"></div>
+
+	</div>	
+
+</main>
+
+    
+    
+      <footer id="footer">
+	<div class="container">
+		<div class="row">
+			
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Contact</h3>
+				<div class="widget-body">
+					<p>
+					<a href="mailto:danieljimenez88m@gmail.com">danieljimenez88m@gmail.com</a><br>
+						<br>
+						
+					</p>
+				</div>
+			</div>
+			
+
+			
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Follow me</h3>
+				<div class="widget-body">
+					<p class="follow-me-icons">
+            
+                
+                    <a href="https://twitter.com/DanielJimenezM9" target="_blank"><i class="fab fa-twitter-square fa-1x"></i></a>
+                
+            
+                
+            
+                
+                    <a href="https://github.com/carlosjimenez88M" target="_blank"><i class="fab fa-github fa-1x"></i></a>
+                
+            
+                
+            
+					</p>
+				</div>
+			</div>
+			
+
+			
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Text widget</h3>
+				<div class="widget-body">
+					 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. &lt;br&gt; Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</div>
+			</div>
+			
+
+			
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Form widget</h3>
+				<div class="widget-body">
+					<p>
+					<a href="mailto:danieljimenez88m@gmail.com">danieljimenez88m@gmail.com</a><br>
+						<br>
+						
+					</p>
+				</div>
+			</div>
+			
+
+		</div> 
+	</div>
+</footer>
+
+<footer id="underfooter">
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+					<p></p>
+				</div>
+			</div>
+
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+					<p class="text-right">
+						Copyright &copy; 2020, Carlos Daniel Jiménez<br>
+						Design: <a href="http://www.gettemplate.com" rel="designer">Initio by GetTemplate</a> - 
+                        Powered by: <a href="https://gohugo.io/" rel="poweredby">Hugo</a>
+                    </p>
+				</div>
+			</div>
+
+		</div> 
+	</div>
+</footer>
+
+
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="https://miguelsimoni.github.io/hugo-initio-site/js/template.js"></script>
+<script id="dsq-count-scr" src="//hugo-initio-site.disqus.com/count.js" async></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'GA-000000000-0', 'auto');
+  ga('send', 'pageview');
+</script>
+
+</body>
+</html>
+
+    
+  </body>
+  
+</html>

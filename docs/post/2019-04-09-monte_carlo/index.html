@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta charset="utf-8">
+  	<meta name="viewport"    content="width=device-width, initial-scale=1.0">
+  	<meta name="description" content="">
+  	<meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
+    
+    
+	<title>Monte Carlo</title>
+	<link rel="shortcut icon" href="https://miguelsimoni.github.io/hugo-initio-site/images/find.png">
+
+	
+	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
+	
+	
+	<script defer src="https://use.fontawesome.com/releases/v5.0.11/js/all.js" integrity="sha384-ImVoB8Er8knetgQakxuBS4G3RSkyD8IZVVQCAnmRJrDwqJFYUE4YOv+DbIofcO9C" crossorigin="anonymous"></script>
+	
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alice|Open+Sans:400,300,700">
+	
+	
+	<link rel="stylesheet" href="https://miguelsimoni.github.io/hugo-initio-site/css/styles.css">
+	
+  
+
+   
+  
+
+</head>
+
+
+  </head>
+  
+  <body>
+
+    
+      <header id="header" style="padding: 0; height: 100%">
+	<div id="head" class="parallax" parallax-speed="2">
+     <div class="banner" style="background-image:url(https://miguelsimoni.github.io/hugo-initio-site/images/fondo.png);" >
+           <h1 id="logo" class="text-center">
+              <img class="img-circle" src="https://miguelsimoni.github.io/hugo-initio-site/images/daniel.jpg" alt="">
+              <span class="title">Carlos Daniel Jiménez</span>
+              <span class="tagline"><br>
+                 <a href="mailto:danieljimenez88m@gmail.com">danieljimenez88m@gmail.com</a>
+              </span>
+           </h1>
+        </div>
+
+    <nav class="navbar navbar-default navbar-sticky">
+    <div class="container-fluid">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="true">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
+
+            <ul class="nav navbar-nav">
+                 
+                <li>
+                    <a href="/hugo-initio-site/post/">blog</a>
+                </li>
+                  
+                <li>
+                    <a href="/hugo-initio-site/courses">Cursos</a>
+                </li>
+                  
+                <li>
+                    <a href="/hugo-initio-site/about/">Sobre mi</a>
+                </li>
+                 
+
+            </ul>
+
+        </div> 
+        
+    </div>
+</nav>
+<nav class="navbar navbar-fake"></nav>
+</header>
+
+    
+ 
+    
+<main id="main">
+
+	<div class="container">
+
+		<div class="row topspace">
+			<div class="col-sm-8 col-sm-offset-2">
+
+ 				<article class="post">
+					<header class="entry-header">
+ 						<div class="entry-meta">
+               <span class="posted-on">
+                  <time class="entry-date published" datetime="December 40, 9090">April 9, 2019</time>
+               </span>
+ 						</div>
+ 						<h1 class="entry-title"><a href="https://miguelsimoni.github.io/hugo-initio-site/post/2019-04-09-monte_carlo/" rel="bookmark">Monte Carlo</a></h1>
+					</header>
+					<div class="entry-content">
+						
+<link href="/hugo-initio-site/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/hugo-initio-site/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+
+
+<blockquote>
+<p>“It has long been an axiom of mine that the little things are infinitely
+the most important.” Arthur Conan Doyle</p>
+</blockquote>
+<p><img src="/hugo-initio-site/post/2019-04-09-Monte_Carlo_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<div id="en-qué-consiste-los-métodos-de-monte-carlo" class="section level3">
+<h3>¿ En qué consiste los métodos de Monte Carlo ?</h3>
+<p>El nombre del método no proviene de un autor como estamos acostumbrados en el mundo de la estadística, sino de un casino en Mónaco, y puntualmente le dieron este titulo debido a que los juegos de azar que son <em>generadores de número aleatorios</em>, como los resultados de las cartas, la ruletas y demás.</p>
+<p>De la mano con lo anterior y conforme al desarrollo de la computación, durante la Segunda Guerra Mundial (1944), se estudiaba problemas probabilisticos sobre la difusión de neutrones en hidrodinámicas donde la difusión posee un comportamiento plenamente aleatorio, por lo anterior sumado al trabajo de <a href="https://es.wikipedia.org/wiki/John_von_Neumann">Neumann</a> y <a href="https://es.wikipedia.org/wiki/Nicholas_Metropolis">Metropolis</a> se logro estimar valores propios en la ecuación de Schrödinge a través de este método de simulación, esta simulación basada en Monte Carlo, dando como resultado que dadas <span class="math inline">\(N\)</span> muestras en un espacio de <span class="math inline">\(M\)</span> dimensiones se puede dar un resultado (o vectores resultantes) a pesar que el problema sea deterministico o estocástico.</p>
+<p>Lo anterior hace refriega en un concepto claro sobre los limites en la inferencia estadística, los límites sobre los problemas numéricos, los cuales se presentan en dos casos:</p>
+<ul>
+<li>Problemas de optimización ;</li>
+<li>Problemas de integración.</li>
+</ul>
+<p>Dichos problemas se presentan dado que no es posible calcular analíticamente los estimadores propios a un número de paradigmas.</p>
+<p>Dicho lo anterior, los mejores resultados para estos problemas vienen dados de generar simulaciones sustitutivas (de distribuciones o vectores), para calcular cantidades de interés, dado que se puede producir infinitos números de aleatorios acordes a una distribución que viene dada de un fenómeno frecuentista o asintóticos, lo cual resulta más fácil que la inferencia numérica, puesto que se puede obtener y controlar el tamaño de las muestras. Y usando los resultados probabilisticos a la ley de los grandes números o teoría del limite central, se puede evidenciar como convergen los métodos de simulación y así poder dar conclusiones sobre las observaciones.</p>
+<p>Considere lo siguiente: Dada una variable aleatoria <span class="math inline">\(X\)</span>, con función de densidad <span class="math inline">\(f(x)\)</span>, se evalúa la expresión</p>
+<p><span class="math display">\[
+\int_{x} h(x) f(x) dx
+\]</span></p>
+<p>Podría ser evaluada a través del método de Simpson, pero el área no se podría tratar con límites infinitos ó se puede evaluar a través de la generación de muestras <span class="math inline">\(x_{1},...,x_{n}\)</span> dada <span class="math inline">\(f(x)\)</span> y se aproxima a través de <span class="math inline">\(\hat h_{n}=\frac{1}{n}\sum^{n}_{i=1} h(x_{i})\)</span> (en otras palabras , promedio de los valores).</p>
+<p>Lo anterior se valida a través de la convergencia que viene dada por</p>
+<p><span class="math display">\[
+\hat h_n =\frac{1}{n} \sum_{n}^{i=1} h(x_i) \rightarrow  \int_{x} h(x)  f(x) dx= \mathbf{E}_f [h(X)]
+\]</span></p>
+<p>Lo anterior se puede demostrar al calcular <span class="math inline">\(\Gamma (\lambda)\)</span> de la siguiente expresión, gracias a la ley de los grandes números que expresa que a una sucesión infinita de variables aleatorias independientes e idénticamente distribuidas que cumplen que <span class="math inline">\(E(|x|&lt; \infty)\)</span> tiene un valor esperado en <span class="math inline">\(\mu\)</span> por lo cual el promedio de las variables aleatorias converge a <span class="math inline">\(\mu\)</span></p>
+<p><span class="math display">\[
+P(\lim_{n \rightarrow \infty} \hat{X}_n =\mu)=1
+\]</span></p>
+<p>Evaluando la expresión</p>
+<p><span class="math display">\[
+\int_{0}^{\infty} x^{\lambda-1} exp(-x) dx
+\]</span></p>
+<p>El resultado es el siguiente</p>
+<p><img src="/hugo-initio-site/post/2019-04-09-Monte_Carlo_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Se puede evidenciar que no hay discrepancia en los valores pequeños de <span class="math inline">\(\lambda\)</span>.</p>
+<p>Más lo anterior tiene un problema y es que la integración falla a la hora de detectar el área de importancia de la función. Por lo tanto los métodos de simulación se enfocan en esta región explotando la información de la función de densidad asociada a la integral.</p>
+<p><em>Observación:</em> La función de integración puede aceptar infinitos límites, pero sus salidas no son confiables.</p>
+<p>Consideremos el siguiente caso: Tengo una muestra de 15 elementos proveniente de una distribución Cauchy (la de la resonancia forzada) con parámetro de localización <span class="math inline">\(\theta =500\)</span>. La psuedo-muestra margial del plano es</p>
+<p><span class="math display">\[
+m(x)=\int_{-\infty}^{\infty} \prod^{15}_{i=1} \frac{1}{\pi} \frac{1}{1+(x_i - \theta)^2}d\theta
+\]</span></p>
+<p>Manteniendo la tesis que reza en la observación se puede ver que el valor que devuelve el resultado tiende a ser incorrecto</p>
+<pre class="r"><code>integrate(lik,200,500) #función programada</code></pre>
+<pre><code>## 1.658516e-18 with absolute error &lt; 3.3e-18</code></pre>
+<p>Para evitar dicho problema del error , se recurre a Monte Carlo, donde el problema genérico es sobre la evaluación de</p>
+<p><span class="math display">\[
+\mathbf{E}_{f}[h(X)] \int_{x} h(x) f(x)
+\]</span></p>
+<p>Donde x denota los valores de la variable aleatoria de X que son usuales o soportables (support) para la función de densidad <span class="math inline">\(f(x)\)</span>, por lo tanto el principio teórico de Monte Carlo está dado a la aproximación de la anterior función generando muestras dada la función de densidad y aproximaciones empíricas antes mencionada</p>
+<p><span class="math display">\[
+\hat{h}_n = \frac{1}{n} \sum_{n}^{i=1} h(x_i)
+\]</span></p>
+<p>Puesto que <span class="math inline">\(h_n\)</span> converge en <span class="math inline">\(\mathbf{E}_{f}[h(X)]\)</span> por la ley de los grandes números <span class="math inline">\(P(\lim_{n \rightarrow \infty} \hat{X}_n =\mu)=1\)</span></p>
+<p>A demás cuando <span class="math inline">\(h^2(x)\)</span> tiene una expectativa finita sobre la función de densidad, la velocidad de convergencia en <span class="math inline">\(h_n\)</span> asciende a <span class="math inline">\(O \sqrt(n)\)</span> y la varianza asintótica se aproxima a la siguiente expresión</p>
+<p><span class="math display">\[
+var(\hat{h}_n)=\frac{1}{n} \int_n (h(x)-\mathbf{E}_f [h(X)])^2 f(x) dx
+\]</span></p>
+<p>La cual también se puede estimar a través de la muestra de</p>
+<p><span class="math display">\[
+v_n=\frac{1}{n^2} \sum_{i=1}^{n}[h(x_i)-\hat{h}_n]^2
+\]</span></p>
+<p>Se construye el intervalo de confianza.</p>
+<p>Esto gracias al teorema del limite central para números grandes, donde sea <span class="math inline">\(X_1,X_2,...,X_n\)</span> un conjunto de valores independientes e idénticamente distribuidos con promedio <span class="math inline">\(\mu\)</span> y varianza <span class="math inline">\(0&lt;\theta^2&lt;\infty\)</span>, se obtiene que</p>
+<p><span class="math display">\[
+\hat{X_n}=\frac{1}{n}(X_1+....+X_n-1,+X_n)
+\]</span></p>
+<p>Entonces</p>
+<p><span class="math display">\[
+\lim_{n\rightarrow \infty} Pr(\frac{\hat{X_n}-\mu)}{\theta \sqrt} \leq z) \mbox{~ Normal(0,1)} 
+\]</span></p>
+<p>Lo que quiere decir que converge <span class="math inline">\(\hat{h_n}\)</span> en <span class="math inline">\(E(h(x))\)</span></p>
+<p><span class="math display">\[
+\frac{\hat{h_n}-E(h(x))}{\sqrt{v_n}} \mbox{~ N(0,1)} 
+\]</span></p>
+<p>Dicho lo anterior se calcula <span class="math inline">\(h(x)=[\cos(40x)+\sin(30x)]^2\)</span>, en donde se generaran muestras independientes e idénticamente distribuidas al rededor <span class="math inline">\(\int h(x)dx\)</span> con <span class="math inline">\(\h(U_i)/n\)</span> donde <span class="math inline">\(U_i\)</span> son variables aleatorias</p>
+<pre><code>## 0.8176594 with absolute error &lt; 5.4e-05</code></pre>
+<p><img src="/hugo-initio-site/post/2019-04-09-Monte_Carlo_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="/hugo-initio-site/post/2019-04-09-Monte_Carlo_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Otra forma de verlo es la siguiente</p>
+<p>Suponga que hay que integrar la función</p>
+<p><span class="math display">\[
+h(x)=(\cos(10x)+0.6 \sin(4x))^4
+\]</span></p>
+<p>En el intervalo (-1,2)</p>
+<pre class="r"><code>a&lt;-0;
+b&lt;-1;
+h1&lt;- function (x) (cos(10 * x) + 0.6 *sin(4*x))^4;
+n&lt;-1000
+u&lt;-runif(n,a,b)
+mean(h(u))* (b-a)</code></pre>
+<pre><code>## [1] 0.8601888</code></pre>
+<p>Al desarrollar la integral observese que</p>
+<pre class="r"><code>integrate(h1,a,b)</code></pre>
+<pre><code>## 0.9410708 with absolute error &lt; 6.6e-06</code></pre>
+<p>Al gráficar se obtiene que
+<img src="/hugo-initio-site/post/2019-04-09-Monte_Carlo_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>Ahora se evidencia la eficiencia de Monte Carlo a medida que aumenta el tamaño de la población <span class="math inline">\(n\)</span> junto a los intervalos de confianza</p>
+<pre class="r"><code>n_max=10^3
+x&lt;-h1(runif(n_max,a,b))
+h_bar&lt;-cumsum(x)/(1:n_max)
+se&lt;-sqrt((cumsum(x-h_bar)^2))/(1:n_max)
+plot(h_bar, type = &quot;l&quot;)
+lines(h_bar+1.96*se, col=&quot;green&quot;)
+lines(h_bar-1.96*se, col=&quot;red&quot;)</code></pre>
+<p><img src="/hugo-initio-site/post/2019-04-09-Monte_Carlo_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>Observese que las integrales pueden usarse desde que <span class="math inline">\(n&gt;500\)</span></p>
+<pre class="r"><code>n_sim&lt;-100
+n&lt;-500
+h_bar_mc&lt;-NULL
+
+
+for(i in 1:n_sim){
+  x&lt;-h1(runif(n,a,b))
+  h_bar_mc[i]&lt;-mean(x)
+}
+
+mean(h_bar_mc)</code></pre>
+<pre><code>## [1] 0.9411604</code></pre>
+<pre class="r"><code>h_bar_mc</code></pre>
+<pre><code>##   [1] 0.9222618 0.9880330 0.9508817 0.9720732 0.9082570 0.9860626 0.9502883
+##   [8] 0.8824401 0.8492985 0.9944643 0.9241766 0.9490846 0.9211495 0.9977947
+##  [15] 0.9187368 0.9524478 0.9516542 0.9647462 0.9779846 0.8216037 0.8926341
+##  [22] 0.9312937 0.9262978 0.9438039 1.0340786 0.9170002 0.9107681 0.8627193
+##  [29] 0.9538731 0.8825741 0.9150335 0.9142928 0.8617979 0.8767957 0.9124670
+##  [36] 1.0579057 0.9568132 0.9564701 0.8690445 0.8874809 1.0209695 1.0293994
+##  [43] 0.9156567 0.9781232 0.8560105 0.9453942 0.8729050 0.9471204 0.9603252
+##  [50] 0.9328127 1.0340971 0.8798936 0.9657333 0.9220628 1.0017323 0.9242631
+##  [57] 0.8689404 1.0010200 0.9511789 0.9926268 0.9232509 0.8939326 0.9786742
+##  [64] 0.9495001 0.9744776 0.9801018 0.9381977 0.9156707 0.9965582 1.0017589
+##  [71] 0.9394239 0.9250338 0.9691803 1.0209512 0.9343181 0.9054994 0.9420197
+##  [78] 0.9622646 0.8547147 0.9011859 0.8357365 1.0028088 0.9704135 0.9402502
+##  [85] 0.9634966 0.9486734 0.8721996 0.9536821 0.9404823 0.9969065 0.9098827
+##  [92] 1.0612120 1.0589935 0.8729445 0.9345121 1.0322189 0.8829102 0.8897175
+##  [99] 0.8569822 1.0384559</code></pre>
+</div>
+<div id="bibliográfia" class="section level2">
+<h2>Bibliográfia</h2>
+<ul>
+<li>Robert C,“Introducing Monte Carlo Methods with R” (2009)</li>
+<li>Gutiérrez A, “Teoría Estadística” (2009)</li>
+</ul>
+</div>
+
+					</div>
+				</article>
+
+			</div>
+		</div> 
+
+        <div class="row">
+			<div class="col-sm-8 col-sm-offset-2">
+
+				<div id="share">
+                    
+				</div>
+			</div>
+		</div> 
+		<div class="clearfix"></div>
+
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-2">
+
+				<div id="comments">
+                    
+				</div>
+			</div>
+		</div> 
+		<div class="clearfix"></div>
+
+	</div>	
+
+</main>
+
+    
+    
+      <footer id="footer">
+	<div class="container">
+		<div class="row">
+			
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Contact</h3>
+				<div class="widget-body">
+					<p>
+					<a href="mailto:danieljimenez88m@gmail.com">danieljimenez88m@gmail.com</a><br>
+						<br>
+						
+					</p>
+				</div>
+			</div>
+			
+
+			
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Follow me</h3>
+				<div class="widget-body">
+					<p class="follow-me-icons">
+            
+                
+                    <a href="https://twitter.com/DanielJimenezM9" target="_blank"><i class="fab fa-twitter-square fa-1x"></i></a>
+                
+            
+                
+            
+                
+                    <a href="https://github.com/carlosjimenez88M" target="_blank"><i class="fab fa-github fa-1x"></i></a>
+                
+            
+                
+            
+					</p>
+				</div>
+			</div>
+			
+
+			
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Text widget</h3>
+				<div class="widget-body">
+					 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. &lt;br&gt; Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</div>
+			</div>
+			
+
+			
+			<div class="col-md-3 widget">
+				<h3 class="widget-title">Form widget</h3>
+				<div class="widget-body">
+					<p>
+					<a href="mailto:danieljimenez88m@gmail.com">danieljimenez88m@gmail.com</a><br>
+						<br>
+						
+					</p>
+				</div>
+			</div>
+			
+
+		</div> 
+	</div>
+</footer>
+
+<footer id="underfooter">
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+					<p></p>
+				</div>
+			</div>
+
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+					<p class="text-right">
+						Copyright &copy; 2020, Carlos Daniel Jiménez<br>
+						Design: <a href="http://www.gettemplate.com" rel="designer">Initio by GetTemplate</a> - 
+                        Powered by: <a href="https://gohugo.io/" rel="poweredby">Hugo</a>
+                    </p>
+				</div>
+			</div>
+
+		</div> 
+	</div>
+</footer>
+
+
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="https://miguelsimoni.github.io/hugo-initio-site/js/template.js"></script>
+<script id="dsq-count-scr" src="//hugo-initio-site.disqus.com/count.js" async></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'GA-000000000-0', 'auto');
+  ga('send', 'pageview');
+</script>
+
+</body>
+</html>
+
+    
+  </body>
+  
+</html>
