@@ -1,18 +1,17 @@
 baseURL: https://www.danieljimenezm.com
 languageCode: en-us
-title: Initio - Free, multipurpose html5 template by GetTemplate
+title: Un Data scientist dice
 theme: hugo-initio
 publishDir: docs
 params:
-  DateForm: January 2, 2006
-  address: 234 Hidden Pond Road, Ashland City, TN 37015
-  avatar: images/guy.jpg
+  DateForm: December 14, 2020
+  avatar: images/daniel.jpg
   avatarclass: circle
   background: ''
-  banner: images/bg_head.jpg
+  banner: images/fondo.png
   disqus:
     site: hugo-initio-site.disqus.com
-  email: anthony.russel42@example.com
+  email: danieljimenez88m@gmail.com
   favicon: images/gt_favicon.png
   footerEnableContact: yes
   footerEnableFollowme: yes
