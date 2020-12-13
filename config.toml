@@ -29,7 +29,7 @@ publishDir = "docs"
 [[menu.main]]
     name = "home"
     url = "/post/"
-    weight = 1
+    weight = 2
 #[[menu.main]]
 #    name = "blog"
 #    url = "/post/"
