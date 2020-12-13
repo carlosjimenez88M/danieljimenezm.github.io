@@ -15,8 +15,8 @@ publishDir = "docs"
     favicon = "images/gt_favicon.png"
     DateForm = "January 2, 2006"
 
-    showSubheader = false
-    showServices = false
+#    showSubheader = false
+#    showServices = false
     showRecentWorks = false
     showDownload = false
     showClients = false
@@ -24,7 +24,7 @@ publishDir = "docs"
     footerEnableContact = true
     footerEnableFollowme = true
     footerEnableTextWidget = false
-    footerEnableFormWidget = true
+    footerEnableFormWidget = false
 
 [[menu.main]]
     name = "blog"
