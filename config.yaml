@@ -5,8 +5,7 @@ theme: hugo-initio
 publishDir: docs
 params:
   DateForm: December 14, 2020
-  avatar: https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/images/daniel.jpg
-  avatarclass: circle
+  avatar: images/daniel.jpg
   background: ''
   banner: logos/fondo.png
   disqus:
