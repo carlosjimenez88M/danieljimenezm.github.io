@@ -1,13 +1,13 @@
-baseURL: https://www.danieljimenezm.com
+baseURL: "https://www.danieljimenezm.com"
 languageCode: en-us
 title: Un Data scientist dice
 theme: hugo-initio
 publishDir: docs
 params:
   DateForm: December 14, 2020
-  avatar: images/daniel.jpg
+  avatar: "images/daniel.jpg"
   background: ''
-  banner: logos/fondo.png
+  banner: "logos/fondo.png"
   disqus:
     site: hugo-initio-site.disqus.com
   email: danieljimenez88m@gmail.com
