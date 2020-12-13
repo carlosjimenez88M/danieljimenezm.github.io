@@ -2,49 +2,49 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title></title>
-    <link>https://miguelsimoni.github.io/hugo-initio-site/</link>
+    <link>https://www.danieljimenezm.com/</link>
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 22 Nov 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://miguelsimoni.github.io/hugo-initio-site/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.danieljimenezm.com/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Sobre mi</title>
-      <link>https://miguelsimoni.github.io/hugo-initio-site/about/</link>
+      <link>https://www.danieljimenezm.com/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://miguelsimoni.github.io/hugo-initio-site/about/</guid>
+      <guid>https://www.danieljimenezm.com/about/</guid>
       <description>¿Qué hace Daniel? Actualmente trabajo como Machine Learning Engineer en el Banco Interamericano de desarrollo y como Senior Data Scientist en Globant. A la par soy profesor de ciencia de datos en la Universidad Nacional de Colombia.
 ¿Quién es Daniel?  Data Scientist y estadístico aplicado. Entusiasta de la tecnología relacionada con el Machine Learning, Data Science, Bases de datos, entre otras. Me encantá trabajar con análisis gráfico y trabajo constantemente en ello.</description>
     </item>
     
     <item>
       <title>¿Cómo ser un Data Scientist?</title>
-      <link>https://miguelsimoni.github.io/hugo-initio-site/post/2020-11-22-consejos2/</link>
+      <link>https://www.danieljimenezm.com/post/2020-11-22-consejos2/</link>
       <pubDate>Sun, 22 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://miguelsimoni.github.io/hugo-initio-site/post/2020-11-22-consejos2/</guid>
+      <guid>https://www.danieljimenezm.com/post/2020-11-22-consejos2/</guid>
       <description>Consejos para convertirse en un Data Scientist Esta entrada es una ruta de navegación para todo aquel que quiera convertirse en científico de datos, por lo tanto parto desde dos experiencias las cuales siento que me faculta para tomar este riesgo gustoso. La primera es la del docente, ejercicio con el que nací en mi carrera profesional, durante algo más de ocho o siete años he sido profesor en distintas universidades entre Colombia, España y México, dictando materias al principio un poco idealistas -cosas de la juventud-, pero desde hace cuatro años decidí volcar todo esfuerzo en una nueva empresa, y es enseñar todo aquello que se puede aplicar al mundo real y gracias a ello, hoy muchos de mis ex estudiantes son científicos de datos en organizaciones como: Banco Mundial, Platzi, entre otras, de ahí y después de hablar con con alguno de ellos rescato varias lecciones.</description>
     </item>
     
     <item>
       <title>Ipad y Machine Learning</title>
-      <link>https://miguelsimoni.github.io/hugo-initio-site/post/2020-11-16-ipad/</link>
+      <link>https://www.danieljimenezm.com/post/2020-11-16-ipad/</link>
       <pubDate>Mon, 16 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://miguelsimoni.github.io/hugo-initio-site/post/2020-11-16-ipad/</guid>
+      <guid>https://www.danieljimenezm.com/post/2020-11-16-ipad/</guid>
       <description>Una forma de usar el iPad como instrumento para el trabajo de Machine Learning Este es un post un poco diferente a los que normalmente acostumbro a escribir, pero la razón por la cual lo hago no es menos valedera a un tema de aplicación conceptual de estadística o machine learning. Sin ganas de entrar a una discusión tipo fanboy de una marca, hablo desde la experiencia de uso y desarrollo del iPad Pro como herramienta de trabajo como Data Scientist.</description>
     </item>
     
     <item>
       <title>Mapas de Calor</title>
-      <link>https://miguelsimoni.github.io/hugo-initio-site/post/2020-10-20-mc/</link>
+      <link>https://www.danieljimenezm.com/post/2020-10-20-mc/</link>
       <pubDate>Tue, 20 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://miguelsimoni.github.io/hugo-initio-site/post/2020-10-20-mc/</guid>
+      <guid>https://www.danieljimenezm.com/post/2020-10-20-mc/</guid>
       <description>Visualización de datos En la gramática de los gráficos de Leland Wilkinson, diseña las reglas básicas y fundamentales para que a la hora de hacer un gráfico,su output tenga una interpretación. Veamos un ejemplo y contextualicemos sobre ello.
 Suponga que quiere entender el nivel de correlación lineal entre las variables de iris, para ello usaremos la siguiente función.
 cor(iris[,-5]) ## Sepal.Length Sepal.Width Petal.Length Petal.Width ## Sepal.Length 1.0000000 -0.1175698 0.</description>
@@ -52,37 +52,37 @@ cor(iris[,-5]) ## Sepal.Length Sepal.Width Petal.Length Petal.Width ## Sepal.Len
     
     <item>
       <title>MarkovChain</title>
-      <link>https://miguelsimoni.github.io/hugo-initio-site/post/2020-08-09-markovchain/</link>
+      <link>https://www.danieljimenezm.com/post/2020-08-09-markovchain/</link>
       <pubDate>Sun, 09 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://miguelsimoni.github.io/hugo-initio-site/post/2020-08-09-markovchain/</guid>
+      <guid>https://www.danieljimenezm.com/post/2020-08-09-markovchain/</guid>
       <description>Entendiendo las simulaciones de Markov Un tema o una rama de la estadística que ha cobrado un nuevo nivel de importancia dada su aplicación en temas como: las finanzas, logística, marketing y forecasting son las cadenas de Markov. Estas mismas pertenecen a lo que se conoce como procesos estocásticos, lo cual quiere decir que son magnitudes de procesos aleatorios que varia con el tiempo, y puntualmente en el caso de la simulación de monte carlo con Markov se aplica la siguiente regla:</description>
     </item>
     
     <item>
       <title>Construyendo un modelo con sentido</title>
-      <link>https://miguelsimoni.github.io/hugo-initio-site/post/2020-07-18-models_interpretability/</link>
+      <link>https://www.danieljimenezm.com/post/2020-07-18-models_interpretability/</link>
       <pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://miguelsimoni.github.io/hugo-initio-site/post/2020-07-18-models_interpretability/</guid>
+      <guid>https://www.danieljimenezm.com/post/2020-07-18-models_interpretability/</guid>
       <description>Uno de los mayores problemas a la hora de construir un modelo de Machine Learning o Deep Learning es aquello que muchos llaman cajas negras y esto se debe a la falta de la comprensión de los efectos de las variables sobre las predicciones. En teoría, la matemática que desarrollamos a la hora de implementar un modelo debe ser suficiente para poder describir dichos efectos, pero también puede ser la causante de muchos errores por falta de entender un contexto o problemas de lógica.</description>
     </item>
     
     <item>
       <title>Cocktail ingredients</title>
-      <link>https://miguelsimoni.github.io/hugo-initio-site/post/2020-05-26-tidylo/</link>
+      <link>https://www.danieljimenezm.com/post/2020-05-26-tidylo/</link>
       <pubDate>Tue, 26 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://miguelsimoni.github.io/hugo-initio-site/post/2020-05-26-tidylo/</guid>
+      <guid>https://www.danieljimenezm.com/post/2020-05-26-tidylo/</guid>
       <description>Introducción Hola muchachos en esta oportunidad voy a trabajar con un paquete nuevo para este tidytuesday y es tidylo, el cual permite calcular la probabilidad de tener un registro a través del método de Monroe el cual permite calcular las probabilidades de registro de un documento a través de una particularidad, de un lag (registro previo). Dicho lo anterior tocaré uno de los temas que más me apaciona y es el empirismo bayesiano!</description>
     </item>
     
     <item>
       <title>tidytuesday#19</title>
-      <link>https://miguelsimoni.github.io/hugo-initio-site/post/2020-05-12-volcano/</link>
+      <link>https://www.danieljimenezm.com/post/2020-05-12-volcano/</link>
       <pubDate>Mon, 11 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://miguelsimoni.github.io/hugo-initio-site/post/2020-05-12-volcano/</guid>
+      <guid>https://www.danieljimenezm.com/post/2020-05-12-volcano/</guid>
       <description>I am very excited, becouse is my first time working with Georeferencial Data analysis! In this opportunity I wanna develop only Visual Data Analysis for this project.
 Well let’s do it!!!
 EDA I try understand type of events and eruption_category in this step.
@@ -92,20 +92,20 @@ volcano_full&amp;lt;-volcano%&amp;gt;% left_join(eruptions,by=c(&amp;quot;volcan
     
     <item>
       <title>Métodos de empirismo bayesiano</title>
-      <link>https://miguelsimoni.github.io/hugo-initio-site/post/2020-05-10-bayes/</link>
+      <link>https://www.danieljimenezm.com/post/2020-05-10-bayes/</link>
       <pubDate>Sun, 10 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://miguelsimoni.github.io/hugo-initio-site/post/2020-05-10-bayes/</guid>
+      <guid>https://www.danieljimenezm.com/post/2020-05-10-bayes/</guid>
       <description>“Pensar todo en términos de probabilidades” Nate Silver(La señal y el ruido)
  Este es un post que he re-escrito un número determinado de veces, y es por un motivo muy especial, pienso y siento que es la esencia de la ciencia de datos y la ingeniería del Machine Learning. El análisis Bayesiano de datos tiene su poder en intentar responder cómo es el comportamiento de la probabilidad de probabilidades de una distribución cuando desconocemos los parámetros \(\alpha\) y \(\beta\).</description>
     </item>
     
     <item>
       <title>tidymetrics and shinydahs</title>
-      <link>https://miguelsimoni.github.io/hugo-initio-site/post/2020-05-03-tidymetrics/</link>
+      <link>https://www.danieljimenezm.com/post/2020-05-03-tidymetrics/</link>
       <pubDate>Sun, 03 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://miguelsimoni.github.io/hugo-initio-site/post/2020-05-03-tidymetrics/</guid>
+      <guid>https://www.danieljimenezm.com/post/2020-05-03-tidymetrics/</guid>
       <description>Tidymetrics Tidymetrics is a great package, developed by Ramnath Vaidyanathan and David Robinson, in this package you can aggregated some particular dimensional modeling for understand the real changes in your data. Working with two types of parameter cross_by and create_metrics is possible develop data science Understood as
  “Data science […] goal is an especially human one: to gain insight and understanding” (Robinson,2017)
  For the cross_by case, this function prerpare data to be aggregated in differntes ways useful for create dimensional modeling.</description>
@@ -113,10 +113,10 @@ volcano_full&amp;lt;-volcano%&amp;gt;% left_join(eruptions,by=c(&amp;quot;volcan
     
     <item>
       <title>tidytuesday #17</title>
-      <link>https://miguelsimoni.github.io/hugo-initio-site/post/2020-04-21-nlp/</link>
+      <link>https://www.danieljimenezm.com/post/2020-04-21-nlp/</link>
       <pubDate>Tue, 21 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://miguelsimoni.github.io/hugo-initio-site/post/2020-04-21-nlp/</guid>
+      <guid>https://www.danieljimenezm.com/post/2020-04-21-nlp/</guid>
       <description>Tidytuesday #17 En está oportunidad trabajaré una seríe de modelos en dos vías, lo cual fue un reto en el sentido del proceso, que se trabajo un NLP para la confirmación de otro, en la generación de targets.
 Las base de datos que trabaje en está oportunidad son las siguientes:
 Y el diccionario se encuentra en el siguiente link https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-04-21/readme.md.
@@ -125,40 +125,40 @@ Ahora si, manos a la obra, mostraré las librerias con las cuales se puede desar
     
     <item>
       <title>PCA</title>
-      <link>https://miguelsimoni.github.io/hugo-initio-site/post/2020-04-20-pca/</link>
+      <link>https://www.danieljimenezm.com/post/2020-04-20-pca/</link>
       <pubDate>Mon, 20 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://miguelsimoni.github.io/hugo-initio-site/post/2020-04-20-pca/</guid>
+      <guid>https://www.danieljimenezm.com/post/2020-04-20-pca/</guid>
       <description>Es de reconocer que soy un gran fanático del trabajo de Julia Silge, quien hace poco empezo a trabajar como software engineer en R Studio. Su comprensión de la estadística es profundo y su capacidad de desarrollo de esta herramienta y generar una experiencia en tidymodels es de sobrada admiración.
 En su nuevo post sobre la aplicación del Principal Component Analysis sobre canciones de Hip Hop vía recipes es un caso de estudio el cual abordaré de manera desagregada.</description>
     </item>
     
     <item>
       <title>Monte Carlo</title>
-      <link>https://miguelsimoni.github.io/hugo-initio-site/post/2019-04-09-monte_carlo/</link>
+      <link>https://www.danieljimenezm.com/post/2019-04-09-monte_carlo/</link>
       <pubDate>Tue, 09 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://miguelsimoni.github.io/hugo-initio-site/post/2019-04-09-monte_carlo/</guid>
+      <guid>https://www.danieljimenezm.com/post/2019-04-09-monte_carlo/</guid>
       <description>“It has long been an axiom of mine that the little things are infinitely the most important.” Arthur Conan Doyle
  ¿ En qué consiste los métodos de Monte Carlo ? El nombre del método no proviene de un autor como estamos acostumbrados en el mundo de la estadística, sino de un casino en Mónaco, y puntualmente le dieron este titulo debido a que los juegos de azar que son generadores de número aleatorios, como los resultados de las cartas, la ruletas y demás.</description>
     </item>
     
     <item>
       <title>Distribución Beta</title>
-      <link>https://miguelsimoni.github.io/hugo-initio-site/post/2019-02-09-distribucion_beta/</link>
+      <link>https://www.danieljimenezm.com/post/2019-02-09-distribucion_beta/</link>
       <pubDate>Wed, 13 Feb 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://miguelsimoni.github.io/hugo-initio-site/post/2019-02-09-distribucion_beta/</guid>
+      <guid>https://www.danieljimenezm.com/post/2019-02-09-distribucion_beta/</guid>
       <description>Durante muchos años, tanto en el ambito acádemico como en el mundo de la estadística aplicada la distribución beta ha sido tratada con especial rezago en su definición y aplicación, dicho lo anterior esta entrada intenta dar una visión sobre la filosofía de la distribución y en especial darle una aplicación empirica para ver su potencial en el mundo real.
 Parto de una afirmación, los mayores usos de esta distribución se dan en el plano del mundo bayesiano, sobre todo para el desarrollo de ciencias experimentales y la teoría de la decisión.</description>
     </item>
     
     <item>
       <title></title>
-      <link>https://miguelsimoni.github.io/hugo-initio-site/courses/</link>
+      <link>https://www.danieljimenezm.com/courses/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://miguelsimoni.github.io/hugo-initio-site/courses/</guid>
+      <guid>https://www.danieljimenezm.com/courses/</guid>
       <description>En esta sección encontrará los últimos cursos que he impartido en la Universidad Nacional de Colombia.
 Cursos recientes:
  Ingenieria de Datos Marketing Digital para Digital Data Science Estadística Computacional NLP and Text Mining  </description>
@@ -166,46 +166,46 @@ Cursos recientes:
     
     <item>
       <title>Application development</title>
-      <link>https://miguelsimoni.github.io/hugo-initio-site/home/services/service3/</link>
+      <link>https://www.danieljimenezm.com/home/services/service3/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://miguelsimoni.github.io/hugo-initio-site/home/services/service3/</guid>
+      <guid>https://www.danieljimenezm.com/home/services/service3/</guid>
       <description>&lt;p&gt;I don&amp;rsquo;t think they tried to market it to the billionaire, spelunking, base-jumping crowd. i did the same thing to gandhi, he didn&amp;rsquo;t eat for three weeks. i once heard a wise man say there are no perfect men.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Custom website design</title>
-      <link>https://miguelsimoni.github.io/hugo-initio-site/home/services/service1/</link>
+      <link>https://www.danieljimenezm.com/home/services/service1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://miguelsimoni.github.io/hugo-initio-site/home/services/service1/</guid>
+      <guid>https://www.danieljimenezm.com/home/services/service1/</guid>
       <description>&lt;p&gt;I don&amp;rsquo;t think they tried to market it to the billionaire, spelunking, base-jumping crowd. i did the same thing to gandhi, he didn&amp;rsquo;t eat for three weeks. i once heard a wise man say there are no perfect men.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Download HUGO template</title>
-      <link>https://miguelsimoni.github.io/hugo-initio-site/home/downloads/download2/</link>
+      <link>https://www.danieljimenezm.com/home/downloads/download2/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://miguelsimoni.github.io/hugo-initio-site/home/downloads/download2/</guid>
+      <guid>https://www.danieljimenezm.com/home/downloads/download2/</guid>
       <description>Another simple, nice-looking call to action box. Boxing is about respect. getting it for yourself, and taking it away from the other guy. no, this is mount everest.</description>
     </item>
     
     <item>
       <title>Download original template</title>
-      <link>https://miguelsimoni.github.io/hugo-initio-site/home/downloads/download1/</link>
+      <link>https://www.danieljimenezm.com/home/downloads/download1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://miguelsimoni.github.io/hugo-initio-site/home/downloads/download1/</guid>
+      <guid>https://www.danieljimenezm.com/home/downloads/download1/</guid>
       <description>A simple, nice-looking call to action box. Boxing is about respect. getting it for yourself, and taking it away from the other guy. no, this is mount everest.</description>
     </item>
     
     <item>
       <title>Python vs R</title>
-      <link>https://miguelsimoni.github.io/hugo-initio-site/post/2019-08-18-python_vs_r/</link>
+      <link>https://www.danieljimenezm.com/post/2019-08-18-python_vs_r/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://miguelsimoni.github.io/hugo-initio-site/post/2019-08-18-python_vs_r/</guid>
+      <guid>https://www.danieljimenezm.com/post/2019-08-18-python_vs_r/</guid>
       <description>La noticia sobre Python Vs R sobre el Data Science Sobre el articulo Is Python Strangling R to Death? quiero analizar dos cosas:
 La realidad sobre Python a nivel de integración y uso y ; La estructura comparativa  De antemano quiero resaltar una verdad sobre el articulo
  As programming languages go, there’s no denying that Python is hot
@@ -214,19 +214,19 @@ La realidad sobre Python a nivel de integración y uso y ; La estructura compara
     
     <item>
       <title>SEO &amp; SEM services</title>
-      <link>https://miguelsimoni.github.io/hugo-initio-site/home/services/service4/</link>
+      <link>https://www.danieljimenezm.com/home/services/service4/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://miguelsimoni.github.io/hugo-initio-site/home/services/service4/</guid>
+      <guid>https://www.danieljimenezm.com/home/services/service4/</guid>
       <description>&lt;p&gt;I don&amp;rsquo;t think they tried to market it to the billionaire, spelunking, base-jumping crowd. i did the same thing to gandhi, he didn&amp;rsquo;t eat for three weeks. i once heard a wise man say there are no perfect men.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Wordpress integration</title>
-      <link>https://miguelsimoni.github.io/hugo-initio-site/home/services/service2/</link>
+      <link>https://www.danieljimenezm.com/home/services/service2/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://miguelsimoni.github.io/hugo-initio-site/home/services/service2/</guid>
+      <guid>https://www.danieljimenezm.com/home/services/service2/</guid>
       <description>&lt;p&gt;I don&amp;rsquo;t think they tried to market it to the billionaire, spelunking, base-jumping crowd. i did the same thing to gandhi, he didn&amp;rsquo;t eat for three weeks. i once heard a wise man say there are no perfect men.&lt;/p&gt;</description>
     </item>
     
