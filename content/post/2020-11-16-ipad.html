@@ -1,0 +1,38 @@
+---
+title: "Ipad y Machine Learning"
+date: 2020-11-16
+output: html_document
+---
+
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+
+
+<div id="una-forma-de-usar-el-ipad-como-instrumento-para-el-trabajo-de-machine-learning" class="section level2">
+<h2>Una forma de usar el iPad como instrumento para el trabajo de Machine Learning</h2>
+<p>Este es un post un poco diferente a los que normalmente acostumbro a escribir, pero la razón por la cual lo hago no es menos valedera a un tema de aplicación conceptual de estadística o machine learning. Sin ganas de entrar a una discusión tipo fanboy de una marca, hablo desde la experiencia de uso y desarrollo del iPad Pro como herramienta de trabajo como Data Scientist.</p>
+<p>Unas de las razones por la cual empecé a usarla (la idea original) era aprovechar que el dispositivo tenia unas ventajas en GPU y procesamiento gráfico el cual poden ayudarme a la hora de entrenar modelos o hacer algo de ingeniera de datos, pero resulta que poco a poco fui aprendiendo a trabajar en cosas más profundas e interesantes que estas.</p>
+<p>Por lo tanto expondré algunas ideas de como generar un <code>workflow</code> del iPad para el trabajo de ciencia de datos.</p>
+<div id="manejor-y-edición-de-repositorios" class="section level3">
+<h3>Manejor y edición de repositorios</h3>
+<p>Como es costumbre la mayoría de científicos de datos trabajamos en Github, dado que tenemos proyectos colaborativos, por lo tanto a la hora de hacer un <code>merge</code> o anexar cambios en una parte del código es necesario poder clonar el repo y hacerle las ediciones, para ello contamos con <a href="https://workingcopyapp.com/">Working Copy</a>.</p>
+<p>Esta app nos permite, clonar, modificar, comentar, mergear y demás acciones nativas de un repo de Github, más una buena practica es editar los códigos o lo que estemos trabajando con un editor tipo <code>Visual Studio Code</code> y para ello contamos con <a href="https://kodex.app/">Kodex</a>, el cual tiene un nivel de eficiencia bastante bueno!</p>
+<p>Paso seguido si queremos trabajar de manera detallada los códigos , o en forma los modelos de analítica y Machine Learning podemos usar alguna de las siguientes opciones :</p>
+<ul>
+<li><p><a href="https://juno.sh/junoconnect/">Juno</a>: Es el Interfaz tipo Jupyter Notebook para Ipad.</p></li>
+<li><p><a href="https://colab.research.google.com/notebooks/intro.ipynb">Google Colab</a>: Cuadernos en google que nos permiten desarrollar el trabajo completo en las libretas de Jupyter. (Recuerden que acá se puede trabajar tanto R como Python).</p></li>
+</ul>
+</div>
+</div>
+<div id="conexiones-a-máquinas" class="section level2">
+<h2>Conexiones a máquinas</h2>
+<p>Gracias a <a href="https://blink.sh/docs/basics/navigation">blink</a> se pueden generar conexiones tipo SSH desde el iPad hacia servidores u host, es algo difícil de manejar al principio dado que es necesario manejar <code>terminal</code> o <code>cmd</code> para poder crear las conexiones.</p>
+<p>Paso seguido, si se integra blink con Juno se puede el workflow para la etapa de producción de código queda completa y la verdad el tiempo de desarrollo es super rápido.</p>
+</div>
+<div id="sql" class="section level2">
+<h2>SQL</h2>
+<p>Para finalizar quiero contarles que una gran parte del trabajo que desarrollamos como científicos de datos esta enfocado en el proceso de ETL y en algunas ocaciones es necesario trabajar con <a href="https://apps.apple.com/es/app/sql-server-mssql-by-sqlpro/id1176218536">SQL</a> y en el iPad esta la opción de trabajar con <a href="https://apps.apple.com/es/app/sql-server-mssql-by-sqlpro/id1176218536">sqlpro</a>, más si el trabajo que usted realiza esta atado a una necesidad mayor de procesamiento (map-reduce) le recomiendo usar BigQuery desde la aplicación móvil de Google.</p>
+<p>Un dato especial: Si quieren trabajar ya en cosas de deep Learning pueden basarse en RaspberryPi, lo cual les permitirá trabajar entrenamientos largos y con alta cantidad de arquitecturas y capas como sean necesarias.</p>
+<p>Y eso es todo por esta entrada espero que les guste!!!</p>
+<p><img src="/post/2020-11-16-ipad_files/figure-html/pressure-1.png" width="672" /></p>
+</div>

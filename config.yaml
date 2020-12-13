@@ -5,10 +5,10 @@ theme: hugo-initio
 publishDir: docs
 params:
   DateForm: December 14, 2020
-  avatar: images/daniel.jpg
+  avatar: static/images/daniel.jpg
   avatarclass: circle
   background: ''
-  banner: images/fondo.png
+  banner: static/images/fondo.png
   disqus:
     site: hugo-initio-site.disqus.com
   email: danieljimenez88m@gmail.com
