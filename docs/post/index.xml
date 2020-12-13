@@ -6,18 +6,106 @@
     <description>Recent content in Posts on Un Data scientist dice</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 17 Jun 2013 12:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 26 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.danieljimenezm.com/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Vivamus Lacus Mauris</title>
-      <link>https://www.danieljimenezm.com/post/vivamus-lacus-mauris/</link>
-      <pubDate>Mon, 17 Jun 2013 12:00:00 +0000</pubDate>
+      <title>Cocktail ingredients</title>
+      <link>https://www.danieljimenezm.com/post/2020-05-26-tidylo/</link>
+      <pubDate>Tue, 26 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://www.danieljimenezm.com/post/vivamus-lacus-mauris/</guid>
-      <description>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit, rerum voluptates veniam. Esse, nihil, ea, eaque, quos cum id tempore voluptate nisi nemo debitis impedit officiis culpa repellat voluptatum in aperiam error quo minima ratione ex pariatur maxime eligendi dolore nesciunt molestiae enim alias atque commodi delectus perferendis. Blanditiis, iste placeat nostrum in! Eligendi, omnis, unde, quos ullam nesciunt molestias quis a saepe nisi distinctio molestiae voluptate obcaecati officiis consequuntur similique aspernatur rerum sequi placeat iure quaerat itaque libero officia recusandae ad corrupti aperiam cum beatae.</description>
+      <guid>https://www.danieljimenezm.com/post/2020-05-26-tidylo/</guid>
+      <description>Introducción Hola muchachos en esta oportunidad voy a trabajar con un paquete nuevo para este tidytuesday y es tidylo, el cual permite calcular la probabilidad de tener un registro a través del método de Monroe el cual permite calcular las probabilidades de registro de un documento a través de una particularidad, de un lag (registro previo). Dicho lo anterior tocaré uno de los temas que más me apaciona y es el empirismo bayesiano!</description>
+    </item>
+    
+    <item>
+      <title>tidytuesday#19</title>
+      <link>https://www.danieljimenezm.com/post/2020-05-12-volcano/</link>
+      <pubDate>Mon, 11 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danieljimenezm.com/post/2020-05-12-volcano/</guid>
+      <description>I am very excited, becouse is my first time working with Georeferencial Data analysis! In this opportunity I wanna develop only Visual Data Analysis for this project.
+Well let’s do it!!!
+EDA I try understand type of events and eruption_category in this step.
+The first step to develop is to cross the databases.
+volcano_full&amp;lt;-volcano%&amp;gt;% left_join(eruptions,by=c(&amp;quot;volcano_number&amp;quot;,&amp;quot;volcano_name&amp;quot;,&amp;quot;latitude&amp;quot;,&amp;quot;longitude&amp;quot;))%&amp;gt;% left_join(events,by=c(&amp;quot;volcano_number&amp;quot;,&amp;quot;volcano_name&amp;quot;,&amp;quot;eruption_number&amp;quot;)) volcano_full$last_eruption_year&amp;lt;-as.numeric(volcano_full$last_eruption_year) ## Warning: NAs introduced by coercion Whit this information, I create a visualization per decade of the number of eruptions given the region</description>
+    </item>
+    
+    <item>
+      <title>Métodos de empirismo bayesiano</title>
+      <link>https://www.danieljimenezm.com/post/2020-05-10-bayes/</link>
+      <pubDate>Sun, 10 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danieljimenezm.com/post/2020-05-10-bayes/</guid>
+      <description>“Pensar todo en términos de probabilidades” Nate Silver(La señal y el ruido)
+ Este es un post que he re-escrito un número determinado de veces, y es por un motivo muy especial, pienso y siento que es la esencia de la ciencia de datos y la ingeniería del Machine Learning. El análisis Bayesiano de datos tiene su poder en intentar responder cómo es el comportamiento de la probabilidad de probabilidades de una distribución cuando desconocemos los parámetros \(\alpha\) y \(\beta\).</description>
+    </item>
+    
+    <item>
+      <title>tidymetrics and shinydahs</title>
+      <link>https://www.danieljimenezm.com/post/2020-05-03-tidymetrics/</link>
+      <pubDate>Sun, 03 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danieljimenezm.com/post/2020-05-03-tidymetrics/</guid>
+      <description>Tidymetrics Tidymetrics is a great package, developed by Ramnath Vaidyanathan and David Robinson, in this package you can aggregated some particular dimensional modeling for understand the real changes in your data. Working with two types of parameter cross_by and create_metrics is possible develop data science Understood as
+ “Data science […] goal is an especially human one: to gain insight and understanding” (Robinson,2017)
+ For the cross_by case, this function prerpare data to be aggregated in differntes ways useful for create dimensional modeling.</description>
+    </item>
+    
+    <item>
+      <title>tidytuesday #17</title>
+      <link>https://www.danieljimenezm.com/post/2020-04-21-nlp/</link>
+      <pubDate>Tue, 21 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danieljimenezm.com/post/2020-04-21-nlp/</guid>
+      <description>Tidytuesday #17 En está oportunidad trabajaré una seríe de modelos en dos vías, lo cual fue un reto en el sentido del proceso, que se trabajo un NLP para la confirmación de otro, en la generación de targets.
+Las base de datos que trabaje en está oportunidad son las siguientes:
+Y el diccionario se encuentra en el siguiente link https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-04-21/readme.md.
+Ahora si, manos a la obra, mostraré las librerias con las cuales se puede desarrollar el ejercicio</description>
+    </item>
+    
+    <item>
+      <title>PCA</title>
+      <link>https://www.danieljimenezm.com/post/2020-04-20-pca/</link>
+      <pubDate>Mon, 20 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danieljimenezm.com/post/2020-04-20-pca/</guid>
+      <description>Es de reconocer que soy un gran fanático del trabajo de Julia Silge, quien hace poco empezo a trabajar como software engineer en R Studio. Su comprensión de la estadística es profundo y su capacidad de desarrollo de esta herramienta y generar una experiencia en tidymodels es de sobrada admiración.
+En su nuevo post sobre la aplicación del Principal Component Analysis sobre canciones de Hip Hop vía recipes es un caso de estudio el cual abordaré de manera desagregada.</description>
+    </item>
+    
+    <item>
+      <title>Monte Carlo</title>
+      <link>https://www.danieljimenezm.com/post/2019-04-09-monte_carlo/</link>
+      <pubDate>Tue, 09 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danieljimenezm.com/post/2019-04-09-monte_carlo/</guid>
+      <description>“It has long been an axiom of mine that the little things are infinitely the most important.” Arthur Conan Doyle
+ ¿ En qué consiste los métodos de Monte Carlo ? El nombre del método no proviene de un autor como estamos acostumbrados en el mundo de la estadística, sino de un casino en Mónaco, y puntualmente le dieron este titulo debido a que los juegos de azar que son generadores de número aleatorios, como los resultados de las cartas, la ruletas y demás.</description>
+    </item>
+    
+    <item>
+      <title>Distribución Beta</title>
+      <link>https://www.danieljimenezm.com/post/2019-02-09-distribucion_beta/</link>
+      <pubDate>Wed, 13 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danieljimenezm.com/post/2019-02-09-distribucion_beta/</guid>
+      <description>Durante muchos años, tanto en el ambito acádemico como en el mundo de la estadística aplicada la distribución beta ha sido tratada con especial rezago en su definición y aplicación, dicho lo anterior esta entrada intenta dar una visión sobre la filosofía de la distribución y en especial darle una aplicación empirica para ver su potencial en el mundo real.
+Parto de una afirmación, los mayores usos de esta distribución se dan en el plano del mundo bayesiano, sobre todo para el desarrollo de ciencias experimentales y la teoría de la decisión.</description>
+    </item>
+    
+    <item>
+      <title>Python vs R</title>
+      <link>https://www.danieljimenezm.com/post/2019-08-18-python_vs_r/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danieljimenezm.com/post/2019-08-18-python_vs_r/</guid>
+      <description>La noticia sobre Python Vs R sobre el Data Science Sobre el articulo Is Python Strangling R to Death? quiero analizar dos cosas:
+La realidad sobre Python a nivel de integración y uso y ; La estructura comparativa  De antemano quiero resaltar una verdad sobre el articulo
+ As programming languages go, there’s no denying that Python is hot
+ Python al ser diseñado y desarrollado por ingenieros tiene una versatilidad sobre la implementación de los modelos a producción más robusta a nivel de experiencia por parte de las plataformas como : AWS, SPark o Google CLoud ML.</description>
     </item>
     
   </channel>

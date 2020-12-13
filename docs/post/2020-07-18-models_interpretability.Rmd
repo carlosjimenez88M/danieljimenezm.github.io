@@ -1,0 +1,498 @@
+---
+title: "Construyendo un modelo con sentido"
+date: 2020-07-18
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r,echo=FALSE, cache=FALSE,warning=FALSE,message=FALSE}
+library(tidyverse);
+library(tidymodels);
+library(broom);
+library(iml);
+library(ggthemes);
+library(ggrepel);
+library(tidytext);
+cap='#Undatascientistdice'
+theme_set(theme_economist())
+
+astronauts <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-07-14/astronauts.csv")
+```
+
+
+
+Uno de los mayores problemas a la hora de construir un modelo de Machine Learning o Deep Learning es aquello que muchos llaman `cajas negras` y esto se debe a la falta de la comprensión de los efectos de las variables sobre las predicciones. En teoría, la matemática que desarrollamos a la hora de implementar un modelo debe ser suficiente para poder describir dichos efectos, pero también puede ser la causante de muchos errores por falta de entender un contexto o problemas de lógica. Been Kim[^1] de Cornell University postulo la siguiente idea con respecto a lo antes mencionado:
+
+> As machine learning systems become ubiquitous, there has been a surge of interest in interpretable machine learning: systems that provide explanation for their outputs. These explanations are often used to qualitatively assess other criteria such as safety or non-discrimination. However, despite the interest in interpretability, there is very little consensus on what interpretable machine learning is and how it should be measured. 
+
+Con lo anterior y trabajando la taxonomía de los modelos de Machine Learning se puede evacuar cualquier factor de confusión a la hora de construir un algoritmo. Para formalizar la idea inicial del interpretability usaré un gráfico diseñado por Parul Pandey[^2] el cual considero un buen punto de partida.
+
+
+![](https://miro.medium.com/max/1400/0*IWLWbvl2xUJLD-va.png)
+
+Este gráfico muestra como debe ser el flujo de trabajo de la cosntrucción de los modelos de Machine Learning, iniciando por la recolección de datos de un problema planteado, su respectivas transformaciones (ETL) para el diseño de una base de datos, paso seguido la construcción del los modelos, y con ello generar los métodos de interpretación para el entendimiento humano y la aplicación oportuna de esta solución.
+
+
+[^1]:En el siguiente link encontrará el texto completo sobre la taxonomía del IML  https://arxiv.org/pdf/1702.08608.pdf
+[^2]: https://towardsdatascience.com/interpretable-machine-learning-1dec0f2f3e6b
+
+
+Las preguntas con las cuales debemos partir para construir una interpretación de los modelos son las siguientes:
+
+* ¿Cuáles son los proxies que tienen mejor aplicación en el mundo real?
+* ¿Cuáles son las tareas de principio a  fin (end to end) fundamentales para lograr el objetivo del algoritmo?
+* ¿Cómo entender las variables explicativas del modelo?
+
+Para entender los dos primeros puntos lo fundamental es lograr captar como son los comportamientos de los resultados de los modelos de manera Global y Local, para así evaluar la consistencia de los resultados. Y para finalizar el entendimiento de las variables es necesario un buen desarrollo del Análisis Exploratorio de Datos (EDA).
+
+En esta oportunidad trabajaré con el [tidytuesday](https://github.com/rfordatascience/tidytuesday) de [Astronautas](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-07-14/readme.md) de los retos de `R` y con base a ello construire las fases del `Interpretable Machine Learning` y un modelo que prediga las horas de misión en un viaje al espacio.
+
+
+### EDA
+
+
+Lo primero que quiero analizar es la relación entre las misiones desarrolladas por astronautas dado el genero y con ello empezar a buscar las respectivas variaciones  que se han presentado a lo largo del tiempo.
+
+```{r, echo=FALSE, cache=FALSE}
+astronauts%>%
+  dplyr::group_by(year_of_mission,sex)%>%
+  dplyr::count(sort = TRUE)%>%
+  ungroup()%>%
+  ggplot(aes(year_of_mission,n,color=sex))+
+  geom_point()+
+  geom_line()+
+  labs(x='Año de la misión',
+       y='Total de participantes',
+       title = 'Relación de misiones por participación de genero',
+       caption = '#Undatascientistdice')+
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+
+Se puede observar que en los últimos años pareciera estar cerrándose la brecha en la participación entre hombres y mujeres, esta idea quedaría más clara si se evaluan los resultados a manera de tendencia.
+
+
+```{r,echo=FALSE,cache=FALSE,warning=FALSE,message=FALSE}
+astronauts%>%
+  dplyr::group_by(year_of_mission,sex)%>%
+  dplyr::count(sort = TRUE)%>%
+  ungroup()%>%
+  ggplot(aes(year_of_mission,n,color=sex))+
+  geom_smooth()+
+  labs(x='Año de la misión',
+       y='Total de participantes',
+       title = 'Tendencia de la participación por genero',
+       subtitle = 'En las misiones espaciales',
+       caption = '#Undatascientistdice')+
+  theme(plot.title = element_text(hjust = 0.5))+
+  theme(plot.subtitle = element_text(hjust = 0.5))
+```
+
+Hasta este punto parece que las tendencias de participación tienden a converger, pero para estar más claro en ello es necesario generar un nuevo cálculo.
+
+$$
+ratio =\sum_{i=1}^{i}\frac{\mbox{Total Mujeres}}{\mbox{Total Hombres}}
+$$
+Con esta sencilla ecuación se logrará comprender como es la tasa de participación a través del radio de los totales entre ambos generos.
+
+
+```{r, echo=FALSE, cache=FALSE,warning=FALSE,message=FALSE}
+astronauts%>%
+  dplyr::group_by(year_of_mission)%>%
+  dplyr::summarize(ratio = sum(sex=='female')/sum(sex=='male'))%>%
+  ggplot(aes(year_of_mission,ratio))+
+  geom_point(aes(size=ratio))+
+  geom_smooth(se=F)+
+  guides(size=FALSE)+
+  labs(x='Año de la misión',
+       y='Ratio',
+       title = 'Radio de participación por misión',
+       subtitle = 'Con relación al genero',
+       caption= '#Undatascientistdice')+
+  theme(plot.title = element_text(hjust = 0.5))+
+  theme(plot.subtitle = element_text(hjust = 0.5))
+```
+
+El gráfico anterior muestra como al principio de la serie de tiempo(de los años 60's hasta los 80's) la tasa de participación por parte de las mujeres fue practimente nula, aunque en el 63 se presenta una participación mixta, lo cual llama mi antención, paso seguido la dinámica de la participación ha estado en un máximo del 30% en el 2000 y de ahí en adelante ha presentado un ligero descenso, con lo cual la tesis original sobre el trade off de las brechas de genero se elimina. Para confimar esta apreciación se desarrolla el siguiente gráfico.
+
+
+
+
+```{r, echo=FALSE, cache=FALSE}
+astronauts%>%
+  dplyr::mutate(decade=10 * year_of_mission %/% 10)%>%
+  group_by(decade,sex)%>%
+  dplyr::count()%>%
+  ggplot(aes(decade,n,color=sex))+
+  geom_point(aes(size=n))+
+  geom_text_repel(aes(label=n),color='black')+
+  facet_wrap(~sex)+
+  guides(color=FALSE,
+         size=FALSE)+
+  labs(y='Total de participantes',
+       x='década',
+       title = 'Participación en misiones por década',
+       subtitle = 'Comparativa entre generos',
+       caption = '#Undatascientisdice')+
+  theme_bw()+
+  theme(plot.title = element_text(hjust = 0.5))+
+  theme(plot.subtitle = element_text(hjust = 0.5))
+  
+```
+
+Ahora desarrollaré un análisis de la nacionalida de los miembros de cada equipo y de las misiones en que han participaron, con el objetivo de crear un feature que logre entender la dinámica de las misiones.
+
+
+```{r, echo=FALSE, cache=FALSE}
+astronauts%>%
+  group_by(nationality)%>%
+  dplyr::count(sort = TRUE)%>%
+  filter(n>10)%>%
+  ggplot(aes(fct_reorder(nationality,n),n))+
+  geom_col()+
+  coord_flip()+
+  labs(y='Total de participantes',
+       x='Nacionalidad',
+       title = 'Análisis de frecuencia de los participantes',
+       subtitle = 'A través de su nacionalidad',
+       caption = '#Undatascientisdice')
+```
+
+
+Bueno, en este punto no hay mucho que decir, aunque si me parece oportuno lograr describir desde cuando USA tiene tanta presencia en las misiones espaciales y para ello usaré la lógica antes mencionada para construir un ratio de participación.
+
+
+```{r, echo=FALSE, cache=FALSE, warning=FALSE, message=FALSE}
+astronauts%>%
+  group_by(year_of_mission)%>%
+  dplyr::summarize(ratio=sum(nationality=='U.S.')/n())%>%
+  ggplot(aes(year_of_mission,ratio))+
+  geom_point()+
+  geom_smooth()+
+  labs(y='Año de la misión',
+       x='Ratio',
+       title = 'Ratio de participación de las misiones',
+       subtitle = 'Comparativa basada en USA',
+       caption = '#Undatascientisdice')+
+  theme(plot.title = element_text(hjust = 0.5))+
+  theme(plot.subtitle = element_text(hjust = 0.5))
+```
+
+En los años 90's USA alcanzo su máximo de participación en misiones espaciales y desde el 2010 presenta una fuerte caída. Pero tengo la sospecha que esto obedece es al número de eventos de este tipo que se desarrollan en los últimos años.  Para ello trabajaré un análisis de frecuencia de misiones por década dada la nacionalidad de los participantes.
+
+
+
+
+```{r,echo=FALSE,cache=FALSE ,warning=FALSE, message=FALSE}
+astronauts%>% 
+  mutate(decade = 10 * year_of_mission %/%10)%>%
+  group_by(decade,nationality)%>%
+  dplyr::count()%>%
+  filter(n>1)%>%
+  ungroup()%>%
+  mutate(decade=factor(decade),
+         nationality=reorder_within(nationality,n,decade))%>%
+  filter(decade!=1960 &decade!=1970)%>%
+  ggplot(aes(nationality,n,color=decade))+
+  geom_errorbar(aes(ymin=0,ymax=n),height = 0,linetype = "dashed")+
+  geom_point(aes(size=n))+
+  facet_wrap(~decade, scales = 'free_y')+
+  coord_flip()+
+  guides(size=FALSE)+
+  scale_x_reordered()+
+  guides(color=FALSE)+
+  labs(y='Total de participantes',
+       x='Nacionalidad',
+       title = 'Generalización de la frecuencia de las misiones',
+       subtitle = 'A través de la nacionalidad de los participantes',
+       caption = '#Undatascientisdice')+
+  theme(plot.title = element_text(hjust = 0.5))+
+  theme(plot.subtitle = element_text(hjust = 0.5))
+
+```
+
+En efecto lo que se puede notar es una variación en negativo del número de total de misiones por década.
+
+
+Para finalizar este análisis estudiaré el cambio de la duración de las misiones por década, con el cual busco comprender la dependencia del tiempo con el resto de variables. 
+
+```{r, echo=FALSE,cache=FALSE,warning=FALSE, message=FALSE}
+astronauts %>%
+  dplyr::mutate(
+    Decade = 10 * (year_of_mission %/% 10),
+    Decade = factor(Decade)
+  ) %>%
+  ggplot(aes(Decade, hours_mission,
+    fill = Decade
+  )) +
+  geom_boxplot(alpha = 0.2, size = 1.5, show.legend = FALSE) +
+  scale_y_log10()+
+  coord_flip()+
+  labs(x='década',
+       y='Horas de misión',
+       title = 'Comparativa de los cambios en las  horas de misión',
+       subtitle = 'A través de las décadas',
+       caption = cap)+
+    theme(plot.title = element_text(hjust = 0.5))+
+  theme(plot.subtitle = element_text(hjust = 0.5))
+```
+
+Todo parece indicar que si hay una relación entre la década en que se desarrollaron las misiones y su duración, lo cual es un buen punto de partida. Ahora estudiaré dichas relaciones con respecto al uso de vehículos en las misiones.
+
+```{r, echo=FALSE, cache=FALSE, warning=FALSE,message=FALSE}
+astronauts %>%
+  dplyr::mutate(
+    Decade = 10 * (year_of_mission %/% 10),
+    Decade = factor(Decade)
+  ) %>%
+  ggplot(aes(Decade, eva_hrs_mission,
+    fill = Decade
+  )) +
+  geom_boxplot(alpha = 0.2, size = 1.5, show.legend = FALSE) +
+  scale_y_log10()+
+  coord_flip()+
+  labs(x='década',
+       y='Horas de misión',
+       title = 'Comparativa de los cambios en las  \nhoras extravehiculares en las misiones',
+       subtitle = 'A través de las décadas',
+       caption = cap)+
+    theme(plot.title = element_text(hjust = 0.5))+
+  theme(plot.subtitle = element_text(hjust = 0.5))
+```
+
+Acá parece que hay una dinámica diferente, la relación en el comportamiento del uso de vehículo y la decada no presenta grandes patrones de relación, lo cual puede ser bueno a la hora de desarrollar un modelo con baja homocedasticidad.
+
+
+
+
+## Taxonomía de un modelo interpretativo
+
+Esta parte se construye de la siguiente forma:
+
+* Es necesario crear un __Feature Summary Statistic__ el cual describe la importancia de las variables del modelo.
+* Paso seguido se desarrolla la visualización del __Feature Summary Statistic__ la cual logran describir el desempeño parcial de cada variable sobre el resultado de un pronóstico.
+* Después se busca la construcción de los modelos particionados para conocer el aporte de la varianza.
+* Por último se trabajan con estimaciones locales y globales sobre las predicciones para identificar la importancia de cada variable dado cada uno de los casos.
+
+Dado los pasos anteriores se construye una base de datos donde las variables character se transformen  en factor, para asi empezar a evaluar de manera cauta la importancia de las variables 
+
+
+```{r, echo=FALSE, cache=FALSE}
+astronauts_df <- astronauts %>%
+  dplyr::select(
+    hours_mission,
+    military_civilian, occupation, year_of_mission, in_orbit,eva_hrs_mission,total_eva_hrs
+  ) %>%
+  mutate(
+    in_orbit = case_when(
+      str_detect(in_orbit, "^Salyut") ~ "Salyut",
+      str_detect(in_orbit, "^STS") ~ "STS",
+      TRUE ~ in_orbit
+    ),
+    occupation = str_to_lower(occupation)
+  ) %>%
+  filter(hours_mission > 0 & eva_hrs_mission>0 &total_eva_hrs>0) %>%
+  mutate(hours_mission = log(hours_mission),
+         eva_hrs_mission= log(eva_hrs_mission),
+         total_eva_hrs = log(total_eva_hrs)
+         ) %>%
+  na.omit()
+
+astronauts_df$in_orbit<-as.factor(astronauts_df$in_orbit)
+astronauts_df$occupation<-as.factor(astronauts_df$occupation)
+astronauts_df$military_civilian<-as.factor(astronauts_df$military_civilian)
+
+astronauts_df<-astronauts_df%>%
+  dplyr::select(hours_mission,everything())
+
+astronauts_df2<-astronauts_df%>%
+  dplyr::select_if(is.numeric)%>%
+  dplyr::select(hours_mission,everything())
+
+astronauts_df%>%
+  head()
+```
+
+Lo primero que quiero resaltar es una mala practica que he visto a lo largo del tiempo por muchos científicos de datos y es la evaluación del aporte del modelo a través de factores lineales.  Si se buscase una relación a través de intervalos de confianza con este método el resultado sería el siguiente:
+
+```{r, echo=FALSE,cache=FALSE}
+linear_model<-lm(hours_mission~.,data = astronauts_df2)
+
+linear_model%>%
+  tidy(conf.int=TRUE)%>%
+  slice(-1)%>%
+  mutate(term=fct_reorder(term,estimate))%>%
+  ggplot(aes(term,estimate))+
+  geom_pointrange(aes(ymin=conf.low,ymax=conf.high))+
+  geom_point()
+```
+
+Hasta acá parece que el año de la misión no aporta nada a la duración de las mismas, gracias al interpreability estos errores se pueden corregir de manera eficiente. Ahora veamos este mismo ejemplo con las variables cualitativas. 
+
+```{r, echo=FALSE, cache=FALSE}
+astronauts_df%>%
+  dplyr::select(hours_mission,where(is.factor))%>%
+  lm(hours_mission~.,data=.)%>%
+  tidy(conf.int=TRUE)%>%
+  slice(-1)%>%
+  mutate(term=fct_reorder(term,estimate))%>%
+  ggplot(aes(term,estimate))+
+  geom_pointrange(aes(ymin=conf.low,ymax=conf.high))+
+  geom_point()+
+  coord_flip()
+```
+
+Por lo visto acá hay algo importante, a pesar que el método de evaluación de las variables a través de modelos líneales no es el mejor, en este caso si da a entender que la variable __in_orbit__ aporta bastante información al modelo. 
+
+A continuación constuire un modelo de Random Forest que me permita identificar la importancia de las variables como debe ser, y de paso ire construyendo  su interpretación.
+
+
+## Creando un modelo de Machine Learning con intepretación
+
+
+Lo primero que se debe desarrollar en esta fase es es la arquitectura del `Random Forest`, se logre catalogar siete variables que he seleccionado después de leer el diccionario del frame y analizarlas desde una óptica de la definición del problema.
+
+```{r, echo=FALSE, cache=FALSE}
+set.seed(1234)
+random_forest_model<-rand_forest()%>%
+  set_mode('regression')%>%
+  set_engine('randomForest')
+
+recipe<-recipe(hours_mission~.,data=astronauts_df)%>%
+  update_role(military_civilian,new_role = "id") %>%
+  step_other(occupation, in_orbit,
+    threshold = 0.005, other = "Other"
+  ) %>%
+  step_dummy(all_nominal(), -has_role("id"))
+
+tidy_prep <- prep(recipe)
+
+rf_wf<-workflow()%>%
+  add_recipe(recipe)
+
+
+
+rf_model<-rf_wf%>%
+  add_model(random_forest_model)%>%
+  fit(astronauts_df)
+
+rf_model
+
+```
+
+Hasta acá con las variables que se eligieron recolectaron el 89.58% de la varianza. Ahora viene la parte más importante, con esta varianza explicada buscaré construir un identificador de la importancia de cada una sobre el objetivo de la predicción.
+
+
+```{r, echo=FALSE, cache=FALSE}
+x_data<-astronauts_df%>%
+  dplyr::select(-hours_mission)%>%
+  as.data.frame()
+rf_predictors<-Predictor$new(rf_model,data=x_data,y=astronauts_df$hours_mission)
+rf_imp<-FeatureImp$new(rf_predictors,loss='mae')
+rf_imp%>%
+  plot()
+```
+
+Medido con un `mae`, las variables que más aportan a la predicción del modelo son : 
+
+* Occupation: En esta variable se almacena el oficio de cada uno de los miembros del equipo, acá hay un buen punto de partida en donde la arquitectura de los equipos define en buena parte la duración de la misión.
+
+* Year_of_mission: Esta variable es importante porque a pesar que el número de misiones ha bajado con los años, la duración de las mismas aumentan conforme pasan los mismos, lo cual da pie a interpretar que existen externalidades que explican este fenómeno.
+
+* In_orbit: Es la que mayor valor aporte, y esto se debe a que es la nave espacial destinada a cada misión. 
+
+las otras variables aportan poco valor, aunque no despreciable, exceptuando military civilian la cual tiene cero participación en la construcción de la varianza del modelo.
+
+Con esta parte se tiene cubierto la selección de features. Ahora se busca entender el efecto de cada variable en el modelo y con ello ir formalizando la interpretación del modelo, suponga que quiere evaluar el efecto del año de la misión sobre el resultado de la duración de la misma, para esto se trabaja con lo que se conoce como feature effects, al cual describe la influencia de la variable sobre el modelo y la predicción. 
+
+
+
+```{r, echo=FALSE, cache=FALSE}
+rf_ale<-FeatureEffects$new(rf_predictors,feature = "year_of_mission")
+rf_ale%>%
+  plot()
+```
+
+Lo que se puede observar con respecto a la influencia de la variable del **Año de la misión** es que empezo teniendo efectos inversamente proporcionales y con el paso del tiempo se ha convertido en un factor directo en la duración de las misiones. Ahora haré lo mismo para el resto de variables 
+
+```{r, echo=FALSE, cache=FALSE}
+rf_ale<-FeatureEffects$new(rf_predictors)
+rf_ale%>%
+  plot()
+```
+
+
+Acá podemos concluir que hay dos variables que poco o nada ayudan a definir la tendencia de la duración de las misiones, una que ya se habia comentado es el military_civilian y la otra es total_eva_hrs, las demás tienen efectos que se pueden medir y con ello se construye un concepto  sobre su influencia en la predicción.
+
+Para poder finalizar con este análisis se debe desarrollar la interaccion de la varianza, entre las variables
+
+```{r, echo=FALSE, cache=FALSE}
+interact <- Interaction$new(rf_predictors)
+interact%>%
+  plot()
+```
+
+
+Acá se puede notar que en términos de la interacción de la varianza dada las variables, los efectos de total_eva_hrs son menores al 4% de la construcción de la información por lo cual está variable no se debe descartar del todo, ya que individualmente no tiene mucho efecto, pero combiana con las otras forma una tendencia sobre las horas de la misión. Para confirmar esto, buscaré la relación de la creación de varianza a través de la iteracción con total_eva_hrs.
+
+
+```{r, echo=FALSE, cache=FALSE}
+interact <- Interaction$new(rf_predictors,feature = 'total_eva_hrs')
+interact%>%
+  plot()
+```
+
+Con está gráfica el argumento anterior queda demostrado.
+
+Para finalizar este post, quiero mostrar como son los resultados locales y como estos ayudan a entender la participación de las variables en los modelos. Las predicciones locales son aquellas que se trabajan por row del set de datos, en donde se busca dos cosas, hacer una predicción y validarla con su valor real, a la par de ver como es el aporte de las variables al valor pronósticado.
+
+Suponga que el primer dato local a evaluar es el siguiente
+```{r, echo=FALSE, cache=FALSE}
+x_data[1,]
+```
+
+Ahora con los modelos  interpretativos el resultado es el siguiente
+
+```{r, echo=FALSE, cache=FALSE, message=FALSE,warning=FALSE}
+rf_lime<-LocalModel$new(rf_predictors,x.interest = x_data[1,])
+rf_lime%>%
+  plot()
+```
+
+Con un accuracy del 75%, el efecto del año de la misión prácticamente monopoliza los efectos sobre la predicción. A continuación dejo otros ejemplos que se construyen con esta lógica.
+
+
+
+```{r, echo=FALSE, cache=FALSE}
+rf_lime<-LocalModel$new(rf_predictors,x.interest = x_data[6,])
+rf_lime%>%
+  plot()
+```
+
+```{r,echo=FALSE, cache=FALSE}
+rf_lime<-LocalModel$new(rf_predictors,x.interest = x_data[300,])
+rf_lime%>%
+  plot()
+```
+
+Otra forma de desarrollar este análisis es a través de teoría de juegos con una técnica llamada **Valor de Shapey**[^3], el cual evalua la cooperación de las variables en términos de generar ganancia de la información, dicha configuración arroja el siguiente resultado.
+
+
+[^3]:https://es.wikipedia.org/wiki/Valor_de_Shapley
+
+
+```{r,echo=FALSE, cache=FALSE}
+shapley <- Shapley$new(rf_predictors, x.interest = x_data[300, ])
+shapley%>%
+  plot()
+```
+
+Con un accuracy del 83%, la cooperación entre las variables tienen una configuración oportuna para el desarrollo de los modelos. Ahora la interpretación se puede obtener a través del `value` de cada una de las variables concatenando el sentido que le corresponde a cada una de ellas.
+
+
+
+Eso es todo por este post, espero que les guste.

@@ -1,0 +1,119 @@
+---
+title: "Métodos de empirismo bayesiano"
+date: 2020-05-10
+output: html_document
+mathjax: "true"
+---
+
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+
+
+<blockquote>
+<p>“Pensar todo en términos de probabilidades” Nate Silver(La señal y el ruido)</p>
+</blockquote>
+<p>Este es un post que he re-escrito un número determinado de veces, y es por un motivo muy especial, pienso y siento que es la esencia de la ciencia de datos y la ingeniería del Machine Learning. El análisis Bayesiano de datos tiene su poder en intentar responder cómo es el comportamiento de la probabilidad de probabilidades de una distribución cuando desconocemos los parámetros <span class="math inline">\(\alpha\)</span> y <span class="math inline">\(\beta\)</span>. Estos ajustes se dan con respecto a los datos y es ese el mejor fit que tenemos para trabajar con las distribuciones y sus actualizaciones (prior y posterior).</p>
+<p>Dicho lo anterior extraigo una frase de <a href="http://varianceexplained.org/">Robinson</a></p>
+<blockquote>
+<p>““This is the Bayesian philosophy in a nutshell: we start with a prior distribution, see some evidence, then update to a posterior distribution”<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+</blockquote>
+<p>La estructura de este método se basa en el siguiente workflow:</p>
+<p><img src="https://www.researchgate.net/profile/Muneki_Yasuda/publication/333815353/figure/fig1/AS:770618689609728@1560741221674/Illustration-of-scheme-of-empirical-Bayes-method-considered-in-this-study.png" /></p>
+<div id="estimaciones-bayesianas" class="section level2">
+<h2>Estimaciones Bayesianas</h2>
+<p>La estimaciones bayesianas se basan en un proceso de inferencia estadística sobre la estimación de la prior. En este caso la <strong>prior</strong> se interpreta como la cantidad de incertidumbre que reflejan los datos o su distribución antes de tomarse en cuenta.</p>
+<p>Un ejemplo que usa Robinson en su texto <strong>Emprirical Bayes</strong> es el siguiente:</p>
+<ul>
+<li>Suponga que usted es un reclutador de jugadores de beisbol ;</li>
+<li>Tiene que elegir a uno de los dos jugadores que tengan la mejor tasa de bateo;</li>
+<li>Se considera que una buena tasa de bateo es del 27%;</li>
+<li>Encontro que el jugador a tiene el siguiente promedio de bateo
+<span class="math display">\[
+\mbox{Jugador a} = \frac{4}{10}
+\]</span></li>
+</ul>
+<p>Mientras que el jugador B tiene el siguiente promedio</p>
+<p><span class="math display">\[
+\mbox{Jugador b} = \frac{300}{1000}
+\]</span></p>
+<p>En este caso no se posee la suficiente evidencia para decir que el jugador a es mejor que el b, dado el histórico de la data, y es en este caso cuando se puede hacer uso del método del empirical bayes para determinar un valor aproximado de como será la tasa de bateo.</p>
+<p>En el paquete de Lahman se incluye una información sobre este problema, la cual usaremos para entender este problema de incertidumbre. Se seleccionará un grupo que tenga un promedio de bateo mayor a cero</p>
+<p><img src="/post/2020-05-10-bayes_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>En está información hay datos bien importantes del promedio de bateo, ahora veamos como es la distribución de los datos</p>
+<p><img src="/post/2020-05-10-bayes_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Se aproxima a la normal por el hecho de la teoría del limite central, en donde la variable independiente aleatoria y la varianza no nula se aproxima a una distribución normal, por lo que se cuenta con una gran cantidad de datos.</p>
+<p>Ahora lo primero a estimar es la prior de los datos.</p>
+<p><span class="math display">\[
+X\sim\mbox{Beta}(\alpha_0,\beta_0)
+\]</span></p>
+<pre class="r"><code>adapt_career&lt;-career %&gt;%
+  filter(AB &gt;= 500) 
+  
+ll &lt;- function(alpha, beta) {
+  x &lt;- adapt_career$H
+  total &lt;- adapt_career$AB
+  -sum(VGAM::dbetabinom.ab(x, total, alpha, beta, log = TRUE))
+}
+
+m &lt;- mle(ll, start = list(alpha = 1, beta = 10), method = &quot;L-BFGS-B&quot;,
+                 lower = c(0.0001, .1))
+ab &lt;- coef(m)
+alpha0 &lt;- ab[1]
+beta0 &lt;- ab[2]</code></pre>
+<p>El alpha calculado es 101.9089, mientras que beta es 289.4558, dicho lo anterior se genera el histograma para poder dar a entender como es el comportamiento de estos datos</p>
+<p><img src="/post/2020-05-10-bayes_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Los parámetros se ajustan bastante bien!!! por lo tanto el fit del máximo likelihood es provechoso.</p>
+<p>Ahora se usa los datos del alpha y beta para hallar la prior de cada uno de los individuos.</p>
+<p>Solo para contextualizar un poco este ejemplo volvamos al caso de los jugadores a y b.</p>
+<p><span class="math display">\[
+\mbox{prior_jugador_b}=\frac{300+\alpha}{100+\alpha+\beta}=\frac{300+101.9089}{1000+101.9089+289.4558}=0.2888595
+\]</span></p>
+<p>Mientras que en el caso del jugador a</p>
+<p><span class="math display">\[
+\mbox{prior_jugador_a}=\frac{4+\alpha}{10+\alpha+\beta}=\frac{4+101.9089}{10+101.9089+289.4558}=0.2706143
+\]</span></p>
+<p>Esta increíble precisión nos indica que el jugador b es mejor que el jugador a y hemos eliminado la incertidumbre. Esto es fenomenal, increíble!!!</p>
+<p>Ahora se hace lo mismo para cada uno de los jugadores y se estima como con el empirical bayes se cambiaron o ajustaron las estimaciones de bateo.</p>
+<pre class="r"><code>career_eb &lt;- career %&gt;%
+  mutate(eb_estimate = (H + alpha0) / (AB + alpha0 + beta0))</code></pre>
+<p>Ahora y adquiere la siguiente estructura, lo cual mostrará en el siguiente gráfico como se ajustan los valores y como los mismos se aproximan al promedio. Tenga en cuenta que los colores azul claro representan la existencia de la suficiente evidencia para creer en la estimación de los bateos
+<span class="math display">\[
+y=\frac{\alpha}{\alpha+\beta}=0.2603937
+\]</span></p>
+<p><img src="/post/2020-05-10-bayes_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>A este proceso se le conoce como contracción y consiste en mover las estimaciones hacia el promedio, entre más se muevan las estimaciones es clara la relación con el número de evidencias que tenemos. Con poca evidencia el movimiento será mayor, mientras que con mucha el movimiento será menor.</p>
+<p>Ahora suponga que quiere conocer el grado de incertidumbre de la estimación, para ello se trabajara con los intervalos de credibilidad que ofrece el método del empirical bayes.</p>
+<p>Se usará el estimador bayesiano trabajado antes que reduce el ruido de los datos en una proporción importante, y calculado la posterior, con lo cual actualizaremos la información.</p>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<p>Veamos un ejemplo de como es el intervalo de credibilidad de Scott Brosius.</p>
+<pre class="r"><code>brosius &lt;- yankee_beta %&gt;%
+  filter(name == &quot;Scott Brosius&quot;)
+
+brosius_pred &lt;- brosius %&gt;%
+  mutate(cumulative = pbeta(x, alpha1, beta1)) %&gt;%
+  filter(cumulative &gt; .025, cumulative &lt; .975)
+
+brosius_low &lt;- qbeta(.025, brosius$alpha1[1], brosius$beta1[1])
+brosius_high &lt;- qbeta(.975, brosius$alpha1[1], brosius$beta1[1])
+
+brosius %&gt;%
+  ggplot(aes(x, density)) +
+  geom_line() +
+  geom_ribbon(aes(ymin = 0, ymax = density), data = brosius_pred,
+              alpha = .25, fill = &quot;red&quot;) +
+  stat_function(fun = function(x) dbeta(x, alpha0, beta0),
+                lty = 2, color = &quot;black&quot;) +
+  geom_errorbarh(aes(xmin = brosius_low, xmax = brosius_high, y = 0), height = 3.5, color = &quot;red&quot;) +
+  xlim(.18, .34)</code></pre>
+<p><img src="/post/2020-05-10-bayes_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+Cabe notar que la distribución beta de Brosius es 1001 H, con un AB de 3889, con un intervalo de credibilidad del 95%.</p>
+<p>Ahora se computa un top de jugadores para ver cómo es el comportamiento del histórico del bateo dada la beta.</p>
+<p><img src="/post/2020-05-10-bayes_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>Esto es todo por este post! Espero que les guste.</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Fragmento de: David Robinson. “Introduction to Empirical Bayes”.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>

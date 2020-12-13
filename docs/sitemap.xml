@@ -23,18 +23,58 @@
   </url>
   
   <url>
+    <loc>https://www.danieljimenezm.com/post/2020-05-26-tidylo/</loc>
+    <lastmod>2020-05-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.danieljimenezm.com/post/</loc>
-    <lastmod>2013-06-17T12:00:00+00:00</lastmod>
+    <lastmod>2020-05-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.danieljimenezm.com/</loc>
-    <lastmod>2013-06-17T12:00:00+00:00</lastmod>
+    <lastmod>2020-05-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.danieljimenezm.com/post/vivamus-lacus-mauris/</loc>
-    <lastmod>2013-06-17T12:00:00+00:00</lastmod>
+    <loc>https://www.danieljimenezm.com/post/2020-05-12-volcano/</loc>
+    <lastmod>2020-05-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danieljimenezm.com/post/2020-05-10-bayes/</loc>
+    <lastmod>2020-05-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danieljimenezm.com/post/2020-05-03-tidymetrics/</loc>
+    <lastmod>2020-05-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danieljimenezm.com/post/2020-04-21-nlp/</loc>
+    <lastmod>2020-04-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danieljimenezm.com/post/2020-04-20-pca/</loc>
+    <lastmod>2020-04-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danieljimenezm.com/post/2019-04-09-monte_carlo/</loc>
+    <lastmod>2019-04-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danieljimenezm.com/post/2019-02-09-distribucion_beta/</loc>
+    <lastmod>2019-02-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.danieljimenezm.com/sobre/</loc>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -59,6 +99,10 @@
   
   <url>
     <loc>https://www.danieljimenezm.com/home/</loc>
+  </url>
+  
+  <url>
+    <loc>https://www.danieljimenezm.com/post/2019-08-18-python_vs_r/</loc>
   </url>
   
   <url>

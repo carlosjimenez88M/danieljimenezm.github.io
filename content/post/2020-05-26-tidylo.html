@@ -1,0 +1,314 @@
+---
+title: "Cocktail ingredients"
+date: 2020-05-26
+output: html_document
+---
+
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+
+
+<div id="introducción" class="section level2">
+<h2>Introducción</h2>
+<p>Hola muchachos en esta oportunidad voy a trabajar con un paquete nuevo para este tidytuesday y es <code>tidylo</code>, el cual permite calcular la probabilidad de tener un registro a través del método de <strong>Monroe</strong> el cual permite calcular las probabilidades de registro de un documento a través de una particularidad, de un lag (registro previo). Dicho lo anterior tocaré uno de los temas que más me apaciona y es el empirismo bayesiano!</p>
+<p>Con <code>tidylo</code> podremos calcular la probabilidad de un registro a través de diferentes implementaciones a través de unas carácteristicas de recuentos (samples).</p>
+<p>Dicho lo anterior en este análisis me enfocare en lo siguiente :</p>
+<ul>
+<li>¿Qué tipos de ingredientes se usan para ciertas bebidas?</li>
+<li>¿Qué tipo de vasos?</li>
+<li>¿Qué tipo de ingredientes se usan en un tipo especifico de vaso?</li>
+</ul>
+<p>Acá hay una gran oportunidad para hacer uso de los PCA`s y algunas otras tecnicas que permitan hacer un análisis más profundo.</p>
+</div>
+<div id="eda" class="section level2">
+<h2>EDA</h2>
+<pre><code>## 
+##  Downloading file 1 of 2: `cocktails.csv`
+##  Downloading file 2 of 2: `boston_cocktails.csv`</code></pre>
+<pre><code>## 
+##  Downloading file 1 of 2: `cocktails.csv`
+##  Downloading file 2 of 2: `boston_cocktails.csv`</code></pre>
+<p>Veamos de primera mano que información trae este set de datos</p>
+<pre class="r"><code>cocktails%&gt;%
+  head()</code></pre>
+<pre><code>## # A tibble: 6 x 13
+##   row_id drink date_modified       id_drink alcoholic category drink_thumb glass
+##    &lt;dbl&gt; &lt;chr&gt; &lt;dttm&gt;                 &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt;
+## 1      0 &#39;57 … 2016-07-18 22:49:04    14029 Alcoholic Cocktail http://www… High…
+## 2      0 &#39;57 … 2016-07-18 22:49:04    14029 Alcoholic Cocktail http://www… High…
+## 3      1 1-90… 2016-07-18 22:27:04    15395 Alcoholic Shot     http://www… Old-…
+## 4      1 1-90… 2016-07-18 22:27:04    15395 Alcoholic Shot     http://www… Old-…
+## 5      1 1-90… 2016-07-18 22:27:04    15395 Alcoholic Shot     http://www… Old-…
+## 6      1 1-90… 2016-07-18 22:27:04    15395 Alcoholic Shot     http://www… Old-…
+## # … with 5 more variables: iba &lt;chr&gt;, video &lt;lgl&gt;, ingredient_number &lt;dbl&gt;,
+## #   ingredient &lt;chr&gt;, measure &lt;chr&gt;</code></pre>
+<p>Viendo esta data lo primero que se me ocurre trabajar es ver como es el comportamiento de los ingredientes y con base a ello intentar plantear los pasos necesarios para responder las preguntas que estan en el intro de este post</p>
+<pre class="r"><code>cocktails%&gt;%
+  count(ingredient,sort = TRUE)%&gt;%
+  mutate(ingredient=fct_reorder(ingredient,n))%&gt;%
+  head(30)%&gt;%
+  ggplot(aes(ingredient,n))+
+  geom_col(show.legend = FALSE)+
+  coord_flip()+
+  labs(x=&#39;Ingrediente&#39;,
+       y=&#39;&#39;,
+       title= &#39;Frecuencia del uso de ingredientes&#39;)</code></pre>
+<p><img src="/post/2020-05-26-tidylo_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Me parece interesante que el vodka sea el más usado para hacer cocletes, seguro un conocedor del tema resaltaría su versatilidad. Ahora veamos más al detalle sobre que tipo de bebidas se usan estos ingredientes</p>
+<pre class="r"><code>cocktails%&gt;%
+  count(category,ingredient,sort = TRUE)%&gt;%
+  mutate(category=fct_lump(category,5),
+         ingredient=fct_lump(ingredient,10))%&gt;%
+  mutate(ingredient=fct_reorder(ingredient,n,sum))%&gt;%
+  ungroup()%&gt;%
+  ggplot(aes(ingredient,n,fill=category))+
+  geom_col(show.legend = FALSE)+
+  facet_wrap(~category,scales = &#39;free_y&#39;)+
+  coord_flip()</code></pre>
+<p><img src="/post/2020-05-26-tidylo_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+El valor <code>other</code> no dice mucho, por lo tanto lo eliminaré para poder hacer un análisis más exacto y organizaré las barras a través de <code>tidytext</code></p>
+<pre class="r"><code>cocktails%&gt;%
+  count(ingredient,sort = TRUE)%&gt;%
+  filter(str_detect(ingredient,&quot;O&quot;))</code></pre>
+<pre><code>## # A tibble: 12 x 2
+##    ingredient         n
+##    &lt;chr&gt;          &lt;int&gt;
+##  1 Orange juice      57
+##  2 Orange            23
+##  3 Orange bitters    12
+##  4 Orange peel        5
+##  5 Olive              4
+##  6 Orange Juice       3
+##  7 Orange spiral      2
+##  8 Orgeat syrup       2
+##  9 Ouzo               2
+## 10 Olive Brine        1
+## 11 Orange Curacao     1
+## 12 Oreo cookie        1</code></pre>
+<pre class="r"><code>cocktails%&gt;%
+  count(category,ingredient,sort = TRUE)%&gt;%
+  mutate(category=fct_lump(category,5),
+         ingredient=fct_lump(ingredient,10))%&gt;%
+  mutate(ingredient=fct_reorder(ingredient,n,sum))%&gt;%
+  filter(category!=&#39;Other&#39;)%&gt;%
+  filter(ingredient!=&#39;Other&#39;)%&gt;%
+  mutate(ingredient=reorder_within(ingredient,n,category))%&gt;%
+  ggplot(aes(ingredient,n,fill=category))+
+  geom_col(show.legend = FALSE)+
+  coord_flip()+
+  facet_wrap(~category,scales = &#39;free_y&#39;)+
+  scale_x_reordered()+
+  labs(x=&#39;Ingredientes&#39;,
+       y=&#39;&#39;,
+       title = &#39;Relación de ingredientes por tipo de bebida&#39;)</code></pre>
+<p><img src="/post/2020-05-26-tidylo_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Acá hay una información bastante interesante, dado que se perfilan varios tipos de bebidas como bases, por decirlo de está manera para cada uno de los cocteles. Para comprender de manera más oportuna esto se debe saber es ¿cuál de los ingredientes tiende a aparecer siempre? y ¿Cuáles aparecen como mezcla?</p>
+<pre class="r"><code>ingredientes_pares&lt;-cocktails%&gt;%
+  add_count(ingredient)%&gt;%
+  filter(n&gt;=20)%&gt;%
+  pairwise_cor(ingredient,category,sort=TRUE)</code></pre>
+<pre><code>## Warning: `tbl_df()` is deprecated as of dplyr 1.0.0.
+## Please use `tibble::as_tibble()` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
+<pre class="r"><code>ingredientes_pares%&gt;%
+  head(15)</code></pre>
+<pre><code>## # A tibble: 15 x 3
+##    item1                item2                correlation
+##    &lt;chr&gt;                &lt;chr&gt;                      &lt;dbl&gt;
+##  1 Water                Sugar                      1.   
+##  2 Sugar                Water                      1.   
+##  3 Dry Vermouth         Gin                        1    
+##  4 Lime                 Lime juice                 1    
+##  5 Gin                  Dry Vermouth               1    
+##  6 Lime juice           Lime                       1    
+##  7 Lemon                Cranberry juice            0.833
+##  8 Lemon                Lemon juice                0.833
+##  9 Cranberry juice      Lemon                      0.833
+## 10 Lemon juice          Lemon                      0.833
+## 11 Bailey&#39;s irish cream Kahlua                     0.828
+## 12 Kahlua               Bailey&#39;s irish cream       0.828
+## 13 Pineapple juice      Cranberry juice            0.828
+## 14 Cranberry juice      Pineapple juice            0.828
+## 15 Lime juice           Lemon juice                0.828</code></pre>
+<p>Hay correlaciones ineresantes, pero me voy a enfocar en dos particulares que llamaron mi atención, la del <strong>Gin</strong> y la del <strong>Lemon</strong></p>
+<pre class="r"><code>ingredientes_pares%&gt;%
+  filter(item1==&#39;Lemon&#39;)%&gt;%
+  head(15)%&gt;%
+  ggplot(aes(fct_reorder(item2,correlation),correlation))+
+  geom_col()+
+  coord_flip()+
+  labs(x=&#39;Ingrediente&#39;,
+       title=&#39;Relación del uso del limón con otros items&#39;)</code></pre>
+<p><img src="/post/2020-05-26-tidylo_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+Acá lo que podemos ver es que la relación del limón con el Gin es bastante baja, pero con otros acidos va bastante bien!!</p>
+<pre class="r"><code>ingredientes_pares%&gt;%
+  filter(item1==&#39;Gin&#39;)%&gt;%
+  head(15)%&gt;%
+  ggplot(aes(fct_reorder(item2,correlation),correlation))+
+  geom_col()+
+  coord_flip()+
+  labs(x=&#39;Ingrediente&#39;,
+       title=&#39;Relación del uso del Gin con otros items&#39;)</code></pre>
+<p><img src="/post/2020-05-26-tidylo_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>Versus el Gin que va de maravillas con cosas dulces.</p>
+<p>Ahora veamos está relación de una manera más estetica.</p>
+<pre class="r"><code>ingredientes_pares%&gt;%
+  filter(item1 %in% c(&#39;Gin&#39;,&#39;Limón&#39;))%&gt;%
+  group_by(item2)%&gt;%
+  top_n(20,correlation)%&gt;%
+  ggplot(aes(fct_reorder(item2,correlation),correlation))+
+  geom_col()+
+  coord_flip()+
+  labs(x=&#39;Ingredientes del item 2&#39;,
+       title = &#39;Relación de uso del Gin y el Limón&#39;)</code></pre>
+<p><img src="/post/2020-05-26-tidylo_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>Ahora veamos está relación con otro insumo</p>
+<pre class="r"><code>ingredientes_pares%&gt;%
+  filter(item1 %in% c(&#39;Gin&#39;,&#39;Limón&#39;,&#39;Brandy&#39;))%&gt;%
+  group_by(item2)%&gt;%
+  top_n(20,correlation)%&gt;%
+  mutate(item2=fct_reorder(item2,correlation))%&gt;%
+  ggplot(aes(correlation,item2))+
+  geom_col()+
+  geom_vline(xintercept = 0,col=&quot;red&quot;)+
+  labs(x=&#39;Ingredientes del item 2&#39;,
+       title = &#39;Relación de uso del Gin y el Limón&#39;)</code></pre>
+<p><img src="/post/2020-05-26-tidylo_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>Ahora trabajaré las relaciones de manera más estrictas a través de los pares de valores entre los componenetes de las bebidas.</p>
+<pre class="r"><code>ingredientes_pares%&gt;%
+  head(100)%&gt;%
+  graph_from_data_frame()%&gt;%
+  ggraph(layout = &#39;fr&#39;)+
+  geom_edge_link()+
+  geom_node_text(aes(label=name),repel = TRUE)+
+  geom_node_point()</code></pre>
+<p><img src="/post/2020-05-26-tidylo_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>Estas relaciones da la impresión de como se conectan las bebidas y sus ingredientes de manera correlacionada, por lo cual hay se puede hablar de clusters de productos, y esto es interesante para un postumo desarrollo de este análisis.</p>
+<p>Ahora empezaré a análizar los ingredientes por vasos, para ello hare un análisis de reducción dimensional el cual me permitirá entender mejor este aspecto</p>
+<pre class="r"><code>ingrediente_vaso&lt;-cocktails%&gt;%
+  distinct(ingredient,glass)%&gt;%
+  mutate(value=1)%&gt;%
+  widely_svd(ingredient,glass,value)
+
+
+ingrediente_vaso%&gt;%
+  head(10)</code></pre>
+<pre><code>## # A tibble: 10 x 3
+##    ingredient                 dimension   value
+##    &lt;chr&gt;                          &lt;int&gt;   &lt;dbl&gt;
+##  1 Creme de Cacao                     1 -0.0652
+##  2 Vodka                              1 -0.174 
+##  3 Absolut Kurant                     1 -0.0254
+##  4 Grand Marnier                      1 -0.106 
+##  5 Chambord raspberry liqueur         1 -0.0689
+##  6 Midori melon liqueur               1 -0.112 
+##  7 Malibu rum                         1 -0.0961
+##  8 Amaretto                           1 -0.138 
+##  9 Cranberry juice                    1 -0.125 
+## 10 Pineapple juice                    1 -0.135</code></pre>
+<p>Ahora entendamos esto a través de una gráfica</p>
+<pre class="r"><code>ingrediente_vaso%&gt;%
+  filter(dimension&gt;1,dimension&lt;=4)%&gt;%
+  mutate(dimension=paste0(&quot;PC&quot;,dimension))%&gt;%
+  group_by(dimension)%&gt;%
+  top_n(15,abs(value))%&gt;%
+  mutate(ingredient=reorder_within(ingredient,value,dimension))%&gt;%
+  ggplot(aes(value,ingredient,fill=value&gt;0))+
+  geom_col(show.legend = FALSE)+
+  scale_y_reordered()+
+  facet_wrap(~dimension, scales = &#39;free&#39;,ncol = 2)</code></pre>
+<p><img src="/post/2020-05-26-tidylo_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>Acá tenemos los pares de ingredientes que jamás iran juntos en un coctel(vaso de coctel), lo cual se trabajo a través de análisis de componentes principales, por lo tanto hay una información supremamente valiosa para este ejercicio.</p>
+</div>
+<div id="tidylo-para-el-análisis-de-correspondencia" class="section level2">
+<h2>Tidylo para el análisis de correspondencia</h2>
+<p>Soy nuevo usando está librería y es por ello que usare en mayor medida la documentación que ofrece el paquete desde R.</p>
+<p>Ahora veamos las relaciones entre las presentaciones de vasos y los ingredientes</p>
+<pre class="r"><code>ingredientes_vaso&lt;-cocktails%&gt;%
+  count(glass,ingredient,sort = TRUE)
+
+ingredientes_vaso%&gt;%
+  head(4)</code></pre>
+<pre><code>## # A tibble: 4 x 3
+##   glass          ingredient       n
+##   &lt;chr&gt;          &lt;chr&gt;        &lt;int&gt;
+## 1 Cocktail glass Gin             37
+## 2 Collins Glass  Vodka           20
+## 3 Cocktail glass Dry Vermouth    19
+## 4 Highball glass Vodka           18</code></pre>
+<p>Ahora a través de <code>bind_log_odds</code> buscaré las probabilidades de registros por cada bigram</p>
+<pre class="r"><code>cocktail_log_odds &lt;- ingredientes_vaso %&gt;%
+  bind_log_odds(glass, ingredient, n) </code></pre>
+<p>Acá podemos ver que hay unas correlaciones interesantes entre los pares del bigram entre el vaso o presentación y el ingrediente. Para entender esto hare un gráfico de correspondencia en términos de magnitud</p>
+<pre class="r"><code>cocktail_log_odds%&gt;%
+  mutate(glass=fct_lump(glass,5),
+         ingredient=fct_lump(ingredient,10))%&gt;%
+  filter(glass!=&#39;Other&#39;)%&gt;%
+  filter(ingredient!=&#39;Other&#39;)%&gt;%
+  arrange(desc(log_odds_weighted))%&gt;%
+  mutate(ingredient=reorder_within(ingredient,log_odds_weighted,glass))%&gt;%
+  filter(n&gt;1)%&gt;%
+  ggplot(aes(log_odds_weighted,ingredient, color=log_odds_weighted&gt;0))+
+  geom_point(aes(size=log_odds_weighted))+
+  scale_y_reordered()+
+  facet_wrap(~glass, scales=&#39;free&#39;)</code></pre>
+<p><img src="/post/2020-05-26-tidylo_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>Estas probabilidades enseñan mucho sobre la correspondencia de los vasos , ingredientes y el cocktel. Pero ahora veamos como es el comportamiento por presentación de cada coctel, esto en término de probabilidades.</p>
+<pre class="r"><code>top10&lt;-cocktail_log_odds%&gt;%
+  group_by(glass)%&gt;%
+  summarize(total=n())%&gt;%
+  arrange(desc(total))%&gt;%
+  top_n(10)</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<pre><code>## Selecting by total</code></pre>
+<pre class="r"><code>cocktail_log_odds%&gt;%
+  filter(glass %in% top10$glass)%&gt;%
+  group_by(glass)%&gt;%
+  top_n(10)%&gt;%
+  ungroup()%&gt;%
+  mutate(ingredient=reorder_within(ingredient, log_odds_weighted,glass))%&gt;%
+  ggplot(aes(log_odds_weighted, ingredient, fill=glass))+
+  geom_col(show.legend = FALSE)+
+  facet_wrap(~glass, scales = &#39;free_y&#39;)+
+  scale_y_reordered()</code></pre>
+<pre><code>## Selecting by log_odds_weighted</code></pre>
+<p><img src="/post/2020-05-26-tidylo_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>Bueno es bastante confuza, ya que hay bastantes ingredientes por vaso, por ello desagregaré un análisis más especifico. Está vez no usare un top 3 de los vasos</p>
+<pre class="r"><code>library(ggrepel)
+top3&lt;-cocktail_log_odds%&gt;%
+  group_by(glass)%&gt;%
+  summarize(total=n())%&gt;%
+  arrange(desc(total))%&gt;%
+  top_n(3)</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<pre><code>## Selecting by total</code></pre>
+<pre class="r"><code>cocktail_log_odds %&gt;%
+  filter(glass %in% top3$glass ,
+         n &gt; 5) %&gt;%
+  ggplot(aes(n, log_odds_weighted, label = ingredient, color=log_odds_weighted&gt;0)) +
+  geom_hline(yintercept = 0, color = &quot;gray50&quot;, lty = 2, size = 1.5) +
+  geom_point(alpha = 0.8, color = &quot;midnightblue&quot;) +
+  geom_text_repel(force = TRUE)+
+  facet_wrap(~glass,ncol = 1)+
+  labs(y=&#39;Empirical Bayes Estimation&#39;)</code></pre>
+<p><img src="/post/2020-05-26-tidylo_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>Esta información si es diciente, ahora se puede comprender como es la probabilidad bayesiana sobre lo que debe ir en cada copa y lo que jamás debe estar mezclado en cada una de ellas.</p>
+<p>Ahora suponga que desea trabajar con un estimador no informativo, el resultado sería el siguiente</p>
+<pre class="r"><code>cocktail_log_odds &lt;- ingredientes_vaso %&gt;%
+  bind_log_odds(glass, ingredient, n, uninformative = TRUE,unweighted = TRUE) 
+
+
+cocktail_log_odds %&gt;%
+  filter(glass %in% top3$glass ,
+         n &gt; 5) %&gt;%
+  ggplot(aes(n, log_odds_weighted, label = ingredient, color=log_odds_weighted&gt;0)) +
+  geom_hline(yintercept = 0, color = &quot;gray50&quot;, lty = 2, size = 1.5) +
+  geom_point(alpha = 0.8, color = &quot;midnightblue&quot;) +
+  geom_text_repel(force = TRUE)+
+  facet_wrap(~glass,ncol = 1)+
+  labs(y=&#39;Empirical Bayes Estimation&#39;)</code></pre>
+<p><img src="/post/2020-05-26-tidylo_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>Las dierencias con los datos no informativos, dan registros regularizados, donde la previa no existe y con base a ello encontramos desde un punto de vista frecuentista (no se porque alguien lo quisiera trabajar así) como es la agrupación de los datos.</p>
+<p>Espero que les guste este post!</p>
+</div>
