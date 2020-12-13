@@ -1,4 +1,4 @@
-baseURL = "https://www.danieljimenezm.com/"
+baseURL = "https://www.danieljimenezm.com/blog"
 languageCode = "en-us"
 title = "Un Data Scientist Dice"
 theme = "hugo-initio"
