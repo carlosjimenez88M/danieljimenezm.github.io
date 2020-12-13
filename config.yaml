@@ -20,8 +20,7 @@ params:
   google:
     analytics:
       trackerID: GA-000000000-0
-  name: Anthony Russel
-  phone: +234 23 9873237
+  name: Daniel Jiménez
   sharethis:
     custom: yes
     property: '123456789012345678901234'
@@ -82,9 +81,9 @@ params:
   year: 2017
 menu:
   main:
-    - name: home
-      url: /
-      weight: 1
+    # - name: home
+    #   url: /
+    #   weight: 1
     - name: blog
       url: /post/
       weight: 5
