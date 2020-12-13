@@ -10,6 +10,9 @@ min_version = "0.1"
 [author]
   name = "Daniel Jiménez"
   homepage = "https://www.danieljimenezm.com"
+  avatar: "images/daniel.jpg"
+  background: ''
+  banner: "logos/fondo.png"
 
 [original]
   name = "Initio"
