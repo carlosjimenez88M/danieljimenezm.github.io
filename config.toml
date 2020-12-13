@@ -39,7 +39,12 @@ publishDir = "docs"
 [[menu.main]]
     name = "Cursos"
     url = "/courses/"
-    weight = 5
+    weight = 6
+    
+[[menu.main]]
+    name = "Tidytuesday"
+    url = "https://github.com/carlosjimenez88M/Tidy-tuesday"
+    weight = 6
 #[[menu.main]]
 #    name = "blog"
 #    url = "/post/"
