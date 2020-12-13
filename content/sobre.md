@@ -1,10 +1,3 @@
-+++
-menu = "main"
-title = "Sobre mi"
-type = "about"
-weight = 10
-+++
-
 ## ¿Qué hace  Daniel?
 
 Actualmente trabajo como Machine Learning Engineer en el **[Banco Interamericano de desarrollo](https://www.iadb.org/es/acerca-del-bid/financiamiento-del-bid/financiamiento-del-bid%2C6028.html)** y como Senior Data Scientist en **[Globant](https://www.globant.com)**. A la par soy profesor de ciencia de datos en la [Universidad Nacional de Colombia](https://unal.edu.co).
