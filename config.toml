@@ -56,7 +56,7 @@ publishDir = "docs"
 	title = "linkedin"
 	url = "https://www.linkedin.com/in/djimenezm"
     icon = "fab fa-linkedin"
-    footer = false
+    footer = true
     sharethis = true
     network = "linkedin"
 [[params.social]]
