@@ -1,8 +1,8 @@
 +++
-title = "Custom website design"
+title = "Estadística Aplicada"
 +++
 
-I don't think they tried to market it to the billionaire, spelunking, base-jumping crowd. i did the same thing to gandhi, he didn't eat for three weeks. i once heard a wise man say there are no perfect men.
+Uso y desarrollo de modelos estadísticos y econométricos aplicados al sector real y público en temas de muestreo, teoría de respuesta al item, diseño de experimentos, forecasting y analítica de datos.
 
 <!--more-->
 
