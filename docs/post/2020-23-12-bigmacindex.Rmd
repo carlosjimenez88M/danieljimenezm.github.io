@@ -1,0 +1,151 @@
+---
+title: "Big Mac Index"
+author: "Daniel Jiménez"
+date: "12/22/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+
+
+```{r}
+library(tidyverse)
+library(tidymodels)
+library(tidymetrics)
+library(ggrepel)
+library(widyr)
+library(scales)
+theme_set(theme_light())
+```
+
+
+```{r}
+bigmac <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-12-22/big-mac.csv')
+
+```
+
+
+
+```{r}
+bigmac%>%
+  add_count(name, name= 'country_total')%>%
+  filter(country_total == max(country_total))%>%
+  ggplot(aes(date,local_price, color= name))+
+  geom_line()+
+  guides(color = guide_legend(override.aes = list(size = 0.5)))
+  
+```
+
+
+
+
+```{r}
+bigmac%>%
+  rename(country = name) -> bigmac
+
+bigmac%>%
+  add_count(country, name= 'country_total')%>%
+  filter(country_total == max(country_total)) -> bigmac_max
+  
+bigmac_max%>%
+  mutate(country = fct_reorder(country, local_price, function(.) max(.) / min(.)))%>%
+  ggplot(aes(date,local_price, color = country))+
+  geom_line(show.legend = FALSE)+
+  geom_smooth(show.legend = FALSE, method = 'lm', col='black', size=0.5, linetype='dashed')+
+  expand_limits(y=0)+
+  facet_wrap(~country, scales='free_y')+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+```
+
+
+```{r}
+bigmac%>%
+  filter(country=='Colombia')%>%
+  ggplot(aes(date,local_price))+
+  geom_point()+
+  geom_line(show.legend = FALSE)+
+  geom_smooth()+
+  expand_limits(y=0)+
+  labs(title = 'Big Mac Index variation in Colombia',
+       y='Local Price',
+       x='Date')+
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+
+```{r}
+library(ggrepel)
+bigmac_max%>%
+  group_by(country)%>%
+  summarize(big_mac_inflation = last(local_price)/first(local_price))%>%
+  arrange(desc(big_mac_inflation))%>%
+  mutate(country = fct_reorder(country, big_mac_inflation))%>%
+  ggplot(aes(big_mac_inflation,country, color = big_mac_inflation))+
+  geom_errorbar(aes(xmin=0,xmax=big_mac_inflation), width=0)+
+  geom_point(aes(size=big_mac_inflation))+
+  #geom_text_repel(aes(label=round(big_mac_inflation,1)),size=3)+
+  scale_color_gradient2(high = "red",mid = 'black')+
+  labs(size = 'Big Mac Inflation',
+       color ='Inflation LEvel')
+```
+```{r}
+bigmac_max%>%
+  mutate(country=fct_reorder(country,dollar_ex))%>%
+  ggplot(aes(dollar_ex,country, fill=country,color=country))+
+  geom_point(alpha=0.3, show.legend = FALSE)+
+  geom_boxplot(alpha=0.4, show.legend = FALSE)+
+  scale_x_log10()
+  
+  
+```
+
+
+
+
+```{r}
+bigmac%>%
+  group_by(date)%>%
+  mutate(usd_price = local_price[iso_a3=='USA'],
+         us_gdp = gdp_dollar[iso_a3=='USA'])%>%
+  ungroup()%>%
+  filter(country=='Colombia',
+         !is.na(gdp_dollar))%>%
+  mutate(price_from_usd = usd_price * dollar_ex)%>%
+  ggplot(aes(date,local_price))+
+  geom_line(aes(color='Price in Colombia'))+
+  geom_line(aes(y= price_from_usd, color='Price from USA'))
+```
+
+Colombia tiene valores bajos 
+
+
+
+```{r}
+bigmac_max%>%
+  group_by(date)%>%
+  mutate(usd_price = local_price[iso_a3=='USA'],
+         us_gdp = gdp_dollar[iso_a3=='USA'])%>%
+  ungroup()%>%
+  filter(country=='Argentina',
+         !is.na(gdp_dollar))%>%
+  mutate(price_from_usd = usd_price * dollar_ex)%>%
+  ggplot(aes(date,local_price))+
+  geom_line(aes(color='Price in Argentina'))+
+  geom_line(aes(y= price_from_usd, color='Price from USA'))
+
+```
+
+
+
+```{r}
+bigmac%>%
+  filter(date==max(date))%>%
+  ggplot(aes(gdp_dollar,usd_adjusted))+
+  geom_point()+
+  geom_smooth(method = 'lm')+
+  geom_text_repel(aes(label=country))
+```
+
