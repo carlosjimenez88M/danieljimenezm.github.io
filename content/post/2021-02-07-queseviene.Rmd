@@ -1,0 +1,47 @@
+---
+title: "¿Qué se viene este año?"
+author: "Daniel Jiménez"
+date: "2/7/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## ¿Qué se viene este año?
+
+Durante el 2020 entendí las siguientes tres reflexiones:
+
+* El mundo evoluciona a una velocidad asombrosa y todos sus caminos se basan en la tecnología;
+
+* Las matemáticas son el idioma del siglo XXI;
+
+* El nuevo reto de la humanidad será aprender a escribir y comunicar de manera eficiente las ideas.
+
+Basado en ello pude evaluar el significado del tiempo y los cambios a los que nos enfrentamos en los próximos dos años, por el **covid** y sus variantes y los demás desastres que fueron menospreciados dada la pandemia.
+
+Por lo anterior y dado el sector en el que me desenvuelvo la ciencia de datos, nuestros frentes evolucionan hacia el machine learning engineer, el NLP y la forma optima de como trabajar con Análisis Exploratorio de datos. Consecuente a ello este año dedicaré especial interés en los dos primeros frentes, ya que el tercero lo trabajo constantemente desde los [tidytuesday](https://github.com/carlosjimenez88M/Tidy-tuesday), pero a la par quiero presentar en estas nuevas publicaciones temas como :
+
+* Muestreo : Puntualizado en dos frentes, balanceo de datos y selección optima de población para estudios (esto es piedra angular para temas e marketing, en otra entrada hablaré de ello).
+
+* Inferencia Estadística: Desde hace un año me encuentro trabajando en un paquete para **R** sobre dicho tema y ahora dado proyectos que estoy trabajando podré desarrollar betas y con ello ajustes para que este esfuerzo tenga un optimo rendimiento.
+
+* Docker: El deploy en docker me parece lo mejor que ha pasado en los últimos años.
+
+* Reconocimientos de Imagines: Dado a un tema de investigación que estoy trabajando desde una parte académica sobre el alzheimer  en donde me toca identificar las reacciones a los estimulos en el cerebro, esta herramienta no solo ha sido mi salvavidas sino una nueva fuente de inspiración para mi trabajo.
+
+Por último el año pasado por los nuevos roles que asumí abandone los tidytuesday, pero después de volver a establecer una agenda retomaré dichos temas para que estas publicaciones sean más constantes, y esto con un fin, poder seguir enseñando por fuera del ejercicio docente.
+
+Espero que les guste el nuevo rumbo de este blog!! y a todos les deseo un excelente inicio de año.
+
+
+
+
+
+
+
+
+
+
