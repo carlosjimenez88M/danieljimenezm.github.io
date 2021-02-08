@@ -36,10 +36,10 @@ publishDir = "docs"
     url = "/post/"
     weight = 5
     
-[[menu.main]]
-    name = "Cursos"
-    url = "/courses/"
-    weight = 6
+#[[menu.main]]
+#    name = "Cursos"
+#    url = "/courses/"
+#    weight = 6
     
 [[menu.main]]
     name = "Tidytuesday"
