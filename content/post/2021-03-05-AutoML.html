@@ -1,0 +1,94 @@
+---
+title: "AutoML"
+author: "Daniel Jiménez"
+date: 2021-03-05
+output: html_document
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>Toca aceptar algo!! La gente de <a href="https://ai.google/">google AI</a> esta logrando grandes avances en todas sus herramientas de AutoML, pero en terminos generales en la plataforma de <a href="https://cloud.google.com/">Google Cloud Platform</a> y sobre ello quiero hablarles en esta entrada.</p>
+<p>De antemano, lo que aquí comparto es desde mi experiencia de uso, al rededor de los últimos dos años, principalmente en el desarrollo de Ingeniería de datos con la joya de la corona <a href="https://cloud.google.com/bigquery?hl=es">Bigquery</a>, a la par de contarles un poco de mi experiencia de uso con AutoML.</p>
+<div id="una-breve-introducción-a-gcp" class="section level2">
+<h2>Una breve introducción a GCP</h2>
+<p>La plataforma de GCP esta diseñada para trabajar en varios frentes :</p>
+<ul>
+<li><p>Creación de máquinas virtuales: Como producto Google ofrece Compute Engine, conas carácteristicas importantes a anotar:</p>
+<ul>
+<li>Estabilidad en el procesamiento C2<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></li>
+<li>Optimización en la memoría</li>
+<li>Aceleración en la GPU</li>
+</ul></li>
+</ul>
+<p>Otro ejemplo sería el de Kubernetes, con lo cual se garantiza el trabajo bajo clusters y comunicación de diferentes nodos. En este punto hay una ventaja y es que si cuentas con cierta experiencia puedes hacer procesos de comunicación lógicos (literalmente), los cuales podran generar ahorros en el consumo de dicho servicio</p>
+<ul>
+<li><p>Storages de Nube: Dado el periodo de Big Data y en especial la necesidad de procesamiento de la misma , el <strong>Cloud Storage</strong> es muy útil para almacenar grandes cantidades de datos y dada la ventaja que tiene la elasticiadad del almacenamiento hace este storage una herramienta increíble para todos aquellos que nos gusta scrapear o tener set de datos extensos.</p></li>
+<li><p>BigQuery : Es un almacén de datos super poderoso que permite desarrollar análisis de la información escalable basado en consultas tipo SQL. BigQuery se caracteriza por :</p>
+<ul>
+<li>Su poder de procesamiento esta en el orden de los Petabytes</li>
+<li>Cuenta con Mapreduce, lo cual ya lo hace una herramienta fundamental para el desarrollo de análisis de datos y creación de heurísticas.</li>
+<li>Acceso a Data Studio para Análisis Exploratorio de Datos.</li>
+</ul></li>
+<li><p>DataFlow, para el procesamiento unificado de datos</p></li>
+</ul>
+<p>Y por último ,</p>
+<ul>
+<li>AutoML: Esta herramienta permite resolver problemas de : regresión, clasificación y clusterización. Cuenta con performance para problemas de computational Visión, NLP y traducción.</li>
+</ul>
+</div>
+<div id="explorando-una-base-de-datos-con-bigquery." class="section level2">
+<h2>Explorando una base de datos con Bigquery.</h2>
+<p>Para el ejercicio de hoy, exploraré la base de datos de <a href="https://www.kaggle.com/blastchar/telco-customer-churn">churn</a> de Kaggle. El objetivo final de este set de datos es poder construir un modelo de clasificación y con base a ello entender un poco las razones de la deserción.</p>
+<p>la query que utilice para extraer y modificar los datos es la siguiente:</p>
+<pre include="FALSE"><code>SELECT * except (MonthlyCharges, Churn,SeniorCitizen),
+cast(MonthlyCharges as INT64) as MonthlyCharges,
+case when Churn =false then &#39;No&#39;
+    when Churn = true then &#39;Yes&#39;
+    when Churn IS NULL THEN NULL 
+    else &#39;other&#39; END AS Churn,
+case when SeniorCitizen=0 then &#39;No&#39;
+     when SeniorCitizen=1 then &#39;Yes&#39;
+     when SeniorCitizen IS NULL THEN NULL 
+     else &#39;other&#39; END AS SeniorCitizen,
+ from bit01-306604.bases_de_prueba.tabla_churn</code></pre>
+<p>Mientras el full de labels de la base es la siguiente:</p>
+<p><img src="../images/churn_str_bbdd.png" />
+Dado que es bueno ensuciar un poco la data, dejando la variable <em>street</em> para ver como es la evaluación de los modelos que genera AutoML.</p>
+</div>
+<div id="explorando-los-datos-con-data-studio" class="section level2">
+<h2>Explorando los datos con Data Studio</h2>
+<p>No voy a detenerme mucho en el EDA de estos datos, ya que solo tengo cuatro dudas</p>
+<ul>
+<li>¿Entre los generos quién hace más churn?</li>
+<li>¿Cómo varia el churn dada la última atención al cliente?</li>
+<li>¿Cómo es la distribución entre los que son padres y los que no?</li>
+<li>¿Cómo es el comportamiento del Churn dado el método de pago?</li>
+</ul>
+<p>El resultado es el sigiuente :</p>
+<p><img src="../images/dash.png" /></p>
+<p>Una vez entendido lo anterior paso a contruir un modelo de regresión lógistica para entender y predecir el churn.</p>
+</div>
+<div id="modelado-machine-learning" class="section level2">
+<h2>Modelado Machine Learning</h2>
+<p>Una vez se carguen los datos (proceso que puede demorar un poco), toca definir las siguientes condiciones :</p>
+<p><img src="../images/str_datos.png" /></p>
+<ul>
+<li>¿Cuáles son las variables de interés a predecir?</li>
+<li>¿Qué variables desea trabajar en su modelo?</li>
+<li>¿Cuál es la mejor métrica para evaluar el modelo?</li>
+</ul>
+<p>Por default voy a dejar el siguiente pipeline:</p>
+<ul>
+<li>Se va a predecir la variable <strong>churn</strong></li>
+<li>Se seleccionaron todas las variables</li>
+<li>La métrica que uso es la ROC</li>
+</ul>
+<p>Los resultados fueron los siguientes :</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Procesadores Virtuales que permiten estabilidad en el procesamiento de los datos.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>

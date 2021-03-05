@@ -1,0 +1,105 @@
+---
+title: "AutoML"
+author: "Daniel Jiménez"
+date: 2021-03-05
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, cache = FALSE,warning = FALSE,message = FALSE)
+```
+
+
+
+Toca  aceptar algo!! La gente de [google AI](https://ai.google/) esta logrando grandes avances en todas sus herramientas de AutoML, pero en terminos generales en la plataforma de [Google Cloud Platform](https://cloud.google.com/) y sobre ello quiero hablarles en esta entrada.
+
+De antemano, lo que aquí comparto es desde mi experiencia de uso, al rededor de los últimos dos años, principalmente en el desarrollo de Ingeniería de datos con la joya de la corona [Bigquery](https://cloud.google.com/bigquery?hl=es), a la par de contarles un poco de mi experiencia de uso con AutoML.
+
+## Una breve introducción a GCP
+
+La plataforma de GCP esta diseñada para trabajar en varios frentes :
+
+* Creación de máquinas virtuales: Como producto Google ofrece Compute Engine, conas carácteristicas importantes a anotar:
+  
+  + Estabilidad en el procesamiento C2[^2]
+  + Optimización en la memoría
+  + Aceleración en la GPU
+
+Otro ejemplo sería el de Kubernetes, con lo cual se garantiza el trabajo bajo clusters y comunicación de diferentes nodos. En este punto hay una ventaja y es que si cuentas con cierta experiencia puedes hacer procesos de comunicación lógicos (literalmente), los cuales podran generar ahorros en el consumo de dicho servicio
+
+[^2]: Procesadores Virtuales que permiten estabilidad en el procesamiento de los datos.
+
+* Storages de Nube: Dado el periodo de Big Data y en especial la necesidad de procesamiento de la misma , el **Cloud Storage** es muy útil para almacenar grandes cantidades de datos y dada la ventaja que tiene la elasticiadad del almacenamiento hace este storage una herramienta increíble para todos aquellos que nos gusta scrapear o tener set de datos extensos.
+
+* BigQuery : Es un almacén de datos super poderoso que permite desarrollar análisis de la información escalable basado en consultas tipo SQL. BigQuery se caracteriza por :
+
+  + Su poder de procesamiento esta en el orden de los Petabytes
+  + Cuenta con Mapreduce, lo cual ya lo hace una herramienta fundamental para el desarrollo de análisis de datos y creación de heurísticas.
+  + Acceso  a Data Studio para Análisis Exploratorio de Datos.
+
+* DataFlow, para el procesamiento unificado de datos
+
+Y por último ,
+
+* AutoML: Esta herramienta permite resolver problemas de : regresión, clasificación y clusterización. Cuenta con performance para problemas de computational Visión, NLP y traducción.
+
+## Explorando una base de datos con Bigquery.
+
+Para el ejercicio de hoy, exploraré la base de datos de [churn](https://www.kaggle.com/blastchar/telco-customer-churn) de Kaggle. El objetivo final de este set de datos es poder construir un modelo de clasificación y con base a ello entender un poco las razones de la deserción.
+
+la query que utilice para extraer y modificar los datos es la siguiente:
+
+```{include=FALSE}
+SELECT * except (MonthlyCharges, Churn,SeniorCitizen),
+cast(MonthlyCharges as INT64) as MonthlyCharges,
+case when Churn =false then 'No'
+    when Churn = true then 'Yes'
+    when Churn IS NULL THEN NULL 
+    else 'other' END AS Churn,
+case when SeniorCitizen=0 then 'No'
+     when SeniorCitizen=1 then 'Yes'
+     when SeniorCitizen IS NULL THEN NULL 
+     else 'other' END AS SeniorCitizen,
+ from bit01-306604.bases_de_prueba.tabla_churn
+```
+
+Mientras el full de labels de la base es la siguiente:
+
+![](../images/churn_str_bbdd.png)
+Dado que es bueno ensuciar un poco la data, dejando la variable *street* para ver como es la evaluación de los modelos que genera AutoML.
+
+## Explorando los datos con Data Studio
+
+No voy a detenerme mucho en el EDA de estos datos, ya que solo tengo cuatro dudas
+
+* ¿Entre los generos quién hace más churn?
+* ¿Cómo varia el churn dada la última atención al cliente?
+* ¿Cómo es la distribución entre los que son padres y los que no?
+* ¿Cómo es el comportamiento del Churn dado el método de pago?
+
+El resultado es el sigiuente :
+
+![](../images/dash.png)
+
+Una vez entendido lo anterior paso a contruir un modelo de regresión lógistica para entender y predecir el churn.
+
+## Modelado Machine Learning
+
+Una vez se carguen los datos (proceso que puede demorar un poco), toca definir las siguientes condiciones :
+
+![](../images/str_datos.png)
+
+* ¿Cuáles son las variables de interés a predecir?
+* ¿Qué variables desea trabajar en su modelo?
+* ¿Cuál es la mejor métrica para evaluar el modelo?
+
+Por default voy a dejar el siguiente pipeline:
+
+* Se va a predecir la variable **churn**
+* Se seleccionaron todas las variables
+* La métrica que uso es la ROC
+
+Los resultados fueron los siguientes :
+
+
+
