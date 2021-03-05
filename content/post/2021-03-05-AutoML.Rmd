@@ -102,4 +102,18 @@ Por default voy a dejar el siguiente pipeline:
 Los resultados fueron los siguientes :
 
 
+![](../images/modelo.png)
+
+
+EL modelo no tiene un buen performance, una solución para esto sería dejar más tiempo entrenando el modelo, ya que hay una métrica que me parecio pertinente evaluar y por ello infiero que lo que falta es tiempo de ejecución:
+
+![](../images/imp.png)
+
+
+Más comparé los resultados del modelo con uno que desarrolle, con la misma data sucia, y más que las predicciones, hay un componente que me llamo más la atención y son las razones por las cuales hay churn.
+
+![](https://github.com/carlosjimenez88M/Big-Data-y-Analytics/raw/master/Presentaciones/Clase-Analytics_files/figure-gfm/unnamed-chunk-39-1.png)
+
+
+No siendo más espero que disfruten esta entrada!!!
 
