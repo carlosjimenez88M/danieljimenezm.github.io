@@ -65,7 +65,7 @@ case when SeniorCitizen=0 then 'No'
 
 Mientras el full de labels de la base es la siguiente:
 
-![](../images/churn_str_bbdd.png)
+![](https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/content/images/churn_str_bbdd.png?raw=true)
 Dado que es bueno ensuciar un poco la data, dejando la variable *street* para ver como es la evaluación de los modelos que genera AutoML.
 
 ## Explorando los datos con Data Studio
@@ -79,7 +79,7 @@ No voy a detenerme mucho en el EDA de estos datos, ya que solo tengo cuatro duda
 
 El resultado es el sigiuente :
 
-![](../images/dash.png)
+![](https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/content/images/dash.png?raw=true)
 
 Una vez entendido lo anterior paso a contruir un modelo de regresión lógistica para entender y predecir el churn.
 
@@ -102,12 +102,12 @@ Por default voy a dejar el siguiente pipeline:
 Los resultados fueron los siguientes :
 
 
-![](../images/modelo.png)
+![](https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/content/images/modelo.png?raw=true)
 
 
 EL modelo no tiene un buen performance, una solución para esto sería dejar más tiempo entrenando el modelo, ya que hay una métrica que me parecio pertinente evaluar y por ello infiero que lo que falta es tiempo de ejecución:
 
-![](../images/imp.png)
+![](https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/content/images/imp.png?raw=true)
 
 
 Más comparé los resultados del modelo con uno que desarrolle, con la misma data sucia, y más que las predicciones, hay un componente que me llamo más la atención y son las razones por las cuales hay churn.
