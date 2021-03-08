@@ -66,6 +66,8 @@ case when SeniorCitizen=0 then 'No'
 Mientras el full de labels de la base es la siguiente:
 
 ![](https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/content/images/churn_str_bbdd.png?raw=true)
+
+
 Dado que es bueno ensuciar un poco la data, dejando la variable *street* para ver como es la evaluación de los modelos que genera AutoML.
 
 ## Explorando los datos con Data Studio
