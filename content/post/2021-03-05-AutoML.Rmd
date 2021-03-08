@@ -87,7 +87,7 @@ Una vez entendido lo anterior paso a contruir un modelo de regresión lógistica
 
 Una vez se carguen los datos (proceso que puede demorar un poco), toca definir las siguientes condiciones :
 
-![](../images/str_datos.png)
+![](https://github.com/carlosjimenez88M/danieljimenezm.github.io/blob/master/content/images/str_datos.png?raw=true)
 
 * ¿Cuáles son las variables de interés a predecir?
 * ¿Qué variables desea trabajar en su modelo?
